@@ -22,6 +22,9 @@
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">Recuerdame</label>
                             </div>
+                            <div class="mb-3">
+                                ¿No tienes una cuenta? <a href="../register/registerForm.php">Registrate</a>
+                            </div>
                             <div class="forgot-password-container mb-3">
                                 <a href="#">¿Has olvidado tu contraseña?</a>
                             </div>
