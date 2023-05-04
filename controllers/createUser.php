@@ -13,6 +13,8 @@ $register_status = [
 
 if($_SERVER["REQUEST_METHOD"] === "POST")
 {
+    $user = new User();
+
     $file_name = "default.png";
 
     if(isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK)
@@ -36,17 +38,17 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
         $city = "default";
     }
 
-    $info = $user_controller->createUser([
-        "username" => trim($_POST["username"]),
-        "password" => trim($_POST["pass"]),
-        "type" => "Normal",
-        "fullname" => trim($_POST["fullname"]),
-        "email" => trim($_POST["email"]),
-        "country" => $country,
-        "city" => $city,
-        "active" => 1,
-        "image" => $file_name
-    ]);
+    $user->__set("username", trim($_POST["username"]));
+    $user->__set("password", trim($_POST["pass"]));
+    $user->__set("type", "Normal");
+    $user->__set("fullname", trim($_POST["fullname"]));
+    $user->__set("email", trim($_POST["email"]));
+    $user->__set("country", $country);
+    $user->__set("city", $city);
+    $user->__set("active", 1);
+    $user->__set("image", $file_name);
+
+    $info = $user_controller->createUser($user);
 
     if(!($info["created"]))
     {
