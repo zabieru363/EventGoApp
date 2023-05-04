@@ -1,0 +1,14 @@
+/* Home styles */
+
+.user_control > * {
+    background: #41b883;
+    text-decoration: none;
+}
+
+.anchor {
+    text-decoration: none;
+}
+
+#event_input {
+    border: 1px solid rgba(0, 0, 0,.1);
+}
