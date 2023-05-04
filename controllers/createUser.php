@@ -1,6 +1,7 @@
 <?php
 require_once("../config/displayErrors.php");
 require_once("UserController.php");
+require_once("../lib/geoplugin.class.php");
 $user_controller = new UserController();
 
 $register_status = [
@@ -18,6 +19,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     {
         $file_name = $_FILES["image"]["name"];
     }
+
+    // Instanciamos la clase GeoPlugin
+    $geo = new geoPlugin();
+    $geo->locate($_SERVER["REMOTE_ADDR"]);
+
+    $country = $geo->countryName;
+    $country = $geo->city;
 
     $info = $user_controller->createUser([
         "username" => trim($_POST["username"]),
