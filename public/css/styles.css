@@ -1,3 +1,17 @@
+/* Global styles */
+.submit-btn {
+    background: #41b883;
+    padding: 0.5rem;
+    border-radius: 5%;
+    color: white;
+    border: none;
+}
+
+.submit-btn:hover{
+    background: #349569;
+    transition: all 1s;
+}
+
 /* Home styles */
 
 .user_control > * {
