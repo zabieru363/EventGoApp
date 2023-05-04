@@ -20,12 +20,21 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
         $file_name = $_FILES["image"]["name"];
     }
 
-    // Instanciamos la clase GeoPlugin
     $geo = new geoPlugin();
     $geo->locate($_SERVER["REMOTE_ADDR"]);
 
     $country = $geo->countryName;
-    $country = $geo->city;
+    $city = $geo->city;
+
+    if(is_null($country))
+    {
+        $country = "default";
+    }
+
+    if(is_null($city))
+    {
+        $city = "default";
+    }
 
     $info = $user_controller->createUser([
         "username" => trim($_POST["username"]),
