@@ -20,10 +20,10 @@ final class UserController
      * insertado al usuario y si el registro contiene
      * algunos errores.
      */
-    public function createUser(array $values):array
+    public function createUser(User $user):array
     {
-        $username_info = $this->model->userExists($values["username"]);
-        $email_info = $this->model->emailExists($values["email"]);
+        $username_info = $this->model->userExists($user->__get("username"));
+        $email_info = $this->model->emailExists($user->__get("email"));
 
         $info = [
             "username_info_message" => $username_info["message"],
@@ -33,7 +33,7 @@ final class UserController
 
         if(!($username_info["exists"]) && !($email_info["exists"]))
         {
-            $this->model->addUser($values);
+            $this->model->addUser($user);
             $info["created"] = true;
         }
 
