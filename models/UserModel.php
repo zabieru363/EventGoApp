@@ -29,23 +29,23 @@ final class UserModel
      * @param array Un array con los valores con los que se
      * guardará el usuario en la base de datos.
      */
-    public function addUser(array $values):void
+    public function addUser(User $user):void
     {
-        $password_hash = password_hash($values["password"], PASSWORD_BCRYPT);
+        $password_hash = password_hash($user->__get("password"), PASSWORD_BCRYPT);
 
         $sql = "INSERT INTO user VALUES(NULL, :username, :password,
         :type, :fullname, :email, :country, :city, :active, CURDATE(), :image)";
 
         $this->connection->execute_query($sql, [
-            ":username" => $values["username"],
+            ":username" => $user->__get("username"),
             ":password" => $password_hash,
-            ":type" => $values["type"],
-            ":fullname" => $values["fullname"],
-            ":email" => $values["email"],
-            ":country" => $values["country"],
-            ":city" => $values["city"],
-            ":active" => $values["active"],
-            ":image" => $values["image"]
+            ":type" => $user->__get("type"),
+            ":fullname" => $user->__get("fullname"),
+            ":email" => $user->__get("email"),
+            ":country" => $user->__get("country"),
+            ":city" => $user->__get("city"),
+            ":active" => $user->__get("active"),
+            ":image" => $user->__get("image")
         ]);
     }
 
