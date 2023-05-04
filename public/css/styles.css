@@ -12,3 +12,54 @@
 #event_input {
     border: 1px solid rgba(0, 0, 0,.1);
 }
+
+/* Register form styles */
+
+.fields-container {
+    width: 60rem;
+}
+
+.circle {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #ddd;
+}
+
+.circle:hover {
+    background: #929292;
+    transition: all 1s;
+}
+
+#image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+label[for="image"] {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
+
+#preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
