@@ -118,7 +118,7 @@ final class UserModel
         $sql = "SELECT Id, Username, Password_hash FROM user 
         WHERE Username = :user  OR Email = :user";
 
-        $this->connection->execute_query($sql, [":user" => $user]);
+        $this->connection->execute_select($sql, [":user" => $user]);
 
         foreach($this->connection->rows as $row)
         {
