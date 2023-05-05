@@ -1,5 +1,0 @@
-[05-May-2023 10:37:14 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\TFG\EventGoApp\models\UserModel.php on line 127
-[05-May-2023 10:38:10 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\TFG\EventGoApp\models\UserModel.php on line 127
-[05-May-2023 10:39:23 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\TFG\EventGoApp\models\UserModel.php on line 127
-[05-May-2023 10:39:50 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\TFG\EventGoApp\models\UserModel.php on line 127
-[05-May-2023 10:41:38 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\TFG\EventGoApp\models\UserModel.php on line 127
