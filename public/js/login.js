@@ -3,6 +3,7 @@
 const form = document.forms[0];
 const elements = [...form.elements];
 elements.length -= 2;
+const feedbacks = form.getElementsByClassName("invalid-feedback");
 const loginErrorDiv = document.getElementsByClassName("login-error")[0];
 const submitBtn = document.getElementsByClassName("submit-btn")[0];
 submitBtn.disabled = true;
