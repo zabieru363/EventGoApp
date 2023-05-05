@@ -13,10 +13,12 @@
                             <div class="mb-3">
                                 <label for="username" class="form-label">Nombre de usuario o correo</label>
                                 <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp">
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="pass" class="form-label">Contraseña</label>
                                 <input type="password" class="form-control" id="pass" name="pass">
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
