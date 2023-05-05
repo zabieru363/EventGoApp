@@ -8,6 +8,7 @@ final class UserController
     public function __construct()
     {
         $this->model = UserModel::getInstance();
+        session_start();
     }
 
     /**

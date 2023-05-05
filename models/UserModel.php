@@ -12,6 +12,7 @@ final class UserModel
     private function __construct()
     {
         $this->connection = Connection::getInstance("eventgo_app");
+        session_start();
     }
 
     public static function getInstance()
@@ -125,6 +126,8 @@ final class UserModel
             if(password_verify($password, $row["Password_hash"]))
             {
                 $login = true;
+                $_SESSION["id_user"] = $row["Id"];
+                $_SESSION["username"] = $row["Username"];
                 break;
             }
         }
