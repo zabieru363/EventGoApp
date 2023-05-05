@@ -26,8 +26,9 @@ final class UserModel
 
     /**
      * Método que registra un usuario nuevo en la base de datos.
-     * @param array Un array con los valores con los que se
-     * guardará el usuario en la base de datos.
+     * @param User Un objeto usuario creado previamente con
+     * los datos que se introdujeron en el formulario de registro
+     * cómo propiedades.
      */
     public function addUser(User $user):void
     {
@@ -99,6 +100,43 @@ final class UserModel
         }
 
         return $info;
+    }
+
+    /**
+     * Método que comprueba si el usuario o email y contraseña
+     * que ha introducido el usuario el formulario de inicio
+     * de sesión es correcto con una consulta a la base de datos.
+     * @param string El nombre de usuario o email introducido.
+     * @param string La contraseña introducida.
+     * @return bool Devuelve true si el usuario fue encontrado
+     * false si no fue así.
+     */
+    public function checkUser(string $user, string $password):bool
+    {
+        $login = false;
+
+        $sql = "SELECT * FROM user 
+        WHERE (Username = :user  OR Email = :user)
+        AND :password = :password";
+
+        $this->connection->execute_query($sql, [
+            ":user" => $user,
+            ":password" => $password
+        ]);
+
+        if(count($this->connection->rows) > 0)
+        {
+            foreach($this->connection->rows as $row)
+            {
+                if(password_verify($password, $row["Password_hash"]))
+                {
+                    $login = true;
+                    break;
+                }
+            }
+        }
+
+        return $login;
     }
 
     /**
