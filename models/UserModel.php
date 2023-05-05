@@ -12,6 +12,7 @@ final class UserModel
     private function __construct()
     {
         $this->connection = Connection::getInstance("eventgo_app");
+        session_start();
     }
 
     public static function getInstance()
@@ -115,24 +116,19 @@ final class UserModel
     {
         $login = false;
 
-        $sql = "SELECT * FROM user 
-        WHERE (Username = :user  OR Email = :user)
-        AND :password = :password";
+        $sql = "SELECT Id, Username, Password_hash FROM user 
+        WHERE Username = :user  OR Email = :user";
 
-        $this->connection->execute_query($sql, [
-            ":user" => $user,
-            ":password" => $password
-        ]);
+        $this->connection->execute_select($sql, [":user" => $user]);
 
-        if(count($this->connection->rows) > 0)
+        foreach($this->connection->rows as $row)
         {
-            foreach($this->connection->rows as $row)
+            if(password_verify($password, $row["Password_hash"]))
             {
-                if(password_verify($password, $row["Password_hash"]))
-                {
-                    $login = true;
-                    break;
-                }
+                $login = true;
+                $_SESSION["id_user"] = $row["Id"];
+                $_SESSION["username"] = $row["Username"];
+                break;
             }
         }
 
