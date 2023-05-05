@@ -115,7 +115,7 @@ final class UserModel
     {
         $login = false;
 
-        $sql = "SELECT * FROM user 
+        $sql = "SELECT Id, Username, Password_hash FROM user 
         WHERE (Username = :user  OR Email = :user)
         AND :password = :password";
 
@@ -124,15 +124,12 @@ final class UserModel
             ":password" => $password
         ]);
 
-        if(count($this->connection->rows) > 0)
+        foreach($this->connection->rows as $row)
         {
-            foreach($this->connection->rows as $row)
+            if(password_verify($password, $row["Password_hash"]))
             {
-                if(password_verify($password, $row["Password_hash"]))
-                {
-                    $login = true;
-                    break;
-                }
+                $login = true;
+                break;
             }
         }
 
