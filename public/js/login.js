@@ -5,13 +5,14 @@ const elements = [...form.elements];
 elements.length -= 2;
 const feedbacks = form.getElementsByClassName("invalid-feedback");
 const loginErrorDiv = document.getElementsByClassName("login-error")[0];
+loginErrorDiv.classList.add("alert");
+loginErrorDiv.classList.add("alert-danger");
+loginErrorDiv.classList.add("d-none");
+
 const submitBtn = document.getElementsByClassName("submit-btn")[0];
 submitBtn.disabled = true;
 submitBtn.style.background = "#8dffcc";
 
-loginErrorDiv.classList.add("alert");
-loginErrorDiv.classList.add("alert-danger");
-loginErrorDiv.style.display = "none";
 
 // * Parte de validación
 
@@ -70,7 +71,6 @@ form.addEventListener("submit", function(e) {
             loginErrorDiv.textContent = data.message;
         }else{
             loginErrorDiv.classList.add("d-none");
-            loginErrorDiv.textContent = "";
         }
     });
 });
