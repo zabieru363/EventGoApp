@@ -9,7 +9,7 @@
                 <div class="col-md-12">
                     <div class="p-5 shadow">
                         <h1 class="display-5 mb-3">Iniciar sesión</h1>
-                        <form name="login-form" id="login-form" method="POST" action="app/login.php">
+                        <form name="login-form" id="login-form" method="POST" action="#">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Nombre de usuario o correo</label>
                                 <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp">
@@ -36,6 +36,8 @@
                 </div>
             </div>
         </section>
+
+        <script src="../../public/js/login.js"></script>
 
         <!-- Bootstrap y Font Awesome -->
         <?php
