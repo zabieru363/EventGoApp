@@ -10,7 +10,7 @@ $login_info = [
 
 if($_SERVER["REQUEST_METHOD"] === "POST")
 {
-    $user = trim($_POST["user"]);
+    $user = trim($_POST["username"]);
     $password = trim($_POST["pass"]);
 
     $info = $user_controller->login($user, $password);
