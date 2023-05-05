@@ -23,6 +23,7 @@ elements[0].addEventListener("input", function() {
     }else{
         feedbacks[0].classList.remove("d-block");
         this.classList.remove("is-invalid");
+        this.classList.add("valid");
         feedbacks[0].textContent = "";
     }
 });
@@ -35,12 +36,13 @@ elements[1].addEventListener("input", function() {
     }else{
         feedbacks[1].classList.remove("d-block");
         this.classList.remove("is-invalid");
+        this.classList.add("valid");
         feedbacks[1].textContent = "";
     }
 });
 
 form.addEventListener("input", function() {
-    const checker = elements.every(element => !(element.classList.contains("is-invalid")));
+    const checker = elements.every(element => element.classList.contains("valid"));
 
     if(checker) {
         submitBtn.disabled = false;
@@ -63,10 +65,12 @@ form.addEventListener("submit", function(e) {
     .then(res => res.json())
     .then(data => {
         console.log(data);
-        if(!data.status) {
-            loginErrorDiv.style.display = "block";
+        if(!data.login) {
+            loginErrorDiv.classList.remove("d-none");
+            loginErrorDiv.textContent = data.message;
         }else{
-            loginErrorDiv.style.display = "none";
+            loginErrorDiv.classList.add("d-none");
+            loginErrorDiv.textContent = "";
         }
     });
 });
