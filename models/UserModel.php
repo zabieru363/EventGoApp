@@ -117,7 +117,7 @@ final class UserModel
 
         $sql = "SELECT Id, Username, Password_hash FROM user 
         WHERE (Username = :user  OR Email = :user)
-        AND :password = :password";
+        AND Password_hash = :password";
 
         $this->connection->execute_query($sql, [
             ":user" => $user,
