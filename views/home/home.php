@@ -18,7 +18,15 @@
             </div>
 
             <?php if(isset($_SESSION["id_user"])): ?>
-                <div><?php echo $_SESSION["username"] ?></div>
+                <div class="auth_user_container">
+                    <?php echo $_SESSION["username"] ?>
+                    <button type="button" class="btn border user-options" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
+                        <i class="fa-solid fa-user"></i>
+                        <a class="anchor" href="#"><i class="fa-solid fa-user"></i> Mi perfil</a>
+                        <a class="anchor" href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
+                        <a class="anchor" href="#"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
+                    </button>
+                </div>
             <?php else: ?>
                 <div class="user_control">
                     <a class="text-white rounded-4 p-2" href="views/login/loginForm.php">Iniciar sesión</a>
