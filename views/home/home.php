@@ -18,11 +18,14 @@
             </div>
 
             <?php if(isset($_SESSION["id_user"])): ?>
-                <div class="auth_user_container d-flex justify-content-between">
-                    <div><?php echo $_SESSION["username"] ?></div>
-                    <div class="user_auth_container">
+                <div class="row align-items-center">
+                    <div class="ms-auto">
                         <div class="user-auth-circle"></div>
                         <img id="image" src="" alt="">
+                    </div>
+                    <div class="ms-auto">
+                        <div class="username"><?php echo $_SESSION["username"] ?></div>
+
                         <div class="dropdown">
                             <a class="btn border user-options dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-bars"></i>
