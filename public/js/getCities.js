@@ -11,7 +11,7 @@ fetch("../../controllers/getCities.php")
         const option = document.createElement("option");
         option.setAttribute("value", counter);
         option.textContent = data[i];
-        option.appendChild(citiesSelect);
+        citiesSelect.appendChild(option);
         counter++;
     }
 })
