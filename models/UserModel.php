@@ -104,6 +104,26 @@ final class UserModel
     }
 
     /**
+     * Método que recupera todas las provincias de
+     * España de la tabla city y las guarda en un array.
+     * @return array Un array con las provincias de España. 
+     */
+    public function getCities():array
+    {
+        $cities = [];
+
+        $sql = "SELECT * FROM city";
+        $this->connection->execute_select($sql, []);
+
+        foreach($this->connection->rows as $row)
+        {
+            array_push($cities, $row["Name"]);
+        }
+
+        return $cities;
+    }
+
+    /**
      * Método que comprueba si el usuario o email y contraseña
      * que ha introducido el usuario el formulario de inicio
      * de sesión es correcto con una consulta a la base de datos.
@@ -112,7 +132,7 @@ final class UserModel
      * @return bool Devuelve true si el usuario fue encontrado
      * false si no fue así.
      */
-    public function checkUser(string $user, string $password):bool
+    public function checkUser(string $user, string $password, bool $remember_me):bool
     {
         $login = false;
 
@@ -128,11 +148,43 @@ final class UserModel
                 $login = true;
                 $_SESSION["id_user"] = $row["Id"];
                 $_SESSION["username"] = $row["Username"];
-                break;
+
+                $this->deleteExpiredTokens();
+
+                if($remember_me)
+                {
+                    $token = bin2hex(random_bytes(32));
+                    $seconds = 30 * 24 * 60 * 60;   // 30 dias en segundos
+                    $now = time();
+                    $expiration = $now + $seconds;
+                    $expiration_date = date('Y-m-d H:i:s', $expiration);
+
+                    $sql = "INSERT INTO remember_token VALUES(NULL,
+                    :user_id, :token, :expiry)";
+
+                    $this->connection->execute_query($sql, [
+                        ":user_id" => $row["Id"],
+                        ":token" => $token,
+                        ":expiry" => $expiration_date
+                    ]);
+
+                    setcookie('remember_me', $token, $expiration, '/');
+                }
             }
         }
 
         return $login;
+    }
+
+    /**
+     * Método que elimina los registros de la tabla de
+     * remember_tokens en los que la fecha de expiración
+     * haya llegado a la fecha de hoy.
+     */
+    private function deleteExpiredTokens():void
+    {
+        $sql = "DELETE FROM remember_token WHERE Expiry <= NOW()";
+        $this->connection->execute_query($sql, []);
     }
 
     /**
