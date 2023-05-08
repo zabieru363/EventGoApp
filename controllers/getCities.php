@@ -11,10 +11,8 @@ function create_cities_array($cities):array
 
     foreach($cities as $city)
     {
-        $array = [
-            "id" => $counter,
-            "city" => $city
-        ];
+        $array["id"] = $counter;
+        $array["city"] = $city;
         
         $counter++;
     }
