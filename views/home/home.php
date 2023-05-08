@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $title = "Inicio";
     $css = "public/css/styles.css";
     require_once("templates/open.php");
@@ -16,10 +17,35 @@
                 name="event_input" placeholder="Buscar eventos">
             </div>
 
-            <div class="user_control">
-                <a class="text-white rounded-4 p-2" href="views/login/loginForm.php">Iniciar sesión</a>
-                <a class="text-white rounded-4 p-2 " href="views/register/registerForm.php">Registrarse</a>
-            </div>
+            <?php if(isset($_SESSION["id_user"])): ?>
+                <div class="row align-items-center">
+                    <div class="ms-auto">
+                        <div class="user-auth-circle"></div>
+                        <img id="image" src="" alt="">
+                    </div>
+                    <div class="ms-auto">
+                        <div class="username"><?php echo $_SESSION["username"] ?></div>
+
+                        <div class="dropdown">
+                            <a class="btn border user-options dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-bars"></i>
+                            </a>
+
+                            <ul class="dropdown-menu p-3">
+                                <li><a class="anchor user-auth-anchor" href="#"><i class="fa-solid fa-user"></i> Mi perfil</a></li>
+                                <li><a class="anchor user-auth-anchor" href="#"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+                                <li><a class="anchor user-auth-anchor" href="#"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <div class="user_control">
+                    <a class="text-white rounded-4 p-2" href="views/login/loginForm.php">Iniciar sesión</a>
+                    <a class="text-white rounded-4 p-2 " href="views/register/registerForm.php">Registrarse</a>
+                </div>
+            <?php endif; ?>
+
         </header>
 
         <section class="wrapper">

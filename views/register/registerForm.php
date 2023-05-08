@@ -28,12 +28,27 @@
                                     </div>
                                 </div>
                             </div>
-                                
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Nombre de usuario *</label>
-                                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Entre 8 y 15 caracteres">
-                                <div class="invalid-feedback"></div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Nombre de usuario *</label>
+                                        <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Entre 8 y 15 caracteres">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="cities" class="form-label">Selecciona tu ciudad *</label>
+                                        <select name="cities" id="cities" class="form-select">
+                                            <option value="">Selecciona tu ciudad</option>
+                                        </select>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
                             </div>
+                                
                                 
                             <div class="row">
 
