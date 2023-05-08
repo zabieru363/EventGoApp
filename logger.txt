@@ -1,0 +1,2 @@
+[08-May-2023 19:00:52 Europe/Berlin] PHP Warning:  Undefined variable $array in C:\xampp\htdocs\TFG\EventGoApp\controllers\getCities.php on line 10
+[08-May-2023 19:01:07 Europe/Berlin] PHP Warning:  Undefined variable $array in C:\xampp\htdocs\TFG\EventGoApp\controllers\getCities.php on line 10
