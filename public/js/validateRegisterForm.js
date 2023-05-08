@@ -105,11 +105,15 @@ elements[5].addEventListener("input", function () {
   if (this.value !== elements[4].value) {
     this.classList.add("is-invalid");
     this.classList.remove("is-valid");
+    elements[4].classList.remove("is-valid");
+    elements[4].classList.add("is-invalid");
     feedbacks[5].classList.add("d-block");
     feedbacks[5].textContent = "Las contraseñas no coinciden";
   } else {
     this.classList.remove("is-invalid");
     this.classList.add("is-valid");
+    elements[4].classList.remove("is-invalid");
+    elements[4].classList.add("is-valid");
     feedbacks[5].classList.remove("d-block");
     feedbacks[5].textContent = "";
   }
@@ -173,6 +177,7 @@ form.addEventListener("submit", function (e) {
         elements.forEach(element => element.classList.remove("is-valid"));
 
         this.reset();
+        preview.setAttribute('src', "#");
 
         const modal = new bootstrap.Modal(document.getElementById("registerCompleteModal"));
         modal.show();
