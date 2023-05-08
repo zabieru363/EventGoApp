@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $title = "Inicio";
     $css = "public/css/styles.css";
     require_once("templates/open.php");
@@ -16,10 +17,15 @@
                 name="event_input" placeholder="Buscar eventos">
             </div>
 
-            <div class="user_control">
-                <a class="text-white rounded-4 p-2" href="views/login/loginForm.php">Iniciar sesión</a>
-                <a class="text-white rounded-4 p-2 " href="views/register/registerForm.php">Registrarse</a>
-            </div>
+            <?php if(isset($_SESSION["id_user"])): ?>
+                <div><?php echo $_SESSION["username"] ?></div>
+            <?php else: ?>
+                <div class="user_control">
+                    <a class="text-white rounded-4 p-2" href="views/login/loginForm.php">Iniciar sesión</a>
+                    <a class="text-white rounded-4 p-2 " href="views/register/registerForm.php">Registrarse</a>
+                </div>
+            <?php endif; ?>
+
         </header>
 
         <section class="wrapper">
