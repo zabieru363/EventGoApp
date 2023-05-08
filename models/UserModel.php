@@ -132,7 +132,7 @@ final class UserModel
                 if($remember_me)
                 {
                     $token = bin2hex(random_bytes(32));
-                    $expiration = time() + (86400 * 30);
+                    $expiration = time() + 30 * 24 * 60 * 60;
 
                     $sql = "INSERT INTO remember_token VALUES(NULL,
                     :user_id, :token, :expiry)";
