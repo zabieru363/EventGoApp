@@ -1,5 +1,4 @@
 "use strict";
-
 const form = document.forms[0];
 const elements = [...form.elements];
 elements.length -= 2;
@@ -75,11 +74,6 @@ elements[3].addEventListener("input", function () {
     this.classList.remove("is-valid");
     feedbacks[3].classList.add("d-block");
     feedbacks[3].textContent = "Este campo es obligatorio.";
-  } else if (!/^(?=.*\d)(?=.*[A-Z]).{8,}$/.test(this.value)) {
-    this.classList.add("is-invalid");
-    this.classList.remove("is-valid");
-    feedbacks[3].classList.add("d-block");
-    feedbacks[3].textContent = "Contraseña debil";
   } else {
     this.classList.remove("is-invalid");
     this.classList.add("is-valid");
@@ -89,16 +83,35 @@ elements[3].addEventListener("input", function () {
 });
 
 elements[4].addEventListener("input", function () {
-  if (this.value !== elements[3].value) {
+  if (this.value === "") {
     this.classList.add("is-invalid");
     this.classList.remove("is-valid");
     feedbacks[4].classList.add("d-block");
-    feedbacks[4].textContent = "Las contraseñas no coinciden";
+    feedbacks[4].textContent = "Este campo es obligatorio.";
+  } else if (!/^(?=.*\d)(?=.*[A-Z]).{8,}$/.test(this.value)) {
+    this.classList.add("is-invalid");
+    this.classList.remove("is-valid");
+    feedbacks[4].classList.add("d-block");
+    feedbacks[4].textContent = "Contraseña debil";
   } else {
     this.classList.remove("is-invalid");
     this.classList.add("is-valid");
     feedbacks[4].classList.remove("d-block");
     feedbacks[4].textContent = "";
+  }
+});
+
+elements[5].addEventListener("input", function () {
+  if (this.value !== elements[4].value) {
+    this.classList.add("is-invalid");
+    this.classList.remove("is-valid");
+    feedbacks[5].classList.add("d-block");
+    feedbacks[5].textContent = "Las contraseñas no coinciden";
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    feedbacks[5].classList.remove("d-block");
+    feedbacks[5].textContent = "";
   }
 });
 
