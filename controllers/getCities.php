@@ -5,17 +5,17 @@ $user_controller = new UserController();
 
 function create_cities_array($cities):array
 {
-    $array = [
-        "id" => [],
-        "city" => []
-    ];
+    $array = [];
 
     $counter = 1;
 
     foreach($cities as $city)
     {
-        array_push($array["id"], $counter);
-        array_push($array["city"], $city);
+        $array = [
+            "id" => $counter,
+            "city" => $city
+        ];
+        
         $counter++;
     }
 
