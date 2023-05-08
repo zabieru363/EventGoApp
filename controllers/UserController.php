@@ -51,14 +51,14 @@ final class UserController
      * con propiedades indicando si el login ha
      * tenido exito o no.
      */
-    public function login(string $user, string $password):array
+    public function login(string $user, string $password, bool $remember_me):array
     {
         $login_status = [
             "message" => "",
             "login" => false
         ];
 
-        if($this->model->checkUser($user, $password))
+        if($this->model->checkUser($user, $password, $remember_me))
         {
             $login_status["login"] = true;
         }
