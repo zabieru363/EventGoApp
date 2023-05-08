@@ -21,8 +21,8 @@
                                 <div class="invalid-feedback"></div>
                             </div>
                             <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Recuerdame</label>
+                                <input type="checkbox" class="form-check-input" name="remember-me" id="remember-me">
+                                <label class="form-check-label" for="remember-me">Recuerdame</label>
                             </div>
                             <div class="mb-3">
                                 ¿No tienes una cuenta? <a href="../register/registerForm.php">Registrate</a>
