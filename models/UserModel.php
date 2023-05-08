@@ -112,7 +112,7 @@ final class UserModel
      * @return bool Devuelve true si el usuario fue encontrado
      * false si no fue así.
      */
-    public function checkUser(string $user, string $password):bool
+    public function checkUser(string $user, string $password, bool $remember_me):bool
     {
         $login = false;
 
@@ -128,7 +128,23 @@ final class UserModel
                 $login = true;
                 $_SESSION["id_user"] = $row["Id"];
                 $_SESSION["username"] = $row["Username"];
-                break;
+
+                if($remember_me)
+                {
+                    $token = bin2hex(random_bytes(32));
+                    $expiration = time() + (86400 * 30);
+
+                    $sql = "INSERT INTO remember_token VALUES(NULL,
+                    :user_id, :token, :expiry)";
+
+                    $this->connection->execute_query($sql, [
+                        ":user_id" => $row["Id"],
+                        ":token" => $token,
+                        ":expiry" => $expiration
+                    ]);
+
+                    setcookie('remember_me', $token, $expiration, '/');
+                }
             }
         }
 

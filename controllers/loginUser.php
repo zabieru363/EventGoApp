@@ -10,10 +10,17 @@ $login_info = [
 
 if($_SERVER["REQUEST_METHOD"] === "POST")
 {
+    $remember_me = false;
+
     $user = trim($_POST["username"]);
     $password = trim($_POST["pass"]);
 
-    $info = $user_controller->login($user, $password);
+    if(isset($_POST["remember_me"]) && $_POST["remember_me"] === "on")
+    {
+        $remember_me = true;
+    }
+
+    $info = $user_controller->login($user, $password, $remember_me);
 
     if($info["login"])
     {
