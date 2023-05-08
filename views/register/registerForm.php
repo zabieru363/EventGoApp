@@ -101,6 +101,7 @@
             </div>
         </section>
 
+        <script src="../../public/js/getCities.js"></script>
         <script src="../../public/js/validateRegisterForm.js"></script>
 
         <!-- Bootstrap y Font Awesome -->
