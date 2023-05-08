@@ -16,6 +16,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $user = new User();
 
     $file_name = "default.png";
+    $tmp = "";
 
     if(isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK)
     {
