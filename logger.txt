@@ -1,1 +1,0 @@
-[08-May-2023 12:56:04 Europe/Berlin] PHP Warning:  Undefined array key "euVATrate" in C:\xampp\htdocs\TFG\EventGoApp\lib\geoplugin.class.php on line 104
