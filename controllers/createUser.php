@@ -55,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     {
         if($file_name !== "default.png")
         {
-            $route = "uploads/" . $file_name;
+            $route = "../uploads/" . $file_name;
             move_uploaded_file($tmp, $route);
         }
 
