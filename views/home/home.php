@@ -18,14 +18,23 @@
             </div>
 
             <?php if(isset($_SESSION["id_user"])): ?>
-                <div class="auth_user_container">
-                    <?php echo $_SESSION["username"] ?>
-                    <button type="button" class="btn border user-options" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
-                        <i class="fa-solid fa-user"></i>
-                        <a class="anchor" href="#"><i class="fa-solid fa-user"></i> Mi perfil</a>
-                        <a class="anchor" href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
-                        <a class="anchor" href="#"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
-                    </button>
+                <div class="auth_user_container d-flex justify-content-between">
+                    <div><?php echo $_SESSION["username"] ?></div>
+                    <div class="user_auth_container">
+                        <div class="user-auth-circle"></div>
+                        <img src="" alt="">
+                        <div class="dropdown">
+                            <a class="btn border user-options dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-bars"></i>
+                            </a>
+
+                            <ul class="dropdown-menu p-3">
+                                <li><a class="anchor user-auth-anchor" href="#"><i class="fa-solid fa-user"></i> Mi perfil</a></li>
+                                <li><a class="anchor user-auth-anchor" href="#"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+                                <li><a class="anchor user-auth-anchor" href="#"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             <?php else: ?>
                 <div class="user_control">
