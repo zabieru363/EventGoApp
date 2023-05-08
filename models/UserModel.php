@@ -129,6 +129,8 @@ final class UserModel
                 $_SESSION["id_user"] = $row["Id"];
                 $_SESSION["username"] = $row["Username"];
 
+                $this->deleteExpiredTokens();
+
                 if($remember_me)
                 {
                     $token = bin2hex(random_bytes(32));
@@ -159,7 +161,7 @@ final class UserModel
      * remember_tokens en los que la fecha de expiración
      * haya llegado a la fecha de hoy.
      */
-    public function deleteExpiredTokens():void
+    private function deleteExpiredTokens():void
     {
         $sql = "DELETE FROM remember_token WHERE Expiry <= NOW()";
         $this->connection->execute_query($sql, []);
