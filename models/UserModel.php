@@ -132,7 +132,10 @@ final class UserModel
                 if($remember_me)
                 {
                     $token = bin2hex(random_bytes(32));
-                    $expiration = time() + 30 * 24 * 60 * 60;
+                    $seconds = 30 * 24 * 60 * 60;
+                    $now = time();
+                    $expiration = $now + $seconds;
+                    $expiration_date = date('Y-m-d H:i:s', $expiration);
 
                     $sql = "INSERT INTO remember_token VALUES(NULL,
                     :user_id, :token, :expiry)";
@@ -140,7 +143,7 @@ final class UserModel
                     $this->connection->execute_query($sql, [
                         ":user_id" => $row["Id"],
                         ":token" => $token,
-                        ":expiry" => $expiration
+                        ":expiry" => $expiration_date
                     ]);
 
                     setcookie('remember_me', $token, $expiration, '/');
