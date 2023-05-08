@@ -20,6 +20,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     if(isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK)
     {
         $file_name = $_FILES["image"]["name"];
+        $tmp = $_FILES["image"]["tmp_name"];
     }
 
     $geo = new geoPlugin();
@@ -52,6 +53,12 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 
     if(!($info["created"]))
     {
+        if($file_name !== "default.png")
+        {
+            $route = __DIR__ . "/uploads" . $file_name;
+            move_uploaded_file($tmp, $route);
+        }
+
         if($info["username_info_message"] !== "")
         {
             $register_status["username_message"] = $info["username_info_message"];
