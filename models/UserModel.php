@@ -132,7 +132,7 @@ final class UserModel
                 if($remember_me)
                 {
                     $token = bin2hex(random_bytes(32));
-                    $seconds = 30 * 24 * 60 * 60;
+                    $seconds = 30 * 24 * 60 * 60;   // 30 dias en segundos
                     $now = time();
                     $expiration = $now + $seconds;
                     $expiration_date = date('Y-m-d H:i:s', $expiration);
@@ -152,6 +152,17 @@ final class UserModel
         }
 
         return $login;
+    }
+
+    /**
+     * Método que elimina los registros de la tabla de
+     * remember_tokens en los que la fecha de expiración
+     * haya llegado a la fecha de hoy.
+     */
+    public function deleteExpiredTokens():void
+    {
+        $sql = "DELETE FROM remember_token WHERE Expiry <= NOW()";
+        $this->connection->execute_query($sql, []);
     }
 
     /**
