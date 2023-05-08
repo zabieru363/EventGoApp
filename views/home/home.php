@@ -22,7 +22,7 @@
                     <div><?php echo $_SESSION["username"] ?></div>
                     <div class="user_auth_container">
                         <div class="user-auth-circle"></div>
-                        <img src="" alt="">
+                        <img id="image" src="" alt="">
                         <div class="dropdown">
                             <a class="btn border user-options dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-bars"></i>
