@@ -12,6 +12,7 @@ final class UserModel
     private function __construct()
     {
         $this->connection = Connection::getInstance("eventgo_app");
+        session_start();
     }
 
     public static function getInstance()
@@ -26,8 +27,9 @@ final class UserModel
 
     /**
      * Método que registra un usuario nuevo en la base de datos.
-     * @param array Un array con los valores con los que se
-     * guardará el usuario en la base de datos.
+     * @param User Un objeto usuario creado previamente con
+     * los datos que se introdujeron en el formulario de registro
+     * cómo propiedades.
      */
     public function addUser(User $user):void
     {
@@ -99,6 +101,90 @@ final class UserModel
         }
 
         return $info;
+    }
+
+    /**
+     * Método que recupera todas las provincias de
+     * España de la tabla city y las guarda en un array.
+     * @return array Un array con las provincias de España. 
+     */
+    public function getCities():array
+    {
+        $cities = [];
+
+        $sql = "SELECT * FROM city";
+        $this->connection->execute_select($sql, []);
+
+        foreach($this->connection->rows as $row)
+        {
+            array_push($cities, $row["Name"]);
+        }
+
+        return $cities;
+    }
+
+    /**
+     * Método que comprueba si el usuario o email y contraseña
+     * que ha introducido el usuario el formulario de inicio
+     * de sesión es correcto con una consulta a la base de datos.
+     * @param string El nombre de usuario o email introducido.
+     * @param string La contraseña introducida.
+     * @return bool Devuelve true si el usuario fue encontrado
+     * false si no fue así.
+     */
+    public function checkUser(string $user, string $password, bool $remember_me):bool
+    {
+        $login = false;
+
+        $sql = "SELECT Id, Username, Password_hash FROM user 
+        WHERE Username = :user  OR Email = :user";
+
+        $this->connection->execute_select($sql, [":user" => $user]);
+
+        foreach($this->connection->rows as $row)
+        {
+            if(password_verify($password, $row["Password_hash"]))
+            {
+                $login = true;
+                $_SESSION["id_user"] = $row["Id"];
+                $_SESSION["username"] = $row["Username"];
+
+                $this->deleteExpiredTokens();
+
+                if($remember_me)
+                {
+                    $token = bin2hex(random_bytes(32));
+                    $seconds = 30 * 24 * 60 * 60;   // 30 dias en segundos
+                    $now = time();
+                    $expiration = $now + $seconds;
+                    $expiration_date = date('Y-m-d H:i:s', $expiration);
+
+                    $sql = "INSERT INTO remember_token VALUES(NULL,
+                    :user_id, :token, :expiry)";
+
+                    $this->connection->execute_query($sql, [
+                        ":user_id" => $row["Id"],
+                        ":token" => $token,
+                        ":expiry" => $expiration_date
+                    ]);
+
+                    setcookie('remember_me', $token, $expiration, '/');
+                }
+            }
+        }
+
+        return $login;
+    }
+
+    /**
+     * Método que elimina los registros de la tabla de
+     * remember_tokens en los que la fecha de expiración
+     * haya llegado a la fecha de hoy.
+     */
+    private function deleteExpiredTokens():void
+    {
+        $sql = "DELETE FROM remember_token WHERE Expiry <= NOW()";
+        $this->connection->execute_query($sql, []);
     }
 
     /**

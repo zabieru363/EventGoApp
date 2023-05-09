@@ -30,7 +30,7 @@
                             <div class="forgot-password-container mb-3">
                                 <a href="#">¿Has olvidado tu contraseña?</a>
                             </div>
-                            <div class="login-error"></div>
+                            <div class="login-error d-none"></div>
                             
                             <button type="submit" name="login" class="submit-btn">Iniciar sesión</button>
                         </form>

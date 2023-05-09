@@ -14,8 +14,8 @@ final class UserController
      * Método que comunica al modelo la acción de registrar
      * el usuario. Si el nombre de usuario o el email ya
      * existen no lo manda a insertar en la base de datos.
-     * @param array Un array asociativo con los valores
-     * que tendrá el usuario.
+     * @param User Un objeto usuario previamente creado
+     * para obtener las diferentes propiedades.
      * @return array Un array asociativo indicando si ha
      * insertado al usuario y si el registro contiene
      * algunos errores.
@@ -38,6 +38,46 @@ final class UserController
         }
 
         return $info;
+    }
+
+    /**
+     * Método que solicita al modelo todas las
+     * provincias de España que hay en la base de datos.
+     * @return array El array con todas las provincias de España.
+     */
+    public function getCities():array
+    {
+        return $this->model->getCities();
+    }
+
+    /**
+     * Método que comprueba si el login es correcto
+     * llamando al modelo.
+     * @param string El nombre de usuario o el email
+     * introducido para iniciar sesión.
+     * @param string La contraseña introducida para
+     * iniciar sesión.
+     * @return array Un array asociativo indicando
+     * con propiedades indicando si el login ha
+     * tenido exito o no.
+     */
+    public function login(string $user, string $password, bool $remember_me):array
+    {
+        $login_status = [
+            "message" => "",
+            "login" => false
+        ];
+
+        if($this->model->checkUser($user, $password, $remember_me))
+        {
+            $login_status["login"] = true;
+        }
+        else
+        {
+            $login_status["message"] = "Usuario o contraseña incorrectos";
+        }
+
+        return $login_status;
     }
 
     /**
