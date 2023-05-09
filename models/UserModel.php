@@ -36,7 +36,7 @@ final class UserModel
         $password_hash = password_hash($user->__get("password"), PASSWORD_BCRYPT);
 
         $sql = "INSERT INTO user VALUES(NULL, :username, :password,
-        :type, :fullname, :email, :country, :city, :active, CURDATE(), :image)";
+        :type, :fullname, :email, :city, :active, CURDATE(), :image)";
 
         $this->connection->execute_query($sql, [
             ":username" => $user->__get("username"),
@@ -44,7 +44,6 @@ final class UserModel
             ":type" => $user->__get("type"),
             ":fullname" => $user->__get("fullname"),
             ":email" => $user->__get("email"),
-            ":country" => $user->__get("country"),
             ":city" => $user->__get("city"),
             ":active" => $user->__get("active"),
             ":image" => $user->__get("image")

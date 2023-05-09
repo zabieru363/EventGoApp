@@ -7,7 +7,6 @@ final class User
     private string $type;
     private string $fullname;
     private string $email;
-    private string $country;
     private string $city;
     private bool $active;
     private string $register_date;
