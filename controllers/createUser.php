@@ -1,7 +1,6 @@
 <?php
 require_once("../config/displayErrors.php");
 require_once("UserController.php");
-require_once("../lib/geoplugin.class.php");
 $user_controller = new UserController();
 
 $register_status = [
@@ -24,29 +23,12 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
         $tmp = $_FILES["image"]["tmp_name"];
     }
 
-    $geo = new geoPlugin();
-    $geo->locate($_SERVER["REMOTE_ADDR"]);
-
-    $country = $geo->countryName;
-    $city = $geo->city;
-
-    if(is_null($country))
-    {
-        $country = "default";
-    }
-
-    if(is_null($city))
-    {
-        $city = "default";
-    }
-
     $user->__set("username", trim($_POST["username"]));
     $user->__set("password", trim($_POST["pass"]));
     $user->__set("type", "Normal");
     $user->__set("fullname", trim($_POST["fullname"]));
     $user->__set("email", trim($_POST["email"]));
-    $user->__set("country", $country);
-    $user->__set("city", $city);
+    $user->__set("city", $_POST["cities"]);
     $user->__set("active", 1);
     $user->__set("image", $file_name);
 
