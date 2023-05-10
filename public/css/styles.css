@@ -23,6 +23,15 @@
     text-decoration: none;
 }
 
+.user-auth-circle {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #ddd;
+}
+
 #event_input {
     border: 1px solid rgba(0, 0, 0,.1);
 }
@@ -35,8 +44,8 @@
 
 .circle {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 10rem;
+    height: 10rem;
     border-radius: 50%;
     overflow: hidden;
     background: #ddd;
