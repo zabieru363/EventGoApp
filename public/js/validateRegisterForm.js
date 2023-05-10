@@ -1,4 +1,5 @@
 "use strict";
+
 const form = document.forms[0];
 const elements = [...form.elements];
 elements.length -= 2;
@@ -93,11 +94,27 @@ elements[4].addEventListener("input", function () {
     this.classList.remove("is-valid");
     feedbacks[4].classList.add("d-block");
     feedbacks[4].textContent = "Contraseña debil";
-  } else {
+  }else {
     this.classList.remove("is-invalid");
     this.classList.add("is-valid");
     feedbacks[4].classList.remove("d-block");
     feedbacks[4].textContent = "";
+  }
+
+  if(this.value !== elements[5].value) {
+    this.classList.add("is-invalid");
+    this.classList.remove("is-valid");
+    elements[5].classList.add("is-invalid");
+    elements[5].classList.remove("is-valid");
+    feedbacks[5].classList.add("d-block");
+    feedbacks[5].textContent = "Las contraseñas no coinciden";
+  }else{
+    this.classList.add("is-valid");
+    this.classList.remove("is-invalid");
+    elements[5].classList.add("is-valid");
+    elements[5].classList.remove("is-invalid");
+    feedbacks[5].classList.remove("d-block");
+    feedbacks[5].textContent = "";
   }
 });
 
@@ -177,13 +194,15 @@ form.addEventListener("submit", function (e) {
         elements.forEach(element => element.classList.remove("is-valid"));
 
         this.reset();
-        preview.setAttribute('src', "#");
+        preview.setAttribute('src', "");
 
         const modal = new bootstrap.Modal(document.getElementById("registerCompleteModal"));
         modal.show();
 
         submitBtn.disabled = true;
         submitBtn.style.background = "#8dffcc";
+
+        window.location.href = "../../index.php";
       }
     })
     .catch((error) => console.log("Algo salió mal. " + error));
