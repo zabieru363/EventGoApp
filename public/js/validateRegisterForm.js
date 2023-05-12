@@ -84,24 +84,14 @@ elements[3].addEventListener("input", function () {
 });
 
 elements[4].addEventListener("input", function () {
-  if (this.value === "") {
+  if((this.value === "") && (elements[5].value === "")) {
     this.classList.add("is-invalid");
     this.classList.remove("is-valid");
-    feedbacks[4].classList.add("d-block");
-    feedbacks[4].textContent = "Este campo es obligatorio.";
-  } else if (!/^(?=.*\d)(?=.*[A-Z]).{8,}$/.test(this.value)) {
-    this.classList.add("is-invalid");
-    this.classList.remove("is-valid");
-    feedbacks[4].classList.add("d-block");
-    feedbacks[4].textContent = "Contraseña debil";
-  }else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-    feedbacks[4].classList.remove("d-block");
-    feedbacks[4].textContent = "";
-  }
-
-  if(this.value !== elements[5].value) {
+    elements[5].classList.add("is-invalid");
+    elements[5].classList.remove("is-valid");
+    feedbacks[5].classList.add("d-block");
+    feedbacks[5].textContent = "La contraseña es obligatoria.";
+  }else if(this.value !== elements[5].value) {
     this.classList.add("is-invalid");
     this.classList.remove("is-valid");
     elements[5].classList.add("is-invalid");
@@ -111,14 +101,45 @@ elements[4].addEventListener("input", function () {
   }else{
     this.classList.add("is-valid");
     this.classList.remove("is-invalid");
+
     elements[5].classList.add("is-valid");
     elements[5].classList.remove("is-invalid");
+
     feedbacks[5].classList.remove("d-block");
     feedbacks[5].textContent = "";
+  }
+  
+  if (!/^(?=.*\d)(?=.*[A-Z]).{8,}$/.test(this.value)) {
+    this.classList.add("is-invalid");
+    this.classList.remove("is-valid");
+    elements[5].classList.add("is-invalid");
+    elements[5].classList.remove("is-valid");
+    feedbacks[4].classList.add("d-block");
+    feedbacks[4].textContent = "Contraseña debil";
+  }else{
+    feedbacks[4].classList.remove("d-block");
+    feedbacks[4].textContent = "";
   }
 });
 
 elements[5].addEventListener("input", function () {
+  if((this.value === "") && (elements[4].value === "")) {
+    this.classList.add("is-invalid");
+    this.classList.remove("is-valid");
+    elements[4].classList.add("is-invalid");
+    elements[4].classList.remove("is-valid");
+    feedbacks[5].classList.add("d-block");
+    feedbacks[5].textContent = "La contraseña es obligatoria.";
+  }else{
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    elements[4].classList.remove("is-invalid");
+    elements[4].classList.add("is-valid");
+
+    feedbacks[5].classList.remove("d-block");
+    feedbacks[5].textContent = "";
+  }
+  
   if (this.value !== elements[4].value) {
     this.classList.add("is-invalid");
     this.classList.remove("is-valid");
@@ -126,13 +147,6 @@ elements[5].addEventListener("input", function () {
     elements[4].classList.add("is-invalid");
     feedbacks[5].classList.add("d-block");
     feedbacks[5].textContent = "Las contraseñas no coinciden";
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-    elements[4].classList.remove("is-invalid");
-    elements[4].classList.add("is-valid");
-    feedbacks[5].classList.remove("d-block");
-    feedbacks[5].textContent = "";
   }
 });
 
