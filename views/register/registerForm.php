@@ -94,7 +94,7 @@
                                         El usuario ha sido registrado correctamente.
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn return-home-btn submit-btn">Volver a inicio</button>
+                                        <button type="button" class="return-home-btn submit-btn">Volver a inicio</button>
                                     </div>
                                 </div>
                             </div>
