@@ -1,4 +1,5 @@
 "use strict";
+
 const form = document.forms[0];
 const elements = [...form.elements];
 elements.length -= 2;
@@ -9,6 +10,8 @@ const submitBtn = document.getElementsByClassName("submit-btn")[0];
 submitBtn.disabled = true;
 submitBtn.style.background = "#8dffcc";
 
+const returnHomeBtn = document.getElementsByClassName("return-home-btn")[0];
+const closeModalBtn = document.getElementsByClassName("btn-close")[0];
 const feedbacks = form.getElementsByClassName("invalid-feedback");
 
 elements[0].addEventListener("input", function () {
@@ -83,25 +86,62 @@ elements[3].addEventListener("input", function () {
 });
 
 elements[4].addEventListener("input", function () {
-  if (this.value === "") {
+  if((this.value === "") && (elements[5].value === "")) {
     this.classList.add("is-invalid");
     this.classList.remove("is-valid");
-    feedbacks[4].classList.add("d-block");
-    feedbacks[4].textContent = "Este campo es obligatorio.";
-  } else if (!/^(?=.*\d)(?=.*[A-Z]).{8,}$/.test(this.value)) {
+    elements[5].classList.add("is-invalid");
+    elements[5].classList.remove("is-valid");
+    feedbacks[5].classList.add("d-block");
+    feedbacks[5].textContent = "La contraseña es obligatoria.";
+  }else if(this.value !== elements[5].value) {
     this.classList.add("is-invalid");
     this.classList.remove("is-valid");
+    elements[5].classList.add("is-invalid");
+    elements[5].classList.remove("is-valid");
+    feedbacks[5].classList.add("d-block");
+    feedbacks[5].textContent = "Las contraseñas no coinciden";
+  }else{
+    this.classList.add("is-valid");
+    this.classList.remove("is-invalid");
+
+    elements[5].classList.add("is-valid");
+    elements[5].classList.remove("is-invalid");
+
+    feedbacks[5].classList.remove("d-block");
+    feedbacks[5].textContent = "";
+  }
+  
+  if (!/^(?=.*\d)(?=.*[A-Z]).{8,}$/.test(this.value)) {
+    this.classList.add("is-invalid");
+    this.classList.remove("is-valid");
+    elements[5].classList.add("is-invalid");
+    elements[5].classList.remove("is-valid");
     feedbacks[4].classList.add("d-block");
     feedbacks[4].textContent = "Contraseña debil";
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
+  }else{
     feedbacks[4].classList.remove("d-block");
     feedbacks[4].textContent = "";
   }
 });
 
 elements[5].addEventListener("input", function () {
+  if((this.value === "") && (elements[4].value === "")) {
+    this.classList.add("is-invalid");
+    this.classList.remove("is-valid");
+    elements[4].classList.add("is-invalid");
+    elements[4].classList.remove("is-valid");
+    feedbacks[5].classList.add("d-block");
+    feedbacks[5].textContent = "La contraseña es obligatoria.";
+  }else{
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    elements[4].classList.remove("is-invalid");
+    elements[4].classList.add("is-valid");
+
+    feedbacks[5].classList.remove("d-block");
+    feedbacks[5].textContent = "";
+  }
+  
   if (this.value !== elements[4].value) {
     this.classList.add("is-invalid");
     this.classList.remove("is-valid");
@@ -109,13 +149,6 @@ elements[5].addEventListener("input", function () {
     elements[4].classList.add("is-invalid");
     feedbacks[5].classList.add("d-block");
     feedbacks[5].textContent = "Las contraseñas no coinciden";
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-    elements[4].classList.remove("is-invalid");
-    elements[4].classList.add("is-valid");
-    feedbacks[5].classList.remove("d-block");
-    feedbacks[5].textContent = "";
   }
 });
 
@@ -177,13 +210,18 @@ form.addEventListener("submit", function (e) {
         elements.forEach(element => element.classList.remove("is-valid"));
 
         this.reset();
-        preview.setAttribute('src', "#");
+        preview.setAttribute('src', "");
 
         const modal = new bootstrap.Modal(document.getElementById("registerCompleteModal"));
         modal.show();
 
-        submitBtn.disabled = true;
-        submitBtn.style.background = "#8dffcc";
+        closeModalBtn.addEventListener("click", function() {
+          window.location.replace("../../index.php");
+        });
+        
+        returnHomeBtn.addEventListener("click", function() {
+          window.location.replace("../../index.php");
+        });
       }
     })
     .catch((error) => console.log("Algo salió mal. " + error));
