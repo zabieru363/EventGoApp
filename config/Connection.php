@@ -9,9 +9,9 @@
         # Propiedades privadas de clase
         private static $instance;
         private $sgbd = "mysql";
-        private $server = "127.0.0.1";    // Localhost
-        private $user = "root";
-        private $password = "";
+        private $server = "sql306.epizy.com";
+        private $user = "epiz_34177723";
+        private $password = "xEaB1VomrRYd";
         protected $db_name;
         public $rows;  // Array de filas con el resultado de la consulta select
         private $connection;
