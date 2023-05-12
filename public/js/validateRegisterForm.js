@@ -10,6 +10,8 @@ const submitBtn = document.getElementsByClassName("submit-btn")[0];
 submitBtn.disabled = true;
 submitBtn.style.background = "#8dffcc";
 
+const returnHomeBtn = document.getElementsByClassName("return-home-btn")[0];
+const closeModalBtn = document.getElementsByClassName("btn-close")[0];
 const feedbacks = form.getElementsByClassName("invalid-feedback");
 
 elements[0].addEventListener("input", function () {
@@ -213,10 +215,13 @@ form.addEventListener("submit", function (e) {
         const modal = new bootstrap.Modal(document.getElementById("registerCompleteModal"));
         modal.show();
 
-        submitBtn.disabled = true;
-        submitBtn.style.background = "#8dffcc";
-
-        window.location.href = "../../index.php";
+        closeModalBtn.addEventListener("click", function() {
+          window.location.replace("../../index.php");
+        });
+        
+        returnHomeBtn.addEventListener("click", function() {
+          window.location.replace("../../index.php");
+        });
       }
     })
     .catch((error) => console.log("Algo salió mal. " + error));
