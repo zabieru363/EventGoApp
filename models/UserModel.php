@@ -11,7 +11,7 @@ final class UserModel
 
     private function __construct()
     {
-        $this->connection = Connection::getInstance("eventgo_app");
+        $this->connection = Connection::getInstance();
         session_start();
     }
 
