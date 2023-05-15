@@ -37,7 +37,7 @@
         {
             if(self::$instance === null)
             {
-                self::$instance = new Connection(DB_NAME);
+                self::$instance = new Connection("eventgo_app");
             }
 
             return self::$instance;
