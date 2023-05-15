@@ -1,4 +1,7 @@
 <?php
+    require_once("DB.php");
+    require_once("displayErrors.php");
+
     /**
      * Clase de acceso a datos.
      * @author Javier López
@@ -8,10 +11,10 @@
     {
         # Propiedades privadas de clase
         private static $instance;
-        private $sgbd = "mysql";
-        private $server = "127.0.0.1";    // Localhost
-        private $user = "root";
-        private $password = "";
+        private $sgbd = SGBD;
+        private $server = HOST;
+        private $user = USER;
+        private $password = DB_PASSWORD;
         protected $db_name;
         public $rows;  // Array de filas con el resultado de la consulta select
         private $connection;
@@ -32,11 +35,11 @@
          * crear una instancia del objeto.
          * @param string $db_name El nombre de la base de datos.
          */
-        public static function getInstance(string $db_name)
+        public static function getInstance()
         {
             if(self::$instance === null)
             {
-                self::$instance = new Connection($db_name);
+                self::$instance = new Connection(DB_NAME);
             }
 
             return self::$instance;
