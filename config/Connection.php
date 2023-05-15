@@ -1,5 +1,6 @@
 <?php
     require_once("DB.php");
+    require_once("displayErrors.php");
 
     /**
      * Clase de acceso a datos.
