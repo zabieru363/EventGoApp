@@ -93,6 +93,7 @@
             </div>
         </main>
 
+        <script src="public/js/getCategories.js"></script>
         <!-- Bootstrap y Font Awesome -->
         <?php
             require_once("./templates/cdns.php");
