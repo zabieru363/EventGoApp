@@ -32,6 +32,7 @@
 
 .user_control > a:hover {
     transition: all 1s;
+    background: var(--secondary_color);
     color: var(--primary-color);
 }
 
