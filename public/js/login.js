@@ -19,26 +19,28 @@ submitBtn.style.background = "#8dffcc";
 elements[0].addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
+        this.classList.remove("valid");
         feedbacks[0].classList.add("d-block");
         feedbacks[0].textContent = "Este campo es obligatorio.";
     }else{
         feedbacks[0].classList.remove("d-block");
+        feedbacks[0].textContent = "";
         this.classList.remove("is-invalid");
         this.classList.add("valid");
-        feedbacks[0].textContent = "";
     }
 });
 
 elements[1].addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
+        this.classList.remove("valid");
         feedbacks[1].classList.add("d-block");
         feedbacks[1].textContent = "Este campo es obligatorio.";
     }else{
         feedbacks[1].classList.remove("d-block");
+        feedbacks[1].textContent = "";
         this.classList.remove("is-invalid");
         this.classList.add("valid");
-        feedbacks[1].textContent = "";
     }
 });
 
@@ -65,12 +67,13 @@ form.addEventListener("submit", function(e) {
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data);
         if(!data.login) {
             loginErrorDiv.classList.remove("d-none");
             loginErrorDiv.textContent = data.message;
         }else{
             loginErrorDiv.classList.add("d-none");
+
+            setTimeout(() => window.location.replace("../../index.php"), 1500);
         }
     });
 });
