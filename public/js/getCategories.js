@@ -5,6 +5,7 @@ const categoriesDiv = document.getElementsByClassName("categories-container")[0]
 fetch("controllers/categoriesHandler.php")
     .then(res => res.json())
     .then(data => {
+        console.log(data);
         data.forEach(function(category){
             const categoryDiv = document.createElement("div");
             categoryDiv.classList.add("category", "shadow");
