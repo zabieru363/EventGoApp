@@ -5,11 +5,11 @@ const categoriesDiv = document.getElementsByClassName("categories-container")[0]
 fetch("controllers/categoriesHandler.php")
     .then(res => res.json())
     .then(data => {
-        data.forEach(function(category){
+        for(let i = 0; i < data.length; i++) {
             const categoryDiv = document.createElement("div");
-            categoryDiv.classList.add("category", "shadow");
-            categoryDiv.textContent = category.name;
+            categoryDiv.classList.add("category", "shadow", "mt-2", "p-2");
+            categoryDiv.textContent = data[i];
             categoriesDiv.appendChild(categoryDiv);
-        });
+        }
     })
     .catch((error) => "Algo salió mal " + error);
