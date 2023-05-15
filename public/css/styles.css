@@ -32,7 +32,7 @@
 
 .user_control > a:hover {
     transition: all 1s;
-    color: var(--secondary_color_hover);
+    color: var(--primary-color);
 }
 
 @media (max-width: 991px) {
