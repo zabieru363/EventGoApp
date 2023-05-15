@@ -2,7 +2,7 @@
 
 const categoriesDiv = document.getElementsByClassName("categories-container")[0];
 
-fetch("../../controllers/categoriesHandler.php")
+fetch("controllers/categoriesHandler.php")
     .then(res => res.json())
     .then(data => {
         data.forEach(function(category){
