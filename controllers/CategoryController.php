@@ -11,9 +11,13 @@ final class CategoryController
         $this->model = DAOCategories::getInstance();
     }
 
-    public function listCategories()
+    /**
+     * Método que devuelve en un array todas las categorias
+     * del modelo que previamente se sacaron de la base de datos.
+     * @return array Un array con todas las categorias.
+     */
+    public function listCategories():array
     {
-        $categories = $this->model->list();
-        require_once("../views/home/home.php");
+        return $this->model->list();
     }
 }
