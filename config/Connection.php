@@ -1,9 +1,5 @@
 <?php
     require_once("DB.php");
-    require_once("displayErrors.php");
-    $msg =  HOST . " " . USER . " " . DB_PASSWORD . " " . DB_NAME;
-    error_log($msg, 3, "../logger.txt");
-
     /**
      * Clase de acceso a datos.
      * @author Javier López
