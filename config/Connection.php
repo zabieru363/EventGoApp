@@ -1,5 +1,6 @@
 <?php
-    // require_once("DB.php");
+    require_once("DB.php");
+
     /**
      * Clase de acceso a datos.
      * @author Javier López
@@ -9,10 +10,10 @@
     {
         # Propiedades privadas de clase
         private static $instance;
-        private $sgbd = "mysql";
-        private $server = "127.0.0.1";
-        private $user = "root";
-        private $password = "";
+        private $sgbd = SGBD;
+        private $server = HOST;
+        private $user = USER;
+        private $password = DB_PASSWORD;
         protected $db_name;
         public $rows;  // Array de filas con el resultado de la consulta select
         private $connection;
@@ -35,9 +36,9 @@
          */
         public static function getInstance()
         {
-            if(!(isset(self::$instance)))
+            if(self::$instance === null)
             {
-                self::$instance = new Connection("eventgo_app");
+                self::$instance = new Connection(DB_NAME);
             }
 
             return self::$instance;
