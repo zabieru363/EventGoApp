@@ -1,5 +1,5 @@
 <?php
-    require_once("DB.php");
+    // require_once("DB.php");
     /**
      * Clase de acceso a datos.
      * @author Javier López
@@ -9,10 +9,10 @@
     {
         # Propiedades privadas de clase
         private static $instance;
-        private $sgbd = SGBD;
-        private $server = HOST;
-        private $user = USER;
-        private $password = DB_PASSWORD;
+        private $sgbd = "mysql";
+        private $server = "127.0.0.1";
+        private $user = "root";
+        private $password = "";
         protected $db_name;
         public $rows;  // Array de filas con el resultado de la consulta select
         private $connection;
