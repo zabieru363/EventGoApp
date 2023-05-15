@@ -180,7 +180,7 @@ form.addEventListener("input", function () {
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-  fetch("../../controllers/createUser.php", {
+  fetch("../../controllers/createUserHandler.php", {
     method: "POST",
     body: new FormData(form)
   })

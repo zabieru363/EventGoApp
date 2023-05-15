@@ -61,7 +61,7 @@ form.addEventListener("input", function() {
 form.addEventListener("submit", function(e) {
     e.preventDefault();
 
-    fetch("../../controllers/loginUser.php", {
+    fetch("../../controllers/loginHandler.php", {
         method: "POST",
         body: new FormData(form)
     })

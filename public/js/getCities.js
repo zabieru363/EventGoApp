@@ -2,7 +2,7 @@
 
 const citiesSelect = document.getElementById("cities");
 
-fetch("../../controllers/getCities.php")
+fetch("../../controllers/citiesHandler.php")
 .then(res => res.json()
 .then(data => {
     let counter = 1;
