@@ -1,26 +1,42 @@
 /* Global styles */
+
+:root {
+    --primary-color: #F7F7F7;
+    --secondary_color: #41b883;
+    --last-color: #FF5733;
+    --secondary_color_hover: #349569;
+}
+
 .submit-btn {
-    background: #41b883;
+    background: var(--secondary_color);
     padding: 0.5rem;
     border-radius: 5%;
-    color: white;
+    color: var(--primary-color);
     border: none;
 }
 
 .submit-btn:hover{
-    background: #349569;
+    background: var(--secondary_color_hover);
     transition: all 1s;
 }
 
 /* Home styles */
 
-.user_control > * {
-    background: #41b883;
+.user_control > a {
     text-decoration: none;
+    color: var(--primary-color);
+    padding: 0.5rem;
+    margin: 0.5rem;
+    background: var(--secondary_color);
 }
 
-.anchor {
-    text-decoration: none;
+@media (max-width: 991px) {
+    .user_control {
+        width: 50%;
+        margin: auto;
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
 .user-auth-circle {
@@ -73,7 +89,7 @@ label[for="image"] {
     transform: translateX(-50%);
     font-size: 1.2rem;
     text-align: center;
-    color: #fff;
+    color: var(--primary-color);
     cursor: pointer;
 }
 
