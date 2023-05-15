@@ -2,13 +2,13 @@
 
 :root {
     --primary-color: #F7F7F7;
-    --secondayy_color: #41b883;
+    --secondary_color: #41b883;
     --last-color: #FF5733;
     --secondary_color_hover: #349569;
 }
 
 .submit-btn {
-    background: var(--secondayy_color);
+    background: var(--secondary_color);
     padding: 0.5rem;
     border-radius: 5%;
     color: var(--primary-color);
@@ -27,7 +27,7 @@
     color: var(--primary-color);
     padding: 0.5rem;
     margin: 0.5rem;
-    background: var(--secondayy_color);
+    background: var(--secondary_color);
 }
 
 @media (max-width: 991px) {
