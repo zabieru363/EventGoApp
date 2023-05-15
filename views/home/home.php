@@ -36,7 +36,7 @@
             <div class="container fluid my-5">
                 <div class="row">
 
-                    <div class="col-md-2">
+                    <div class="col-md-2 categories-container">
                         <h2>Categorías</h2>
                         <div class="category shadow">Categoria</div>
                     </div>
@@ -93,6 +93,7 @@
             </div>
         </main>
 
+        <script src="public/js/getCategories.js"></script>
         <!-- Bootstrap y Font Awesome -->
         <?php
             require_once("./templates/cdns.php");
