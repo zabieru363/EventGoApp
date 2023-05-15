@@ -9,7 +9,7 @@ final class DAOCategories
     private Connection $connection;
     private $data = [];
 
-    public function __construct()
+    private function __construct()
     {
         $this->connection = Connection::getInstance();
     }
