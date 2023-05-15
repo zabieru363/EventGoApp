@@ -93,6 +93,9 @@
                                     <div class="modal-body">
                                         El usuario ha sido registrado correctamente.
                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="return-home-btn submit-btn">Volver a inicio</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -101,6 +104,7 @@
             </div>
         </section>
 
+        <script src="../../public/js/getCities.js"></script>
         <script src="../../public/js/validateRegisterForm.js"></script>
 
         <!-- Bootstrap y Font Awesome -->
