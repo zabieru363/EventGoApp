@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $user = trim($_POST["username"]);
     $password = trim($_POST["pass"]);
 
-    if(isset($_POST["remember_me"]) && $_POST["remember_me"] === "on")
+    if(isset($_POST["remember-me"]) && $_POST["remember-me"] === "on")
     {
         $remember_me = true;
     }

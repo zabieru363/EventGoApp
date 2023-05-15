@@ -41,6 +41,16 @@ final class UserController
     }
 
     /**
+     * Método que solicita al modelo todas las
+     * provincias de España que hay en la base de datos.
+     * @return array El array con todas las provincias de España.
+     */
+    public function getCities():array
+    {
+        return $this->model->getCities();
+    }
+
+    /**
      * Método que comprueba si el login es correcto
      * llamando al modelo.
      * @param string El nombre de usuario o el email
