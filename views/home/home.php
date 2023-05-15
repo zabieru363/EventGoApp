@@ -38,7 +38,6 @@
 
                     <div class="col-md-2 categories-container">
                         <h2>Categorías</h2>
-                        <div class="category shadow">Categoria</div>
                     </div>
 
                     <div class="col-md-10">
