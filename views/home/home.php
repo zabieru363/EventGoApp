@@ -114,6 +114,7 @@
             </div>
         </main>
 
+        <script src="public/js/setUserImage.js"></script>
         <script src="public/js/getCategories.js"></script>
         <!-- Bootstrap y Font Awesome -->
         <?php
