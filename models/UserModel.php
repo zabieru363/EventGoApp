@@ -176,6 +176,17 @@ final class UserModel
     }
 
     /**
+     * Método que elimina el token de autenticación del usuario
+     * para cuando inicia sesión.
+     * @param int El id del usuario del que se quiere eliminar el token
+     */
+    public function deleteToken(int $user_id):void
+    {
+        $sql = "DELETE FROM remember_tokens WHERE User_id = :id";
+        $this->connection->execute_query($sql, [":id" => $user_id]);
+    }
+
+    /**
      * Método que elimina los registros de la tabla de
      * remember_tokens en los que la fecha de expiración
      * haya llegado a la fecha de hoy.
