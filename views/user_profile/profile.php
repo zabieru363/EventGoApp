@@ -14,7 +14,27 @@
                         <h2 class="display-6"><?php echo $_SESSION["username"] ?></h2>
                         <h5 class="user-fullname">Javier López</h5>
                         <p class="user-email">zabierujlc@gmail.com</p>
-                        <button class="submit-btn"><i class="fa-solid fa-pencil"></i> Editar perfil</button>
+                        <div class="dropdown">
+                            <button class="submit-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                <i class="fa-solid fa-pencil"></i> Editar perfil
+                            </button>
+
+                            <form class="dropdown-menu p-4">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Nombre de usuario</label>
+                                    <input type="text" class="form-control" id="username">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fullname" class="form-label">Nombre completo</label>
+                                    <input type="text" class="form-control" id="fullname">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 
