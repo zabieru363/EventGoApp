@@ -11,4 +11,4 @@ if(isset($_COOKIE["remember_me"]))
 session_destroy();
 
 // Finalmente se redirecciona al index.php
-header("Location: ../index.php");
+header('Refresh: 2; url=../index.php');
