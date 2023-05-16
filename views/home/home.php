@@ -26,8 +26,10 @@
                                     <a href="views/login/loginForm.php">Iniciar sesión</a>
                                     <a href="views/register/registerForm.php">Registrarse</a>
                                 <?php else: ?>
-                                    <div class="d-flex justify-content-center align-items-center authenticated user-container">
-                                        <div class="user-image"></div>
+                                    <div class="d-flex justify-content-center align-items-center authenticated-user-container">
+                                        <div class="user-image">
+                                            <img src="" alt="Imagen de usuario">
+                                        </div>
                                         <ul class="navbar-nav">
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle user-options-dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,7 +41,9 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                        <a href="#"><i class="fa-regular fa-plus"></i> Crear evento público</a>
+                                        <div class="create-event-container">
+                                            <a href="#"><i class="fa-regular fa-plus"></i> Crear evento público</a>
+                                        </div>
                                     </div>
                                 <?php endif; ?>
                             </div>
