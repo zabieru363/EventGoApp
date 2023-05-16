@@ -187,6 +187,27 @@ final class UserModel
     }
 
     /**
+     * Método que hace una consulta a la base de datos para
+     * traerse el nombre del archivo de la imagen del usuario.
+     * @param int El id de usuario al que corresponde la foto.
+     * @return string El nombre de la imagen de ese usuario.
+     */
+    public function getUserImage(int $user_id):string
+    {
+        $sql = "SELECT Image FROM user WHERE Id = :id";
+        $this->connection->execute_select($sql, [":id" => $user_id]);
+
+        $file_name = "";
+
+        foreach($this->connection->rows as $row)
+        {
+            $file_name = $row["Image"];
+        }
+
+        return $file_name;
+    }
+
+    /**
      * Método que obtiene todos los usuarios de la
      * tabla user de la base de datos y los trae al modelo.
      * @return array Un array con todos los usuarios de la
