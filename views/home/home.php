@@ -22,8 +22,30 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav ms-auto">
                             <div class="user_control d-flex justify-content-center">
-                                <a href="views/login/loginForm.php">Iniciar sesión</a>
-                                <a href="views/register/registerForm.php">Registrarse</a>
+                                <?php if(!(isset($_SESSION["id_user"]))): ?>
+                                    <a href="views/login/loginForm.php">Iniciar sesión</a>
+                                    <a href="views/register/registerForm.php">Registrarse</a>
+                                <?php else: ?>
+                                    <div class="d-flex justify-content-center align-items-center authenticated-user-container">
+                                        <div class="user-image">
+                                            <img src="" alt="Imagen de usuario">
+                                        </div>
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle user-options-dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <?php echo $_SESSION["username"] ?>
+                                                </a>
+                                                <ul class="dropdown-menu user-options">
+                                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Mi perfil</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <div class="create-event-container">
+                                            <a href="#"><i class="fa-regular fa-plus"></i> Crear evento público</a>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

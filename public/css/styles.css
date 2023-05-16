@@ -36,6 +36,33 @@
     color: var(--primary-color);
 }
 
+.user-image {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 0.5rem;
+}
+  
+.user-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.create-event-container > a {
+    text-decoration: none;
+    color: var(--primary-color);
+    padding: 0.5rem;
+    margin: 0.5rem;
+    background: var(--secondary_color);
+}
+
+.create-event-container > a:hover{
+    transition: all 1s;
+    background: var(--secondary_color_hover);
+}
+
 @media (max-width: 991px) {
     .user_control {
         width: 50%;
@@ -51,13 +78,18 @@
     }
 }
 
-.user-auth-circle {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    background: #ddd;
+@media (max-width: 415px) {
+    .authenticated-user-container {
+        flex-direction: column;
+    }
+
+    .user-image {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 0.5rem;
+    }
 }
 
 #event_input {
