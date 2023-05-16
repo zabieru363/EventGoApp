@@ -1,12 +1,15 @@
 <?php
-session_start();
-unset($_SESSION["id_user"]);
-unset($_SESSION["username"]);
+require_once("UserController.php");
+$user_controller = new UserController();
 
 if(isset($_COOKIE["remember_me"]))
 {
     setcookie("remember_me", "", time() - 3600);
+    $user_controller->deleteToken($_SESSION["id_user"]);
 }
+
+unset($_SESSION["id_user"]);
+unset($_SESSION["username"]);
 
 session_destroy();
 

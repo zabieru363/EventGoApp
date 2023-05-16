@@ -81,6 +81,17 @@ final class UserController
     }
 
     /**
+     * Método que llama al modelo para eliminar el token
+     * de autenticación del usuario
+     * @param int El id del usuario del cuál se quiere
+     * eliminar el token.
+     */
+    public function deleteToken(int $user_id):void
+    {
+        $this->model->deleteToken($user_id);
+    }
+
+    /**
      * Método que llama al modelo para recuperar
      * la imagen del usuario.
      * @param int El id de usuario del que se quiere
