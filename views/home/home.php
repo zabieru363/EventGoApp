@@ -114,7 +114,9 @@
             </div>
         </main>
 
-        <script src="public/js/setUserImage.js"></script>
+        <?php if(isset($_SESSION["id_user"])): ?>
+            <script src="public/js/setUserImage.js"></script>
+        <?php endif; ?>
         <script src="public/js/getCategories.js"></script>
         <!-- Bootstrap y Font Awesome -->
         <?php
