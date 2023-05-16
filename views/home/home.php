@@ -37,7 +37,7 @@
                                                 </a>
                                                 <ul class="dropdown-menu user-options">
                                                     <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Mi perfil</a></li>
-                                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
+                                                    <li><a class="dropdown-item" href="controllers/logout.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -114,6 +114,9 @@
             </div>
         </main>
 
+        <?php if(isset($_SESSION["id_user"])): ?>
+            <script src="public/js/setUserImage.js"></script>
+        <?php endif; ?>
         <script src="public/js/getCategories.js"></script>
         <!-- Bootstrap y Font Awesome -->
         <?php
