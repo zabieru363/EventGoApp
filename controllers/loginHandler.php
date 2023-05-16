@@ -1,11 +1,13 @@
 <?php
+session_start();
 require_once("../config/displayErrors.php");
 require_once("UserController.php");
 $user_controller = new UserController();
 
 $login_info = [
     "message" => "",
-    "login" => false
+    "login" => false,
+    "image" => ""
 ];
 
 if($_SERVER["REQUEST_METHOD"] === "POST")
@@ -24,6 +26,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 
     if($info["login"])
     {
+        $file_name = $user_controller->setUserImage($_SESSION["id_user"]);
+
+        $login_info["image"] = $file_name;
         $login_info["login"] = true;
     }
     else

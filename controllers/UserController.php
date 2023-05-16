@@ -81,6 +81,18 @@ final class UserController
     }
 
     /**
+     * Método que llama al modelo para recuperar
+     * la imagen del usuario.
+     * @param int El id de usuario del que se quiere
+     * recuperar la imagen.
+     * @return string El nombre de la imagen de ese usuario.
+     */
+    public function setUserImage(int $user_id):string
+    {
+        return $this->model->getUserImage($user_id);
+    }
+
+    /**
      * Inicio de la aplicacion.
      */
     public function listUsers()
