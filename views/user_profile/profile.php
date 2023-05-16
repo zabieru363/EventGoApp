@@ -6,9 +6,9 @@
 ?>
     <body>
         <div class="container-fluid my-5">
-            <div class="row border p-5 user-profile-container">
+            <div class="row p-5 user-profile-container">
 
-                <div class="col-md-3 d-flex justify-content-center align-items-center">
+                <div class="col-md-3 p-4 d-flex justify-content-center align-items-center border">
                     <div class="row user-info text-center">
                         <img class="rounded-circle w-100 h-100 object-fit-cover" src="../../public/img/images.jpg" alt="">
                         <h2 class="display-6"><?php echo $_SESSION["username"] ?></h2>
@@ -18,12 +18,12 @@
                     </div>
                 </div>
                 
-                <div class="col-md-9 my-auto">
+                <div class="col-md-9 my-auto events-container">
                     <div class="text-center">
                         <h1>Tus eventos</h1>
                     </div>
 
-                    <div class="events-container d-flex justify-content-center">
+                    <div class="d-flex justify-content-center">
                         <button class="btn btn-outline-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#publicEvents" aria-controls="offcanvasRight">Publicados <i class="fa-solid fa-earth-americas"></i></button>
 
                         <div class="offcanvas offcanvas-end" tabindex="-1" id="publicEvents" aria-labelledby="publicEventsLabel">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
 
-                    <div class="events-container d-flex justify-content-center mt-3">
+                    <div class="d-flex justify-content-center mt-3">
                         <button class="btn btn-outline-warning me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#pendingEvents" aria-controls="offcanvasRight">Pendientes de confirmación <i class="fa-solid fa-triangle-exclamation"></i></i></button>
 
                         <div class="offcanvas offcanvas-end" tabindex="-1" id="pendingEvents" aria-labelledby="pendingEventsLabel">
