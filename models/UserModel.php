@@ -182,7 +182,7 @@ final class UserModel
      */
     public function deleteToken(int $user_id):void
     {
-        $sql = "DELETE FROM remember_tokens WHERE User_id = :id";
+        $sql = "DELETE FROM remember_token WHERE User_id = :id";
         $this->connection->execute_query($sql, [":id" => $user_id]);
     }
 
