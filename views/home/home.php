@@ -36,7 +36,7 @@
                                                     <?php echo $_SESSION["username"] ?>
                                                 </a>
                                                 <ul class="dropdown-menu user-options">
-                                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Mi perfil</a></li>
+                                                    <li><a class="dropdown-item" href="views/user_profile/profile.php"><i class="fa-solid fa-user"></i> Mi perfil</a></li>
                                                     <li><a class="dropdown-item" href="controllers/logout.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
                                                 </ul>
                                             </li>
@@ -62,7 +62,7 @@
                         <h2>Categorías</h2>
                     </div>
 
-                    <div class="col-md-10">
+                    <div class="col-md-10 events-container">
                     <div class="card">
                         <h1 class="card-header display-6 p-3 text-center">Titulo del evento</h1>
                         <div class="card-body">
@@ -114,13 +114,15 @@
             </div>
         </main>
 
+        <!-- JavaScript que se carga si el usuario ha iniciado sesión -->
         <?php if(isset($_SESSION["id_user"])): ?>
             <script src="public/js/setUserImage.js"></script>
         <?php endif; ?>
+
+        <!-- JavaScript por defecto -->
         <script src="public/js/getCategories.js"></script>
+
         <!-- Bootstrap y Font Awesome -->
-        <?php
-            require_once("./templates/cdns.php");
-        ?>
+        <?php require_once("./templates/cdns.php"); ?>
     </body>
 </html>
