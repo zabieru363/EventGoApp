@@ -6,7 +6,7 @@
 ?>
     <body>
         <div class="container-fluid my-5">
-            <div class="row border p-5">
+            <div class="row border p-5 user-profile-container">
 
                 <div class="col-md-3 d-flex justify-content-center align-items-center">
                     <div class="row user-info text-center">
