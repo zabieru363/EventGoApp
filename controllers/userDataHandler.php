@@ -11,16 +11,28 @@ if($_SERVER["REQUEST_METHOD"] === "GET")
 
 if($_SERVER["REQUEST_METHOD"] === "POST")
 {
-    $file_name = "";
+    $file_name = $_POST["image"];
     $tmp = "";
+
+    $user_data = $user_controller->getUserProfileData($_SESSION["id_user"]);
 
     if(isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK)
     {
         $file_name = $_FILES["image"]["name"];
         $tmp = $_FILES["image"]["tmp_name"];
     }
+
+    $user_data["Image"] = $file_name;
+
+    if($user_data["Image"] !== "")
+    {
+        if(!(file_exists("../uploads/" . $user_data["Image"])))
+        {
+            $route = "../uploads/" . $user_data["Image"];
+            move_uploaded_file($tmp, $route);
+        }
+    }
     
-    $user_data = $user_controller->getUserProfileData($_SESSION["id_user"]);
     $user_info = $user_controller->usernameExists($user_data["username"]);
 
     if($user_info["exists"])
@@ -47,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 
     if(!($user_info["exists"]) && !($email_info["exists"]))
     {
-        $updated = $user_controller->updateUser($user_data);
+        $updated = $user_controller->updateUser($_SESSION["id_user"], $user_data);
 
         if($updated)
         {
