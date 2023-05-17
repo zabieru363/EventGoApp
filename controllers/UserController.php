@@ -41,6 +41,33 @@ final class UserController
     }
 
     /**
+     * Método que llama al modelo y comprueba si el
+     * nombre de usuario que se le pasa cómo parámetro
+     * existe.
+     * @param string El nombre de usuario a comprobar.
+     * @return array Un array asociativo que contiene
+     * un boolean que indica si el usuario existe y
+     * un mensaje que indica si ha habido algún error.
+     */
+    public function usernameExists(string $user):array
+    {
+        return $this->model->userExists($user);
+    }
+
+    /**
+     * Método que llama al modelo y comprueba si el
+     * email que se le pasa cómo parámetro existe.
+     * @param string El email a comprobar.
+     * @return array Un array asociativo que contiene
+     * un boolean que indica si el email existe y
+     * un mensaje que indica si ha habido algún error.
+     */
+    public function emailExists(string $email):array
+    {
+        return $this->model->emailExists($email);
+    }
+
+    /**
      * Método que solicita al modelo todas las
      * provincias de España que hay en la base de datos.
      * @return array El array con todas las provincias de España.
@@ -103,9 +130,23 @@ final class UserController
         return $this->model->getUserImage($user_id);
     }
 
+    /**
+     * Método que llama al modelo de usuario y ejecuta el
+     * método getUserData que recupera la información en
+     * base al id de usuario que se le ha pasado.
+     * @param int El id del usuario del cuál se quieren
+     * obtener los datos.
+     * @return array Un array asociativo con los datos
+     * correspondientes a ese usuario.
+     */
     public function getUserProfileData(int $user_id):array
     {
         return $this->model->getUserData($user_id);
+    }
+
+    public function updateUser(array $new_values):bool
+    {
+        return $this->model->changeUserData($new_values);
     }
 
     /**

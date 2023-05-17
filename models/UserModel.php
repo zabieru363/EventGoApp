@@ -252,6 +252,37 @@ final class UserModel
         return $data;
     }
 
+    public function changeUserData(int $user_id, array $new_values):bool
+    {
+        $updated = false;
+
+        if($new_values["Image"] !== "")
+        {
+            $sql = "UPDATE user SET Username = :username, Name = :fullname,
+            Email = :email, Image = :image WHERE Id = :id";
+            $updated = $this->connection->execute_query($sql, [
+                ":username" => $new_values["username"],
+                ":fullname" => $new_values["name"],
+                ":email" => $new_values["email"],
+                ":image" => $new_values["Image"],
+                ":id" => $user_id
+            ]);
+        }
+        else
+        {
+            $sql = "UPDATE user SET Username = :username, Name = :fullname,
+            Email = :email WHERE Id = :id";
+            $updated = $this->connection->execute_query($sql, [
+                ":username" => $new_values["username"],
+                ":fullname" => $new_values["name"],
+                ":email" => $new_values["email"],
+                ":id" => $user_id
+            ]);
+        }
+
+        return $updated;
+    }
+
     /**
      * Método que obtiene todos los usuarios de la
      * tabla user de la base de datos y los trae al modelo.
