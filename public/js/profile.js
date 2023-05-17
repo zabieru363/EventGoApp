@@ -113,7 +113,42 @@ form.addEventListener("submit", function(e) {
     })
         .then(res => res.json())
         .then(data => {
+            if(data["username_exists"]) {
+                elements[0].classList.add("is-invalid");
+                elements[0].classList.remove("is-valid");
 
+                feedbacks[0].classList.add("d-block");
+                feedbacks[0].textContent = "Este nombre de usuario ya está en uso";
+            }else{
+                elements[0].classList.add("is-valid");
+                elements[0].classList.remove("is-invalid");
+
+                feedbacks[0].classList.remove("d-block");
+                feedbacks[0].textContent = "";
+            }
+
+            if(data["email_exists"]) {
+                elements[2].classList.add("is-invalid");
+                elements[2].classList.remove("is-valid");
+
+                feedbacks[2].classList.add("d-block");
+                feedbacks[2].textContent = "Este email ya está en uso.";
+            }else{
+                elements[2].classList.add("is-valid");
+                elements[2].classList.remove("is-invalid");
+
+                feedbacks[2].classList.remove("d-block");
+                feedbacks[2].textContent = "";
+            }
+
+            const modal = new bootstrap.Modal(document.getElementById("editProfileSuccessModal"));
+            if(data.updated) {
+                this.reset();
+                modal.show();
+
+                submitBtn.disabled = true;
+                submitBtn.style.background = "#609ffd";
+            }
         })
         .catch(error => "Algo salió mal " + error);
 });
