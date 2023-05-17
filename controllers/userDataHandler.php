@@ -70,7 +70,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     if($user_data["username"] !== $_POST["username"]
     || $user_data["name"] !== $_POST["fullname"]
     || $user_data["email"] !== $_POST["email"]
-    || $user_data["Image"] !== $_POST["image"])
+    || $user_data["Image"] !== $user_updated["image"])
     {
         if(!($user_info["exists"]) && !($email_info["exists"]))
         {
