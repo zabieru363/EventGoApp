@@ -9,6 +9,15 @@ const editProfileContainer = document.getElementsByClassName("edit-profile-conta
 const userInfo = document.getElementsByClassName("user-info")[0];
 const userInfoElements = userInfo.children;
 
+const form = document.forms[0];
+const elements = [...form.elements];
+const feedbacks = form.getElementsByClassName("invalid-feedback");
+
+const submitBtn = elements.pop();
+const imageImput = elements.pop();
+
+const closeModalBtn = document.getElementsByClassName("return-home-btn")[0];
+
 editProfileBtn.addEventListener("click", function() {
     eventsContainer.classList.add("d-none");
     editProfileContainer.classList.remove("d-none");
@@ -27,19 +36,16 @@ fetch("../../controllers/userDataHandler.php")
         userInfoElements[1].textContent = data.username;
         userInfoElements[2].textContent = data.name;
         userInfoElements[3].textContent = data.email;
+
+        /* Poner los datos del usuario en el formulario para que
+        aparezcan por defecto a la hora de mostrarse. */
+        elements[0].value = data.username;
+        elements[1].value = data.name;
+        elements[2].value = data.email;
     })
     .catch(error => "Algo salió mal " + error);
 
 // Validación de formulario
-const form = document.forms[0];
-const elements = [...form.elements];
-const feedbacks = form.getElementsByClassName("invalid-feedback");
-
-const submitBtn = elements.pop();
-submitBtn.disabled = true;
-submitBtn.style.background = "#609ffd";
-
-const imageImput = elements.pop();
 
 elements[0].addEventListener("input", function() {
     if(this.value === "") {
@@ -143,11 +149,22 @@ form.addEventListener("submit", function(e) {
 
             const modal = new bootstrap.Modal(document.getElementById("editProfileSuccessModal"));
             if(data.updated) {
-                this.reset();
                 modal.show();
 
-                submitBtn.disabled = true;
-                submitBtn.style.background = "#609ffd";
+                // Actualizamos la vista.
+                userInfoElements[0].src = `../../uploads/${data.Image}`;
+                userInfoElements[1].textContent = data.username;
+                userInfoElements[2].textContent = data.name;
+                userInfoElements[3].textContent = data.email;
+
+                /* Poner los datos del usuario en el formulario para que
+                aparezcan por defecto a la hora de mostrarse. */
+                elements[0].value = data.username;
+                elements[1].value = data.name;
+                elements[2].value = data.email;
+
+                elements.forEach(input => input.classList.remove("is-valid"));
+                closeModalBtn.addEventListener("click", () => modal.hide());
             }
         })
         .catch(error => "Algo salió mal " + error);
