@@ -114,30 +114,47 @@
                         <form name="edit-profile-form" class="needs-validation" novalidate method="POST" action="#" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Nombre de usuario</label>
-                                <input type="text" class="form-control" id="username">
+                                <input type="text" class="form-control" name="username" id="username">
                                 <div class="invalid-feedback"></div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="fullname" class="form-label">Nombre completo</label>
-                                <input type="text" class="form-control" id="fullname">
+                                <input type="text" class="form-control" name="fullname" id="fullname">
                                 <div class="invalid-feedback"></div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email">
+                                <input type="email" class="form-control" name="email" id="email">
                                 <div class="invalid-feedback"></div>
                             </div>
         
                             <div class="mb-3">
-                                <label for="image2" class="form-label">Foto de perfil</label>
-                                <input type="file" class="form-control" id="image2">
+                                <label for="imageEdit" class="form-label">Foto de perfil</label>
+                                <input type="file" class="form-control" name="image" id="imageEdit">
                                 <div class="invalid-feedback"></div>
                             </div>
         
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
+
+                        <div class="modal fade" id="editProfileSuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Operación realizada <i class="fa-solid fa-badge-check"></i></h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Datos de usuario actualizados.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="return-home-btn submit-btn">¡Vale!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
