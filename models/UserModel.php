@@ -219,6 +219,40 @@ final class UserModel
     }
 
     /**
+     * Método que recupera los datos para el perfil
+     * de un usuario en especifico.
+     * @param int El id del usuario del cuál se quieren
+     * recuperar los datos.
+     * @return array Un array asociativo el cuál
+     * contiene los datos del usuario extraidos de la consulta.
+     */
+    public function getUserData(int $user_id):array
+    {
+        $data = [
+            "username" => "",
+            "fullname" => "",
+            "email" => "",
+            "city" => 0,
+            "image" => ""
+        ];
+
+        $sql = "SELECT Username, Name, Email, City, Image
+        FROM user WHERE Id = :id";
+        $this->connection->execute_select($sql, [":id" => $user_id]);
+
+        foreach($this->connection->rows as $row)
+        {
+            $data["username"] = $row["Username"];
+            $data["name"] = $row["Name"];
+            $data["email"] = $row["Email"];
+            $data["city"] = $row["City"];
+            $data["Image"] = $row["Image"];
+        }
+
+        return $data;
+    }
+
+    /**
      * Método que obtiene todos los usuarios de la
      * tabla user de la base de datos y los trae al modelo.
      * @return array Un array con todos los usuarios de la
