@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] === "GET")
 
 if($_SERVER["REQUEST_METHOD"] === "POST")
 {
-    $file_name = $_POST["image"];
+    $file_name = "";
     $tmp = "";
 
     $user_data = $user_controller->getUserProfileData($_SESSION["id_user"]);
