@@ -16,10 +16,10 @@
                         <h5 class="user-fullname">Javier López</h5>
                         <p class="user-email">zabierujlc@gmail.com</p>
     
-                        <button class="submit-btn mb-2">
+                        <button class="submit-btn mb-2 edit-profile-btn">
                             <i class="fa-solid fa-pencil"></i> Editar perfil
                         </button>
-                        <button class="submit-btn events-button">
+                        <button class="submit-btn events-button show-all-events-btn">
                             <i class="fa-solid fa-calendar-days"></i> Mis eventos
                         </button>
                     </div>
