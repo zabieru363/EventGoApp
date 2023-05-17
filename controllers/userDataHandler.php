@@ -67,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     /* Si el usuario ha introducido el mismo usuario y email no
     haría falta hacer el UPDATE. */
     if(!($user_info["exists"]) && !($email_info["exists"])
-    && $user_is_diferent && $email_is_diferent)
+    && $user_is_diferent || $email_is_diferent)
     {
         $updated = $user_controller->updateUser($_SESSION["id_user"], $user_data);
 
