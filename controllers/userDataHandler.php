@@ -73,6 +73,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     && $user_data["Image"] !== $_POST["image"]
     && !($user_info["exists"]) && !($email_info["exists"]))
     {
+        error_log("Ha entrado", 3, "../logger.txt");
         $updated = $user_controller->updateUser($_SESSION["id_user"], $user_updated);
     
         if($updated)
