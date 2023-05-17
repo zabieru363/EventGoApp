@@ -146,6 +146,8 @@ form.addEventListener("submit", function(e) {
                 this.reset();
                 modal.show();
 
+                elements.forEach(input => input.classList.remove("is-valid"));
+
                 submitBtn.disabled = true;
                 submitBtn.style.background = "#609ffd";
             }
