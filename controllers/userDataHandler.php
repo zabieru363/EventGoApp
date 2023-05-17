@@ -16,10 +16,17 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $file_name = "";
     $tmp = "";
 
+    $user_updated = [
+        "username" => "",
+        "name" => "",
+        "email" => "",
+        "image" => ""
+    ];
+
     if(isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK)
     {
         $file_name = $_FILES["image"]["name"];
-        $user_data["Image"] = $file_name;
+        $user_updated["image"] = $file_name;
         $tmp = $_FILES["image"]["tmp_name"];
     }
 
@@ -36,27 +43,27 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 
     if($user_info["exists"])
     {
-        $user_data["username_exists"] = true;
+        $user_updated["username_exists"] = true;
     }
     else
     {
-        $user_data["username"] = trim($_POST["username"]);
-        $user_data["username_exists"] = false;
+        $user_updated["username"] = trim($_POST["username"]);
+        $user_updated["username_exists"] = false;
     }
 
     $email_info = $user_controller->emailExists(trim($_POST["email"]));
 
-    if($email_info["exists"] && ($user_data["email"] !== $_POST["email"]))
+    if($email_info["exists"])
     {
-        $user_data["email_exists"] = true;
+        $user_updated["email_exists"] = true;
     }
     else
     {
-        $user_data["email"] = trim($_POST["email"]);
-        $user_data["email_exists"] = false;
+        $user_updated["email"] = trim($_POST["email"]);
+        $user_updated["email_exists"] = false;
     }
 
-    $user_data["name"] = trim($_POST["fullname"]);
+    $user_updated["name"] = trim($_POST["fullname"]);
 
     /* Si el usuario ha introducido el mismo usuario y email no
     haría falta hacer el UPDATE. */
@@ -67,13 +74,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     {
         if(!($user_info["exists"]) && !($email_info["exists"]))
         {
-            $updated = $user_controller->updateUser($_SESSION["id_user"], $user_data);
+            $updated = $user_controller->updateUser($_SESSION["id_user"], $user_updated);
     
             if($updated)
             {
-                $user_data["updated"] = true;
+                $user_updated["updated"] = true;
             }
         }
-        echo json_encode($user_data);
+        echo json_encode($user_updated);
     }
 }
