@@ -11,7 +11,7 @@
                 <div class="col-md-3 p-4 d-flex justify-content-center align-items-center border">
                     <div class="row user-info text-center">
                         <img class="rounded-circle w-100 h-100 object-fit-cover" src="" alt="Imagen de usuario">
-                        <h2 class="display-6"><?php echo $_SESSION["username"] ?> </h2>
+                        <h2 class="display-6"></h2>
                         <h5 class="user-fullname"></h5>
                         <p class="user-email"></p>
     
