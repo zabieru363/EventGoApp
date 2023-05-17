@@ -68,19 +68,20 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     /* Si el usuario ha introducido el mismo usuario y email no
     haría falta hacer el UPDATE. */
     if($user_data["username"] !== $_POST["username"]
-    && $user_data["name"] !== $_POST["fullname"]
-    && $user_data["email"] !== $_POST["email"]
-    && $user_data["Image"] !== $_POST["image"]
-    && !($user_info["exists"]) && !($email_info["exists"]))
+    || $user_data["name"] !== $_POST["fullname"]
+    || $user_data["email"] !== $_POST["email"]
+    || $user_data["Image"] !== $_POST["image"])
     {
-        error_log("Ha entrado", 3, "../logger.txt");
-        $updated = $user_controller->updateUser($_SESSION["id_user"], $user_updated);
-    
-        if($updated)
+        if(!($user_info["exists"]) && !($email_info["exists"]))
         {
-            $user_updated["updated"] = true;
-        }
+            $updated = $user_controller->updateUser($_SESSION["id_user"], $user_updated);
         
-        echo json_encode($user_updated);
+            if($updated)
+            {
+                $user_updated["updated"] = true;
+            }
+            
+            echo json_encode($user_updated);
+        }
     }
 }
