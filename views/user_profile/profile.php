@@ -10,11 +10,10 @@
 
                 <div class="col-md-3 p-4 d-flex justify-content-center align-items-center border">
                     <div class="row user-info text-center">
-                        <img class="rounded-circle w-100 h-100 object-fit-cover" src="../../public/img/images.jpg" alt="">
-                        <h2 class="display-6"><?php echo $_SESSION["username"] ?>
-                        </h2>
-                        <h5 class="user-fullname">Javier López</h5>
-                        <p class="user-email">zabierujlc@gmail.com</p>
+                        <img class="rounded-circle w-100 h-100 object-fit-cover" src="" alt="Imagen de usuario">
+                        <h2 class="display-6"><?php echo $_SESSION["username"] ?> </h2>
+                        <h5 class="user-fullname"></h5>
+                        <p class="user-email"></p>
     
                         <button class="submit-btn mb-2 edit-profile-btn">
                             <i class="fa-solid fa-pencil"></i> Editar perfil
@@ -112,25 +111,29 @@
                     </div>
 
                     <div class="w-50 edit-profile-container d-none">
-                        <form>
+                        <form name="edit-profile-form" class="needs-validation" novalidate method="POST" action="#" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Nombre de usuario</label>
                                 <input type="text" class="form-control" id="username">
+                                <div class="invalid-feedback"></div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="fullname" class="form-label">Nombre completo</label>
                                 <input type="text" class="form-control" id="fullname">
+                                <div class="invalid-feedback"></div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email">
+                                <div class="invalid-feedback"></div>
                             </div>
         
                             <div class="mb-3">
                                 <label for="image2" class="form-label">Foto de perfil</label>
                                 <input type="file" class="form-control" id="image2">
+                                <div class="invalid-feedback"></div>
                             </div>
         
                             <button type="submit" class="btn btn-primary">Guardar</button>
