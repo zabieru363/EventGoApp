@@ -140,6 +140,9 @@
             </div>
         </div>
 
+        <!-- JavaScript -->
+        <script src="../../public/js/profile.js"></script>
+
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("../../templates/cdns.php"); ?>
     </body>
