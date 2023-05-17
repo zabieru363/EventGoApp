@@ -11,24 +11,23 @@ if($_SERVER["REQUEST_METHOD"] === "GET")
 
 if($_SERVER["REQUEST_METHOD"] === "POST")
 {
+    $user_data = $user_controller->getUserProfileData($_SESSION["id_user"]);
+
     $file_name = "";
     $tmp = "";
-
-    $user_data = $user_controller->getUserProfileData($_SESSION["id_user"]);
 
     if(isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK)
     {
         $file_name = $_FILES["image"]["name"];
+        $user_data["Image"] = $file_name;
         $tmp = $_FILES["image"]["tmp_name"];
     }
 
-    $user_data["Image"] = $file_name;
-
-    if($user_data["Image"] !== "")
+    if($file_name !== "")
     {
-        if(!(file_exists("../uploads/" . $user_data["Image"])))
+        if(!(file_exists("../uploads/" . $file_name)))
         {
-            $route = "../uploads/" . $user_data["Image"];
+            $route = "../uploads/" . $file_name;
             move_uploaded_file($tmp, $route);
         }
     }
