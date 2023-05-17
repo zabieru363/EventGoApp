@@ -104,3 +104,16 @@ form.addEventListener("input", function() {
         submitBtn.style.background = "#609ffd";
     }
 });
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    fetch("../../controllers/userDataHandler.php", {
+        method: "POST",
+        body: new FormData(this)
+    })
+        .then(res => res.json())
+        .then(data => {
+
+        })
+        .catch(error => "Algo salió mal " + error);
+});
