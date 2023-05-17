@@ -38,10 +38,12 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     if($user_info["exists"])
     {
         $user_data["username"] = $user_info["message"];
+        $user_data["username_exists"] = true;
     }
     else
     {
         $user_data["username"] = trim($_POST["username"]);
+        $user_data["username_exists"] = false;
     }
 
     $email_info = $user_controller->emailExists($user_data["email"]);
@@ -49,10 +51,12 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     if($email_info["exists"])
     {
         $user_data["email"] = $email_info["message"];
+        $user_data["email_exists"] = true;
     }
     else
     {
         $user_data["email"] = trim($_POST["email"]);
+        $user_data["email_exists"] = false;
     }
 
     $user_data["name"] = trim($_POST["fullname"]);
