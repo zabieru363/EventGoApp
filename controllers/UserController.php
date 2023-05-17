@@ -103,6 +103,11 @@ final class UserController
         return $this->model->getUserImage($user_id);
     }
 
+    public function getUserProfileData(int $user_id):array
+    {
+        return $this->model->getUserData($user_id);
+    }
+
     /**
      * Inicio de la aplicacion.
      */
