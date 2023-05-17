@@ -33,11 +33,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
         }
     }
     
-    $user_info = $user_controller->usernameExists($user_data["username"]);
+    $user_info = $user_controller->usernameExists(trim($_POST["username"]));
 
     if($user_info["exists"])
     {
-        $user_data["username"] = $user_info["message"];
         $user_data["username_exists"] = true;
     }
     else
@@ -46,11 +45,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
         $user_data["username_exists"] = false;
     }
 
-    $email_info = $user_controller->emailExists($user_data["email"]);
+    $email_info = $user_controller->emailExists(trim($_POST["email"]));
 
     if($email_info["exists"])
     {
-        $user_data["email"] = $email_info["message"];
         $user_data["email_exists"] = true;
     }
     else
