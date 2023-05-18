@@ -38,6 +38,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
             move_uploaded_file($tmp, $route);
         }
     }
+    else
+    {
+        $user_updated["Image"] = $user_data["Image"];
+    }
     
     $user_info = $user_controller->usernameExists(trim($_POST["username"]));
 
@@ -67,7 +71,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 
     /* Si el usuario ha introducido el mismo usuario y email no
     haría falta hacer el UPDATE. */
-    if(!($user_info["exists"]) && !($email_info["exists"]))
+    if(!($user_info["exists"]) || !($email_info["exists"]))
     {
         $updated = $user_controller->updateUser($_SESSION["id_user"], $user_updated);
             
