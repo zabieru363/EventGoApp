@@ -31,15 +31,15 @@ showAllEventsBtn.addEventListener("click", function() {
 fetch("../../controllers/userDataHandler.php")
     .then(res => res.json())
     .then(data => {
-        userInfoElements[0].src = `../../uploads/${data.Image}`;
+        userInfoElements[0].src = `../../uploads/${data.image}`;
         userInfoElements[1].textContent = data.username;
-        userInfoElements[2].textContent = data.name;
+        userInfoElements[2].textContent = data.fullname;
         userInfoElements[3].textContent = data.email;
 
         /* Poner los datos del usuario en el formulario para que
         aparezcan por defecto a la hora de mostrarse. */
         elements[0].value = data.username;
-        elements[1].value = data.name;
+        elements[1].value = data.fullname;
         elements[2].value = data.email;
     })
     .catch(error => "Algo salió mal " + error);
@@ -174,15 +174,15 @@ form.addEventListener("submit", function(e) {
                 modal.show();
 
                 // Actualizamos la vista.
-                userInfoElements[0].src = `../../uploads/${data.Image}`;
+                userInfoElements[0].src = `../../uploads/${data.image}`;
                 userInfoElements[1].textContent = data.username;
-                userInfoElements[2].textContent = data.name;
+                userInfoElements[2].textContent = data.fullname;
                 userInfoElements[3].textContent = data.email;
 
                 /* Poner los datos del usuario en el formulario para que
                 aparezcan por defecto a la hora de mostrarse. */
                 elements[0].value = data.username;
-                elements[1].value = data.name;
+                elements[1].value = data.fullname;
                 elements[2].value = data.email;
 
                 elements.forEach(input => input.classList.add("is-valid"));
