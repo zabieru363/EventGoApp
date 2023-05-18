@@ -243,10 +243,10 @@ final class UserModel
         foreach($this->connection->rows as $row)
         {
             $data["username"] = $row["Username"];
-            $data["name"] = $row["Name"];
+            $data["fullname"] = $row["Name"];
             $data["email"] = $row["Email"];
             $data["city"] = $row["City"];
-            $data["Image"] = $row["Image"];
+            $data["image"] = $row["Image"];
         }
 
         return $data;
