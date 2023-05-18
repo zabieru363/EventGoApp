@@ -20,13 +20,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
         "username" => "",
         "name" => "",
         "email" => "",
-        "image" => ""
+        "Image" => ""
     ];
 
     if(isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK)
     {
         $file_name = $_FILES["image"]["name"];
-        $user_updated["image"] = $file_name;
+        $user_updated["Image"] = $file_name;
         $tmp = $_FILES["image"]["tmp_name"];
     }
 
