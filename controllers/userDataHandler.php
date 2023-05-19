@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 
     $user_updated = [
         "username" => "",
-        "name" => "",
+        "fullname" => "",
         "email" => "",
         "Image" => ""
     ];
@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     if(isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK)
     {
         $file_name = $_FILES["image"]["name"];
-        $user_updated["Image"] = $file_name;
+        $user_updated["image"] = $file_name;
         $tmp = $_FILES["image"]["tmp_name"];
     }
 
@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     }
     else
     {
-        $user_updated["Image"] = $user_data["Image"];
+        $user_updated["image"] = $user_data["image"];
     }
     
     $user_info = $user_controller->usernameExists(trim($_POST["username"]));
@@ -67,18 +67,14 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
         $user_updated["email_exists"] = false;
     }
 
-    $user_updated["name"] = trim($_POST["fullname"]);
+    $user_updated["fullname"] = trim($_POST["fullname"]);
 
     /* Si el usuario ha introducido el mismo usuario y email no
     haría falta hacer el UPDATE. */
     if(!($user_info["exists"]) && !($email_info["exists"]))
     {
         $updated = $user_controller->updateUser($_SESSION["id_user"], $user_updated);
-            
-        if($updated)
-        {
-            $user_updated["updated"] = true;
-        }
+        if($updated) $user_updated["updated"] = true;
     }
     echo json_encode($user_updated);
 }
