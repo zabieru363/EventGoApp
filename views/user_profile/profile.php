@@ -113,20 +113,14 @@
                     <div class="w-50 edit-profile-container d-none">
                         <form name="edit-profile-form" class="needs-validation" novalidate method="POST" action="#" enctype="multipart/form-data">
                             <div class="mb-3">
-                                <label for="username" class="form-label">Nombre de usuario</label>
-                                <input type="text" class="form-control" name="username" id="username">
+                                <label for="pass" class="form-label">Cambiar contraseña</label>
+                                <input type="password" class="form-control" name="pass" id="pass">
                                 <div class="invalid-feedback"></div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="fullname" class="form-label">Nombre completo</label>
                                 <input type="text" class="form-control" name="fullname" id="fullname">
-                                <div class="invalid-feedback"></div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" name="email" id="email">
                                 <div class="invalid-feedback"></div>
                             </div>
         
