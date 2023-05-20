@@ -1,9 +1,6 @@
 "use strict";
 
 const editProfileBtn = document.getElementsByClassName("edit-profile-btn")[0];
-const showAllEventsBtn = document.getElementsByClassName("show-all-events-btn")[0];
-
-const eventsContainer = document.getElementsByClassName("events-container")[0];
 const editProfileContainer = document.getElementsByClassName("edit-profile-container")[0];
 
 const userInfo = document.getElementsByClassName("user-info")[0];
@@ -18,31 +15,8 @@ const submitBtn = elements.pop();
 const closeModalBtn = document.getElementsByClassName("return-home-btn")[0];
 
 editProfileBtn.addEventListener("click", function() {
-    eventsContainer.classList.add("d-none");
     editProfileContainer.classList.remove("d-none");
 });
-
-showAllEventsBtn.addEventListener("click", function() {
-    editProfileContainer.classList.add("d-none");
-    eventsContainer.classList.remove("d-none");
-});
-
-// Obteniendo los datos del perfil de usuario.
-fetch("../../controllers/userDataHandler.php")
-    .then(res => res.json())
-    .then(data => {
-        userInfoElements[0].src = `../../uploads/${data.image}`;
-        userInfoElements[1].textContent = data.username;
-        userInfoElements[2].textContent = data.fullname;
-        userInfoElements[3].textContent = data.email;
-
-        /* Poner los datos del usuario en el formulario para que
-        aparezcan por defecto a la hora de mostrarse. */
-        elements[0].value = data.username;
-        elements[1].value = data.fullname;
-        elements[2].value = data.email;
-    })
-    .catch(error => "Algo salió mal " + error);
 
 // Validación de formulario
 elements.forEach(input => input.classList.add("is-valid"));
@@ -135,59 +109,7 @@ form.addEventListener("submit", function(e) {
     })
         .then(res => res.json())
         .then(data => {
-            if(data["username_exists"]) {
-                elements[0].classList.add("is-invalid");
-                elements[0].classList.remove("is-valid");
-
-                feedbacks[0].classList.add("d-block");
-                feedbacks[0].textContent = "Este nombre de usuario ya está en uso";
-
-                submitBtn.disabled = true;
-                submitBtn.style.background = "#609ffd";
-            }else{
-                elements[0].classList.add("is-valid");
-                elements[0].classList.remove("is-invalid");
-
-                feedbacks[0].classList.remove("d-block");
-                feedbacks[0].textContent = "";
-            }
-
-            if(data["email_exists"]) {
-                elements[2].classList.add("is-invalid");
-                elements[2].classList.remove("is-valid");
-
-                feedbacks[2].classList.add("d-block");
-                feedbacks[2].textContent = "Este email ya está en uso.";
-
-                submitBtn.disabled = true;
-                submitBtn.style.background = "#609ffd";
-            }else{
-                elements[2].classList.add("is-valid");
-                elements[2].classList.remove("is-invalid");
-
-                feedbacks[2].classList.remove("d-block");
-                feedbacks[2].textContent = "";
-            }
-
-            const modal = new bootstrap.Modal(document.getElementById("editProfileSuccessModal"));
-            if(data.updated) {
-                modal.show();
-
-                // Actualizamos la vista.
-                userInfoElements[0].src = `../../uploads/${data.image}`;
-                userInfoElements[1].textContent = data.username;
-                userInfoElements[2].textContent = data.fullname;
-                userInfoElements[3].textContent = data.email;
-
-                /* Poner los datos del usuario en el formulario para que
-                aparezcan por defecto a la hora de mostrarse. */
-                elements[0].value = data.username;
-                elements[1].value = data.fullname;
-                elements[2].value = data.email;
-
-                elements.forEach(input => input.classList.add("is-valid"));
-                closeModalBtn.addEventListener("click", () => modal.hide());
-            }
+            
         })
         .catch(error => "Algo salió mal " + error);
 });
