@@ -122,13 +122,7 @@
             </div>
         </main>
 
-        <!-- JavaScript que se carga si el usuario ha iniciado sesión -->
-        <?php if(isset($_SESSION["id_user"])): ?>
-            <script src="public/js/setUserImage.js"></script>
-        <?php endif; ?>
-
-        <!-- JavaScript por defecto -->
-        <!-- <script src="public/js/getCategories.js"></script> -->
+        <!-- JavaScript -->
 
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("./templates/cdns.php"); ?>
