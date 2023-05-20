@@ -1,9 +1,8 @@
 <?php
-require_once("../lib/BaseController.php");
 require_once("../config/displayErrors.php");
 require_once("../models/DAOCities.php");
 
-final class CityController extends BaseController
+final class CityController
 {
     private $model;
 
