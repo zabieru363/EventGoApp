@@ -2,13 +2,10 @@
 
 const form = document.forms[0];
 const elements = [...form.elements];
-elements.length -= 2;
-
-const inputFile = form.image;
-
-const submitBtn = document.getElementsByClassName("submit-btn")[0];
+const submitBtn = elements.pop();
 submitBtn.disabled = true;
 submitBtn.style.background = "#8dffcc";
+const inputFile = elements.pop();
 
 const returnHomeBtn = document.getElementsByClassName("return-home-btn")[0];
 const closeModalBtn = document.getElementsByClassName("btn-close")[0];
@@ -154,9 +151,12 @@ elements[5].addEventListener("input", function () {
 
 // Carga la imagen en el circulo.
 const preview = form.querySelector("#preview");
-inputFile.addEventListener('change', function() {
+inputFile.addEventListener("change", function() {
     const file = this.files[0];
-    if (file) {
+    if(!(file.type.startsWith("image/"))) {
+      this.classList.add("is-invalid");
+      this.classList.remove("is-valid");
+    }else{
       const reader = new FileReader();
       reader.addEventListener('load', function() {
         preview.setAttribute('src', this.result);
