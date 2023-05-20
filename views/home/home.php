@@ -61,6 +61,13 @@
 
                     <div class="col-md-2 categories-container">
                         <h2>Categorías</h2>
+
+                        <?php
+                            foreach($categories as $category)
+                            {
+                                echo "<div class='category shadow mt-2 p-2'>{$category->__get("name")}</div>";
+                            }
+                        ?>
                     </div>
 
                     <div class="col-md-10 events-container">
@@ -115,13 +122,7 @@
             </div>
         </main>
 
-        <!-- JavaScript que se carga si el usuario ha iniciado sesión -->
-        <?php if(isset($_SESSION["id_user"])): ?>
-            <script src="public/js/setUserImage.js"></script>
-        <?php endif; ?>
-
-        <!-- JavaScript por defecto -->
-        <script src="public/js/getCategories.js"></script>
+        <!-- JavaScript -->
 
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("./templates/cdns.php"); ?>

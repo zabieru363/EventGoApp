@@ -1,1 +1,6 @@
-<?php require_once("views/home/home.php"); ?>
+<?php
+    require_once("controllers/HomeController.php");
+    $main_controller = new HomeController();
+
+    $main_controller->index();
+?>
