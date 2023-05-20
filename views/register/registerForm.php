@@ -75,6 +75,7 @@
                                     <label for="image" class="form-label"><i class="fa-solid fa-camera"></i> Imagen de perfil</label>
                                     <input type="file" class="form-control" id="image" name="image">
                                     <img id="preview" src="#" alt="Preview">
+                                    <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                             
