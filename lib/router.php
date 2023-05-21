@@ -13,5 +13,6 @@ switch($view)
     
     default:
         $main_controller = new HomeController();
+        $main_controller->index();
         break;
 }
