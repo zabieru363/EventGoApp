@@ -1,0 +1,8 @@
+[21-May-2023 17:34:31 Europe/Berlin] PHP Warning:  Undefined variable $cities in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\views\register\registerForm.php on line 48
+[21-May-2023 17:34:31 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\views\register\registerForm.php on line 48
+[21-May-2023 17:34:37 Europe/Berlin] PHP Warning:  Undefined variable $cities in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\views\register\registerForm.php on line 48
+[21-May-2023 17:34:37 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\views\register\registerForm.php on line 48
+[21-May-2023 17:35:14 Europe/Berlin] PHP Warning:  Undefined variable $cities in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\views\register\registerForm.php on line 48
+[21-May-2023 17:35:14 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\views\register\registerForm.php on line 48
+[21-May-2023 17:35:15 Europe/Berlin] PHP Warning:  Undefined variable $cities in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\views\register\registerForm.php on line 48
+[21-May-2023 17:35:15 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, null given in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\views\register\registerForm.php on line 48
