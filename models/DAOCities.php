@@ -1,7 +1,7 @@
 <?php
-require_once("../config/displayErrors.php");
-require_once("../config/Connection.php");
-require_once("City.php");
+require_once("config/displayErrors.php");
+require_once("config/Connection.php");
+require_once("entities/City.php");
 
 final class DAOCities
 {

@@ -1,5 +1,5 @@
 <?php
-require_once("../controllers/RegisterController.php");
+require_once("controllers/RegisterController.php");
 
 $view = isset($_GET["view"]) ? $_GET['view'] : "index";
 
