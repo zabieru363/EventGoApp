@@ -2,6 +2,10 @@
     $title = "Registrarse";
     $css = "../../public/css/styles.css";
     require_once("../../templates/open.php");
+    require_once("../../controllers/CityController.php");
+
+    $city_controller = new CityController();
+    $cities = $city_controller->listCities();
 ?>
     <body>
         <section class="wrapper d-flex justify-content-center">
