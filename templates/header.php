@@ -15,8 +15,8 @@
                 <div class="navbar-nav ms-auto">
                     <div class="user_control d-flex justify-content-center">
                         <?php if (!(isset($_SESSION["id_user"]))) : ?>
-                            <a href="views/login/loginForm.php">Iniciar sesión</a>
-                            <a href="views/register/registerForm.php">Registrarse</a>
+                            <a href="views/login/loginForm.php?view=login">Iniciar sesión</a>
+                            <a href="views/register/registerForm.php?view=register">Registrarse</a>
                         <?php else : ?>
                             <div class="d-flex justify-content-center align-items-center authenticated-user-container">
                                 <div class="user-image">
