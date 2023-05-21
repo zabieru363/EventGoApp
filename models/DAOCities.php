@@ -18,7 +18,7 @@ final class DAOCities
     {
         if(self::$instance === null)
         {
-            self::$instance = new DAOCategories();
+            self::$instance = new DAOCities();
         }
 
         return self::$instance;
