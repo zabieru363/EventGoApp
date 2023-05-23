@@ -1,5 +1,4 @@
 <?php
-require_once("lib/BaseController.php");
 require_once("CategoryController.php");
 
 final class HomeController extends BaseController
