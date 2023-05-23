@@ -1,7 +1,6 @@
 <?php
     $title = "Iniciar sesión";
-    $css = "../../public/css/styles.css";
-    require_once("../../templates/open.php");
+    require_once("templates/open.php");
 ?>
     <body>
     <section class="wrapper d-flex justify-content-center">
@@ -42,8 +41,6 @@
         <script src="../../public/js/login.js"></script>
 
         <!-- Bootstrap y Font Awesome -->
-        <?php
-            require_once("../../templates/cdns.php");
-        ?>
+        <?php require_once("templates/cdns.php"); ?>
     </body>
 </html>

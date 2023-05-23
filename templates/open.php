@@ -16,5 +16,5 @@
         crossorigin="anonymous">
 
         <!-- Estilos locales -->
-        <link rel="stylesheet" href="<?php echo $css ?>">
+        <link rel="stylesheet" href="public/css/styles.css">
     </head>
