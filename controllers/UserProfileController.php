@@ -1,7 +1,7 @@
 <?php
 require_once("UserController.php");
 
-final class UserProfileController extends BaseController
+final class ProfileController extends BaseController
 {
     private $model;
 
