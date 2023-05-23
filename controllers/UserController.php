@@ -1,5 +1,5 @@
 <?php
-require_once("models/UserModel.php");
+require_once(realpath(dirname(__FILE__)) . "/../models/UserModel.php");
 
 final class UserController
 {
