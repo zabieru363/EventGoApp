@@ -134,6 +134,18 @@ final class UserController
         return $this->model->getUserData($user_id);
     }
 
+    /**
+     * Método que obtiene a través del modelo el nombre
+     * de la ciudad del usuario.
+     * @param int El id de la ciudad obtenido previamente con
+     * la consulta que trae los daots del usuario.
+     * @return string La ciudad del usuario.
+     */
+    public function getUserCity(int $city_id):string
+    {
+        return $this->model->getUserCity($city_id);
+    }
+
     public function updateUser(int $user_id, array $new_values):bool
     {
         return $this->model->changeUserData($user_id, $new_values);

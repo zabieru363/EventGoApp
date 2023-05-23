@@ -18,7 +18,11 @@ final class ProfileController extends BaseController
             if(isset($_SESSION["id_user"]))
             {
                 $user_data = $user_controller->getUserProfileData($_SESSION["id_user"]);
-                $this->render("user_profile/profile", ["user_data" => $user_data]);
+                $city_name = $user_controller->getUserCity($user_data["city"]);
+                $this->render("user_profile/profile", [
+                    "user_data" => $user_data,
+                    "city_name" => $city_name
+                ]);
             }
         }catch(Exception $e){
             var_dump($e->getMessage());
