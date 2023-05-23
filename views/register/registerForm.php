@@ -110,7 +110,7 @@
             </div>
         </section>
 
-        <script src="../../public/js/validateRegisterForm.js"></script>
+        <script src="public/js/validateRegisterForm.js"></script>
 
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("templates/cdns.php"); ?>
