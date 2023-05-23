@@ -13,6 +13,7 @@ const feedbacks = form.getElementsByClassName("invalid-feedback");
 const submitBtn = elements.pop();
 
 const closeModalBtn = document.getElementsByClassName("return-home-btn")[0];
+const warning = document.getElementsByClassName("no-update-warning")[0];
 
 editProfileBtn.addEventListener("click", function() {
     editProfileContainer.classList.remove("d-none");
@@ -93,13 +94,28 @@ form.addEventListener("input", function() {
 
 form.addEventListener("submit", function(e) {
     e.preventDefault();
-    fetch("controllers/updateUserProfileHandler.php", {
-        method: "POST",
-        body: new FormData(this)
-    })
-        .then(res => res.json())
-        .then(data => {
-            
+
+    let allEmpty = true;
+    const formData = new FormData(this);
+
+    for(const value of formData.values()) {
+        if(value !== "") {
+            allEmpty = false;
+            break;
+        }
+    }
+
+    if(allEmpty) {
+        warning.classList.remove("d-none");
+    }else{
+        fetch("controllers/updateUserProfileHandler.php", {
+            method: "POST",
+            body: new FormData(this)
         })
-        .catch(error => "Algo salió mal " + error);
+            .then(res => res.json())
+            .then(data => {
+                
+            })
+            .catch(error => "Algo salió mal " + error);
+    }
 });
