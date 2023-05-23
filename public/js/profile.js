@@ -19,16 +19,22 @@ editProfileBtn.addEventListener("click", function() {
 });
 
 // Validación de formulario
-elements.forEach(input => input.classList.add("is-valid"));
 
 elements[0].addEventListener("input", function() {
-    if(this.value === "") {
-        this.classList.add("is-invalid");
-        this.classList.remove("is-valid");
-        feedbacks[0].classList.add("d-block");
-        feedbacks[0].textContent = "Este campo es obligatorio";
+    if(this.value !== "") {
+        if(!/^(?=.*\d)(?=.*[A-Z]).{8,}$/.test(this.value)) {
+            this.classList.add("is-invalid");
+            this.classList.remove("valid");
+            feedbacks[0].classList.add("d-block");
+            feedbacks[0].textContent = "Contraseña debil";
+        }else{
+            this.classList.add("valid");
+            this.classList.remove("is-invalid");
+            feedbacks[0].classList.remove("d-block");
+            feedbacks[0].textContent = "";
+        }
     }else{
-        this.classList.add("is-valid");
+        this.classList.add("valid");
         this.classList.remove("is-invalid");
         feedbacks[0].classList.remove("d-block");
         feedbacks[0].textContent = "";
@@ -36,61 +42,45 @@ elements[0].addEventListener("input", function() {
 });
 
 elements[1].addEventListener("input", function() {
-    if(this.value === "") {
-        this.classList.add("is-invalid");
-        this.classList.remove("is-valid");
-        feedbacks[1].classList.add("d-block");
-        feedbacks[1].textContent = "Este campo es obligatorio";
-    }else if(/\d/.test(this.value)) {
-        this.classList.add("is-invalid");
-        this.classList.remove("is-valid");
-        feedbacks[1].classList.add("d-block");
-        feedbacks[1].textContent = "El nombre no puede contener números";
+    if(this.value !== "") {
+        if(/\d/.test(this.value)) {
+            this.classList.add("is-invalid");
+            this.classList.remove("valid");
+            feedbacks[1].classList.add("d-block");
+            feedbacks[1].textContent = "El nombre no puede contener números";
+        }else{
+            this.classList.add("valid");
+            this.classList.remove("is-invalid");
+            feedbacks[1].classList.remove("d-block");
+            feedbacks[1].textContent = "";
+        }
     }else{
-        this.classList.add("is-valid");
+        this.classList.add("valid");
         this.classList.remove("is-invalid");
-        feedbacks[1].classList.remove("d-block");
-        feedbacks[1].textContent = "";
+        feedbacks[0].classList.remove("d-block");
+        feedbacks[0].textContent = "";
     }
 });
 
-elements[2].addEventListener("input", function() {
-    if(this.value === "") {
-        this.classList.add("is-invalid");
-        this.classList.remove("is-valid");
-        feedbacks[2].classList.add("d-block");
-        feedbacks[2].textContent = "Este campo es obligatorio";
-    }else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) {
-        this.classList.add("is-invalid");
-        this.classList.remove("is-valid");
-        feedbacks[2].classList.add("d-block");
-        feedbacks[2].textContent = "El email no es válido";
-    }else{
-        this.classList.add("is-valid");
-        this.classList.remove("is-invalid");
-        feedbacks[2].classList.remove("d-block");
-        feedbacks[2].textContent = "";
-    }
-});
-
-elements[3].addEventListener("input", function(){
-    const file = this.files[0];
-
-    if(!(file.type.startsWith("image/"))) {
-        this.classList.add("is-invalid");
-        this.classList.remove("is-valid");
-        feedbacks[3].classList.add("d-block");
-        feedbacks[3].textContent = "El archivo no es una imagen"; 
-    }else{
-        this.classList.add("is-valid");
-        this.classList.remove("is-invalid");
-        feedbacks[3].classList.remove("d-block");
-        feedbacks[3].textContent = ""; 
+elements[3].addEventListener("change", function(){
+    if(this.files.length !== 0) {
+        const file = this.files[0];
+        if(!(file.type.startsWith("image/"))) {
+            this.classList.add("is-invalid");
+            this.classList.remove("valid");
+            feedbacks[3].classList.add("d-block");
+            feedbacks[3].textContent = "El archivo no es una imagen"; 
+        }else{
+            this.classList.add("valid");
+            this.classList.remove("is-invalid");
+            feedbacks[3].classList.remove("d-block");
+            feedbacks[3].textContent = ""; 
+        }
     }
 });
 
 form.addEventListener("input", function() {
-    const checker = elements.every(input => input.classList.contains("is-valid"));
+    const checker = elements.some(input => input.classList.contains("valid"));
 
     if(checker) {
         submitBtn.disabled = false;
