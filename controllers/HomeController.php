@@ -22,11 +22,20 @@ final class HomeController extends BaseController
             $category_controller = new CategoryController();
             $user_controller = new UserController();
             $categoires = $category_controller->listCategories();
-            $user_data = $user_controller->getUserProfileData($_SESSION["id_user"]);
 
-            $data = ["categories" => $categoires];
-            $data = ["user_data" => $user_data];
-            $this->render("home/home", $data);
+            if(isset($_SESSION["id_user"]))
+            {
+                $user_data = $user_controller->getUserProfileData($_SESSION["id_user"]);
+                $this->render("home/home", [
+                    "user_data" => $user_data,
+                    "categories" => $categoires
+                ]);
+            }
+            else
+            {
+                $data = ["categories" => $categoires];
+                $this->render("home/home", $data);
+            }
         }catch(Exception $e){
             var_dump($e->getMessage());
         }
