@@ -2,6 +2,10 @@
     $title = "Registrarse";
     $css = "../../public/css/styles.css";
     require_once("../../templates/open.php");
+    require_once("../../controllers/CityController.php");
+
+    $city_controller = new CityController();
+    $cities = $city_controller->listCities();
 ?>
     <body>
         <section class="wrapper d-flex justify-content-center">
@@ -43,6 +47,12 @@
                                         <label for="cities" class="form-label">Selecciona tu ciudad *</label>
                                         <select name="cities" id="cities" class="form-select">
                                             <option value="">Selecciona tu ciudad</option>
+                                            <?php
+                                                foreach($cities as $city)
+                                                {
+                                                    echo "<option value=''>{$city->__get("name")}</option>";
+                                                }
+                                            ?>
                                         </select>
                                         <div class="invalid-feedback"></div>
                                     </div>

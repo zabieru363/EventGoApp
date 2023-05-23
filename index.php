@@ -1,6 +1,7 @@
-<?php
-    require_once("controllers/HomeController.php");
-    $main_controller = new HomeController();
+<?php 
+    require_once(realpath(dirname(__FILE__)) . "/lib/BaseController.php");
+    require_once(realpath(dirname(__FILE__)) . "/lib/Dispatcher.php");
 
-    $main_controller->index();
+    $dispatcher = new Dispatcher();
+    $dispatcher->dispatch();
 ?>

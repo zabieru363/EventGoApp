@@ -14,12 +14,11 @@ class BaseController
      * necesitan del modelo.
      * @param string El nombre de la vista.
      * @param array Un array asociativo con los datos que se
-     * quieren enviar a la vista.
+     * quieren enviar a la vista (opcional).
      */
-    protected function render(string $view, $data = [], bool $main = true)
+    protected function render(string $view, $data = [])
     {
-        $route = $main ? "views/" . $view . ".php" :
-        "../views/" . $view . ".php";
+        $route = "views/" . $view . ".php";
 
         if(file_exists($route))
         {
