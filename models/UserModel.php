@@ -253,27 +253,6 @@ final class UserModel
         return $data;
     }
 
-    /**
-     * Método que obtiene el nombre de la ciudad del
-     * usuario.
-     * @param int El id de la ciudad obtenido del select
-     * @return string El nombre de la ciudad
-     */
-    public function getUserCity(int $city_id):string
-    {
-        $city = "";
-
-        $sql = "SELECT Name FROM city WHERE Id = :id";
-        $this->connection->execute_select($sql, [":id" => $city_id]);
-
-        foreach($this->connection->rows as $row)
-        {
-            $city = $row["Name"];
-        }
-
-        return $city;
-    }
-
     public function changeUserData(int $user_id, array $new_values):bool
     {
         $updated = false;
