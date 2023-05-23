@@ -1,6 +1,6 @@
 <?php
-require_once(realpath(dirname(__FILE__) . '/../config/displayErrors.php'));
-require_once(realpath(dirname(__FILE__) . "/../models/DAOCities.php"));
+require_once("config/displayErrors.php");
+require_once("models/DAOCities.php");
 
 final class CityController
 {
