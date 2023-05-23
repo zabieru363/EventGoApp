@@ -1,7 +1,7 @@
 <?php
-require_once("../config/displayErrors.php");
-require_once("../config/Connection.php");
-require_once("City.php");
+require_once(realpath(dirname(__FILE__) . '/../config/displayErrors.php'));
+require_once(realpath(dirname(__FILE__) . '/../config/Connection.php'));
+require_once(realpath(dirname(__FILE__) . '/../models/entities/City.php'));
 
 final class DAOCities
 {
@@ -18,7 +18,7 @@ final class DAOCities
     {
         if(self::$instance === null)
         {
-            self::$instance = new DAOCategories();
+            self::$instance = new DAOCities();
         }
 
         return self::$instance;

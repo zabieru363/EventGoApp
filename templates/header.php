@@ -15,8 +15,8 @@
                 <div class="navbar-nav ms-auto">
                     <div class="user_control d-flex justify-content-center">
                         <?php if (!(isset($_SESSION["id_user"]))) : ?>
-                            <a href="views/login/loginForm.php?view=login">Iniciar sesión</a>
-                            <a href="views/register/registerForm.php?view=register">Registrarse</a>
+                            <a href="index.php?url=login">Iniciar sesión</a>
+                            <a href="index.php?url=register">Registrarse</a>
                         <?php else : ?>
                             <div class="d-flex justify-content-center align-items-center authenticated-user-container">
                                 <div class="user-image">
@@ -28,9 +28,9 @@
                                             <?php echo $_SESSION["username"] ?>
                                         </a>
                                         <ul class="dropdown-menu user-options">
-                                            <li><a class="dropdown-item" href="views/user_profile/profile.php"><i class="fa-solid fa-user"></i> Mi perfil</a></li>
-                                            <li><a class="dropdown-item" href="views/user_events/events.php"><i class="fa-solid fa-calendar"></i> Mis eventos</a></li>
-                                            <li><a class="dropdown-item" href="controllers/logout.php"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
+                                            <li><a class="dropdown-item" href="index.php?url=profile"><i class="fa-solid fa-user"></i> Mi perfil</a></li>
+                                            <li><a class="dropdown-item" href="index.php?url=events"><i class="fa-solid fa-calendar"></i> Mis eventos</a></li>
+                                            <li><a class="dropdown-item" href="index.php?url=logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
                                         </ul>
                                     </li>
                                 </ul>
