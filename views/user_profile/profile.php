@@ -12,7 +12,7 @@
                         <h2 class="username display-6 text-center"><?php echo $_SESSION["username"] ?></h2>
                         <h5 class="user-fullname text-center"><?php echo $user_data["fullname"] ?></h5>
                         <p class="user-email text-center"><?php echo $user_data["email"] ?></p>
-                        <p class="user-location text-center"><i class="fa-solid fa-location-dot"></i></p>
+                        <p class="user-location text-center"><i class="fa-solid fa-location-dot"></i> <?php echo $city_name ?></p>
     
                         <button class="submit-btn mb-2 edit-profile-btn">
                             <i class="fa-solid fa-pencil"></i> Editar perfil
