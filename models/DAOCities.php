@@ -1,7 +1,7 @@
 <?php
-require_once("config/displayErrors.php");
-require_once("config/Connection.php");
-require_once("models/entities/City.php");
+require_once(realpath(dirname(__FILE__)) . "/../config/displayErrors.php");
+require_once(realpath(dirname(__FILE__)) . "/../config/Connection.php");
+require_once(realpath(dirname(__FILE__)) . "/entities/City.php");
 
 final class DAOCities
 {
