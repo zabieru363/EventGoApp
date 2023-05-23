@@ -1,6 +1,6 @@
 <?php
-require_once("../config/displayErrors.php");
-require_once("../config//Connection.php");
+require_once("config/displayErrors.php");
+require_once("config//Connection.php");
 require_once("entities/User.php");
 
 final class UserModel
