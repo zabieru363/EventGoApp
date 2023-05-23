@@ -45,7 +45,7 @@
                                             <?php
                                                 foreach($cities as $city)
                                                 {
-                                                    echo "<option value=''>{$city->__get("name")}</option>";
+                                                    echo "<option value={$city->__get("id")}>{$city->__get("name")}</option>";
                                                 }
                                             ?>
                                         </select>
