@@ -34,6 +34,20 @@
                                 <input type="text" class="form-control" name="fullname" id="fullname">
                                 <div class="invalid-feedback"></div>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="fullname" class="form-label">Ciudad</label>
+                                <select name="cities" id="cities">
+                                    <option value="">Selecciona tu ciudad</option>
+                                    <?php
+                                        foreach($cities as $city)
+                                        {
+                                            echo "<option value={$city->__get("id")}>{$city->__get("name")}</option>";
+                                        }
+                                    ?>
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
         
                             <div class="mb-3">
                                 <label for="imageEdit" class="form-label">Foto de perfil</label>
