@@ -9,6 +9,7 @@ final class HomeController extends BaseController
     public function __construct()
     {
         $this->model = UserModel::getInstance();
+        session_start();
     }
 
     /**
