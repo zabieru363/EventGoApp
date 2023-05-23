@@ -20,7 +20,7 @@
                         <?php else : ?>
                             <div class="d-flex justify-content-center align-items-center authenticated-user-container">
                                 <div class="user-image">
-                                    <img src="" alt="Imagen de usuario">
+                                    <img src="<?php echo "uploads/" . $user_data["image"] ?>" alt="Imagen de usuario">
                                 </div>
                                 <ul class="navbar-nav">
                                     <li class="nav-item dropdown">
