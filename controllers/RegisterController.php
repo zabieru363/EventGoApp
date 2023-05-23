@@ -1,5 +1,5 @@
 <?php
-require_once(realpath(dirname(__FILE__) . "../config/displayErrors.php"));
+require_once(realpath(dirname(__FILE__)) . "../config/displayErrors.php");
 require_once("CityController.php");
 
 final class RegisterController extends BaseController

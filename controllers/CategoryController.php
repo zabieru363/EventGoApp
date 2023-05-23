@@ -1,6 +1,6 @@
 <?php
-require_once(realpath(dirname(__FILE__) . "../models/DAOCategories.php"));
-require_once(realpath(dirname(__FILE__) . "../config/displayErrors.php"));
+require_once(realpath(dirname(__FILE__)) . "../models/DAOCategories.php");
+require_once(realpath(dirname(__FILE__)) . "../config/displayErrors.php");
 
 final class CategoryController
 {
