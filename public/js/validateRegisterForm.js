@@ -150,6 +150,7 @@ elements[5].addEventListener("input", function () {
 
 // Carga la imagen en el circulo.
 const preview = form.querySelector("#preview");
+elements[6].classList.add("is-valid");
 elements[6].addEventListener("change", function() {
     const file = this.files[0];
     if(!(file.type.startsWith("image/"))) {
@@ -186,7 +187,7 @@ form.addEventListener("input", function () {
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-  fetch("../../controllers/createUserHandler.php", {
+  fetch("controllers/createUserHandler.php", {
     method: "POST",
     body: new FormData(form)
   })
@@ -222,11 +223,11 @@ form.addEventListener("submit", function (e) {
         modal.show();
 
         closeModalBtn.addEventListener("click", function() {
-          window.location.replace("../../index.php");
+          window.location.replace("index.php");
         });
         
         returnHomeBtn.addEventListener("click", function() {
-          window.location.replace("../../index.php");
+          window.location.replace("index.php");
         });
       }
     })
