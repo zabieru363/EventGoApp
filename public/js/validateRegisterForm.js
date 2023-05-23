@@ -5,7 +5,6 @@ const elements = [...form.elements];
 const submitBtn = elements.pop();
 submitBtn.disabled = true;
 submitBtn.style.background = "#8dffcc";
-const inputFile = elements.pop();
 
 const returnHomeBtn = document.getElementsByClassName("return-home-btn")[0];
 const closeModalBtn = document.getElementsByClassName("btn-close")[0];
@@ -151,11 +150,14 @@ elements[5].addEventListener("input", function () {
 
 // Carga la imagen en el circulo.
 const preview = form.querySelector("#preview");
-inputFile.addEventListener("change", function() {
+elements[6].classList.add("is-valid");
+elements[6].addEventListener("change", function() {
     const file = this.files[0];
     if(!(file.type.startsWith("image/"))) {
-      this.classList.add("is-invalid");
       this.classList.remove("is-valid");
+      this.classList.add("is-invalid");
+      feedbacks[6].classList.add("d-block");
+      feedbacks[6].textContent = "El archivo no es una imagen";
     }else{
       const reader = new FileReader();
       reader.addEventListener('load', function() {
@@ -163,6 +165,11 @@ inputFile.addEventListener("change", function() {
         preview.style.display = 'block';
       });
       reader.readAsDataURL(file);
+
+      this.classList.add("is-valid");
+      this.classList.remove("is-invalid");
+      feedbacks[6].classList.remvoe("d-block");
+      feedbacks[6].textContent = "";
     }
 });
 
@@ -180,7 +187,7 @@ form.addEventListener("input", function () {
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-  fetch("../../controllers/createUserHandler.php", {
+  fetch("controllers/createUserHandler.php", {
     method: "POST",
     body: new FormData(form)
   })
@@ -216,11 +223,11 @@ form.addEventListener("submit", function (e) {
         modal.show();
 
         closeModalBtn.addEventListener("click", function() {
-          window.location.replace("../../index.php");
+          window.location.replace("index.php");
         });
         
         returnHomeBtn.addEventListener("click", function() {
-          window.location.replace("../../index.php");
+          window.location.replace("index.php");
         });
       }
     })
