@@ -61,7 +61,7 @@ form.addEventListener("input", function() {
 form.addEventListener("submit", function(e) {
     e.preventDefault();
 
-    fetch("../../controllers/loginHandler.php", {
+    fetch("controllers/loginHandler.php", {
         method: "POST",
         body: new FormData(form)
     })
@@ -73,7 +73,7 @@ form.addEventListener("submit", function(e) {
         }else{
             loginErrorDiv.classList.add("d-none");
 
-            setTimeout(() => window.location.replace("../../index.php"), 1500);
+            setTimeout(() => window.location.replace("index.php"), 1500);
         }
     });
 });
