@@ -1,0 +1,7 @@
+[23-May-2023 19:50:26 Europe/Berlin] PHP Warning:  Undefined variable $user_data in C:\xampp\htdocs\TFG\EventGoApp\controllers\updateUserProfileHandler.php on line 39
+[23-May-2023 19:50:26 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\TFG\EventGoApp\controllers\updateUserProfileHandler.php on line 39
+[23-May-2023 19:50:26 Europe/Berlin] PHP Warning:  Undefined variable $user_controller in C:\xampp\htdocs\TFG\EventGoApp\controllers\updateUserProfileHandler.php on line 42
+[23-May-2023 19:50:26 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function updateUser() on null in C:\xampp\htdocs\TFG\EventGoApp\controllers\updateUserProfileHandler.php:42
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\TFG\EventGoApp\controllers\updateUserProfileHandler.php on line 42
