@@ -1,6 +1,6 @@
 <?php
-require_once("config/displayErrors.php");
 require_once("models/DAOCities.php");
+require_once("config/displayErrors.php");
 
 final class CityController
 {
