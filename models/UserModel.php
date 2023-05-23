@@ -257,29 +257,15 @@ final class UserModel
     {
         $updated = false;
 
-        if($new_values["Image"] !== "")
-        {
-            $sql = "UPDATE user SET Username = :username, Name = :fullname,
-            Email = :email, Image = :image WHERE Id = :id";
-            $updated = $this->connection->execute_query($sql, [
-                ":username" => $new_values["username"],
-                ":fullname" => $new_values["name"],
-                ":email" => $new_values["email"],
-                ":image" => $new_values["Image"],
-                ":id" => $user_id
-            ]);
-        }
-        else
-        {
-            $sql = "UPDATE user SET Username = :username, Name = :fullname,
-            Email = :email WHERE Id = :id";
-            $updated = $this->connection->execute_query($sql, [
-                ":username" => $new_values["username"],
-                ":fullname" => $new_values["name"],
-                ":email" => $new_values["email"],
-                ":id" => $user_id
-            ]);
-        }
+        $sql = "UPDATE user SET Password = :password, Name = :fullname,
+            Image = :image, City = :city WHERE Id = :id";
+        $updated = $this->connection->execute_query($sql, [
+            ":passowrd" => $new_values["password"],
+            ":fullname" => $new_values["fullname"],
+            ":image" => $new_values["image"],
+            ":city" => $new_values["city"],
+            ":id" => $user_id
+        ]);
 
         return $updated;
     }
