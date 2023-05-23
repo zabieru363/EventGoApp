@@ -1,18 +1,17 @@
 <?php
     session_start();
     $title = "Perfil de " . $_SESSION["username"];
-    $css = "../../public/css/styles.css";
-    require_once("../../templates/open.php");
+    require_once("templates/open.php");
 ?>
     <body>
         <div class="container-fluid my-5 d-flex justify-content-center">
             <div class="row mt-3 user-profile-container">
                 <div class="col-md-4 p-4 d-flex justify-content-center align-items-center border">
                     <div class="row user-info d-flex justify-content-center align-items-center">
-                        <img class="w-50 h-50 rounded-circle object-fit-cover" src="../../public/img/images.jpg" alt="Imagen de usuario">
-                        <h2 class="username display-6 text-center">zabieru363</h2>
-                        <h5 class="user-fullname text-center">Javier López Carretero</h5>
-                        <p class="user-email text-center">zabierujlc@gmail.com</p>
+                        <img class="w-50 h-50 rounded-circle object-fit-cover" src="<?php echo "uploads/" . $user_data["image"] ?>" alt="Imagen de usuario">
+                        <h2 class="username display-6 text-center"><?php echo $_SESSION["username"] ?></h2>
+                        <h5 class="user-fullname text-center"><?php echo $user_data["fullname"] ?></h5>
+                        <p class="user-email text-center"><?php echo $user_data["email"] ?></p>
     
                         <button class="submit-btn mb-2 edit-profile-btn">
                             <i class="fa-solid fa-pencil"></i> Editar perfil
@@ -66,7 +65,7 @@
         </div>
 
         <!-- JavaScript -->
-        <script src="../../public/js/profile.js"></script>
+        <script src="public/js/profile.js"></script>
 
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("../../templates/cdns.php"); ?>
