@@ -103,7 +103,7 @@ form.addEventListener("input", function() {
 
 form.addEventListener("submit", function(e) {
     e.preventDefault();
-    fetch("../../controllers/userDataHandler.php", {
+    fetch("controllers/updateUserProfileHandler.php", {
         method: "POST",
         body: new FormData(this)
     })
