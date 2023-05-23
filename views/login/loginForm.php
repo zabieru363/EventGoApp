@@ -38,7 +38,7 @@
             </div>
         </section>
 
-        <script src="../../public/js/login.js"></script>
+        <script src="public/js/login.js"></script>
 
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("templates/cdns.php"); ?>
