@@ -1,11 +1,7 @@
 <?php
     $title = "Registrarse";
     $css = "../../public/css/styles.css";
-    require_once("../../templates/open.php");
-    require_once("../../controllers/CityController.php");
-
-    $city_controller = new CityController();
-    $cities = $city_controller->listCities();
+    require_once("templates/open.php");
 ?>
     <body>
         <section class="wrapper d-flex justify-content-center">
@@ -118,8 +114,6 @@
         <script src="../../public/js/validateRegisterForm.js"></script>
 
         <!-- Bootstrap y Font Awesome -->
-        <?php
-            require_once("../../templates/cdns.php");
-        ?>
+        <?php require_once("templates/cdns.php"); ?>
     </body>
 </html>
