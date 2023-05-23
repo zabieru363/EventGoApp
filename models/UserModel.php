@@ -236,8 +236,9 @@ final class UserModel
             "image" => ""
         ];
 
-        $sql = "SELECT Username, Name, Email, City, Image
-        FROM user WHERE Id = :id";
+        $sql = "SELECT user.Name, user.Email, city.Name AS city_name, user.Image
+        FROM user JOIN city ON user.City = city.Id
+        WHERE user.Id = :id";
         $this->connection->execute_select($sql, [":id" => $user_id]);
 
         foreach($this->connection->rows as $row)
@@ -245,7 +246,7 @@ final class UserModel
             $data["username"] = $row["Username"];
             $data["fullname"] = $row["Name"];
             $data["email"] = $row["Email"];
-            $data["city"] = $row["City"];
+            $data["city"] = $row["city_name"];
             $data["image"] = $row["Image"];
         }
 
