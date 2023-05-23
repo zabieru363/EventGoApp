@@ -1,6 +1,5 @@
 <?php
     $title = "Registrarse";
-    $css = "../../public/css/styles.css";
     require_once("templates/open.php");
 ?>
     <body>
