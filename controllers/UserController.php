@@ -1,5 +1,5 @@
 <?php
-require_once("../models/UserModel.php");
+require_once(realpath(dirname(__FILE__)) . "/../models/UserModel.php");
 
 final class UserController
 {
@@ -140,11 +140,11 @@ final class UserController
     }
 
     /**
-     * Inicio de la aplicacion.
+     * Método que recupera todos los usuarios llamando
+     * al modelo, previamente ya extraidos de la tabla user.
      */
-    public function listUsers()
+    public function listUsers():array
     {
-        $users = $this->model->getAllUsers();
-        require_once("views/register/registerForm.php");
+        return $this->model->getAllUsers();
     }
 }
