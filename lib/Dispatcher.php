@@ -20,7 +20,10 @@ final class Dispatcher
         $url = "home";   // Por defecto es home
         $action = "index";  // La acción por defecto es el método index
 
-        if(isset($_GET["url"])) $url = $_GET["url"];
+        if(isset($_GET["url"]) && isset($_GET["action"])) {
+            $url = $_GET["url"];
+            $action = $_GET["action"];
+        }
 
         $controller_name = ucfirst($url) . "Controller";
         $route = "controllers/" . $controller_name . ".php";
