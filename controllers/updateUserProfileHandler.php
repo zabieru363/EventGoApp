@@ -8,25 +8,25 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $tmp = "";
 
     $user_updated = [
-        "password" => "",
-        "fullname" => "",
-        "city" => 0,
+        "Password" => "",
+        "Name" => "",
+        "City" => 0,
         "Image" => ""
     ];
 
     if(!(empty($_POST["pass"])))
     {
         $password_hash = password_hash(trim($_POST["pass"]), PASSWORD_BCRYPT);
-        $user_updated["password"] = $password_hash;
+        $user_updated["Password"] = $password_hash;
     }
 
-    if(!(empty($_POST["fullname"]))) $user_updated["fullname"] = trim($_POST["fullname"]);
-    if(!(empty($_POST["cities"]))) $user_updated["city"] = $_POST["cities"];
+    if(!(empty($_POST["fullname"]))) $user_updated["Name"] = trim($_POST["fullname"]);
+    if(!(empty($_POST["cities"]))) $user_updated["City"] = $_POST["cities"];
 
     if(isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK)
     {
         $file_name = $_FILES["image"]["name"];
-        $user_updated["image"] = $file_name;
+        $user_updated["Image"] = $file_name;
         $tmp = $_FILES["image"]["tmp_name"];
     }
 
@@ -39,8 +39,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
         }
     }
 
-    $updated = $user_controller->updateUser($_SESSION["id_user"], $user_updated);
-    if($updated) $user_updated["updated"] = true;
+    $updated_fields = $user_controller->updateUser($_SESSION["id_user"], $user_updated);
 
-    echo json_encode($user_updated);
+    echo json_encode($$updated_fields);
 }
