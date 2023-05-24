@@ -67,8 +67,7 @@
                     <label for="images" class="form-label">Fotos del evento</label>
                         <div class="drag-area">
                             <h2>Arrastra y suelta imagenes (máximo 3 imagenes)</h2>
-                            <span>0</span>
-                            <button>O selecciona tus archivos</button>
+                            <button class="submit-btn">O selecciona tus archivos</button>
                             <input type="file" class="form-control" id="images" name="images[]" hidden multiple>
                         </div>
                         
