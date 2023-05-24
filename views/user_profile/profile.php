@@ -58,7 +58,7 @@
                             <button type="submit" class="btn btn-primary">Guardar</button>
 
                         </form>
-                        <div class="no-update-warning d-none alert alert-danger" role="alert">No hay datos para actualizar</div>
+                        <div class="no-update-warning mt-3 d-none alert alert-danger" role="alert">No hay datos para actualizar</div>
 
                         <div class="modal fade" id="editProfileSuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">

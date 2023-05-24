@@ -25,17 +25,14 @@ elements[0].addEventListener("input", function() {
     if(this.value !== "") {
         if(!/^(?=.*\d)(?=.*[A-Z]).{8,}$/.test(this.value)) {
             this.classList.add("is-invalid");
-            this.classList.remove("valid");
             feedbacks[0].classList.add("d-block");
             feedbacks[0].textContent = "Contraseña debil";
         }else{
-            this.classList.add("valid");
             this.classList.remove("is-invalid");
             feedbacks[0].classList.remove("d-block");
             feedbacks[0].textContent = "";
         }
     }else{
-        this.classList.add("valid");
         this.classList.remove("is-invalid");
         feedbacks[0].classList.remove("d-block");
         feedbacks[0].textContent = "";
@@ -46,25 +43,18 @@ elements[1].addEventListener("input", function() {
     if(this.value !== "") {
         if(/\d/.test(this.value)) {
             this.classList.add("is-invalid");
-            this.classList.remove("valid");
             feedbacks[1].classList.add("d-block");
             feedbacks[1].textContent = "El nombre no puede contener números";
         }else{
-            this.classList.add("valid");
             this.classList.remove("is-invalid");
             feedbacks[1].classList.remove("d-block");
             feedbacks[1].textContent = "";
         }
     }else{
-        this.classList.add("valid");
         this.classList.remove("is-invalid");
         feedbacks[1].classList.remove("d-block");
         feedbacks[1].textContent = "";
     }
-});
-
-elements[2].addEventListener("input", function() {
-    if(this.value !== "") this.classList.add("valid");
 });
 
 elements[3].addEventListener("change", function(){
@@ -72,11 +62,9 @@ elements[3].addEventListener("change", function(){
         const file = this.files[0];
         if(!(file.type.startsWith("image/"))) {
             this.classList.add("is-invalid");
-            this.classList.remove("valid");
             feedbacks[3].classList.add("d-block");
             feedbacks[3].textContent = "El archivo no es una imagen"; 
         }else{
-            this.classList.add("valid");
             this.classList.remove("is-invalid");
             feedbacks[3].classList.remove("d-block");
             feedbacks[3].textContent = ""; 
@@ -110,7 +98,16 @@ form.addEventListener("submit", function(e) {
         })
             .then(res => res.json())
             .then(data => {
-                
+                if(data.Image) userInfoElements[0].src = `uploads/${data.Image}`;
+                if(data.Name) userInfoElements[2].textContent = data.Name;
+                if(data.City) userInfoElements[4].innerHTML =  `<i class="fa-solid fa-location-dot"></i> ${data.City}`;
+
+                this.reset();
+
+                const modal = new bootstrap.Modal(document.getElementById("editProfileSuccessModal"));
+                modal.show();
+
+                closeModalBtn.addEventListener("click", () => modal.hide());
             })
             .catch(error => "Algo salió mal " + error);
     }
