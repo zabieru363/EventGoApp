@@ -45,5 +45,5 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $user_data = $user_controller->getUserProfileData($_SESSION["id_user"]);
     $updated_fields["City"] = $user_data["city"];
 
-    echo json_encode($$updated_fields);
+    echo json_encode($updated_fields);
 }
