@@ -12,7 +12,7 @@
             <!-- Formulario para crear eventos -->
             <form name="create-event-form" method="POST" novalidate class="needs-validation" action="#" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="event_title" class="form-label">Título del Evento</label>
+                    <label for="event_title" class="form-label">Título del evento</label>
                     <input type="text" class="form-control" id="event_title" name="event_title" placeholder="Título del evento">
                     <div class="invalid-feedback"></div>
                 </div>
@@ -63,22 +63,20 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <div class="row">
-                        <div class="col">
-                            <label for="images" class="form-label">Fotos del evento</label>
-                            <input type="file" class="form-control" id="images" name="images[]" multiple>
-                            <div id="imagesHelp" class="form-text">Se pueden subir hasta 3 imagenes.</div>
-                            <div class="invalid-feedback"></div>
+                <div class="mb-3 event-images">
+                    <label for="images" class="form-label">Fotos del evento</label>
+                        <div class="drag-area">
+                            <h2>Arrastra y suelta imagenes (máximo 3 imagenes)</h2>
+                            <span>0</span>
+                            <button>O selecciona tus archivos</button>
+                            <input type="file" class="form-control" id="images" name="images[]" hidden multiple>
                         </div>
-
-                        <div class="col">
-                            <div class="uploaded-files"></div>
-                        </div>
-                    </div>
+                        
+                        <div id="preview_files"></div>
+                        <div class="invalid-feedback"></div>
                 </div>
 
-                <button type="submit" class="submit-btn">Crear Evento</button>
+                <button type="submit" class="submit-btn">Crear evento</button>
             </form>
         </div>
 
