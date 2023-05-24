@@ -6,11 +6,7 @@
             <div class="col-md-2 categories-container">
                 <h2>Categorías</h2>
 
-                <?php
-                foreach ($categories as $category) {
-                    echo "<div class='category shadow mt-2 p-2'>{$category->__get("name")}</div>";
-                }
-                ?>
+                <?php foreach ($categories as $category) echo "<div class='category shadow mt-2 p-2'>{$category->__get("name")}</div>"; ?>
             </div>
 
             <div class="col-md-10 events-container">
