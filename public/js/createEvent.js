@@ -5,9 +5,16 @@ const elements = [...form.elements];
 const feedbacks = form.getElementsByClassName("invalid-feedback");
 const uploadedFilesDiv = form.getElementsByClassName("uploaded-files")[0];
 
-const radioMe = document.getElementById("me");
-const radioOther = document.getElementById("other");
+const radioMe = form.me;
+const radioOther = form.other;
 const adminNameInput = document.getElementById("administrator_name");
+
+const dragArea = form.getElementsByClassName("drag-area")[0];
+const buttonDragArea = dragArea.getElementsByTagName("button")[0];
+
+buttonDragArea.addEventListener("click", function() {
+    elements[8].click();
+});
 
 (function() {
     radioMe.addEventListener("click", () => adminNameInput.classList.add("d-none"));
