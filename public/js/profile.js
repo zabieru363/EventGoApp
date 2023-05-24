@@ -119,9 +119,7 @@ form.addEventListener("submit", function(e) {
                 const modal = new bootstrap.Modal(document.getElementById("editProfileSuccessModal"));
                 modal.show();
 
-                closeModalBtn.addEventListener("click", function() {
-                    modal.hide();
-                });
+                closeModalBtn.addEventListener("click", () => modal.hide());
             })
             .catch(error => "Algo salió mal " + error);
     }
