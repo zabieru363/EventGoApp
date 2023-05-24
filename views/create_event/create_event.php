@@ -6,7 +6,7 @@
     <body>
         <?php require_once("templates/header.php"); ?>
 
-        <div class="container">
+        <div class="container shadow p-5 mt-3 mb-3">
             <h1>Crear evento público</h1>
 
             <!-- Formulario para crear eventos -->
