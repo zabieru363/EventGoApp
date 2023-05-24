@@ -29,13 +29,13 @@
                                         </a>
                                         <ul class="dropdown-menu user-options">
                                             <li><a class="dropdown-item" href="index.php?url=profile"><i class="fa-solid fa-user"></i> Mi perfil</a></li>
-                                            <li><a class="dropdown-item" href="index.php?url=events"><i class="fa-solid fa-calendar"></i> Mis eventos</a></li>
+                                            <li><a class="dropdown-item" href="index.php?url=event&action=list"><i class="fa-solid fa-calendar"></i> Mis eventos</a></li>
                                             <li><a class="dropdown-item" href="index.php?url=logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                                 <div class="create-event-container">
-                                    <a href="index.php?url=event"><i class="fa-regular fa-plus"></i> Crear evento público</a>
+                                    <a href="index.php?url=event&action=create"><i class="fa-regular fa-plus"></i> Crear evento público</a>
                                 </div>
                             </div>
                         <?php endif; ?>
