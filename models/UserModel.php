@@ -276,7 +276,7 @@ final class UserModel
             {
                 $fields[] = "$key = :$key";
                 $params[":$key"] = is_numeric($value) ? intval($value) : $value;
-                array_push($updated_fields, $key);
+                $updated_fields[$key] = $value;
             }
         }
 
