@@ -110,7 +110,18 @@ form.addEventListener("submit", function(e) {
         })
             .then(res => res.json())
             .then(data => {
-                
+                if(data.Image) userInfoElements[0].src = `uploads/${data.Image}`;
+                if(data.Name) userInfoElements[2].textContent = data.Name;
+                if(data.City) userInfoElements[4].textContent = data.City;
+
+                this.reset();
+
+                const modal = new bootstrap.Modal(document.getElementById("editProfileSuccessModal"));
+                modal.show();
+
+                closeModalBtn.addEventListener("click", function() {
+                    modal.hide();
+                });
             })
             .catch(error => "Algo salió mal " + error);
     }
