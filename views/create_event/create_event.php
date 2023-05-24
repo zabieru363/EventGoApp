@@ -48,21 +48,34 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="start_date" class="form-label">Fecha y hora de inicio</label>
-                    <input type="datetime-local" class="form-control" id="start_date" name="start_date">
-                    <div class="invalid-feedback"></div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="start_date" class="form-label">Fecha y hora de inicio</label>
+                            <input type="datetime-local" class="form-control" id="start_date" name="start_date">
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="col">
+                            <label for="end_date" class="form-label">Fecha y hora de finalización</label>
+                            <input type="datetime-local" class="form-control" id="end_date" name="end_date">
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="end_date" class="form-label">Fecha y hora de finalización</label>
-                    <input type="datetime-local" class="form-control" id="end_date" name="end_date">
-                    <div class="invalid-feedback"></div>
-                </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="images" class="form-label">Fotos del evento</label>
+                            <input type="file" class="form-control" id="images" name="images[]" multiple>
+                            <div id="imagesHelp" class="form-text">Se pueden subir hasta 3 imagenes.</div>
+                            <div class="invalid-feedback"></div>
+                        </div>
 
-                <div class="mb-3">
-                    <label for="images" class="form-label">Fotos del evento</label>
-                    <input type="file" class="form-control" id="images" name="images[]" multiple>
-                    <div class="invalid-feedback"></div>
+                        <div class="col">
+                            <div class="uploaded-files"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <button type="submit" class="submit-btn">Crear Evento</button>
