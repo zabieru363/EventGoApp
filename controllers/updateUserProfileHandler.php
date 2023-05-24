@@ -4,6 +4,8 @@ require_once("UserController.php");
 
 if($_SERVER["REQUEST_METHOD"] === "POST")
 {
+    $user_controller = new UserController();
+
     $file_name = "";
     $tmp = "";
 
@@ -40,6 +42,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     }
 
     $updated_fields = $user_controller->updateUser($_SESSION["id_user"], $user_updated);
+    $user_data = $user_controller->getUserProfileData($_SESSION["id_user"]);
+    $updated_fields["City"] = $user_data["city"];
 
     echo json_encode($$updated_fields);
 }
