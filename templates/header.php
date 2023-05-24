@@ -35,7 +35,7 @@
                                     </li>
                                 </ul>
                                 <div class="create-event-container">
-                                    <a href="#"><i class="fa-regular fa-plus"></i> Crear evento público</a>
+                                    <a href="index.php?url=event"><i class="fa-regular fa-plus"></i> Crear evento público</a>
                                 </div>
                             </div>
                         <?php endif; ?>
