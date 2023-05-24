@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $tmp = "";
 
     $user_updated = [
-        "Password" => "",
+        "Password_hash" => "",
         "Name" => "",
         "City" => 0,
         "Image" => ""
@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     if(!(empty($_POST["pass"])))
     {
         $password_hash = password_hash(trim($_POST["pass"]), PASSWORD_BCRYPT);
-        $user_updated["Password"] = $password_hash;
+        $user_updated["Password_hash"] = $password_hash;
     }
 
     if(!(empty($_POST["fullname"]))) $user_updated["Name"] = trim($_POST["fullname"]);
