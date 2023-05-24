@@ -27,7 +27,7 @@ final class HomeController extends BaseController
             {
                 $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
                 $this->render("home/home", [
-                    "user_data" => $user_image,
+                    "user_image" => $user_image,
                     "categories" => $categoires
                 ]);
             }
