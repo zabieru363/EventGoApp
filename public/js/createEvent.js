@@ -3,6 +3,7 @@
 const form = document.forms[0];
 const elements = [...form.elements];
 const feedbacks = form.getElementsByClassName("invalid-feedback");
+const uploadedFilesDiv = form.getElementsByClassName("uploaded-files")[0];
 
 const radioMe = document.getElementById("me");
 const radioOther = document.getElementById("other");
@@ -90,25 +91,34 @@ elements[7].addEventListener("input", function() {
     }
 });
 
-elements[8].addEventListener("input", function() {
-    const files = [...this.files];
-    const allImages = files.every(file => file.type.startsWith("image/"));
+elements[8].addEventListener("change", function() {
+    const uploaded = [];
 
-    if(files.length > 3) {
-        this.classList.add("is-invalid");
-        this.classList.remove("is-valid");
-        feedbacks[6].classList.add("d-block");
-        feedbacks[6].textContent = "Solo se pueden subir 3 imagenes";
-    }else if(!allImages) {
-        this.classList.add("is-invalid");
-        this.classList.remove("is-valid");
-        feedbacks[6].classList.add("d-block");
-        feedbacks[6].textContent = "Los archivos deben de ser imagenes";
-    }else{
-        this.classList.remove("is-invalid");
-        this.classList.add("is-valid");
-        feedbacks[5].classList.remove("d-block");
-        feedbacks[5].textContent = "";
+    for(let i = 0; i < this.files.length; i++) {
+        if(uploaded.length < 3) {
+            if(!(this.files[i].type.startsWith("image/"))) {
+                this.classList.add("is-invalid");
+                this.classList.remove("is-valid");
+                feedbacks[6].classList.add("d-block");
+                feedbacks[6].textContent = "Este archivo no es una imagen";
+                break;
+            }else{
+                this.classList.remove("is-invalid");
+                this.classList.add("is-valid");
+                feedbacks[6].classList.remove("d-block");
+                feedbacks[6].textContent = "";
+                uploaded.push(this.files[i].name);
+    
+                const imageName = document.createElement("p");
+                imageName.textContent = this.files[i].name;
+                uploadedFilesDiv.appendChild(imageName);
+            }
+        }else{
+            this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
+            feedbacks[6].classList.add("d-block");
+            feedbacks[6].textContent = "Solamente se pueden subir 3 imagenes.";
+        }
     }
 });
 
