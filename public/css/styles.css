@@ -150,3 +150,42 @@ label[for="image"] {
     object-fit: cover;
     display: none;
 }
+
+/* Drag area event images styles */
+
+.event-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.drag-area {
+    border: 4px dashed #ddd;
+    padding: 1.5rem;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.drag-area:active{
+    background: var(--secondary_color);
+    color: white;
+    border: 2px dashed #618ac9;
+}
+
+.drag-area button {
+    cursor: pointer;
+}
+
+.fields-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    border: solid 1px #ddd;
+}
+
+#preview_files {
+    margin-top: 1.5rem;
+}
