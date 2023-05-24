@@ -58,9 +58,13 @@ elements[1].addEventListener("input", function() {
     }else{
         this.classList.add("valid");
         this.classList.remove("is-invalid");
-        feedbacks[0].classList.remove("d-block");
-        feedbacks[0].textContent = "";
+        feedbacks[1].classList.remove("d-block");
+        feedbacks[1].textContent = "";
     }
+});
+
+elements[2].addEventListener("input", function() {
+    if(this.value !== "") this.classList.add("valid");
 });
 
 elements[3].addEventListener("change", function(){
@@ -81,33 +85,25 @@ elements[3].addEventListener("change", function(){
 });
 
 form.addEventListener("input", function() {
-    const checker = elements.some(input => input.classList.contains("valid"));
+    const checker = elements.some(input => input.classList.contains("is-invalid"));
 
     if(checker) {
-        submitBtn.disabled = false;
-        submitBtn.style.background = "#0B5ED7";
-    }else{
         submitBtn.disabled = true;
         submitBtn.style.background = "#609ffd";
+    }else{
+        submitBtn.disabled = false;
+        submitBtn.style.background = "#0B5ED7";
     }
 });
 
 form.addEventListener("submit", function(e) {
     e.preventDefault();
-
-    let allEmpty = true;
-    const formData = new FormData(this);
-
-    for(const value of formData.values()) {
-        if(value !== "") {
-            allEmpty = false;
-            break;
-        }
-    }
-
-    if(allEmpty) {
+    
+    if(elements[0].value === "" && elements[1].value === "" 
+    && elements[2].value === "" && elements[3].files.length === 0) {
         warning.classList.remove("d-none");
     }else{
+        warning.classList.add("d-none");
         fetch("controllers/updateUserProfileHandler.php", {
             method: "POST",
             body: new FormData(this)

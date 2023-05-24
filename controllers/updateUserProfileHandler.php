@@ -14,10 +14,14 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
         "Image" => ""
     ];
 
-    $password_hash = password_hash(trim($_POST["pass"]), PASSWORD_BCRYPT);
-    $user_updated["password"] = $password_hash;
-    $user_updated["fullname"] = trim($_POST["fullname"]);
-    $user_updated["city"] = $_POST["cities"];
+    if(!(empty($_POST["pass"])))
+    {
+        $password_hash = password_hash(trim($_POST["pass"]), PASSWORD_BCRYPT);
+        $user_updated["password"] = $password_hash;
+    }
+
+    if(!(empty($_POST["fullname"]))) $user_updated["fullname"] = trim($_POST["fullname"]);
+    if(!(empty($_POST["cities"]))) $user_updated["city"] = $_POST["cities"];
 
     if(isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK)
     {
@@ -33,10 +37,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
             $route = "uploads/" . $file_name;
             move_uploaded_file($tmp, $route);
         }
-    }
-    else
-    {
-        $user_updated["image"] = $user_data["image"];
     }
 
     $updated = $user_controller->updateUser($_SESSION["id_user"], $user_updated);
