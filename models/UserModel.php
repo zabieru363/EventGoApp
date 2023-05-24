@@ -268,7 +268,7 @@ final class UserModel
         $params = [];
         $updated_fields = [];
 
-        $sql = "UPDATE user SET";
+        $sql = "UPDATE user SET ";
 
         foreach($new_values as $key => $value)
         {
