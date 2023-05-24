@@ -253,21 +253,40 @@ final class UserModel
         return $data;
     }
 
-    public function changeUserData(int $user_id, array $new_values):bool
+    /**
+     * Método que permite actualizar cualquier campo del perfil
+     * del usuario (concretamente, la contraseña, el nombre completo,
+     * la imagen o la ciudad)
+     * @param int El id de usuario que corresponde al usuario
+     * del cuál se quieren actualizar los datos.
+     * @param array Los nuevos valores para los campos.
+     * @return array Un array con los campos actualizados
+     */
+    public function changeUserData(int $user_id, array $new_values):array
     {
-        $updated = false;
+        $fields = [];
+        $params = [];
+        $updated_fields = [];
 
-        $sql = "UPDATE user SET Password = :password, Name = :fullname,
-            Image = :image, City = :city WHERE Id = :id";
-        $updated = $this->connection->execute_query($sql, [
-            ":passowrd" => $new_values["password"],
-            ":fullname" => $new_values["fullname"],
-            ":image" => $new_values["image"],
-            ":city" => $new_values["city"],
-            ":id" => $user_id
-        ]);
+        $sql = "UPDATE user SET";
 
-        return $updated;
+        foreach($new_values as $key => $value)
+        {
+            if(!(empty($value)))
+            {
+                $fields[] = "$key = :$key";
+                $params[":$key"] = is_numeric($value) ? intval($value) : $value;
+                array_push($updated_fields, $key);
+            }
+        }
+
+        $sql .= implode(", ", $fields);
+        $sql .= " WHERE Id = :id";
+        $params[':id'] = $user_id;
+
+        $this->connection->execute_query($sql, $params);
+
+        return $updated_fields;
     }
 
     /**
