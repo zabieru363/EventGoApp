@@ -62,7 +62,7 @@
         </div>
 
         <!-- JavaScript -->
-        <script src="public/js/showAdminControl.js"></script>
+        <script src="public/js/createEvent.js"></script>
 
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("templates/cdns.php"); ?>
