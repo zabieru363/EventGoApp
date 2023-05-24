@@ -134,7 +134,7 @@ final class UserController
         return $this->model->getUserData($user_id);
     }
 
-    public function updateUser(int $user_id, array $new_values):bool
+    public function updateUser(int $user_id, array $new_values):array
     {
         return $this->model->changeUserData($user_id, $new_values);
     }
