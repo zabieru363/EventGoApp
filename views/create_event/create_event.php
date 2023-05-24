@@ -6,19 +6,21 @@
     <body>
         <?php require_once("templates/header.php"); ?>
 
-        <div class="container">
+        <div class="container shadow p-5 mt-3 mb-3">
             <h1>Crear evento público</h1>
 
             <!-- Formulario para crear eventos -->
-            <form name="create-event-form" method="POST" novalidate action="#" enctype="multipart/form-data">
+            <form name="create-event-form" method="POST" novalidate class="needs-validation" action="#" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="event_title" class="form-label">Título del Evento</label>
+                    <label for="event_title" class="form-label">Título del evento</label>
                     <input type="text" class="form-control" id="event_title" name="event_title" placeholder="Título del evento">
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-3">
                     <label for="event_description" class="form-label">Descripción</label>
                     <textarea class="form-control" id="event_description" name="event_description" rows="3" placeholder="Información del evento"></textarea>
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-3">
@@ -33,6 +35,7 @@
                     </div>
 
                     <input type="text" class="d-none form-control mt-2" id="administrator_name" name="administrator_name" placeholder="Pedro Garcia">
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-3">
@@ -40,28 +43,45 @@
                     <select class="form-select" id="locations" name="locations">
                         <option value="">Seleccione una localización</option>
                     </select>
+
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="start_date" class="form-label">Fecha y hora de inicio</label>
-                    <input type="datetime-local" class="form-control" id="start_date" name="start_date">
+                    <div class="row">
+                        <div class="col">
+                            <label for="start_date" class="form-label">Fecha y hora de inicio</label>
+                            <input type="datetime-local" class="form-control" id="start_date" name="start_date">
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="col">
+                            <label for="end_date" class="form-label">Fecha y hora de finalización</label>
+                            <input type="datetime-local" class="form-control" id="end_date" name="end_date">
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="end_date" class="form-label">Fecha y hora de finalización</label>
-                    <input type="datetime-local" class="form-control" id="end_date" name="end_date">
-                </div>
-
-                <div class="mb-3">
+                <div class="mb-3 event-images">
                     <label for="images" class="form-label">Fotos del evento</label>
-                    <input type="file" class="form-control" id="images" name="images[]" multiple>
+                        <div class="drag-area">
+                            <h2>Arrastra y suelta imagenes (máximo 3 imagenes)</h2>
+                            <span>0</span>
+                            <button>O selecciona tus archivos</button>
+                            <input type="file" class="form-control" id="images" name="images[]" hidden multiple>
+                        </div>
+                        
+                        <div id="preview_files"></div>
+                        <div class="invalid-feedback"></div>
                 </div>
 
-                <button type="submit" class="submit-btn">Crear Evento</button>
+                <button type="submit" class="submit-btn">Crear evento</button>
             </form>
         </div>
 
         <!-- JavaScript -->
+        <script src="public/js/createEvent.js"></script>
 
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("templates/cdns.php"); ?>
