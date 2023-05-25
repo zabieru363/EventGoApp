@@ -17,10 +17,6 @@ const eventEndDateInput = form["end_date"];
 
 const eventImagesInput = form["images"];
 
-const modal = new bootstrap.Modal(document.getElementById("createEventModal"));
-const modalTitle = document.getElementsByClassName("modal-title")[0];
-const modalBody = document.getElementsByClassName("modal-body")[0];
-
 (function() {
     radioMe.addEventListener("click", () => adminNameInput.classList.add("d-none"));
     radioOther.addEventListener("click", () => adminNameInput.classList.remove("d-none"));
@@ -100,6 +96,39 @@ eventEndDateInput.addEventListener("input", function() {
         this.classList.add("is-valid");
         feedbacks[5].classList.remove("d-block");
         feedbacks[5].textContent = "";   
+    }
+});
+
+eventImagesInput.addEventListener("change", function() {
+    let valid = true;
+
+    if(this.files.length <= 3) {
+        for(const file of this.files) {
+            if(!(file.type.startsWith("image/"))) {
+                valid = false;
+                this.value = "";
+                break;
+            }
+        }
+
+        if(valid) {
+            this.classList.remove("is-invalid");
+            this.classList.add("is-valid");
+            feedbacks[6].classList.remove("d-block");
+            feedbacks[6].textContent = "";  
+        }else{
+            this.classList.add("is-invalid");
+            this.classList.remove("is-valid");
+            feedbacks[6].classList.add("d-block");
+            feedbacks[6].textContent = "Se ha subido un archivo que no es una imagen. Vuelve a subir los archivos";
+        }
+
+    }else{
+        this.classList.add("is-invalid");
+        this.classList.remove("is-valid");
+        feedbacks[6].classList.add("d-block");
+        feedbacks[6].textContent = "Solamente puedes subir 3 imagenes cómo máximo";
+        this.value = "";
     }
 });
 
