@@ -19,6 +19,11 @@ const eventImagesInput = form["images"];
 const dragArea = form.getElementsByClassName("drag-area")[0];
 const dragText = dragArea.getElementsByTagName("h2")[0];
 const buttonDragArea = dragArea.getElementsByTagName("button")[0];
+
+const modal = new bootstrap.Modal(document.getElementById("createEventModal"));
+const modalTitle = document.getElementsByClassName("modal-title")[0];
+const modalbody = document.getElementsByClassName("modal-body")[0];
+
 let files;
 
 function showFiles(files) {
@@ -37,8 +42,9 @@ function processFile(file) {
 
     if(validExtensions.includes(fileType)) {
     }else{
-        feedbacks[6].classList.add("d-blocK");
-        feedbacks[6].textContent = "Este archivo no es una imagen";
+        modalTitle.textContent = "Error";
+        modalbody.textContent = "Este archivo no es una imagen";
+        modal.show();
     }
 }
 
