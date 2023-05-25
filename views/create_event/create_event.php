@@ -66,14 +66,7 @@ require_once("templates/open.php");
 
             <div class="mb-3 event-images">
                 <label for="images" class="form-label">Fotos del evento</label>
-                <div class="drag-area">
-                    <h2>Arrastra y suelta imagenes (máximo 3 imagenes)</h2>
-                    <span>0</span>
-                    <button class="submit-btn">O selecciona tus archivos</button>
-                    <input type="file" class="form-control" id="images" name="images[]" hidden multiple>
-                </div>
-
-                <div id="preview_files"></div>
+                <input type="file" class="form-control" id="images" name="images[]" multiple>
                 <div class="invalid-feedback"></div>
             </div>
 
