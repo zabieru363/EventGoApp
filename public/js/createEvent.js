@@ -6,6 +6,7 @@ const feedbacks = form.getElementsByClassName("invalid-feedback");
 // Recogiendo elementos del formulario por id a traves de la variable form.
 const eventTitleInput = form["event_title"];
 const eventDescriptionTextarea = form["event_description"];
+const adminRadio = form.adminRadio;
 
 const radioMe = form.me;
 const radioOther = form.other;
@@ -17,8 +18,19 @@ const eventEndDateInput = form["end_date"];
 
 const eventImagesInput = form["images"];
 
+const submitBtn = form.getElementsByClassName("submit-btn")[0];
+submitBtn.disabled = true;
+submitBtn.style.background = "#8dffcc";
+
 (function() {
-    radioMe.addEventListener("click", () => adminNameInput.classList.add("d-none"));
+    radioMe.addEventListener("click", function() {
+        adminNameInput.classList.add("d-none");
+        adminNameInput.value = "";
+        adminNameInput.classList.remove("is-valid");
+        adminNameInput.classList.remove("is-invalid");
+        feedbacks[2].textContent = "";
+    });
+
     radioOther.addEventListener("click", () => adminNameInput.classList.remove("d-none"));
 })();
 
@@ -54,6 +66,25 @@ eventDescriptionTextarea.addEventListener("input", function() {
         this.classList.add("is-valid");
         feedbacks[1].classList.remove("d-block");
         feedbacks[1].textContent = "";
+    }
+});
+
+adminNameInput.addEventListener("input", function() {
+    if(this.value === "") {
+        this.classList.add("is-invalid");
+        this.classList.remove("is-valid");
+        feedbacks[2].classList.add("d-block");
+        feedbacks[2].textContent = "Este campo es obligatorio";
+    }else if(!(/^[a-zA-Z\sñÑ]+$/.test(this.value))) {
+        this.classList.add("is-invalid");
+        this.classList.remove("is-valid");
+        feedbacks[2].classList.add("d-block");
+        feedbacks[2].textContent = "Los caracteres especiales y números no están permitidos";
+    }else{
+        this.classList.remove("is-invalid");
+        this.classList.add("is-valid");
+        feedbacks[2].classList.remove("d-block");
+        feedbacks[2].textContent = "";
     }
 });
 
@@ -129,6 +160,26 @@ eventImagesInput.addEventListener("change", function() {
         feedbacks[6].classList.add("d-block");
         feedbacks[6].textContent = "Solamente puedes subir 3 imagenes cómo máximo";
         this.value = "";
+    }
+});
+
+form.addEventListener("input", function() {
+    const fields = [eventTitleInput, eventDescriptionTextarea, eventLocationSelect, eventStartDateInput, eventEndDateInput, eventImagesInput];
+    if(adminRadio.value === "other") {
+        if(adminNameInput.value === "") {
+            fields.push(adminNameInput);
+            submitBtn.disabled = true;
+            submitBtn.style.background = "#8dffcc";
+        }
+    }
+    const allValid = fields.every(field => field.classList.contains("is-valid"));
+
+    if(!allValid || adminRadio.value === "") {
+        submitBtn.disabled = true;
+        submitBtn.style.background = "#8dffcc";
+    }else{
+        submitBtn.disabled = false;
+        submitBtn.style.background = "#41b883";
     }
 });
 
