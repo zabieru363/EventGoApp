@@ -48,48 +48,11 @@ require_once("templates/open.php");
                 <div class="invalid-feedback"></div>
             </div>
 
-<<<<<<< HEAD
-                <div class="mb-3">
-                    <label for="locations" class="form-label">Lugar del evento</label>
-                    <select class="form-select" id="locations" name="locations">
-                        <option value="">Seleccione una localización</option>
-                    </select>
-
-                    <div class="invalid-feedback"></div>
-                </div>
-
-                <div class="mb-3">
-                    <div class="row">
-                        <div class="col">
-                            <label for="start_date" class="form-label">Fecha y hora de inicio</label>
-                            <input type="datetime-local" class="form-control" id="start_date" name="start_date">
-                            <div class="invalid-feedback"></div>
-                        </div>
-
-                        <div class="col">
-                            <label for="end_date" class="form-label">Fecha y hora de finalización</label>
-                            <input type="datetime-local" class="form-control" id="end_date" name="end_date">
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-3 event-images">
-                    <label for="images" class="form-label">Fotos del evento</label>
-                        <div class="drag-area">
-                            <h2>Arrastra y suelta imagenes (máximo 3 imagenes)</h2>
-                            <button class="submit-btn">O selecciona tus archivos</button>
-                            <input type="file" class="form-control" id="images" name="images[]" hidden multiple>
-                        </div>
-                        
-                        <div id="preview_files"></div>
-=======
             <div class="mb-3">
                 <div class="row">
                     <div class="col">
                         <label for="start_date" class="form-label">Fecha y hora de inicio</label>
                         <input type="datetime-local" class="form-control" id="start_date" name="start_date">
->>>>>>> views
                         <div class="invalid-feedback"></div>
                     </div>
 
