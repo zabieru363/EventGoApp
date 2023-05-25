@@ -20,7 +20,7 @@ final class EventController extends BaseController
                 $cities = $city_controller->listCities();
                 $this->render("create_event/create_event", [
                     "user_image" => $user_image,
-                    "categories" => $cities
+                    "cities" => $cities
                 ]);
             }
             else
