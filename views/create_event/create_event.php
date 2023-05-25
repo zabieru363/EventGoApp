@@ -65,14 +65,14 @@
 
                 <div class="mb-3 event-images">
                     <label for="images" class="form-label">Fotos del evento</label>
-                        <div class="drag-area">
-                            <h2>Arrastra y suelta imagenes (máximo 3 imagenes)</h2>
-                            <button class="submit-btn">O selecciona tus archivos</button>
-                            <input type="file" class="form-control" id="images" name="images[]" hidden multiple>
-                        </div>
-                        
-                        <div id="preview_files"></div>
+                    <div class="drag-area">
+                        <h2>Arrastra y suelta imagenes</h2>
+                        <button class="submit-btn">O selecciona tus archivos</button>
+                        <input type="file" class="form-control" id="images" name="images[]" hidden multiple>
                         <div class="invalid-feedback"></div>
+                    </div>
+                        
+                    <div id="preview_files"></div>
                 </div>
 
                 <button type="submit" class="submit-btn">Crear evento</button>

@@ -1,19 +1,77 @@
 "use strict";
 
 const form = document.forms[0];
-const elements = [...form.elements];
 const feedbacks = form.getElementsByClassName("invalid-feedback");
-const uploadedFilesDiv = form.getElementsByClassName("uploaded-files")[0];
+
+// Recogiendo elementos del formulario por id a traves de la variable form.
+const eventTitleInput = form["event_title"];
+const eventDescriptionTextarea = form["event_description"];
 
 const radioMe = form.me;
 const radioOther = form.other;
 const adminNameInput = document.getElementById("administrator_name");
 
-const dragArea = form.getElementsByClassName("drag-area")[0];
-const buttonDragArea = dragArea.getElementsByTagName("button")[0];
+const eventLocationSelect = form["locations"];
+const eventStartDateInput = form["start_date"];
+const eventEndDateInput = form["end_date"];
 
-buttonDragArea.addEventListener("click", function() {
-    elements[8].click();
+const eventImagesInput = form["images"];
+const dragArea = form.getElementsByClassName("drag-area")[0];
+const dragText = dragArea.getElementsByTagName("h2")[0];
+const buttonDragArea = dragArea.getElementsByTagName("button")[0];
+let files;
+
+function showFiles(files) {
+    if(!files.length) {
+        processFile(files);
+    }else{
+        for(const file of files) {
+            processFile(file);
+        }
+    }
+}
+
+function processFile(file) {
+    const fileType = file.type;
+    const validExtensions = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
+
+    if(validExtensions.includes(fileType)) {
+    }else{
+        feedbacks[6].classList.add("d-blocK");
+        feedbacks[6].textContent = "Este archivo no es una imagen";
+    }
+}
+
+buttonDragArea.addEventListener("click", function(e) {
+    e.preventDefault();
+    eventImagesInput.click();
+});
+
+dragArea.addEventListener("dragover", function(e) {
+    e.preventDefault();
+    this.classList.add("active");
+    dragText.textContent = "Suelta los archivos aquí";
+});
+
+dragArea.addEventListener("dragleave", function(e) {
+    e.preventDefault();
+    this.classList.remove("active");
+    dragText.textContent = "Arrastra y suelta imagenes";
+});
+
+dragArea.addEventListener("drop", function(e) {
+    e.preventDefault();
+    files = e.dataTransfer.files;
+    showFiles(files);
+    this.classList.remove("active");
+    dragText.textContent = "Arrastra y suelta imagenes";
+});
+
+eventImagesInput.addEventListener("change", function() {
+    files = this.files;
+    dragArea.classList.add("active");
+    showFiles(files);
+    dragArea.classList.remove("active");
 });
 
 (function() {
@@ -23,7 +81,7 @@ buttonDragArea.addEventListener("click", function() {
 
 // Validación formulario
 
-elements[0].addEventListener("input", function() {
+eventTitleInput.addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -42,7 +100,7 @@ elements[0].addEventListener("input", function() {
     }
 });
 
-elements[1].addEventListener("input", function() {
+eventDescriptionTextarea.addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -56,7 +114,7 @@ elements[1].addEventListener("input", function() {
     }
 });
 
-elements[3].addEventListener("input", function() {
+eventLocationSelect.addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -70,7 +128,7 @@ elements[3].addEventListener("input", function() {
     }
 });
 
-elements[6].addEventListener("input", function() {
+eventStartDateInput.addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -84,7 +142,7 @@ elements[6].addEventListener("input", function() {
     }
 });
 
-elements[7].addEventListener("input", function() {
+eventEndDateInput.addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -95,37 +153,6 @@ elements[7].addEventListener("input", function() {
         this.classList.add("is-valid");
         feedbacks[5].classList.remove("d-block");
         feedbacks[5].textContent = "";   
-    }
-});
-
-elements[8].addEventListener("change", function() {
-    const uploaded = [];
-
-    for(let i = 0; i < this.files.length; i++) {
-        if(uploaded.length < 3) {
-            if(!(this.files[i].type.startsWith("image/"))) {
-                this.classList.add("is-invalid");
-                this.classList.remove("is-valid");
-                feedbacks[6].classList.add("d-block");
-                feedbacks[6].textContent = "Este archivo no es una imagen";
-                break;
-            }else{
-                this.classList.remove("is-invalid");
-                this.classList.add("is-valid");
-                feedbacks[6].classList.remove("d-block");
-                feedbacks[6].textContent = "";
-                uploaded.push(this.files[i].name);
-    
-                const imageName = document.createElement("p");
-                imageName.textContent = this.files[i].name;
-                uploadedFilesDiv.appendChild(imageName);
-            }
-        }else{
-            this.classList.add("is-invalid");
-            this.classList.remove("is-valid");
-            feedbacks[6].classList.add("d-block");
-            feedbacks[6].textContent = "Solamente se pueden subir 3 imagenes.";
-        }
     }
 });
 
