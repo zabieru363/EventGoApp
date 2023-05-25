@@ -16,69 +16,10 @@ const eventStartDateInput = form["start_date"];
 const eventEndDateInput = form["end_date"];
 
 const eventImagesInput = form["images"];
-const dragArea = form.getElementsByClassName("drag-area")[0];
-const dragText = dragArea.getElementsByTagName("h2")[0];
-const buttonDragArea = dragArea.getElementsByTagName("button")[0];
 
 const modal = new bootstrap.Modal(document.getElementById("createEventModal"));
 const modalTitle = document.getElementsByClassName("modal-title")[0];
-const modalbody = document.getElementsByClassName("modal-body")[0];
-
-let files;
-
-function showFiles(files) {
-    if(!files.length) {
-        processFile(files);
-    }else{
-        for(const file of files) {
-            processFile(file);
-        }
-    }
-}
-
-function processFile(file) {
-    const fileType = file.type;
-    const validExtensions = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
-
-    if(validExtensions.includes(fileType)) {
-    }else{
-        modalTitle.textContent = "Error";
-        modalbody.textContent = "Este archivo no es una imagen";
-        modal.show();
-    }
-}
-
-buttonDragArea.addEventListener("click", function(e) {
-    e.preventDefault();
-    eventImagesInput.click();
-});
-
-dragArea.addEventListener("dragover", function(e) {
-    e.preventDefault();
-    this.classList.add("active");
-    dragText.textContent = "Suelta los archivos aquí";
-});
-
-dragArea.addEventListener("dragleave", function(e) {
-    e.preventDefault();
-    this.classList.remove("active");
-    dragText.textContent = "Arrastra y suelta imagenes";
-});
-
-dragArea.addEventListener("drop", function(e) {
-    e.preventDefault();
-    files = e.dataTransfer.files;
-    showFiles(files);
-    this.classList.remove("active");
-    dragText.textContent = "Arrastra y suelta imagenes";
-});
-
-eventImagesInput.addEventListener("change", function() {
-    files = this.files;
-    dragArea.classList.add("active");
-    showFiles(files);
-    dragArea.classList.remove("active");
-});
+const modalBody = document.getElementsByClassName("modal-body")[0];
 
 (function() {
     radioMe.addEventListener("click", () => adminNameInput.classList.add("d-none"));
