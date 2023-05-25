@@ -12,12 +12,15 @@ final class EventController extends BaseController
     {
         try{
             $user_controller = new UserController();
+            $city_controller = new CityController();
 
             if(isset($_SESSION["id_user"]))
             {
                 $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
+                $cities = $city_controller->listCities();
                 $this->render("create_event/create_event", [
-                    "user_image" => $user_image
+                    "user_image" => $user_image,
+                    "cities" => $cities
                 ]);
             }
             else

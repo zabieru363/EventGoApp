@@ -1,29 +1,42 @@
 "use strict";
 
 const form = document.forms[0];
-const elements = [...form.elements];
 const feedbacks = form.getElementsByClassName("invalid-feedback");
-const uploadedFilesDiv = form.getElementsByClassName("uploaded-files")[0];
+
+// Recogiendo elementos del formulario por id a traves de la variable form.
+const eventTitleInput = form["event_title"];
+const eventDescriptionTextarea = form["event_description"];
+const adminRadio = form.adminRadio;
 
 const radioMe = form.me;
 const radioOther = form.other;
 const adminNameInput = document.getElementById("administrator_name");
 
-const dragArea = form.getElementsByClassName("drag-area")[0];
-const buttonDragArea = dragArea.getElementsByTagName("button")[0];
+const eventLocationSelect = form["locations"];
+const eventStartDateInput = form["start_date"];
+const eventEndDateInput = form["end_date"];
 
-buttonDragArea.addEventListener("click", function() {
-    elements[8].click();
-});
+const eventImagesInput = form["images"];
+
+const submitBtn = form.getElementsByClassName("submit-btn")[0];
+submitBtn.disabled = true;
+submitBtn.style.background = "#8dffcc";
 
 (function() {
-    radioMe.addEventListener("click", () => adminNameInput.classList.add("d-none"));
+    radioMe.addEventListener("click", function() {
+        adminNameInput.classList.add("d-none");
+        adminNameInput.value = "";
+        adminNameInput.classList.remove("is-valid");
+        adminNameInput.classList.remove("is-invalid");
+        feedbacks[2].textContent = "";
+    });
+
     radioOther.addEventListener("click", () => adminNameInput.classList.remove("d-none"));
 })();
 
 // Validación formulario
 
-elements[0].addEventListener("input", function() {
+eventTitleInput.addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -42,7 +55,7 @@ elements[0].addEventListener("input", function() {
     }
 });
 
-elements[1].addEventListener("input", function() {
+eventDescriptionTextarea.addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -56,7 +69,26 @@ elements[1].addEventListener("input", function() {
     }
 });
 
-elements[3].addEventListener("input", function() {
+adminNameInput.addEventListener("input", function() {
+    if(this.value === "") {
+        this.classList.add("is-invalid");
+        this.classList.remove("is-valid");
+        feedbacks[2].classList.add("d-block");
+        feedbacks[2].textContent = "Este campo es obligatorio";
+    }else if(!(/^[a-zA-Z\sñÑ]+$/.test(this.value))) {
+        this.classList.add("is-invalid");
+        this.classList.remove("is-valid");
+        feedbacks[2].classList.add("d-block");
+        feedbacks[2].textContent = "Los caracteres especiales y números no están permitidos";
+    }else{
+        this.classList.remove("is-invalid");
+        this.classList.add("is-valid");
+        feedbacks[2].classList.remove("d-block");
+        feedbacks[2].textContent = "";
+    }
+});
+
+eventLocationSelect.addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -70,7 +102,7 @@ elements[3].addEventListener("input", function() {
     }
 });
 
-elements[6].addEventListener("input", function() {
+eventStartDateInput.addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -84,7 +116,7 @@ elements[6].addEventListener("input", function() {
     }
 });
 
-elements[7].addEventListener("input", function() {
+eventEndDateInput.addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -98,34 +130,56 @@ elements[7].addEventListener("input", function() {
     }
 });
 
-elements[8].addEventListener("change", function() {
-    const uploaded = [];
+eventImagesInput.addEventListener("change", function() {
+    let valid = true;
 
-    for(let i = 0; i < this.files.length; i++) {
-        if(uploaded.length < 3) {
-            if(!(this.files[i].type.startsWith("image/"))) {
-                this.classList.add("is-invalid");
-                this.classList.remove("is-valid");
-                feedbacks[6].classList.add("d-block");
-                feedbacks[6].textContent = "Este archivo no es una imagen";
+    if(this.files.length <= 3) {
+        for(const file of this.files) {
+            if(!(file.type.startsWith("image/"))) {
+                valid = false;
+                this.value = "";
                 break;
-            }else{
-                this.classList.remove("is-invalid");
-                this.classList.add("is-valid");
-                feedbacks[6].classList.remove("d-block");
-                feedbacks[6].textContent = "";
-                uploaded.push(this.files[i].name);
-    
-                const imageName = document.createElement("p");
-                imageName.textContent = this.files[i].name;
-                uploadedFilesDiv.appendChild(imageName);
             }
+        }
+
+        if(valid) {
+            this.classList.remove("is-invalid");
+            this.classList.add("is-valid");
+            feedbacks[6].classList.remove("d-block");
+            feedbacks[6].textContent = "";  
         }else{
             this.classList.add("is-invalid");
             this.classList.remove("is-valid");
             feedbacks[6].classList.add("d-block");
-            feedbacks[6].textContent = "Solamente se pueden subir 3 imagenes.";
+            feedbacks[6].textContent = "Se ha subido un archivo que no es una imagen. Vuelve a subir los archivos";
         }
+
+    }else{
+        this.classList.add("is-invalid");
+        this.classList.remove("is-valid");
+        feedbacks[6].classList.add("d-block");
+        feedbacks[6].textContent = "Solamente puedes subir 3 imagenes cómo máximo";
+        this.value = "";
+    }
+});
+
+form.addEventListener("input", function() {
+    const fields = [eventTitleInput, eventDescriptionTextarea, eventLocationSelect, eventStartDateInput, eventEndDateInput, eventImagesInput];
+    if(adminRadio.value === "other") {
+        if(adminNameInput.value === "") {
+            fields.push(adminNameInput);
+            submitBtn.disabled = true;
+            submitBtn.style.background = "#8dffcc";
+        }
+    }
+    const allValid = fields.every(field => field.classList.contains("is-valid"));
+
+    if(!allValid || adminRadio.value === "") {
+        submitBtn.disabled = true;
+        submitBtn.style.background = "#8dffcc";
+    }else{
+        submitBtn.disabled = false;
+        submitBtn.style.background = "#41b883";
     }
 });
 
