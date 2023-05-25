@@ -2,8 +2,8 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-light border">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="img/logo.png" width="45" height="40">
+            <a class="navbar-brand" href="index.php">
+                <img src="public/img/logo.png" width="60" height="40">
             </a>
             <div class="search-events ms-5 w-50">
                 <input type="search" class="form-control border-2 event-input" placeholder="Buscar eventos">
