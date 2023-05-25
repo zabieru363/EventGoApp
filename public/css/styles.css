@@ -168,7 +168,7 @@ label[for="image"] {
     border-radius: 5px;
 }
 
-.drag-area:active{
+.drag-area:hover{
     background: var(--secondary_color);
     color: white;
     border: 2px dashed #618ac9;
