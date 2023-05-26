@@ -40,23 +40,27 @@ require_once("templates/open.php");
             </div>
 
             <div class="mb-3">
-                <label for="locations" class="form-label">Lugar del evento</label>
-                <select class="form-select" id="locations" name="locations">
-                    <option value="">Seleccione una localización</option>
-                    <?php foreach($cities as $city) echo "<option value='{$city->__get("id")}'>{$city->__get("name")}</option>"; ?>
-                </select>
+                <div class="row">
+                    <div class="col">
+                        <label for="locations" class="form-label">Lugar del evento</label>
+                        <select class="form-select" id="locations" name="locations">
+                            <option value="">Seleccione una localización</option>
+                            <?php foreach($cities as $city) echo "<option value='{$city->__get("id")}'>{$city->__get("name")}</option>"; ?>
+                        </select>
+        
+                        <div class="invalid-feedback"></div>
+                    </div>
 
-                <div class="invalid-feedback"></div>
-            </div>
-
-            <div class="mb-3">
-                <label for="locations" class="form-label">Categoria del evento</label>
-                <select class="form-select" id="event_categories" name="event_categories">
-                    <option value="">Seleccione una categoria</option>
-                    <?php foreach($categories as $category) echo "<option value='{$category->__get("id")}'>{$category->__get("name")}</option>"; ?>
-                </select>
-
-                <div class="invalid-feedback"></div>
+                    <div class="col">
+                        <label for="locations" class="form-label">Categoria del evento</label>
+                        <select class="form-select" id="event_categories" name="event_categories">
+                            <option value="">Seleccione una categoria</option>
+                            <?php foreach($categories as $category) echo "<option value='{$category->__get("id")}'>{$category->__get("name")}</option>"; ?>
+                        </select>
+        
+                        <div class="invalid-feedback"></div>
+                    </div>
+                </div>
             </div>
 
             <div class="mb-3">
