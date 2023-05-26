@@ -181,7 +181,7 @@ eventImagesInput.addEventListener("input", function() {
 form.addEventListener("input", function() {
     const fields = [eventTitleInput, eventDescriptionTextarea, eventLocationSelect,
     eventCategoriesSelect, eventStartDateInput, eventEndDateInput, eventImagesInput];
-    
+
     if(adminRadio.value === "other") {
         fields.push(adminNameInput);
         if(adminNameInput.value === "") {
@@ -202,4 +202,14 @@ form.addEventListener("input", function() {
 
 form.addEventListener("submit", function(e) {
     e.preventDefault();
+
+    fetch("controllers/createEventHandler.php", {
+        method: "POST",
+        body: new FormData(this)
+    })
+        .then(res => res.json())
+        .then(data => {
+
+        })
+        .catch(error => console.log("Algo salió mal: " + error));
 });
