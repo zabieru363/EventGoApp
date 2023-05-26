@@ -24,6 +24,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     }
 
     $location = $_POST["locations"];
+    $category = $_POST["event_categories"];
     $start_date = $_POST["start_date"];
     $end_date = $_POST["end_date"];
 
@@ -42,5 +43,4 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
             }
         }
     }
-
 }
