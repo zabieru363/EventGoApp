@@ -130,7 +130,7 @@ eventEndDateInput.addEventListener("input", function() {
     }
 });
 
-eventImagesInput.addEventListener("change", function() {
+eventImagesInput.addEventListener("input", function() {
     let valid = true;
 
     if(this.files.length <= 3) {
