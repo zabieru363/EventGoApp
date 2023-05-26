@@ -13,6 +13,7 @@ const radioOther = form.other;
 const adminNameInput = document.getElementById("administrator_name");
 
 const eventLocationSelect = form["locations"];
+const eventCategoriesSelect = form["event_categories"];
 const eventStartDateInput = form["start_date"];
 const eventEndDateInput = form["end_date"];
 
@@ -102,7 +103,7 @@ eventLocationSelect.addEventListener("input", function() {
     }
 });
 
-eventStartDateInput.addEventListener("input", function() {
+eventCategoriesSelect.addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -112,11 +113,11 @@ eventStartDateInput.addEventListener("input", function() {
         this.classList.remove("is-invalid");
         this.classList.add("is-valid");
         feedbacks[4].classList.remove("d-block");
-        feedbacks[4].textContent = "";   
+        feedbacks[4].textContent = "";
     }
 });
 
-eventEndDateInput.addEventListener("input", function() {
+eventStartDateInput.addEventListener("input", function() {
     if(this.value === "") {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -127,6 +128,20 @@ eventEndDateInput.addEventListener("input", function() {
         this.classList.add("is-valid");
         feedbacks[5].classList.remove("d-block");
         feedbacks[5].textContent = "";   
+    }
+});
+
+eventEndDateInput.addEventListener("input", function() {
+    if(this.value === "") {
+        this.classList.add("is-invalid");
+        this.classList.remove("is-valid");
+        feedbacks[6].classList.add("d-block");
+        feedbacks[6].textContent = "Este campo es obligatorio";
+    }else{
+        this.classList.remove("is-invalid");
+        this.classList.add("is-valid");
+        feedbacks[6].classList.remove("d-block");
+        feedbacks[6].textContent = "";   
     }
 });
 
@@ -145,26 +160,28 @@ eventImagesInput.addEventListener("input", function() {
         if(valid) {
             this.classList.remove("is-invalid");
             this.classList.add("is-valid");
-            feedbacks[6].classList.remove("d-block");
-            feedbacks[6].textContent = "";  
+            feedbacks[7].classList.remove("d-block");
+            feedbacks[7].textContent = "";  
         }else{
             this.classList.add("is-invalid");
             this.classList.remove("is-valid");
-            feedbacks[6].classList.add("d-block");
-            feedbacks[6].textContent = "Se ha subido un archivo que no es una imagen. Vuelve a subir los archivos";
+            feedbacks[7].classList.add("d-block");
+            feedbacks[7].textContent = "Se ha subido un archivo que no es una imagen. Vuelve a subir los archivos";
         }
 
     }else{
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
-        feedbacks[6].classList.add("d-block");
-        feedbacks[6].textContent = "Solamente puedes subir 3 imagenes cómo máximo";
+        feedbacks[7].classList.add("d-block");
+        feedbacks[7].textContent = "Solamente puedes subir 3 imagenes cómo máximo";
         this.value = "";
     }
 });
 
 form.addEventListener("input", function() {
-    const fields = [eventTitleInput, eventDescriptionTextarea, eventLocationSelect, eventStartDateInput, eventEndDateInput, eventImagesInput];
+    const fields = [eventTitleInput, eventDescriptionTextarea, eventLocationSelect,
+    eventCategoriesSelect, eventStartDateInput, eventEndDateInput, eventImagesInput];
+    
     if(adminRadio.value === "other") {
         fields.push(adminNameInput);
         if(adminNameInput.value === "") {
