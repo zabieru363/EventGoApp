@@ -130,7 +130,7 @@ eventEndDateInput.addEventListener("input", function() {
     }
 });
 
-eventImagesInput.addEventListener("change", function() {
+eventImagesInput.addEventListener("input", function() {
     let valid = true;
 
     if(this.files.length <= 3) {
@@ -166,8 +166,8 @@ eventImagesInput.addEventListener("change", function() {
 form.addEventListener("input", function() {
     const fields = [eventTitleInput, eventDescriptionTextarea, eventLocationSelect, eventStartDateInput, eventEndDateInput, eventImagesInput];
     if(adminRadio.value === "other") {
+        fields.push(adminNameInput);
         if(adminNameInput.value === "") {
-            fields.push(adminNameInput);
             submitBtn.disabled = true;
             submitBtn.style.background = "#8dffcc";
         }
