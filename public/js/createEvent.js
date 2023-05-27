@@ -23,6 +23,9 @@ const submitBtn = form.getElementsByClassName("submit-btn")[0];
 submitBtn.disabled = true;
 submitBtn.style.background = "#8dffcc";
 
+const modalTitle = document.getElementsByClassName("modal-title")[0];
+const modalBody = document.getElementsByClassName("modal-body")[0];
+
 (function() {
     radioMe.addEventListener("click", function() {
         adminNameInput.classList.add("d-none");
@@ -189,6 +192,7 @@ form.addEventListener("input", function() {
             submitBtn.style.background = "#8dffcc";
         }
     }
+
     const allValid = fields.every(field => field.classList.contains("is-valid"));
 
     if(!allValid || adminRadio.value === "") {
@@ -209,7 +213,29 @@ form.addEventListener("submit", function(e) {
     })
         .then(res => res.json())
         .then(data => {
+            if(data.created) {
+                this.reset();
 
+                [...form.elements].forEach(input => input.classList.remove("is-valid"));
+
+                const modal = new bootstrap.Modal(document.getElementById("createEventModal"));
+                modalTitle.textContent = "Evento creado";
+
+                if(data.assigned && data["event_user_assoc"]) {
+                    modalBody.textContent = `Se ha creado el evento y se ha encuadrado en la categoría ${eventCategoriesSelect.value}`;
+                }
+
+                modal.show();
+            }else{
+                const modal = new bootstrap.Modal(document.getElementById("createEventModal"));
+                modalTitle.textContent = "Algo salió mal";
+
+                if(data.assigned && data["event_user_assoc"]) {
+                    modalBody.textContent = `No se ha podido crear evento, hay errores en el servidor.}`;
+                }
+
+                modal.show();
+            }
         })
         .catch(error => console.log("Algo salió mal: " + error));
 });
