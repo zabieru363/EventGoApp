@@ -46,18 +46,18 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $files = [];
     $image_event_assoc = false;
 
-    if(isset($_FILES["images"]) && $_FILES["images"]['error'] == UPLOAD_ERR_OK)
+    for($i = 0; $i < count($_FILES["images"]); $i++)
     {
-        for($i = 0; $i < count($_FILES["images"]); $i++)
+        if($_FILES["images"]["error"][$i] == UPLOAD_ERR_OK)
         {
             $files[$i]["name"] = $_FILES["images"]["name"][$i];
             $files[$i]["tmp"] = $_FILES["images"]["tmp"][$i];
-
+    
             if(!(file_exists("uploads/" . $files[$i]["name"])))
             {
                 move_uploaded_file($files[$i]["tmp"], realpath(dirname(__FILE__)) . "/../uploads/" . $files[$i]["name"]);
             }
-
+    
             $image_event_assoc = $event_controller->setEventImages($event_id, $files[$i]["name"]);
         }
     }
