@@ -110,4 +110,38 @@ final class EventModel
 
         return $status;
     }
+
+    /**
+     * Método que recupera todos los eventos de una categoróa y los
+     * guarda en el array privado data.
+     * @param int El id de la categoría por el cuál se quiere filtrar.
+     * @return array Un array con todos los eventos de esa categoría.
+     * Incluye también las imagenes en la última columna, separadas por el " "
+     */
+    public function getEventsCategory(int $category_id):array
+    {
+        $sql = "SELECT e.Title, e.Description, e.Admin, c.Name AS City_Name,
+        e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR ' ') AS
+        Image_Name FROM event e 
+        INNER JOIN event_images ei ON e.Id = ei.Event_id
+        INNER JOIN city c ON c.Id = e.Location
+        INNER JOIN category_event ec ON ec.Event_id = e.Id
+        WHERE ec.Category_id = :id_category
+        GROUP BY e.Id;";
+
+        $this->connection->execute_select($sql, [":id_category" => $category_id]);
+
+        foreach($this->connection->rows as $row)
+        {
+            $this->data["title"] = $row["Title"];
+            $this->data["description"] = $row["Description"];
+            $this->data["admin"] = $row["Admin"];
+            $this->data["city"] = $row["City_Name"];
+            $this->data["start_date"] = $row["Start_date"];
+            $this->data["end_date"] = $row["Ending_date"];
+            $this->data["images"] = $row["Image_Name"];
+        }
+
+        return $this->data;
+    }
 }
