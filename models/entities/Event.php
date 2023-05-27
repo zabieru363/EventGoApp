@@ -6,7 +6,6 @@ final class Event
     private string $description;
     private string $admin;
     private int $location;
-    private int $user_id;
     private string $start_date;
     private string $end_date;
     private bool $active;
