@@ -44,6 +44,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $user_event_assoc = $event_controller->addEventToUserList($event_id, $_SESSION["id_user"]);
 
     $files = [];
+    $image_event_assoc = false;
 
     if(isset($_FILES["images"]) && $_FILES["images"]['error'] == UPLOAD_ERR_OK)
     {
