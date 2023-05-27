@@ -216,7 +216,9 @@ form.addEventListener("submit", function(e) {
             if(data.created) {
                 const modal = new bootstrap.Modal(document.getElementById("createEventModal"));
                 modalTitle.textContent = "Evento creado";
-                if(data.assigned && data["event_user_assoc"]) modalBody.textContent = `Se ha creado el evento y se ha encuadrado en la categoría ${eventCategoriesSelect.value}`;
+                if(data.assigned && data["event_user_assoc"]) 
+                    modalBody.textContent = `Se ha creado el evento y se ha encuadrado en la categoría 
+                    ${eventCategoriesSelect.options[eventCategoriesSelect.selectedIndex].text}`;
                 modal.show();
             }
 
