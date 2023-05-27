@@ -214,28 +214,14 @@ form.addEventListener("submit", function(e) {
         .then(res => res.json())
         .then(data => {
             if(data.created) {
-                this.reset();
-
-                [...form.elements].forEach(input => input.classList.remove("is-valid"));
-
                 const modal = new bootstrap.Modal(document.getElementById("createEventModal"));
                 modalTitle.textContent = "Evento creado";
-
-                if(data.assigned && data["event_user_assoc"]) {
-                    modalBody.textContent = `Se ha creado el evento y se ha encuadrado en la categoría ${eventCategoriesSelect.value}`;
-                }
-
-                modal.show();
-            }else{
-                const modal = new bootstrap.Modal(document.getElementById("createEventModal"));
-                modalTitle.textContent = "Algo salió mal";
-
-                if(data.assigned && data["event_user_assoc"]) {
-                    modalBody.textContent = `No se ha podido crear evento, hay errores en el servidor.}`;
-                }
-
+                if(data.assigned && data["event_user_assoc"]) modalBody.textContent = `Se ha creado el evento y se ha encuadrado en la categoría ${eventCategoriesSelect.value}`;
                 modal.show();
             }
+
+            this.reset();
+            [...form.elements].forEach(input => input.classList.remove("is-valid"));
         })
         .catch(error => console.log("Algo salió mal: " + error));
 });
