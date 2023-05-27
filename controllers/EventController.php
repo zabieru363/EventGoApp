@@ -2,6 +2,7 @@
 require_once("UserController.php");
 require_once("CityController.php");
 require_once("CategoryController.php");
+require_once(realpath(dirname(__FILE__)) . "/../lib/BaseController.php");
 require_once(realpath(dirname(__FILE__)) . "/../models/EventModel.php");
 
 final class EventController extends BaseController
