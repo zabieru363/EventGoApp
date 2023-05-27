@@ -25,6 +25,7 @@ submitBtn.style.background = "#8dffcc";
 
 const modalTitle = document.getElementsByClassName("modal-title")[0];
 const modalBody = document.getElementsByClassName("modal-body")[0];
+const closeModalBtn = document.getElementsByClassName("btn-close")[0];
 
 (function() {
     radioMe.addEventListener("click", function() {
@@ -224,6 +225,8 @@ form.addEventListener("submit", function(e) {
 
             this.reset();
             [...form.elements].forEach(input => input.classList.remove("is-valid"));
+
+            closeModalBtn.addEventListener("click", () => window.location.replace("index.php"));
         })
         .catch(error => console.log("Algo salió mal: " + error));
 });
