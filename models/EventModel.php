@@ -133,13 +133,17 @@ final class EventModel
 
         foreach($this->connection->rows as $row)
         {
-            $this->data["title"] = $row["Title"];
-            $this->data["description"] = $row["Description"];
-            $this->data["admin"] = $row["Admin"];
-            $this->data["city"] = $row["City_Name"];
-            $this->data["start_date"] = $row["Start_date"];
-            $this->data["end_date"] = $row["Ending_date"];
-            $this->data["images"] = $row["Image_Name"];
+            $new_row = [];
+
+            $new_row["title"] = $row["Title"];
+            $new_row["description"] = $row["Description"];
+            $new_row["admin"] = $row["Admin"];
+            $new_row["city"] = $row["City_Name"];
+            $new_row["start_date"] = $row["Start_date"];
+            $new_row["end_date"] = $row["Ending_date"];
+            $new_row["images"] = $row["Image_Name"];
+
+            array_push($this->data, $new_row);
         }
 
         return $this->data;
