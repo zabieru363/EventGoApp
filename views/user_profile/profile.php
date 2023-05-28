@@ -4,6 +4,8 @@
     require_once("templates/open.php");
 ?>
     <body>
+        <?php require_once("templates/basic_header.php"); ?>
+        
         <div class="container-fluid my-5 d-flex justify-content-center">
             <div class="row mt-3 user-profile-container">
                 <div class="col-md-4 p-4 d-flex justify-content-center align-items-center border">

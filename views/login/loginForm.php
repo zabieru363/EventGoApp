@@ -3,7 +3,9 @@
     require_once("templates/open.php");
 ?>
     <body>
-    <section class="wrapper d-flex justify-content-center">
+        <?php require_once("templates/basic_header.php"); ?>
+        
+        <section class="wrapper d-flex justify-content-center">
             <div class="row mt-5">
                 <div class="col-md-12">
                     <div class="p-5 shadow">
