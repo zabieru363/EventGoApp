@@ -11,7 +11,7 @@ for(const category of categoriesContainer) {
 }
 
 function loadEvents(category) {
-    fetch("controllers/getEventsCategory.php", {
+    fetch("controllers/getEventsCategoryHandler.php", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -20,7 +20,7 @@ function loadEvents(category) {
     })
         .then(res => res.json())
         .then(data => {
-
+            console.log(data);
         })
         .catch(error => console.log("Algo salió mal " + error));
 }
