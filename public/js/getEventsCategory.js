@@ -1,8 +1,10 @@
 "use strict";
 
-const categoriesContainer = document.getElementsByClassName("categories-container")[0];
+import Event from "./entities/Event.js";
 
-for(const category of categoriesContainer) {
+const categories = [...document.getElementsByClassName("category")];
+
+for(const category of categories) {
     category.addEventListener("click", function() {
         const id = category.getAttribute("data-id");
         const name = category.textContent;
@@ -20,7 +22,7 @@ function loadEvents(category) {
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            
         })
         .catch(error => console.log("Algo salió mal " + error));
 }
