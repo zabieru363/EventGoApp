@@ -22,7 +22,12 @@ function loadEvents(category) {
     })
         .then(res => res.json())
         .then(data => {
-            
+            console.log(data);
+            // const events = [...data];
+            // for(const e of events) {
+            //     const event = new Event(e.title, e.description, e.admin, e.city, e.start_date, e.end_date, e.images);
+            //     console.log(event.title);
+            // }
         })
         .catch(error => console.log("Algo salió mal " + error));
 }
