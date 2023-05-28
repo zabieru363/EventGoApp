@@ -21,19 +21,19 @@ final class HomeController extends BaseController
         try{
             $category_controller = new CategoryController();
             $user_controller = new UserController();
-            $categoires = $category_controller->listCategories();
+            $categories = $category_controller->listCategories();
 
             if(isset($_SESSION["id_user"]))
             {
                 $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
                 $this->render("home/home", [
                     "user_image" => $user_image,
-                    "categories" => $categoires
+                    "categories" => $categories
                 ]);
             }
             else
             {
-                $data = ["categories" => $categoires];
+                $data = ["categories" => $categories];
                 $this->render("home/home", $data);
             }
         }catch(Exception $e){
