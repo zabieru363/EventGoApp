@@ -10,11 +10,11 @@ for(let i = 0; i < categories.length; i++) {
         eventsContainer.innerHTML = "";
 
         for(let j = 0; j < categories.length; j++) {
-            categories[j].classList.remove("active");
+            categories[j].classList.remove("category-active");
             categories[j].innerHTML = categories[j].innerText;
         }
 
-        this.classList.add("active");
+        this.classList.add("category-active");
         this.innerHTML += "<i class='ms-3 fa-regular fa-circle-check'></i>";
         const id = categories[i].getAttribute("data-id");
         const name = categories[i].textContent;
