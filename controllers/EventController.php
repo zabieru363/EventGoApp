@@ -89,4 +89,13 @@ final class EventController extends BaseController
     {
         return $this->model->addEventToUserList($event_id, $user_id);
     }
+
+    /**
+     * Método que llama al modelo para recuperar los eventos de
+     * una ctaegoría en especifico.
+     */
+    public function getEventsCategory(int $category_id):array
+    {
+        return $this->model->getEventsCategory($category_id);
+    }
 }
