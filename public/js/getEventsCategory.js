@@ -5,11 +5,19 @@ import Event from "./entities/Event.js";
 const categories = [...document.getElementsByClassName("category")];
 const eventsContainer = document.getElementsByClassName("events-container")[0];
 
-for(const category of categories) {
-    category.addEventListener("click", function() {
+for(let i = 0; i < categories.length; i++) {
+    categories[i].addEventListener("click", function(e) {
         eventsContainer.innerHTML = "";
-        const id = category.getAttribute("data-id");
-        const name = category.textContent;
+
+        for(let j = 0; j < categories.length; j++) {
+            categories[j].classList.remove("active");
+            categories[j].innerHTML = categories[j].innerText;
+        }
+
+        this.classList.add("active");
+        this.innerHTML += "<i class='ms-3 fa-regular fa-circle-check'></i>";
+        const id = categories[i].getAttribute("data-id");
+        const name = categories[i].textContent;
         loadEvents({id, name});
     });
 }
