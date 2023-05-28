@@ -8,6 +8,7 @@
         <?php require_once("templates/eventsZone.php"); ?>
 
         <!-- JavaScript -->
+        <script src="public/js/getEventsCategory.js" type="module"></script>
 
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("templates/cdns.php"); ?>
