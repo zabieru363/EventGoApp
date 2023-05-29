@@ -36,13 +36,17 @@ final class EventController extends BaseController
                     "categories" => $categories
                 ]);
             }
-            else
-            {
-                $this->render("create_event/create_event");
-            }
         }catch(Exception $e) {
             var_dump($e->getMessage());
         }
+    }
+
+    public function list()
+    {
+        $user_controller = new UserController();
+        $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
+        
+        $this->render("my_events/myEvents", ["user_image" => $user_image]);
     }
 
     /**
