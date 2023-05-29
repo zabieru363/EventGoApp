@@ -6,8 +6,8 @@
     <body>
         <?php require_once("templates/basic_header.php"); ?>
 
-        <div class="container-fluid">
-            <h1>Tus eventos</h1>
+        <div class="container-fluid shadow mt-3 p-3 w-50">
+            <h1 class="display-6">Tus eventos</h1>
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
