@@ -12,7 +12,6 @@ final class EventModel
     private function __construct()
     {
         $this->connection = Connection::getInstance();
-        session_start();
     }
 
     /**
