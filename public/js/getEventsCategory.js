@@ -6,8 +6,14 @@ const categories = [...document.getElementsByClassName("category")];
 const randomCategory =  Math.floor(Math.random() * (categories.length - 1) + 0);
 const categoryName = categories[randomCategory];
 
-categories[randomCategory - 1].classList.add("category-active");
-categories[randomCategory - 1].innerHTML += "<i class='ms-3 fa-regular fa-circle-check'></i>";
+if(randomCategory === 0) {
+    categories[0].classList.add("category-active");
+    categories[0].innerHTML += "<i class='ms-3 fa-regular fa-circle-check'></i>";
+}else{
+    categories[randomCategory - 1].classList.add("category-active");
+    categories[randomCategory - 1].innerHTML += "<i class='ms-3 fa-regular fa-circle-check'></i>";
+}
+
 
 const eventsContainer = document.getElementsByClassName("events-container")[0];
 
