@@ -24,26 +24,6 @@ final class DAOCategories
         return self::$instance;
     }
 
-    /**
-     * Método que obtiene el id de una categoría.
-     * @param string El nombre de la categoría que se ha seleccionado.
-     * @return int El id de la categoría seleccionada.
-     */
-    public function getCategoryId(string $category):int
-    {
-        $id = 0;
-
-        $sql = "SELECT Id FROM category WHERE Name = :category";
-        $this->connection->execute_select($sql, [":category" => $category]);
-
-        foreach($this->connection->rows as $row)
-        {
-            $id = $row["Id"];
-        }
-
-        return $id;
-    }
-
     public function list():array
     {
         $sql = "SELECT * FROM category";

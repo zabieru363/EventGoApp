@@ -101,11 +101,12 @@ final class EventModel
      */
     public function addEventToUserList(int $event_id, int $user_id):bool
     {
-        $sql = "INSERT INTO user_event VALUES(:event_id, :user_id)";
+        $sql = "INSERT INTO user_event VALUES(:event_id, :user_id, id_rule)";
 
         $status = $this->connection->execute_query($sql, [
             ":event_id" => $event_id,
-            ":user_id" => $user_id
+            ":user_id" => $user_id,
+            "id_rule" => 1
         ]);
 
         return $status;
@@ -121,7 +122,7 @@ final class EventModel
     public function getEventsCategory(int $category_id):array
     {
         $sql = "SELECT e.Title, e.Description, e.Admin, c.Name AS City_Name,
-        e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR ' ') AS
+        e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
         Image_Name FROM event e 
         INNER JOIN event_images ei ON e.Id = ei.Event_id
         INNER JOIN city c ON c.Id = e.Location
@@ -133,13 +134,17 @@ final class EventModel
 
         foreach($this->connection->rows as $row)
         {
-            $this->data["title"] = $row["Title"];
-            $this->data["description"] = $row["Description"];
-            $this->data["admin"] = $row["Admin"];
-            $this->data["city"] = $row["City_Name"];
-            $this->data["start_date"] = $row["Start_date"];
-            $this->data["end_date"] = $row["Ending_date"];
-            $this->data["images"] = $row["Image_Name"];
+            $new_row = [];
+
+            $new_row["title"] = $row["Title"];
+            $new_row["description"] = $row["Description"];
+            $new_row["admin"] = $row["Admin"];
+            $new_row["city"] = $row["City_Name"];
+            $new_row["start_date"] = $row["Start_date"];
+            $new_row["end_date"] = $row["Ending_date"];
+            $new_row["images"] = $row["Image_Name"];
+
+            array_push($this->data, $new_row);
         }
 
         return $this->data;
