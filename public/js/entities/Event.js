@@ -58,6 +58,6 @@ export default class Event {
     }
 
     get images() {
-        return this.#images.split("/\//");
+        return this.#images.split("/");
     }
 }
