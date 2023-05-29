@@ -1,5 +1,6 @@
 <?php
 require_once("EventController.php");
+require_once("UserController.php");
 
 if($_SERVER["REQUEST_METHOD"] === "POST")
 {
@@ -16,7 +17,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 
     if($radio === "me")
     {
-        $admin_name = $_SESSION["username"];
+        $user_controller = new UserController();
+        $user_data = $user_controller->getUserProfileData($_SESSION["id_user"]);
+
+        $admin_name = $user_data["fullname"];
     }
     else
     {
