@@ -105,7 +105,7 @@ function loadEvents(category) {
                                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Participar
                                     </button>
-                                    <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu event-participation-options">
                                         <li class="dropdown-item">Puedo ir</li>
                                         <li class="dropdown-item">No puedo ir</li>
                                         <li class="dropdown-item">Todavía no lo se</li>
