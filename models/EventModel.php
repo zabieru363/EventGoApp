@@ -160,7 +160,7 @@ final class EventModel
      */
     public function getUserPublicEvents(int $user_id):array
     {
-        $sql = "SELECT e.Id e.Title, e.Description, e.Admin, c.Name AS City_Name,
+        $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
         e.Start_date, e.Ending_date FROM event e 
         INNER JOIN user_event ue ON e.Id = ue.Id_event
         INNER JOIN user u ON ue.Id_user = u.Id
