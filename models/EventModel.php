@@ -188,4 +188,23 @@ final class EventModel
 
         return $this->data;
     }
+
+    /**
+     * Método que hace una consulta a la tabla user_event para cmabiar el
+     * estado de un evento.
+     * @param int El id del evento del cuál se quiere cambiar la regla.
+     * @param int El id de la regla que se quiere establecer para ese evento.
+     * @return bool True si la operación ha tenido exito, false si no es así.
+     */
+    public function setEventParticipationRule(int $event_id, int $rule_id):bool
+    {
+        $sql = "UPDATE user_event SET Id_rule = :rule_id WHERE Id_evemt = :evemt_id";
+
+        $status = $this->connection->execute_query($sql, [
+            ":rule_id" => $rule_id,
+            ":event_id" => $event_id
+        ]);
+
+        return $status;
+    }
 }
