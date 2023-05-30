@@ -106,17 +106,54 @@ function loadEvents(category) {
                                         Participar
                                     </button>
                                     <ul class="dropdown-menu event-participation-options">
-                                        <li class="dropdown-item">Puedo ir</li>
-                                        <li class="dropdown-item">No puedo ir</li>
-                                        <li class="dropdown-item">Todavía no lo se</li>
+                                        <li class="dropdown-item opt1">Puedo ir</li>
+                                        <li class="dropdown-item opt2">No puedo ir</li>
+                                        <li class="dropdown-item opt3">Todavía no lo se</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>`
                     
                         eventsContainer.appendChild(eventContainer);
+
+                        // Añadimos un manejador de eventos a los eventos de una categoría que si contenga eventos.
+                        const participationDropdownButton = document.getElementsByClassName("event-participation-options")[0];
+                        console.log(participationDropdownButton);
+
+                        participationDropdownButton.addEventListener("click", function(e) {
+                            let rule = "";
+
+                            if(e.target.classList.contains("opt1")) rule = "opt2";
+                            if(e.target.classList.contains("opt2")) rule = "opt3";
+                            if(e.target.classList.contains("opt3")) rule = "opt4";
+
+                            setParticipationRule(rule);     // Función que mandará al php la opción que haya escogido el usuario.
+                        });
                 }
             }
+        })
+        .catch(error => console.log("Algo salió mal " + error));
+}
+
+function setParticipationRule(rule) {
+    const rules = {
+        opt2 : 2,
+        opt3 : 3,
+        opt4 : 4
+    };
+
+    const selectedRule = rules[rule];
+
+    fetch("controllers/setParticipationRuleEvent.php", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(selectedRule)
+    })
+        .then(res => res.json())
+        .then(data => {
+
         })
         .catch(error => console.log("Algo salió mal " + error));
 }
