@@ -45,8 +45,12 @@ final class EventController extends BaseController
     {
         $user_controller = new UserController();
         $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
+        $public_user_events = $this->getUserPublicEvents($_SESSION["id_user"]);
         
-        $this->render("my_events/myEvents", ["user_image" => $user_image]);
+        $this->render("my_events/myEvents", [
+            "user_image" => $user_image,
+            "public_user_events" => $public_user_events
+        ]);
     }
 
     /**
@@ -101,5 +105,16 @@ final class EventController extends BaseController
     public function getEventsCategory(int $category_id):array
     {
         return $this->model->getEventsCategory($category_id);
+    }
+
+    /**
+     * Método que llama al modelo para obtener los eventos
+     * publicados por un usuario.
+     * @param int El id del usuario del cuál se quieren
+     * obtener sus eventos publicados.
+     */
+    public function getUserPublicEvents(int $user_id):array
+    {
+        return $this->model->getUserPublicEvents($user_id);
     }
 }
