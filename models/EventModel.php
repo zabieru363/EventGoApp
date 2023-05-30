@@ -120,7 +120,7 @@ final class EventModel
      */
     public function getEventsCategory(int $category_id):array
     {
-        $sql = "SELECT e.Title, e.Description, e.Admin, c.Name AS City_Name,
+        $sql = "SELECT e.Id e.Title, e.Description, e.Admin, c.Name AS City_Name,
         e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
         Image_Name FROM event e 
         INNER JOIN event_images ei ON e.Id = ei.Event_id
@@ -136,6 +136,7 @@ final class EventModel
         {
             $new_row = [];
 
+            $new_row["id"] = $row["Id"];
             $new_row["title"] = $row["Title"];
             $new_row["description"] = $row["Description"];
             $new_row["admin"] = $row["Admin"];
@@ -164,9 +165,8 @@ final class EventModel
         e.Start_date, e.Ending_date FROM event e 
         INNER JOIN user_event ue ON e.Id = ue.Id_event
         INNER JOIN user u ON ue.Id_user = u.Id
-        INNER JOIN event_participation_rules epr ON epr.Id = ue.Id_rule
         INNER JOIN city c ON c.Id = e.Location
-        WHERE u.Id = :user_id AND ue.Id_rule = 1";
+        WHERE u.Id = :user_id;";
 
         $this->connection->execute_select($sql, [":user_id" => $user_id]);
         $this->data = [];   // Vaciamos el contenido del array para poder insertar de nuevo.
