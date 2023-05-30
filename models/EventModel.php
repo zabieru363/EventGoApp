@@ -130,6 +130,7 @@ final class EventModel
         GROUP BY e.Id;";
 
         $this->connection->execute_select($sql, [":id_category" => $category_id]);
+        $this->data = [];   // Vaciamos el contenido del array para poder insertar de nuevo.
 
         foreach($this->connection->rows as $row)
         {
@@ -142,6 +143,45 @@ final class EventModel
             $new_row["start_date"] = $row["Start_date"];
             $new_row["end_date"] = $row["Ending_date"];
             $new_row["images"] = $row["Image_Name"];
+
+            array_push($this->data, $new_row);
+        }
+
+        return $this->data;
+    }
+
+    /**
+     * Método que trae con una consulta los eventos que ha publicado un
+     * usuario.
+     * @param int El id del usuario del cuál se quieren obtener
+     * los eventos publicados.
+     * @return array Un array asociativo con los eventos
+     * que ha publicado el usuario con la información de cada evento.
+     */
+    public function getUserPublicEvents(int $user_id):array
+    {
+        $sql = "SELECT e.Id e.Title, e.Description, e.Admin, c.Name AS City_Name,
+        e.Start_date, e.Ending_date FROM event e 
+        INNER JOIN user_event ue ON e.Id = ue.Id_event
+        INNER JOIN user u ON ue.Id_user = u.Id
+        INNER JOIN event_participation_rules epr ON epr.Id = ue.Id_rule
+        INNER JOIN city c ON c.Id = e.Location
+        WHERE u.Id = :user_id AND ue.Id_rule = 1";
+
+        $this->connection->execute_select($sql, [":user_id" => $user_id]);
+        $this->data = [];   // Vaciamos el contenido del array para poder insertar de nuevo.
+
+        foreach($this->connection->rows as $row)
+        {
+            $new_row = [];
+
+            $new_row["id"] = $row["Id"];
+            $new_row["title"] = $row["Title"];
+            $new_row["description"] = $row["Description"];
+            $new_row["admin"] = $row["Admin"];
+            $new_row["city"] = $row["City_Name"];
+            $new_row["start_date"] = $row["Start_date"];
+            $new_row["end_date"] = $row["Ending_date"];
 
             array_push($this->data, $new_row);
         }
