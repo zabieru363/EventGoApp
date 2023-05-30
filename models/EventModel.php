@@ -156,7 +156,7 @@ final class EventModel
      * usuario.
      * @param int El id del usuario del cuál se quieren obtener
      * los eventos publicados.
-     * @return array Un array asociativo con los eventos
+     * @return array Un array de asociativo que contiene los eventos
      * que ha publicado el usuario con la información de cada evento.
      */
     public function getUserPublicEvents(int $user_id):array
