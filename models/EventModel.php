@@ -120,7 +120,7 @@ final class EventModel
      */
     public function getEventsCategory(int $category_id):array
     {
-        $sql = "SELECT e.Id e.Title, e.Description, e.Admin, c.Name AS City_Name,
+        $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
         e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
         Image_Name FROM event e 
         INNER JOIN event_images ei ON e.Id = ei.Event_id
