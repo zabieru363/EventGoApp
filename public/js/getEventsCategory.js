@@ -26,10 +26,10 @@ for(let i = 0; i < categories.length; i++) {
         this.classList.add("category-active");
         this.innerHTML += "<i class='ms-3 fa-regular fa-circle-check'></i>";
 
-        const idCategory = categories[i].getAttribute("data-id");
-        const categoryName = categories[i].textContent;
+        const id = categories[i].getAttribute("data-id");
+        const name = categories[i].textContent;
 
-        loadEvents({idCategory, categoryName});
+        loadEvents({id, name});
     });
 }
 
