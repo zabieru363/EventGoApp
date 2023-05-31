@@ -14,7 +14,6 @@ if(randomCategory === 0) {
     categories[randomCategory - 1].innerHTML += "<i class='ms-3 fa-regular fa-circle-check'></i>";
 }
 
-
 const eventsContainer = document.getElementsByClassName("events-container")[0];
 
 loadEvents({id: randomCategory, name: categoryName});     // Cargamos los eventos de una categoría al azar.
@@ -58,6 +57,49 @@ function loadEvents(category) {
                 for(const e of data) {
                     const event = new Event(e.id, e.title, e.description, e.admin, e.city, e.start_date, e.end_date, e.images);
                     const eventImages = event.images;
+
+                    fetch("controllers/getParticipationRuleEventHandler.php", {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({idEvent: event.id})
+                    })
+                        .then(res => res.json())
+                        .then(eventData => {
+                            const dropdown = document.createElement("div");
+                            switch(eventData.rule) {
+                                case 1 :
+                                    dropdown.classList.add("dropdown");
+                                    dropdown.innerHTML = `
+                                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Participar
+                                        </button>
+                                        <ul class="dropdown-menu event-participation-options">
+                                            <li class="dropdown-item opt1">Puedo ir</li>
+                                            <li class="dropdown-item opt2">No puedo ir</li>
+                                            <li class="dropdown-item opt3">Todavía no lo se</li>
+                                        </ul>`;
+                                    break;
+                                case 2 :
+                                    dropdown.innerHTML = `<button class="btn btn-success">Participaré</button>`;
+                                    break;
+                                case 3 :
+                                    dropdown.innerHTML = `<button class="btn btn-danger">No participaré</button>`;
+                                    break;
+                                case 4:
+                                    dropdown.classList.add("dropdown");
+                                    dropdown.innerHTML = `
+                                        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Pendiente de confirmar
+                                        </button>
+                                        <ul class="dropdown-menu event-confirmation-options">
+                                            <li class="dropdown-item opt2">Puedo ir</li>
+                                            <li class="dropdown-item opt3">No puedo ir</li>
+                                        </ul>`;
+                                    break;
+                            }
+                        });
     
                     let carouselHTML = "";
     
