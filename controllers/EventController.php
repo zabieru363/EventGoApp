@@ -129,4 +129,16 @@ final class EventController extends BaseController
     {
         return $this->model->setEventParticipationRule($event_id, $user_id, $rule_id);
     }
+
+    /**
+     * Método que llama al modelo y obtiene la regla de participación o
+     * de estado de un evento.
+     * @param int El id del evento del cuál se quiere cambiar la regla.
+     * @param int El id de la regla que se quiere aplicar a ese evento.
+     * @return bool True si la operación ha tenido exito, false si no fue así.
+     */
+    public function getEventParticipationRule(int $event_id, int $user_id):bool
+    {
+        return $this->model->getEventParticipationRule($event_id, $user_id);
+    }
 }
