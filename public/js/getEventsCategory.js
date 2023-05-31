@@ -56,7 +56,7 @@ function loadEvents(category) {
                 eventsContainer.appendChild(alert);
             }else{
                 for(const e of data) {
-                    const event = new Event(e.title, e.description, e.admin, e.city, e.start_date, e.end_date, e.images);
+                    const event = new Event(e.id, e.title, e.description, e.admin, e.city, e.start_date, e.end_date, e.images);
                     const eventImages = event.images;
     
                     let carouselHTML = "";
@@ -76,7 +76,7 @@ function loadEvents(category) {
                     const eventContainer = document.createElement("div");
     
                     eventContainer.innerHTML = 
-                    `<div class="card mb-3">
+                    `<div class="card mb-3 data-id=${event.id}">
                             <h1 class="card-header display-6 p-3 text-center">${event.title}</h1>
                             <div class="card-body">
                                 <div id="carouselControls" class="carousel slide mb-3" data-bs-ride="carousel">
@@ -117,17 +117,18 @@ function loadEvents(category) {
                         eventsContainer.appendChild(eventContainer);
 
                         // Añadimos un manejador de eventos a los eventos de una categoría que si contenga eventos.
+                        const eventIdContainer = eventContainer.getElementsByClassName("card")[0];
                         const participationDropdownButton = document.getElementsByClassName("event-participation-options")[0];
-                        console.log(participationDropdownButton);
 
                         participationDropdownButton.addEventListener("click", function(e) {
                             let rule = "";
+                            const idEvent = eventIdContainer.getAttribute("data-id");
 
                             if(e.target.classList.contains("opt1")) rule = "opt2";
                             if(e.target.classList.contains("opt2")) rule = "opt3";
                             if(e.target.classList.contains("opt3")) rule = "opt4";
 
-                            setParticipationRule(rule);     // Función que mandará al php la opción que haya escogido el usuario.
+                            setParticipationRule(idEvent, rule);     // Función que mandará al php la opción que haya escogido el usuario.
                         });
                 }
             }
@@ -135,21 +136,24 @@ function loadEvents(category) {
         .catch(error => console.log("Algo salió mal " + error));
 }
 
-function setParticipationRule(rule) {
+function setParticipationRule(idEvent, rule) {
     const rules = {
         opt2 : 2,
         opt3 : 3,
         opt4 : 4
     };
 
-    const selectedRule = rules[rule];
+    const obj = {
+        rule : rules[rule],
+        idEvent
+    };
 
     fetch("controllers/setParticipationRuleEvent.php", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(selectedRule)
+        body: JSON.stringify(obj)
     })
         .then(res => res.json())
         .then(data => {
