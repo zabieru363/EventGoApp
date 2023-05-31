@@ -7,7 +7,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $data = json_decode($json);
 
     $event_controller = new EventController();
-    $events = $event_controller->getEventsCategory($data->idCategory);
+    $events = $event_controller->getEventsCategory($data->id);
 
     header("Content-Type: application/json");
     echo json_encode($events);
