@@ -100,12 +100,11 @@ final class EventModel
      */
     public function addEventToUserList(int $event_id, int $user_id):bool
     {
-        $sql = "INSERT INTO user_event VALUES(:event_id, :user_id, :id_rule)";
+        $sql = "INSERT INTO user_event VALUES(:event_id, :user_id)";
 
         $status = $this->connection->execute_query($sql, [
             ":event_id" => $event_id,
             ":user_id" => $user_id,
-            ":id_rule" => 1
         ]);
 
         return $status;
