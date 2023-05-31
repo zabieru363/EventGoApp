@@ -3,6 +3,7 @@
 export default class Event {
     
     // Atributos de clase
+    #id;
     #title;
     #description;
     #admin;
@@ -11,7 +12,8 @@ export default class Event {
     #endingDate;
     #images;
 
-    constructor(title, description, admin, city, startDate, endingDate, images) {
+    constructor(id, title, description, admin, city, startDate, endingDate, images) {
+        this.#id = id;
         this.#title = title;
         this.#description = description;
         this.#admin = admin;
@@ -32,6 +34,10 @@ export default class Event {
     }
 
     // Getters y setters de propiedad
+
+    get id() {
+        return this.#id;
+    }
 
     get title() {
         return this.#title;
