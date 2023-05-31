@@ -76,7 +76,7 @@ function loadEvents(category) {
                     const eventContainer = document.createElement("div");
     
                     eventContainer.innerHTML = 
-                    `<div class="card mb-3 data-id=${event.id}">
+                    `<div class="card mb-3" data-id=${event.id}>
                             <h1 class="card-header display-6 p-3 text-center">${event.title}</h1>
                             <div class="card-body">
                                 <div id="carouselControls" class="carousel slide mb-3" data-bs-ride="carousel">
@@ -117,11 +117,11 @@ function loadEvents(category) {
                         eventsContainer.appendChild(eventContainer);
 
                         // Añadimos un manejador de eventos a los eventos de una categoría que si contenga eventos.
-                        const eventIdContainer = eventContainer.getElementsByClassName("card")[0];
-                        const participationDropdownButton = document.getElementsByClassName("event-participation-options")[0];
+                        const participationDropdownButton = eventContainer.querySelector(".event-participation-options");
 
                         participationDropdownButton.addEventListener("click", function(e) {
                             let rule = "";
+                            const eventIdContainer = this.closest(".card");     // Se va al elemento con el selector especificado.
                             const idEvent = eventIdContainer.getAttribute("data-id");
 
                             if(e.target.classList.contains("opt1")) rule = "opt2";
@@ -148,7 +148,7 @@ function setParticipationRule(idEvent, rule) {
         idEvent
     };
 
-    fetch("controllers/setParticipationRuleEvent.php", {
+    fetch("controllers/setParticipationRuleEventHandler.php", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -157,7 +157,7 @@ function setParticipationRule(idEvent, rule) {
     })
         .then(res => res.json())
         .then(data => {
-
+            console.log(data);
         })
         .catch(error => console.log("Algo salió mal " + error));
 }
