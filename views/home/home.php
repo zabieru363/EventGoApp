@@ -9,7 +9,7 @@
 
         <!-- JavaScript -->
         <script src="public/js/getEventsCategory.js" type="module"></script>
-        <script src="public/js/participationSystem.jsy.js"></script>
+        <script src="public/js/participationSystem.js"></script>
 
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("templates/cdns.php"); ?>
