@@ -237,8 +237,10 @@ final class EventModel
         return $status;
     }
 
-    public function getEventParticipationRule(int $event_id, int $user_id):bool
+    public function getEventParticipationRule(int $event_id, int $user_id):int
     {
+        $rule = 0;
+
         $sql = "SELECT COUNT(*) AS RULE_EXISTS FROM user_event_participation
         WHERE User_id = :user_id AND Event_id = :event_id";
 
@@ -253,10 +255,12 @@ final class EventModel
         {
             $sql = "SELECT Rule_id FROM user_event_participation WHERE Event_id = :event_id
             AND User_id = :user_id";
-            $status = $this->connection->execute_query($sql, [
+            $this->connection->execute_select($sql, [
                 ":user_id" => $user_id,
                 ":event_id" => $event_id,
             ]);
+
+            $rule = $this->connection->rows[0]["Rule_id"];
         }
         else
         {
@@ -271,12 +275,14 @@ final class EventModel
 
             $sql = "SELECT Rule_id FROM user_event_participation WHERE Event_id = :event_id
             AND User_id = :user_id";
-            $status = $this->connection->execute_query($sql, [
+            $this->connection->execute_select($sql, [
                 ":user_id" => $user_id,
                 ":event_id" => $event_id,
             ]);
+
+            $rule = $this->connection->rows[0]["Rule_id"];
         }
 
-        return $status;
+        return $rule;
     }
 }
