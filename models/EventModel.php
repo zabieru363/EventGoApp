@@ -210,7 +210,7 @@ final class EventModel
         if($exists > 0)
         {
             $sql = "UPDATE user_event_participation SET Rule_id = :rule_id 
-            WHERE Event_id = :evemt_id AND User_id = :user_id";
+            WHERE Event_id = :event_id AND User_id = :user_id";
             $status = $this->connection->execute_query($sql, [
                 ":user_id" => $user_id,
                 ":event_id" => $event_id,
