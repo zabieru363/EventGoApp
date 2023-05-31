@@ -194,16 +194,42 @@ final class EventModel
      * estado de un evento.
      * @param int El id del evento del cuál se quiere cambiar la regla.
      * @param int El id de la regla que se quiere establecer para ese evento.
+     * @param int El id del usuario que seleccionó una opción en el evento.
      * @return bool True si la operación ha tenido exito, false si no es así.
      */
-    public function setEventParticipationRule(int $event_id, int $rule_id):bool
+    public function setEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
     {
-        $sql = "UPDATE user_event SET Id_rule = :rule_id WHERE Id_evemt = :evemt_id";
+        $status = false;
 
-        $status = $this->connection->execute_query($sql, [
-            ":rule_id" => $rule_id,
-            ":event_id" => $event_id
-        ]);
+        // Primero hay que comprobar si hay una regla creada ya para el usuario
+        $sql = "SELECT COUNT(*) AS RULE_EXISTS FROM user_event_participation
+        WHERE User_id = :user_id";
+
+        $this->connection->execute_select($sql, [":user_id" => $user_id]);
+        $exists = $this->connection->rows[0]["RULE_EXISTS"];
+
+        if($exists > 0)
+        {
+            $sql = "UPDATE user_event_participation SET Rule_id = :rule_id 
+            WHERE Event_id = :evemt_id AND User_id = :user_id";
+            $status = $this->connection->execute_query($sql, [
+                ":user_id" => $user_id,
+                ":event_id" => $event_id,
+                ":rule_id" => $rule_id
+            ]);
+        }
+        else
+        {
+            $sql = "INSERT INTO user_event_participation VALUES(
+                :event_id, :user_id, :rule_id
+            )";
+
+            $status = $this->connection->execute_query($sql, [
+                ":user_id" => $user_id,
+                ":event_id" => $event_id,
+                ":rule_id" => $rule_id
+            ]);
+        }
 
         return $status;
     }
