@@ -128,7 +128,7 @@ function loadEvents(category) {
                             if(e.target.classList.contains("opt2")) rule = "opt3";
                             if(e.target.classList.contains("opt3")) rule = "opt4";
 
-                            setParticipationRule(idEvent, rule);     // Función que mandará al php la opción que haya escogido el usuario.
+                            setParticipationRule(eventIdContainer, idEvent, rule);     // Función que mandará al php la opción que haya escogido el usuario.
                         });
                 }
             }
@@ -136,7 +136,7 @@ function loadEvents(category) {
         .catch(error => console.log("Algo salió mal " + error));
 }
 
-function setParticipationRule(idEvent, rule) {
+function setParticipationRule(eventIdContainer, idEvent, rule) {
     const rules = {
         opt2 : 2,
         opt3 : 3,
@@ -157,7 +157,86 @@ function setParticipationRule(idEvent, rule) {
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            const participationResultButton = document.createElement("button");
+            const dropdown = eventIdContainer.querySelector(".dropdown");
+            const newDropdownContainer = document.createElement("div");
+            newDropdownContainer.classList.add("dropdown");
+
+            if(rule === "opt2") {
+                participationResultButton.classList.add("btn", "btn-success");
+                participationResultButton.textContent = "Participaré";
+
+                dropdown.innerHTML = "";
+                dropdown.appendChild(participationResultButton);
+            }else if(rule === "opt3") {
+                participationResultButton.classList.add("btn", "btn-danger");
+                participationResultButton.textContent = "No participaré";
+
+                dropdown.innerHTML = "";
+                dropdown.appendChild(participationResultButton);
+            }else if(rule === "opt4") {
+                dropdown.innerHTML = `
+                    <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Pendiente de confirmar
+                    </button>
+                    <ul class="dropdown-menu event-confirmation-options">
+                        <li class="dropdown-item opt2">Puedo ir</li>
+                        <li class="dropdown-item opt3">No puedo ir</li>
+                    </ul>`;
+                
+                const dropdownOptions = dropdown.querySelector(".event-confirmation-options");
+
+                dropdownOptions.addEventListener("click", function(e) {
+                    let newRule = "";
+                    if(e.target.classList.contains("opt2")) newRule = "opt2";
+                    if(e.target.classList.contains("opt3")) newRule = "opt3";
+
+                    setEventConfirmation(eventIdContainer, idEvent, newRule);
+                });
+            }
+        })
+        .catch(error => console.log("Algo salió mal " + error));
+}
+
+function setEventConfirmation(eventIdContainer, idEvent, newRule) {
+    const rules = {
+        opt2 : 2,
+        opt3 : 3,
+        opt4 : 4
+    };
+
+    const obj = {
+        rule : rules[newRule],
+        idEvent
+    };
+
+    fetch("controllers/setParticipationRuleEventHandler.php", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(obj)
+    })
+        .then(res => res.json())
+        .then(data => {
+            const participationResultButton = document.createElement("button");
+            const dropdown = eventIdContainer.querySelector(".dropdown");
+            const newDropdownContainer = document.createElement("div");
+            newDropdownContainer.classList.add("dropdown");
+
+            if(newRule === "opt2") {
+                participationResultButton.classList.add("btn", "btn-success");
+                participationResultButton.textContent = "Participaré";
+
+                dropdown.innerHTML = "";
+                dropdown.appendChild(participationResultButton);
+            }else if(newRule === "opt3") {
+                participationResultButton.classList.add("btn", "btn-danger");
+                participationResultButton.textContent = "No participaré";
+
+                dropdown.innerHTML = "";
+                dropdown.appendChild(participationResultButton);
+            }
         })
         .catch(error => console.log("Algo salió mal " + error));
 }
