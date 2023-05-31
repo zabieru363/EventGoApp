@@ -202,9 +202,13 @@ final class EventModel
 
         // Primero hay que comprobar si hay una regla creada ya para el usuario
         $sql = "SELECT COUNT(*) AS RULE_EXISTS FROM user_event_participation
-        WHERE User_id = :user_id";
+        WHERE User_id = :user_id AND Event_id = :event_id";
 
-        $this->connection->execute_select($sql, [":user_id" => $user_id]);
+        $this->connection->execute_select($sql, [
+            ":user_id" => $user_id,
+            ":event_id" => $event_id
+        ]);
+
         $exists = $this->connection->rows[0]["RULE_EXISTS"];
 
         if($exists > 0)
@@ -227,6 +231,49 @@ final class EventModel
                 ":user_id" => $user_id,
                 ":event_id" => $event_id,
                 ":rule_id" => $rule_id
+            ]);
+        }
+
+        return $status;
+    }
+
+    public function getEventParticipationRule(int $event_id, int $user_id):bool
+    {
+        $sql = "SELECT COUNT(*) AS RULE_EXISTS FROM user_event_participation
+        WHERE User_id = :user_id AND Event_id = :event_id";
+
+        $this->connection->execute_select($sql, [
+            ":user_id" => $user_id,
+            ":event_id" => $event_id
+        ]);
+
+        $exists = $this->connection->rows[0]["RULE_EXISTS"];
+
+        if($exists > 0)
+        {
+            $sql = "SELECT Rule_id FROM user_event_participation WHERE Event_id = :event_id
+            AND User_id = :user_id";
+            $status = $this->connection->execute_query($sql, [
+                ":user_id" => $user_id,
+                ":event_id" => $event_id,
+            ]);
+        }
+        else
+        {
+            $sql = "INSERT INTO user_event_participation VALUES(
+                :event_id, :user_id, 1
+            )";
+
+            $this->connection->execute_query($sql, [
+                ":user_id" => $user_id,
+                ":event_id" => $event_id
+            ]);
+
+            $sql = "SELECT Rule_id FROM user_event_participation WHERE Event_id = :event_id
+            AND User_id = :user_id";
+            $status = $this->connection->execute_query($sql, [
+                ":user_id" => $user_id,
+                ":event_id" => $event_id,
             ]);
         }
 
