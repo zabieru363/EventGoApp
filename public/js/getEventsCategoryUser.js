@@ -58,6 +58,58 @@ async function loadEvents(category) {
                 const event = new Event(e.id, e.title, e.description, e.admin, e.city, e.start_date, e.end_date, e.images);
                 const eventImages = event.images;
 
+                let dynamicHTMLDropdown = "";
+
+                const eventDataResponse = await fetch("controllers/getParticipationRuleEventHandler.php", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ idEvent: event.id })
+                });
+
+                const eventData = await eventDataResponse.json();
+
+                switch(eventData.rule) {
+                    case 1:
+                        dynamicHTMLDropdown = `
+                            <div class='dropdown' rule='1'>
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Participar
+                                </button>
+                                <ul class="dropdown-menu event-participation-options">
+                                    <li class="dropdown-item opt1">Puedo ir</li>
+                                    <li class="dropdown-item opt2">No puedo ir</li>
+                                    <li class="dropdown-item opt3">Todavía no lo se</li>
+                                </ul>
+                            </div>`;
+                        break;
+                    case 2:
+                        dynamicHTMLDropdown = `
+                            <div class='dropdown' rule='2'>
+                                <button class="btn btn-success">Participaré</button>
+                            </div>`;
+                        break;
+                    case 3:
+                        dynamicHTMLDropdown = `
+                            <div class='dropdown' rule='3'>
+                                <button class="btn btn-danger">No participaré</button>
+                            </div>`;
+                        break;
+                    case 4:
+                        dynamicHTMLDropdown = `
+                            <div class='dropdown' rule='4'>
+                                <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Pendiente de confirmar
+                                </button>
+                                <ul class="dropdown-menu event-confirmation-options">
+                                    <li class="dropdown-item opt2">Puedo ir</li>
+                                    <li class="dropdown-item opt3">No puedo ir</li>
+                                </ul>
+                            </div>`
+                        break;
+                }
+
                 let carouselHTML = "";
 
                     for(let i = 0; i < eventImages.length; i++) {
@@ -101,16 +153,7 @@ async function loadEvents(category) {
                                     <p class="event-date"><i class="fa-solid fa-clock"></i> Empieza el <strong>${event.startDate}</strong>, finaliza el <strong>${event.endingDate}</strong></p>
                                     <p><strong><i class="fa-solid fa-location-dot"></i> ${event.city}</strong></p>
                                 </div>
-                                <div class='dropdown'>
-                                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Participar
-                                    </button>
-                                    <ul class="dropdown-menu event-participation-options">
-                                        <li class="dropdown-item opt1">Puedo ir</li>
-                                        <li class="dropdown-item opt2">No puedo ir</li>
-                                        <li class="dropdown-item opt3">Todavía no lo se</li>
-                                    </ul>
-                                </div>
+                                ${dynamicHTMLDropdown}
                             </div>
                         </div>`
                     
