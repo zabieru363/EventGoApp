@@ -101,10 +101,12 @@ final class EventController extends BaseController
     /**
      * Método que llama al modelo para recuperar los eventos de
      * una ctaegoría en especifico.
+     * @param int El id del usuario para asociar las reglas a los eventos.
+     * @return array Un array con todos los eventos.
      */
-    public function getEventsCategory(int $category_id):array
+    public function getAllEventsy(int $user_id):array
     {
-        return $this->model->getEventsCategory($category_id);
+        return $this->model->getAllEvents($user_id);
     }
 
     /**
@@ -128,17 +130,5 @@ final class EventController extends BaseController
     public function setEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
     {
         return $this->model->setEventParticipationRule($event_id, $user_id, $rule_id);
-    }
-
-    /**
-     * Método que llama al modelo y obtiene la regla de participación o
-     * de estado de un evento.
-     * @param int El id del evento del cuál se quiere cambiar la regla.
-     * @param int El id de la regla que se quiere aplicar a ese evento.
-     * @return int El id de la regla de participación del evento.
-     */
-    public function getEventParticipationRule(int $event_id, int $user_id):int
-    {
-        return $this->model->getEventParticipationRule($event_id, $user_id);
     }
 }
