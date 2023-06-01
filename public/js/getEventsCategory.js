@@ -116,6 +116,15 @@ async function loadEvents(category) {
                     
                     eventsContainer.appendChild(eventContainer);
             }
+
+            const dropdowns = document.querySelectorAll(".dropdown-menu");
+
+            dropdowns.forEach(function(dropdown) {
+                dropdown.addEventListener("click", function() {
+                    window.location.href = "index.php?url=login";
+                });
+            });
+
         }
     }catch(error) {
         console.log("Algo salió mal " + error);
