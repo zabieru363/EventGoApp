@@ -202,7 +202,7 @@ final class EventModel
     public function setEventParticipationRule(int $event_id, int $user_id):bool
     {
         $sql = "INSERT INTO user_event_participation VALUES(
-            :event_id, :user_id, :rule_id
+            :event_id, :user_id, 1
         )";
 
         $status = $this->connection->execute_query($sql, [
