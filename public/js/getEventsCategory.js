@@ -73,30 +73,40 @@ async function loadEvents(category) {
                 switch(eventData.rule) {
                     case 1:
                         dynamicHTMLDropdown = `
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Participar
-                            </button>
-                            <ul class="dropdown-menu event-participation-options">
-                                <li class="dropdown-item opt1">Puedo ir</li>
-                                <li class="dropdown-item opt2">No puedo ir</li>
-                                <li class="dropdown-item opt3">Todavía no lo se</li>
-                            </ul>`;
+                            <div class='dropdown' rule='1'>
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Participar
+                                </button>
+                                <ul class="dropdown-menu event-participation-options">
+                                    <li class="dropdown-item opt1">Puedo ir</li>
+                                    <li class="dropdown-item opt2">No puedo ir</li>
+                                    <li class="dropdown-item opt3">Todavía no lo se</li>
+                                </ul>
+                            </div>`;
                         break;
                     case 2:
-                        dynamicHTMLDropdown = `<button class="btn btn-success">Participaré</button>`;
+                        dynamicHTMLDropdown = `
+                            <div class='dropdown' rule='2'>
+                                <button class="btn btn-success">Participaré</button>
+                            </div>`;
                         break;
                     case 3:
-                        dynamicHTMLDropdown = `<button class="btn btn-danger">No participaré</button>`;
+                        dynamicHTMLDropdown = `
+                            <div class='dropdown' rule='3'>
+                                <button class="btn btn-danger">No participaré</button>
+                            </div>`;
                         break;
                     case 4:
                         dynamicHTMLDropdown = `
-                            <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Pendiente de confirmar
-                            </button>
-                            <ul class="dropdown-menu event-confirmation-options">
-                                <li class="dropdown-item opt2">Puedo ir</li>
-                                <li class="dropdown-item opt3">No puedo ir</li>
-                            </ul>`
+                            <div class='dropdown' rule='4'>
+                                <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Pendiente de confirmar
+                                </button>
+                                <ul class="dropdown-menu event-confirmation-options">
+                                    <li class="dropdown-item opt2">Puedo ir</li>
+                                    <li class="dropdown-item opt3">No puedo ir</li>
+                                </ul>
+                            </div>`
                         break;
                 }
 
@@ -143,9 +153,7 @@ async function loadEvents(category) {
                                     <p class="event-date"><i class="fa-solid fa-clock"></i> Empieza el <strong>${event.startDate}</strong>, finaliza el <strong>${event.endingDate}</strong></p>
                                     <p><strong><i class="fa-solid fa-location-dot"></i> ${event.city}</strong></p>
                                 </div>
-                                <div class='dropdown'>
-                                    ${dynamicHTMLDropdown}
-                                </div>
+                                ${dynamicHTMLDropdown}
                             </div>
                         </div>`
                     
