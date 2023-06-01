@@ -111,24 +111,25 @@ final class EventModel
     }
 
     /**
-     * Método que recupera todos los eventos de una categoróa y los
+     * Método que recupera todos los eventos y los
      * guarda en el array privado data.
-     * @param int El id de la categoría por el cuál se quiere filtrar.
+     * @param int El id del usuario para asociar la regla de cada evento.
      * @return array Un array con todos los eventos de esa categoría.
      * Incluye también las imagenes en la última columna, separadas por el " "
      */
-    public function getEventsCategory(int $category_id):array
+    public function getAllEvents(int $user_id):array
     {
         $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
         e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
-        Image_Name FROM event e 
+        Image_Name, ce.Category_id AS Category, uep.Rule_id AS Rule FROM event e 
         INNER JOIN event_images ei ON e.Id = ei.Event_id
         INNER JOIN city c ON c.Id = e.Location
-        INNER JOIN category_event ec ON ec.Event_id = e.Id
-        WHERE ec.Category_id = :id_category
+        INNER JOIN category_event ce ON e.Id = ce.Event_id
+        INNER JOIN user_event_participation uep  ON e.Id = uep.Event_id
+        WHERE uep.User_id = :user_id
         GROUP BY e.Id;";
 
-        $this->connection->execute_select($sql, [":id_category" => $category_id]);
+        $this->connection->execute_select($sql, [":user_id" => $user_id]);
         $this->data = [];   // Vaciamos el contenido del array para poder insertar de nuevo.
 
         foreach($this->connection->rows as $row)
@@ -143,6 +144,8 @@ final class EventModel
             $new_row["start_date"] = $row["Start_date"];
             $new_row["end_date"] = $row["Ending_date"];
             $new_row["images"] = $row["Image_Name"];
+            $new_row["category"] = $row["Category"];
+            $new_row["rule"] = $row["Rule"];
 
             array_push($this->data, $new_row);
         }
@@ -235,54 +238,5 @@ final class EventModel
         }
 
         return $status;
-    }
-
-    public function getEventParticipationRule(int $event_id, int $user_id):int
-    {
-        $rule = 0;
-
-        $sql = "SELECT COUNT(*) AS RULE_EXISTS FROM user_event_participation
-        WHERE User_id = :user_id AND Event_id = :event_id";
-
-        $this->connection->execute_select($sql, [
-            ":user_id" => $user_id,
-            ":event_id" => $event_id
-        ]);
-
-        $exists = $this->connection->rows[0]["RULE_EXISTS"];
-
-        if($exists > 0)
-        {
-            $sql = "SELECT Rule_id FROM user_event_participation WHERE Event_id = :event_id
-            AND User_id = :user_id";
-            $this->connection->execute_select($sql, [
-                ":user_id" => $user_id,
-                ":event_id" => $event_id,
-            ]);
-
-            $rule = $this->connection->rows[0]["Rule_id"];
-        }
-        else
-        {
-            $sql = "INSERT INTO user_event_participation VALUES(
-                :event_id, :user_id, 1
-            )";
-
-            $this->connection->execute_query($sql, [
-                ":user_id" => $user_id,
-                ":event_id" => $event_id
-            ]);
-
-            $sql = "SELECT Rule_id FROM user_event_participation WHERE Event_id = :event_id
-            AND User_id = :user_id";
-            $this->connection->execute_select($sql, [
-                ":user_id" => $user_id,
-                ":event_id" => $event_id,
-            ]);
-
-            $rule = $this->connection->rows[0]["Rule_id"];
-        }
-
-        return $rule;
     }
 }
