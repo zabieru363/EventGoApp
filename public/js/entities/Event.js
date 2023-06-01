@@ -11,8 +11,10 @@ export default class Event {
     #startDate;
     #endingDate;
     #images;
+    #category;
+    #rule;
 
-    constructor(id, title, description, admin, city, startDate, endingDate, images) {
+    constructor(id, title, description, admin, city, startDate, endingDate, images, category, rule) {
         this.#id = id;
         this.#title = title;
         this.#description = description;
@@ -21,6 +23,8 @@ export default class Event {
         this.#startDate = startDate;
         this.#endingDate = endingDate;
         this.#images = images;
+        this.#category = category;
+        this.#rule = rule;
 
         Object.keys(this).forEach(function(key) {
             Object.defineProperty(this, key, {
@@ -65,5 +69,13 @@ export default class Event {
 
     get images() {
         return this.#images.split("/");
+    }
+
+    get category() {
+        return this.#category;
+    }
+
+    get rule() {
+        return this.#rule;
     }
 }

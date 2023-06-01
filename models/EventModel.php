@@ -199,43 +199,38 @@ final class EventModel
      * @param int El id del usuario que seleccionó una opción en el evento.
      * @return bool True si la operación ha tenido exito, false si no es así.
      */
-    public function setEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
+    public function setEventParticipationRule(int $event_id, int $user_id):bool
     {
-        $status = false;
+        $sql = "INSERT INTO user_event_participation VALUES(
+            :event_id, :user_id, :rule_id
+        )";
 
-        // Primero hay que comprobar si hay una regla creada ya para el usuario
-        $sql = "SELECT COUNT(*) AS RULE_EXISTS FROM user_event_participation
-        WHERE User_id = :user_id AND Event_id = :event_id";
-
-        $this->connection->execute_select($sql, [
+        $status = $this->connection->execute_query($sql, [
             ":user_id" => $user_id,
             ":event_id" => $event_id
         ]);
 
-        $exists = $this->connection->rows[0]["RULE_EXISTS"];
+        return $status;
+    }
 
-        if($exists > 0)
-        {
-            $sql = "UPDATE user_event_participation SET Rule_id = :rule_id 
-            WHERE Event_id = :event_id AND User_id = :user_id";
-            $status = $this->connection->execute_query($sql, [
-                ":user_id" => $user_id,
-                ":event_id" => $event_id,
-                ":rule_id" => $rule_id
-            ]);
-        }
-        else
-        {
-            $sql = "INSERT INTO user_event_participation VALUES(
-                :event_id, :user_id, :rule_id
-            )";
+    /**
+     * Método que actualiza la regla de participación de un evento para un
+     * usuario.
+     * @param int El id del evento del cuál se quiere cambiar la regla.
+     * @param int El id del usuario que quiere participar en el evento.
+     * @param int El id de la regla de la opción de participación que escogió el usuario
+     * @return bool True si la consulta ha tenido exito, false si no es así.
+     */
+    public function updateEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
+    {
+        $sql = "UPDATE user_event_participation SET Rule_id = :rule_id 
+        WHERE Event_id = :event_id AND User_id = :user_id";
 
-            $status = $this->connection->execute_query($sql, [
-                ":user_id" => $user_id,
-                ":event_id" => $event_id,
-                ":rule_id" => $rule_id
-            ]);
-        }
+        $status = $this->connection->execute_query($sql, [
+            ":user_id" => $user_id,
+            ":event_id" => $event_id,
+            ":rule_id" => $rule_id
+        ]);
 
         return $status;
     }
