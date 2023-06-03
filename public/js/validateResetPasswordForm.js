@@ -116,6 +116,7 @@ form.addEventListener("submit", function(e) {
         .then(res => res.json())
         .then(data => {
             if(!data.process) {
+                alertEmail.textContent = data.message;
                 alertEmail.classList.remove("d-none");
             }else{
                 alertEmail.classList.add("d-none");
