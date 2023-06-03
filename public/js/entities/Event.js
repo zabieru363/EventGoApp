@@ -14,7 +14,7 @@ export default class Event {
     #category;
     #rule;
 
-    constructor(id, title, description, admin, city, startDate, endingDate, images, category, rule) {
+    constructor(id, title, description, admin, city, startDate, endingDate, images, category, rule = 1) {
         this.#id = id;
         this.#title = title;
         this.#description = description;
