@@ -295,15 +295,40 @@ final class UserModel
      * formulario de reestablecer contraseña.
      * @return bool True si la consulta ha tenido exito, false si no es así.
      */
-    public function resetUserPassword(string $email, string $password):bool
+    public function resetUserPassword(string $email, string $password):array
     {
-        $sql = "UPDATE user SET Password_hash = :password WHERE Email = :email";
-        $status = $this->connection->execute_query($sql, [
-            ":password" => $password,
+        $info = [
+            "status" => false,
+            "message" => ""
+        ];
+
+        // Primero hay que comprobar si la contraseña que ya tiene puesta el usuario es igual a la que ha escrito.
+        $sql = "SELECT Password_hash FROM user WHERE Email = :email";
+        $this->connection->execute_select($sql, [
             ":email" => $email
         ]);
 
-        return $status;
+        $password_bd = $this->connection->rows[0]["Password_hash"];
+
+        $equals = password_verify($password, $password_bd);
+
+        if($equals)
+        {
+            $info["message"] = "La contraseña que has escrito no puede ser igual a la actual";
+        }
+        else
+        {
+            $sql = "UPDATE user SET Password_hash = :password WHERE Email = :email";
+            $this->connection->execute_query($sql, [
+                ":password" => $password,
+                ":email" => $email
+            ]);
+
+            $info["status"];
+            $info["message"] = "Tu contraseña ha sido cambiada. Ya puedes iniciar sesión con tu nueva contraseña.";
+        }
+
+        return $info;
     }
 
     /**
