@@ -30,7 +30,7 @@ require_once("templates/open.php");
 
                         <button type="submit" name="login" class="submit-btn">Reestablecer contraseña</button>
 
-                        <div class="alert alert-danger d-none">Esta cuenta de correo electrónico no existe</div>
+                        <div class="alert alert-danger d-none mt-3">Esta cuenta de correo electrónico no existe</div>
                     </form>
                 </div>
             </div>
