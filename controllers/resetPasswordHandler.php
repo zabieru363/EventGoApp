@@ -9,7 +9,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $user_controller = new UserController();
     $new_password = password_hash($password, PASSWORD_BCRYPT);
 
-    if($user_controller->emailExists($email))
+    $user_info = $user_controller->emailExists($email);
+
+    if(!$user_info["exists"])
     {
         echo json_encode([
             "process" => false,
