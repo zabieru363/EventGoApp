@@ -3,10 +3,14 @@
 const categories = [...document.getElementsByClassName("category")];
 const eventsContainer = document.getElementsByClassName("events-container")[0];
 
-categories.forEach(function(category) {
-    category.addEventListener("click", function() {
-        const events = [...eventsContainer.children];
-
-        events.forEach(event => console.log(event));
+document.addEventListener("eventsLoaded", function() {
+    categories.forEach(function(category) {
+        category.addEventListener("click", function() {
+            if(eventsContainer.classList.contains("no-events")) {
+                console.log("Sin eventos");
+            }else{
+                console.log("Con eventos");
+            }
+        });
     });
 });

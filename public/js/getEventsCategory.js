@@ -10,6 +10,8 @@ const firstCategory = categories[0];
 fetch("controllers/getAllEventsHandler.php")
     .then(res => res.json())
     .then(data => {
+        const eventsLoadedEvent = new CustomEvent("eventsLoaded", {details: data});
+        document.dispatchEvent(eventsLoadedEvent);
         categories.forEach(function(category) {
             category.addEventListener("click", function() {
                 eventsContainer.innerHTML = "";
@@ -28,6 +30,7 @@ fetch("controllers/getAllEventsHandler.php")
 
                 if(categoryEvents.length < 1) {
                     const alert = document.createElement("div");
+                    eventsContainer.classList.add("no-events");
 
                     alert.innerHTML = `<div class="alert alert-success" role="alert">
                         No hay eventos en esta categoría.
@@ -35,6 +38,7 @@ fetch("controllers/getAllEventsHandler.php")
 
                     eventsContainer.appendChild(alert);
                 }else{
+                    eventsContainer.classList.remove("no-events");
                     for(const e of categoryEvents) {
                         // Si esta propiedad no existe significa que no está la sesión iniciada.
                         if(typeof e.rule === "undefined") {
