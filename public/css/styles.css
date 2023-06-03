@@ -112,6 +112,11 @@ html {
     border: 2px solid white;
 }
 
+.disabled-category {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 /* Register form styles */
 
 .fields-container {
