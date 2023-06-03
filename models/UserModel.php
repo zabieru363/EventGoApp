@@ -318,9 +318,11 @@ final class UserModel
         }
         else
         {
+            $new_password = password_hash($password, PASSWORD_BCRYPT);
+
             $sql = "UPDATE user SET Password_hash = :password WHERE Email = :email";
             $this->connection->execute_query($sql, [
-                ":password" => $password,
+                ":password" => $new_password,
                 ":email" => $email
             ]);
 
