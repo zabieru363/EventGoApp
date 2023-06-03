@@ -121,7 +121,7 @@ final class EventModel
     {
         $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
         e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
-        Image_Name, ce.Category_id AS Category, uep.Rule_id AS Rule FROM event e 
+        Image_Name, ce.Category_id AS Category, uep.Rule_id AS Rule, e.Active FROM event e 
         INNER JOIN event_images ei ON e.Id = ei.Event_id
         INNER JOIN city c ON c.Id = e.Location
         INNER JOIN category_event ce ON e.Id = ce.Event_id
@@ -144,8 +144,49 @@ final class EventModel
             $new_row["start_date"] = $row["Start_date"];
             $new_row["end_date"] = $row["Ending_date"];
             $new_row["images"] = $row["Image_Name"];
+            $new_row["active"] = $row["Active"];
             $new_row["category"] = $row["Category"];
             $new_row["rule"] = $row["Rule"];
+
+            array_push($this->data, $new_row);
+        }
+
+        return $this->data;
+    }
+
+    /**
+     * Método que extrae de la base de datos todos los eventos
+     * sin necesidad de que esté la activa la sesión del usuario
+     * @return array Un array asociativo con todos los eventos
+     * y todos sus datos.
+     */
+    public function getAllEventsWithoutSession():array
+    {
+        $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
+        e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
+        Image_Name, ce.Category_id AS Category, e.Active FROM event e 
+        INNER JOIN event_images ei ON e.Id = ei.Event_id
+        INNER JOIN city c ON c.Id = e.Location
+        INNER JOIN category_event ce ON e.Id = ce.Event_id
+        GROUP BY e.Id;";
+
+        $this->connection->execute_select($sql, []);
+        $this->data = [];   // Vaciamos el contenido del array para poder insertar de nuevo.
+
+        foreach($this->connection->rows as $row)
+        {
+            $new_row = [];
+
+            $new_row["id"] = $row["Id"];
+            $new_row["title"] = $row["Title"];
+            $new_row["description"] = $row["Description"];
+            $new_row["admin"] = $row["Admin"];
+            $new_row["city"] = $row["City_Name"];
+            $new_row["start_date"] = $row["Start_date"];
+            $new_row["end_date"] = $row["Ending_date"];
+            $new_row["images"] = $row["Image_Name"];
+            $new_row["active"] = $row["Active"];
+            $new_row["category"] = $row["Category"];
 
             array_push($this->data, $new_row);
         }
