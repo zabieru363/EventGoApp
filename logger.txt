@@ -1,0 +1,14 @@
+[03-Jun-2023 17:18:00 Europe/Berlin] PHP Warning:  Undefined array key "password" in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:18:00 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:18:19 Europe/Berlin] PHP Warning:  Undefined array key "password" in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:18:19 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:21:13 Europe/Berlin] PHP Warning:  Undefined array key "password" in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:21:13 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:26:57 Europe/Berlin] PHP Warning:  Undefined array key "password" in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:26:57 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:27:10 Europe/Berlin] PHP Warning:  Undefined array key "password" in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:27:10 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:31:38 Europe/Berlin] PHP Warning:  Undefined array key "password" in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:31:38 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:32:11 Europe/Berlin] PHP Warning:  Undefined array key "password" in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
+[03-Jun-2023 17:32:11 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in D:\XAMPP\htdocs\DAW\TFG\EventGoApp\controllers\resetPasswordHandler.php on line 7
