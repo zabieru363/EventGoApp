@@ -100,6 +100,11 @@ fetch("controllers/getAllEventsHandler.php")
                                </div>`
                            
                            eventsContainer.appendChild(eventContainer);
+
+                           const dropdown = eventContainer.querySelector(".dropdown");
+
+                           // Si la sesión no está iniciada enviamos al usuario a la página de login.
+                           dropdown.addEventListener("click", () => window.location.href = "index.php?url=login");
                         }else{
                             const event = new Event(e.id, e.title, e.description, e.admin,
                                 e.city, e.start_date, e.end_date, e.images, e.category, e.rule);
