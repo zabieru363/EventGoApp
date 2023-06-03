@@ -104,7 +104,7 @@ final class EventController extends BaseController
      * @param int El id del usuario para asociar las reglas a los eventos.
      * @return array Un array con todos los eventos.
      */
-    public function getAllEventsy(int $user_id):array
+    public function getAllEvents(int $user_id = null):array
     {
         return $this->model->getAllEvents($user_id);
     }
