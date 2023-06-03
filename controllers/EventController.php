@@ -52,10 +52,10 @@ final class EventController extends BaseController
      */
     public function list():void
     {
+        $user_controller = new UserController();
         if(isset($_SESSION["id_user"]))
         {
             try {
-                $user_controller = new UserController();
                 $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
                 $public_user_events = $this->getUserPublicEvents($_SESSION["id_user"]);
                 
