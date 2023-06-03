@@ -8,10 +8,10 @@ final class LogoutController extends BaseController
      */
     public function index():void
     {
+        $user_controller = new UserController();
         if(isset($_SESSION["id_user"]))
         {
             try{
-                $user_controller = new UserController();
     
                 if(isset($_COOKIE["remember_me"]))
                 {
