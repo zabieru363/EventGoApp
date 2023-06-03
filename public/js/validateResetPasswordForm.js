@@ -3,7 +3,8 @@
 const form = document.forms[0];
 const elements = [...form.elements];
 const feedbacks = form.getElementsByClassName("invalid-feedback");
-const alertEmail = form.getElementsByClassName("alert-danger")[0];
+const warning = form.getElementsByClassName("alert-danger")[0];
+const modalBody = document.getElementsByClassName("modal-body")[0];
 
 const submitBtn = elements.pop();
 submitBtn.disabled = true;
@@ -116,16 +117,18 @@ form.addEventListener("submit", function(e) {
         .then(res => res.json())
         .then(data => {
             if(!data.process) {
-                alertEmail.classList.remove("d-none");
+                warning.textContent = data.message;
+                warning.classList.remove("d-none");
             }else{
-                alertEmail.classList.add("d-none");
+                warning.classList.add("d-none");
 
                 const modal = new bootstrap.Modal(document.getElementById("resetPasswordComplete"));
+                modalBody.textContent = data.message;
                 modal.show();
 
                 const modalCloseBtn = document.getElementsByClassName("btn-close")[0];
 
-                modalCloseBtn.addEventListener("click", () => window.location.replace("index.php"));
+                modalCloseBtn.addEventListener("click", () => window.location.replace("index.php?url=login"));
             }
         })
         .catch(error => console.log("Algo salió mal " + error));
