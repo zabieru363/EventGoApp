@@ -27,7 +27,7 @@
                                 <div class="invalid-feedback"></div>
                             </div>
                             
-                            <button type="submit" name="login" class="submit-btn">Iniciar sesión</button>
+                            <button type="submit" name="login" class="submit-btn">Reestablecer contraseña</button>
                         </form>
                     </div>
                 </div>
