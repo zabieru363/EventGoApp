@@ -153,7 +153,7 @@ final class UserController
      * @param string La nueva contraseña que introdujo el usuario en el formulario
      * de reestablecer contraseña.
      */
-    public function resetUserPassword(string $email, string $password):bool
+    public function resetUserPassword(string $email, string $password):array
     {
         return $this->model->resetUserPassword($email, $password);
     }
