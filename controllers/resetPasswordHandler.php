@@ -4,7 +4,7 @@ require_once("UserController.php");
 if($_SERVER["REQUEST_METHOD"] === "POST")
 {
     $email = trim($_POST["email"]);
-    $password = trim($_POST["password"]);
+    $password = trim($_POST["pass-confirmed"]);
 
     $user_controller = new UserController();
     $new_password = password_hash($password, PASSWORD_BCRYPT);
