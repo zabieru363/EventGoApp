@@ -326,7 +326,7 @@ final class UserModel
                 ":email" => $email
             ]);
 
-            $info["status"];
+            $info["status"] = true;
             $info["message"] = "Tu contraseña ha sido cambiada. Ya puedes iniciar sesión con tu nueva contraseña.";
         }
 
