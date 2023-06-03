@@ -125,7 +125,7 @@ form.addEventListener("submit", function(e) {
 
                 const modalCloseBtn = document.getElementsByClassName("btn-close")[0];
 
-                modalCloseBtn.addEventListener("click", () => window.location.replace("index.php"));
+                modalCloseBtn.addEventListener("click", () => window.location.replace("index.php?url=login"));
             }
         })
         .catch(error => console.log("Algo salió mal " + error));
