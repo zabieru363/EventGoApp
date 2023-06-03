@@ -7,10 +7,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $password = trim($_POST["pass-confirmed"]);
 
     $user_controller = new UserController();
-    $new_password = password_hash($password, PASSWORD_BCRYPT);
 
     $user_info = $user_controller->emailExists($email);
-    $info = $user_controller->resetUserPassword($email, $new_password);
+    $info = $user_controller->resetUserPassword($email, $password);
 
     if(!$user_info["exists"])
     {
