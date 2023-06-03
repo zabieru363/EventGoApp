@@ -8,7 +8,11 @@
         <?php require_once("templates/eventsZone.php"); ?>
 
         <!-- JavaScript -->
-        <script src="public/js/getEventsCategory.js" type="module"></script>
+        <?php if(isset($_SESSION["id_user"])): ?>
+            <script src="public/js/getEventsCategoryUser.js" type="module"></script>
+        <?php else: ?>
+            <script src="public/js/getEventsCategory.js" type="module"></script>
+        <?php endif; ?>
 
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("templates/cdns.php"); ?>

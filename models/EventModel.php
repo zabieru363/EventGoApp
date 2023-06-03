@@ -111,40 +111,83 @@ final class EventModel
     }
 
     /**
-     * Método que recupera todos los eventos de una categoróa y los
+     * Método que recupera todos los eventos y los
      * guarda en el array privado data.
-     * @param int El id de la categoría por el cuál se quiere filtrar.
-     * @return array Un array con todos los eventos de esa categoría.
-     * Incluye también las imagenes en la última columna, separadas por el " "
+     * @param int Parametro opcional. Si se pasa tiene que ser
+     * un id que identifique al usuario, para saber si la sesión
+     * está activa o no. Si no es null traerá todos los eventos junto
+     * con las reglas que estableció el usuario. Si es nulo traerá
+     * todos los evento sis las reglas.
+     * @return array Un array con todos los eventos 
+     * Incluye también las imagenes, separadas por el " "
      */
-    public function getEventsCategory(int $category_id):array
+    public function getAllEvents(int $user_id = null):array
     {
-        $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
-        e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
-        Image_Name FROM event e 
-        INNER JOIN event_images ei ON e.Id = ei.Event_id
-        INNER JOIN city c ON c.Id = e.Location
-        INNER JOIN category_event ec ON ec.Event_id = e.Id
-        WHERE ec.Category_id = :id_category
-        GROUP BY e.Id;";
-
-        $this->connection->execute_select($sql, [":id_category" => $category_id]);
-        $this->data = [];   // Vaciamos el contenido del array para poder insertar de nuevo.
-
-        foreach($this->connection->rows as $row)
+        // Si está la sesión iniciada.
+        if(!(is_null($user_id)))
         {
-            $new_row = [];
+            $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
+            e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
+            Image_Name, ce.Category_id AS Category, uep.Rule_id AS Rule, e.Active FROM event e 
+            INNER JOIN event_images ei ON e.Id = ei.Event_id
+            INNER JOIN city c ON c.Id = e.Location
+            INNER JOIN category_event ce ON e.Id = ce.Event_id
+            INNER JOIN user_event_participation uep  ON e.Id = uep.Event_id
+            WHERE uep.User_id = :user_id
+            GROUP BY e.Id;";
+    
+            $this->connection->execute_select($sql, [":user_id" => $user_id]);
+            $this->data = [];   // Vaciamos el contenido del array para poder insertar de nuevo.
+    
+            foreach($this->connection->rows as $row)
+            {
+                $new_row = [];
+    
+                $new_row["id"] = $row["Id"];
+                $new_row["title"] = $row["Title"];
+                $new_row["description"] = $row["Description"];
+                $new_row["admin"] = $row["Admin"];
+                $new_row["city"] = $row["City_Name"];
+                $new_row["start_date"] = $row["Start_date"];
+                $new_row["end_date"] = $row["Ending_date"];
+                $new_row["images"] = $row["Image_Name"];
+                $new_row["active"] = $row["Active"];
+                $new_row["category"] = $row["Category"];
+                $new_row["rule"] = $row["Rule"];
+    
+                array_push($this->data, $new_row);
+            }
+        }
+        else
+        {
+            $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
+            e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
+            Image_Name, ce.Category_id AS Category, e.Active FROM event e 
+            INNER JOIN event_images ei ON e.Id = ei.Event_id
+            INNER JOIN city c ON c.Id = e.Location
+            INNER JOIN category_event ce ON e.Id = ce.Event_id
+            GROUP BY e.Id;";
 
-            $new_row["id"] = $row["Id"];
-            $new_row["title"] = $row["Title"];
-            $new_row["description"] = $row["Description"];
-            $new_row["admin"] = $row["Admin"];
-            $new_row["city"] = $row["City_Name"];
-            $new_row["start_date"] = $row["Start_date"];
-            $new_row["end_date"] = $row["Ending_date"];
-            $new_row["images"] = $row["Image_Name"];
+            $this->connection->execute_select($sql, []);
+            $this->data = [];   // Vaciamos el contenido del array para poder insertar de nuevo.
 
-            array_push($this->data, $new_row);
+            foreach($this->connection->rows as $row)
+            {
+                $new_row = [];
+
+                $new_row["id"] = $row["Id"];
+                $new_row["title"] = $row["Title"];
+                $new_row["description"] = $row["Description"];
+                $new_row["admin"] = $row["Admin"];
+                $new_row["city"] = $row["City_Name"];
+                $new_row["start_date"] = $row["Start_date"];
+                $new_row["end_date"] = $row["Ending_date"];
+                $new_row["images"] = $row["Image_Name"];
+                $new_row["active"] = $row["Active"];
+                $new_row["category"] = $row["Category"];
+
+                array_push($this->data, $new_row);
+            }
         }
 
         return $this->data;
@@ -196,39 +239,38 @@ final class EventModel
      * @param int El id del usuario que seleccionó una opción en el evento.
      * @return bool True si la operación ha tenido exito, false si no es así.
      */
-    public function setEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
+    public function setEventParticipationRule(int $event_id, int $user_id):bool
     {
-        $status = false;
+        $sql = "INSERT INTO user_event_participation VALUES(
+            :event_id, :user_id, 1
+        )";
 
-        // Primero hay que comprobar si hay una regla creada ya para el usuario
-        $sql = "SELECT COUNT(*) AS RULE_EXISTS FROM user_event_participation
-        WHERE User_id = :user_id";
+        $status = $this->connection->execute_query($sql, [
+            ":user_id" => $user_id,
+            ":event_id" => $event_id
+        ]);
 
-        $this->connection->execute_select($sql, [":user_id" => $user_id]);
-        $exists = $this->connection->rows[0]["RULE_EXISTS"];
+        return $status;
+    }
 
-        if($exists > 0)
-        {
-            $sql = "UPDATE user_event_participation SET Rule_id = :rule_id 
-            WHERE Event_id = :evemt_id AND User_id = :user_id";
-            $status = $this->connection->execute_query($sql, [
-                ":user_id" => $user_id,
-                ":event_id" => $event_id,
-                ":rule_id" => $rule_id
-            ]);
-        }
-        else
-        {
-            $sql = "INSERT INTO user_event_participation VALUES(
-                :event_id, :user_id, :rule_id
-            )";
+    /**
+     * Método que actualiza la regla de participación de un evento para un
+     * usuario.
+     * @param int El id del evento del cuál se quiere cambiar la regla.
+     * @param int El id del usuario que quiere participar en el evento.
+     * @param int El id de la regla de la opción de participación que escogió el usuario
+     * @return bool True si la consulta ha tenido exito, false si no es así.
+     */
+    public function updateEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
+    {
+        $sql = "UPDATE user_event_participation SET Rule_id = :rule_id 
+        WHERE Event_id = :event_id AND User_id = :user_id";
 
-            $status = $this->connection->execute_query($sql, [
-                ":user_id" => $user_id,
-                ":event_id" => $event_id,
-                ":rule_id" => $rule_id
-            ]);
-        }
+        $status = $this->connection->execute_query($sql, [
+            ":user_id" => $user_id,
+            ":event_id" => $event_id,
+            ":rule_id" => $rule_id
+        ]);
 
         return $status;
     }

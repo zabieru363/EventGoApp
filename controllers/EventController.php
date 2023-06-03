@@ -101,10 +101,12 @@ final class EventController extends BaseController
     /**
      * Método que llama al modelo para recuperar los eventos de
      * una ctaegoría en especifico.
+     * @param int El id del usuario para asociar las reglas a los eventos.
+     * @return array Un array con todos los eventos.
      */
-    public function getEventsCategory(int $category_id):array
+    public function getAllEventsy(int $user_id):array
     {
-        return $this->model->getEventsCategory($category_id);
+        return $this->model->getAllEvents($user_id);
     }
 
     /**
