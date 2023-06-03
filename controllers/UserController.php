@@ -134,9 +134,28 @@ final class UserController
         return $this->model->getUserData($user_id);
     }
 
+    /**
+     * Método que manda al modelo la acción de cambiar los
+     * datos de perfil de usuario (los que haya rellenado el usuario)
+     * @param int El id del usuario del cuál se quieren cambiar los datos.
+     * @param array Un array asociativo con los valores que introdujo el
+     * usuario en el formulario de edición de perfil.
+     */
     public function updateUser(int $user_id, array $new_values):array
     {
         return $this->model->changeUserData($user_id, $new_values);
+    }
+
+    /**
+     * Método que llama al modelo para reestablecer la contraseña del
+     * usuario.
+     * @param string El email del usuario del cuál se quiere reestablecer la contraseña.
+     * @param string La nueva contraseña que introdujo el usuario en el formulario
+     * de reestablecer contraseña.
+     */
+    public function resetUserPassword(string $email, string $password):array
+    {
+        return $this->model->resetUserPassword($email, $password);
     }
 
     /**
