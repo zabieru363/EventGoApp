@@ -301,4 +301,20 @@ final class EventModel
 
         return $status;
     }
+
+    public function eventParticipationRuleExists(int $event_id, int $user_id):bool
+    {
+        $exists = false;
+
+        $sql = "SELECT Rule_id FROM user_event_participation
+        WHERE Event_id = :event_id AND User_id = :user_id";
+        $this->connection->execute_select($sql, [
+            ":event_id" => $event_id,
+            ":user_id" => $user_id 
+        ]);
+
+        if(count($this->connection->rows) > 0) $exists = true;
+
+        return $exists;
+    }
 }
