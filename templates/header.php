@@ -7,6 +7,7 @@
             </a>
             <div class="search-events ms-5 w-50">
                 <input type="search" class="form-control border-2 event-input" placeholder="Buscar eventos">
+                <datalist class="event-results-datalist"></datalist>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
