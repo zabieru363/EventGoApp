@@ -120,8 +120,8 @@ final class EventModel
      */
     public function searchEvent(string $search):array
     {
-        $sql = "SELECT Id, Title FROM event WHERE Title LIKE '%:search%' LIMIT 3";
-        $this->connection->execute_select($sql, [":search" => $search]);
+        $sql = "SELECT Id, Title FROM event WHERE Title LIKE :search LIMIT 3";
+        $this->connection->execute_select($sql, [":search" => "%" . $search . "%"]);
         $this->data = [];
 
         foreach($this->connection->rows as $row)
