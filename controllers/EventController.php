@@ -36,21 +36,41 @@ final class EventController extends BaseController
                     "categories" => $categories
                 ]);
             }
+            else
+            {
+                header("Location: index.php?url=login");
+            }
         }catch(Exception $e) {
             var_dump($e->getMessage());
         }
     }
 
-    public function list()
+    /**
+     * Método que renderiza la vista de la lista de
+     * eventos del usuario. Si el usuario no tiene la sesión
+     * iniciada, redireccionará al login.
+     */
+    public function list():void
     {
         $user_controller = new UserController();
-        $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
-        $public_user_events = $this->getUserPublicEvents($_SESSION["id_user"]);
-        
-        $this->render("my_events/myEvents", [
-            "user_image" => $user_image,
-            "public_user_events" => $public_user_events
-        ]);
+        if(isset($_SESSION["id_user"]))
+        {
+            try {
+                $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
+                $public_user_events = $this->getUserPublicEvents($_SESSION["id_user"]);
+                
+                $this->render("my_events/myEvents", [
+                    "user_image" => $user_image,
+                    "public_user_events" => $public_user_events
+                ]);
+            }catch(Exception $e) {
+                var_dump($e->getMessage());
+            }
+        }
+        else
+        {
+            header("Location: index.php?url=login");
+        }
     }
 
     /**
@@ -96,6 +116,19 @@ final class EventController extends BaseController
     public function addEventToUserList(int $event_id, int $user_id):bool
     {
         return $this->model->addEventToUserList($event_id, $user_id);
+    }
+
+    /**
+     * Método que llama al modelo para buscar eventos por
+     * titulo de evento, mirando a ver si coincide con lo
+     * que escribió el usuario.
+     * @param string Lo que escribió el usuario en el input de eventos.
+     * @return array Un array asociativo con el id y el titulo
+     * de los eventos que encontró.
+     */
+    public function searchEvent(string $search):array
+    {
+        return $this->model->searchEvent($search);
     }
 
     /**

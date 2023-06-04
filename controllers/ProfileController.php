@@ -26,6 +26,10 @@ final class ProfileController extends BaseController
                     "cities" => $cities
                 ]);
             }
+            else
+            {
+                header("Location: index.php?url=login");
+            }
         }catch(Exception $e){
             var_dump($e->getMessage());
         }
