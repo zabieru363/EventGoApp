@@ -10,32 +10,26 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $event_id = $data->idEvent;
     $rule = $data->rule;
 
+    $participation = [
+        "rule" => 0,
+        "action" => ""
+    ];
+
     $event_controller = new EventController();
     $user_controller = new UserController();
 
-    $created = $event_controller->setEventParticipationRule($event_id, $_SESSION["id_user"], $rule);
-    $result = [
-        "created" => false,
-        "message" => ""
-    ];
-
-    if($rule === 2)
+    if($event_controller->eventParticipationRuleExists($event_id, $_SESSION["id_user"]))
     {
-        $result["created"] = true;
-        $result["message"] = "Participarás en este evento";
+        $event_controller->setEventParticipationRule($event_id, $_SESSION["id_user"], $rule);
+        $participation["rule"] = $rule;
+        $participation["action"] = "created";
+    }
+    else
+    {
+        $event_controller->updateEventParticipationRule($event_id, $_SESSION["id_user"], $rule);
+        $participation["rule"] = $rule;
+        $participation["action"] = "updated";
     }
 
-    if($rule === 3)
-    {
-        $result["created"] = true;
-        $result["message"] = "No participarás en este evento";
-    }
-
-    if($rule === 4)
-    {
-        $result["created"] = true;
-        $result["message"] = "Se ha establecido en pendiente de confirmación";
-    }
-
-    echo json_encode($result);
+    echo json_encode($participation);
 }
