@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $event_controller = new EventController();
     $user_controller = new UserController();
 
-    if($event_controller->eventParticipationRuleExists($event_id, $_SESSION["id_user"]))
+    if(!($event_controller->eventParticipationRuleExists($event_id, $_SESSION["id_user"])))
     {
         $event_controller->setEventParticipationRule($event_id, $_SESSION["id_user"], $rule);
         $participation["rule"] = $rule;
