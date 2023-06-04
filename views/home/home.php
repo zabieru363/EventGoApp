@@ -10,6 +10,7 @@
         <!-- JavaScript -->
         <script src="public/js/getEventsCategory.js" type="module"></script>
         <script src="public/js/systemParticipation.js"></script>
+        <script src="public/js/searchEvent.js"></script>
 
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("templates/cdns.php"); ?>
