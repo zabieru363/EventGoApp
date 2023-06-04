@@ -289,6 +289,54 @@ final class UserModel
     }
 
     /**
+     * Método que permite cambiar la contraseña del usuario.
+     * @param string El email del usuario del cuál se quiere reestablecer la contraseña.
+     * @param string La nueva contraseña que escribió el usuario en el
+     * formulario de reestablecer contraseña.
+     * @return bool True si la consulta ha tenido exito, false si no es así.
+     */
+    public function resetUserPassword(string $email, string $password):array
+    {
+        $info = [
+            "status" => false,
+            "message" => ""
+        ];
+
+        // Primero hay que comprobar si la contraseña que ya tiene puesta el usuario es igual a la que ha escrito.
+        $sql = "SELECT Password_hash FROM user WHERE Email = :email";
+        $this->connection->execute_select($sql, [
+            ":email" => $email
+        ]);
+
+        if(count($this->connection->rows) > 0)
+        {
+            $password_bd = $this->connection->rows[0]["Password_hash"];
+            $equals = password_verify($password, $password_bd);
+    
+            if($equals)
+            {
+                $info["message"] = "La contraseña que has escrito no puede ser igual a la actual";
+            }
+            else
+            {
+                $new_password = password_hash($password, PASSWORD_BCRYPT);
+    
+                $sql = "UPDATE user SET Password_hash = :password WHERE Email = :email";
+                $this->connection->execute_query($sql, [
+                    ":password" => $new_password,
+                    ":email" => $email
+                ]);
+    
+                $info["status"] = true;
+                $info["message"] = "Tu contraseña ha sido cambiada. Ya puedes iniciar sesión con tu nueva contraseña.";
+            }
+        }
+
+
+        return $info;
+    }
+
+    /**
      * Método que obtiene todos los usuarios de la
      * tabla user de la base de datos y los trae al modelo.
      * @return array Un array con todos los usuarios de la

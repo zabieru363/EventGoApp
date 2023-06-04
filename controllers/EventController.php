@@ -45,8 +45,12 @@ final class EventController extends BaseController
     {
         $user_controller = new UserController();
         $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
+        $public_user_events = $this->getUserPublicEvents($_SESSION["id_user"]);
         
-        $this->render("my_events/myEvents", ["user_image" => $user_image]);
+        $this->render("my_events/myEvents", [
+            "user_image" => $user_image,
+            "public_user_events" => $public_user_events
+        ]);
     }
 
     /**
@@ -97,9 +101,34 @@ final class EventController extends BaseController
     /**
      * Método que llama al modelo para recuperar los eventos de
      * una ctaegoría en especifico.
+     * @param int El id del usuario para asociar las reglas a los eventos.
+     * @return array Un array con todos los eventos.
      */
-    public function getEventsCategory(int $category_id):array
+    public function getAllEventsy(int $user_id):array
     {
-        return $this->model->getEventsCategory($category_id);
+        return $this->model->getAllEvents($user_id);
+    }
+
+    /**
+     * Método que llama al modelo para obtener los eventos
+     * publicados por un usuario.
+     * @param int El id del usuario del cuál se quieren
+     * obtener sus eventos publicados.
+     */
+    public function getUserPublicEvents(int $user_id):array
+    {
+        return $this->model->getUserPublicEvents($user_id);
+    }
+
+    /**
+     * Método que llama al modelo y cambia la regla de participación o
+     * de estado de un evento.
+     * @param int El id del evento del cuál se quiere cambiar la regla.
+     * @param int El id de la regla que se quiere aplicar a ese evento.
+     * @return bool True si la operación ha tenido exito, false si no fue así.
+     */
+    public function setEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
+    {
+        return $this->model->setEventParticipationRule($event_id, $user_id, $rule_id);
     }
 }

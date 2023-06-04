@@ -25,6 +25,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     else
     {
         $admin_name = trim($_POST["administrator_name"]);
+        session_start();
     }
 
     $location = $_POST["locations"];
