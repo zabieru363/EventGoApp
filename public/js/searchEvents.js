@@ -33,16 +33,14 @@ function getResults() {
                     resultsDatalist.appendChild(li);
                 }else{
                     data.forEach(() => {
-                        const li = document.createElement("li");
+                        const li = `<li dataset-event-id="${data.id}" class="result-datalist">${data.title}</li>`;
+                        resultsDatalist.insertAdjacentHTML("beforeend", li);
 
-                        li.style.padding = "0.5rem";
-                        li.style.borderBottom = "0.5px solid grey";
-                        li.style.background = "white";
-                        li.style.color = "black";
-                        li.style.cursor = "pointer";
-
-                        resultsDatalist.insertAdjacentHTML("beforeend", `<li dataset-event-id="${data.id}" class="result-datalist">${data.title}</li>`) 
-                        resultsDatalist.appendChild(li);
+                        // li.style.padding = "0.5rem";
+                        // li.style.borderBottom = "0.5px solid grey";
+                        // li.style.background = "white";
+                        // li.style.color = "black";
+                        // li.style.cursor = "pointer";
                     });
 
                     array.forEach(element => {
