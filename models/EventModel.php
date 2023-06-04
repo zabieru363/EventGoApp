@@ -111,6 +111,33 @@ final class EventModel
     }
 
     /**
+     * Método que busca eventos por titulo en base a lo que el usuario
+     * escribió en el buscador. Si encuentra algo, trae solo 3 registros
+     * para dar la menor carga posible al servidor.
+     * @param string Lo que ha introducido el usuario en el formulario.
+     * @return array Un array asociativo con el id del evento y el titulo
+     * de los eventos que ha encontrado la consulta.
+     */
+    public function searchEvent(string $search):array
+    {
+        $sql = "SELECT Id, Title FROM event WHERE Title LIKE '%:search%' LIMIT 3";
+        $this->connection->execute_select($sql, [":search" => $search]);
+        $this->data = [];
+
+        foreach($this->connection->rows as $row)
+        {
+            $new_row = [];
+
+            $new_row["id"] = $row["Id"];
+            $new_row["title"] = $row["Title"];
+
+            array_push($this->data, $new_row);
+        }
+
+        return $this->data;
+    }
+
+    /**
      * Método que recupera todos los eventos y los
      * guarda en el array privado data.
      * @param int Parametro opcional. Si se pasa tiene que ser
