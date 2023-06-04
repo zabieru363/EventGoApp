@@ -4,6 +4,9 @@ const eventInput = document.getElementsByClassName("event-input")[0];
 const resultsDatalist = document.getElementsByClassName("event-results-datalist")[0];
 
 eventInput.addEventListener("input", getResults);
+eventInput.addEventListener("blur", function() {
+    resultsDatalist.classList.add("d-none");
+});
 
 function getResults() {
     if(this.value !== "") {     // Si no hay nada en el formulario no hay necesidad de hacer ninguna petición.
@@ -29,17 +32,21 @@ function getResults() {
 
                     resultsDatalist.appendChild(li);
                 }else{
-                    data.forEach(function(result) {
+                    data.forEach(() => {
                         const li = document.createElement("li");
-                        li.setAttribute("event-id", result.id);
-                        li.textContent = result.title;
-    
+
                         li.style.padding = "0.5rem";
                         li.style.borderBottom = "0.5px solid grey";
                         li.style.background = "white";
                         li.style.color = "black";
+                        li.style.cursor = "pointer";
 
+                        resultsDatalist.insertAdjacentHTML("beforeend", `<li dataset-event-id="${data.id}" class="result-datalist">${data.title}</li>`) 
                         resultsDatalist.appendChild(li);
+                    });
+
+                    array.forEach(element => {
+                        
                     });
                 }
 
