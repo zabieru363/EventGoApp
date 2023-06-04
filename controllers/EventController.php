@@ -176,4 +176,9 @@ final class EventController extends BaseController
     {
         return $this->model->updateEventParticipationRule($event_id, $user_id, $rule_id);
     }
+
+    public function eventParticipationRuleExists(int $event_id, int $user_id):bool
+    {
+        return $this->model->eventParticipationRuleExists($event_id, $user_id);
+    }
 }
