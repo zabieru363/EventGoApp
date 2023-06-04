@@ -119,6 +119,19 @@ final class EventController extends BaseController
     }
 
     /**
+     * Método que llama al modelo para buscar eventos por
+     * titulo de evento, mirando a ver si coincide con lo
+     * que escribió el usuario.
+     * @param string Lo que escribió el usuario en el input de eventos.
+     * @return array Un array asociativo con el id y el titulo
+     * de los eventos que encontró.
+     */
+    public function searchEvent(string $search):array
+    {
+        return $this->model->searchEvent($search);
+    }
+
+    /**
      * Método que llama al modelo para recuperar los eventos de
      * una ctaegoría en especifico.
      * @param int El id del usuario para asociar las reglas a los eventos.
