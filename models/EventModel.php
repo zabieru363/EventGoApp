@@ -266,15 +266,16 @@ final class EventModel
      * @param int El id del usuario que seleccionó una opción en el evento.
      * @return bool True si la operación ha tenido exito, false si no es así.
      */
-    public function setEventParticipationRule(int $event_id, int $user_id):bool
+    public function setEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
     {
         $sql = "INSERT INTO user_event_participation VALUES(
-            :event_id, :user_id, 1
+            :event_id, :user_id, :rule_id
         )";
 
         $status = $this->connection->execute_query($sql, [
             ":user_id" => $user_id,
-            ":event_id" => $event_id
+            ":event_id" => $event_id,
+            ":rule_id" => $rule_id
         ]);
 
         return $status;
