@@ -100,6 +100,28 @@ html {
     border: 1px solid rgba(0, 0, 0,.1);
 }
 
+.event-results-datalist {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    list-style: none;
+}
+
+@media (max-width: 768px) {
+    .event-results-datalist {
+        width: 100%;
+    }
+}
+  
+@media (min-width: 769px) {
+    .event-results-datalist {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+}
+
 .category:hover {
     transition: all 0.5s;
     background: var(--secondary_color);
