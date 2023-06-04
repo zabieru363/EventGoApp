@@ -37,7 +37,7 @@ const loadEventsByCategory = categoryEvents => {
                                      Participar
                                  </button>
                                  <ul class="dropdown-menu event-participation-options">
-                                     <li class="dropdown-item op21">Puedo ir</li>
+                                     <li class="dropdown-item opt2">Puedo ir</li>
                                      <li class="dropdown-item opt3">No puedo ir</li>
                                      <li class="dropdown-item opt4">Todavía no lo se</li>
                                  </ul>
@@ -127,7 +127,9 @@ const loadEventsByCategory = categoryEvents => {
             if(e.target.classList.contains("opt3")) rule = 3;
             if(e.target.classList.contains("opt4")) rule = 4;
 
-            setParticipationRule(rule, this);
+            const eventId = +this.closest(".card").getAttribute("data-id");
+
+            setParticipationRule(eventId, rule, this);
         });
     }
 
@@ -137,7 +139,9 @@ const loadEventsByCategory = categoryEvents => {
             if(e.target.classList.contains("opt2")) rule = 2;
             if(e.target.classList.contains("opt3")) rule = 3;
 
-            setParticipationRule(rule, this);
+            const eventId = +this.closest(".card").getAttribute("data-id");
+
+            setParticipationRule(eventId, rule, this);
         });
     }
   }
@@ -218,17 +222,14 @@ const checkSessionStatus = categoryEvents => {
   return typeof categoryEvents[0].rule === 'undefined';
 };
 
-const setParticipationRule = (rule, dropdown) => {
-    const formData = new FormData();
-    formData.append("rule", rule);
-
+const setParticipationRule = (idEvent, rule, dropdown) => {
     fetch("controllers/setParticipationRuleEventHandler.php", {
         method: "POST",
-        body: formData
+        body: JSON.stringify({idEvent, rule})
     })
         .then(res => res.json())
         .then(data => {
-            
+            console.log(data);
         })
         .catch(error => console.log("Algo salió mal " + error));
 };
