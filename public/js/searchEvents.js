@@ -18,13 +18,35 @@ function getResults() {
             .then(data => {
                 resultsDatalist.innerHTML = "";
 
-                data.forEach(function(result) {
-                    const option = document.createElement("option");
-                    option.value = result.id;
-                    option.textContent = result.title;
-                    resultsDatalist.appendChild(option);
-                });
+                if(data.length < 1) {
+                    const li = document.createElement("li");
+                    li.textContent = "Sin resultados";
+
+                    li.style.padding = "0.5rem";
+                    li.style.borderBottom = "0.5px solid grey";
+                    li.style.background = "white";
+                    li.style.color = "black";
+
+                    resultsDatalist.appendChild(li);
+                }else{
+                    data.forEach(function(result) {
+                        const li = document.createElement("li");
+                        li.setAttribute("event-id", result.id);
+                        li.textContent = result.title;
+    
+                        li.style.padding = "0.5rem";
+                        li.style.borderBottom = "0.5px solid grey";
+                        li.style.background = "white";
+                        li.style.color = "black";
+
+                        resultsDatalist.appendChild(li);
+                    });
+                }
+
+                resultsDatalist.classList.remove("d-none");
             })
             .catch(error => console.log("Algo salió mal " + error));
+    }else{
+        resultsDatalist.innerHTML = "";
     }
 }
