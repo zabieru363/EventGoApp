@@ -137,6 +137,18 @@ final class UserController
     }
 
     /**
+     * Método que llama al modelo para comprobar si una
+     * cuenta de uusario está activa o no.
+     * @param int El id del usuario del cuál se quiere saber
+     * si su cuenta está activa o no.
+     * @return bool True si está activo, false si no es así.
+     */
+    public function isUserActive(int $user_id):bool
+    {
+        return $this->model->isUserActive($user_id);
+    }
+
+    /**
      * Método que manda al modelo la acción de cambiar los
      * datos de perfil de usuario (los que haya rellenado el usuario)
      * @param int El id del usuario del cuál se quieren cambiar los datos.
