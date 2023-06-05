@@ -1,11 +1,11 @@
 <?php
-session_start();
-$title = "Crear evento";
-require_once("templates/open.php");
+    session_start();
+    $title = "Crear evento";
+    require_once("templates/open.php");
 ?>
 
 <body>
-    <?php require_once("templates/header.php"); ?>
+    <?php require_once("templates/basic_header.php"); ?>
 
     <div class="container shadow p-5 mt-3 mb-3">
         <h1>Crear evento público</h1>

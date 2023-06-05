@@ -131,48 +131,61 @@ final class UserModel
      * @return bool Devuelve true si el usuario fue encontrado
      * false si no fue así.
      */
-    public function checkUser(string $user, string $password, bool $remember_me):bool
+    public function checkUser(string $user, string $password, bool $remember_me):array
     {
-        $login = false;
+        $user_info = [
+            "login" => false,
+            "active" => false
+        ];
 
-        $sql = "SELECT Id, Username, Password_hash FROM user 
+        $sql = "SELECT Id, Username, Password_hash, Active FROM user 
         WHERE Username = :user  OR Email = :user";
 
         $this->connection->execute_select($sql, [":user" => $user]);
 
-        foreach($this->connection->rows as $row)
+        if(count($this->connection->rows) > 0)
         {
-            if(password_verify($password, $row["Password_hash"]))
+            $user_id = $this->connection->rows[0]["Id"];
+            $username = $this->connection->rows[0]["Username"];
+            $password_hash = $this->connection->rows[0]["Password_hash"];
+            $active = $this->connection->rows[0]["Active"];
+    
+            if(password_verify($password, $password_hash))
             {
-                $login = true;
-                $_SESSION["id_user"] = $row["Id"];
-                $_SESSION["username"] = $row["Username"];
-
-                $this->deleteExpiredTokens();
-
-                if($remember_me)
+                $user_info["login"] = true;
+                
+                if($active === 1)
                 {
-                    $token = bin2hex(random_bytes(32));
-                    $seconds = 30 * 24 * 60 * 60;   // 30 dias en segundos
-                    $now = time();
-                    $expiration = $now + $seconds;
-                    $expiration_date = date('Y-m-d H:i:s', $expiration);
-
-                    $sql = "INSERT INTO remember_token VALUES(NULL,
-                    :user_id, :token, :expiry)";
-
-                    $this->connection->execute_query($sql, [
-                        ":user_id" => $row["Id"],
-                        ":token" => $token,
-                        ":expiry" => $expiration_date
-                    ]);
-
-                    setcookie('remember_me', $token, $expiration, '/');
+                    $user_info["active"] = true;
+                    $_SESSION["id_user"] = $user_id;
+                    $_SESSION["username"] = $username;
+    
+                    $this->deleteExpiredTokens();
+    
+                    if($remember_me)
+                    {
+                        $token = bin2hex(random_bytes(32));
+                        $seconds = 30 * 24 * 60 * 60;   // 30 dias en segundos
+                        $now = time();
+                        $expiration = $now + $seconds;
+                        $expiration_date = date('Y-m-d H:i:s', $expiration);
+    
+                        $sql = "INSERT INTO remember_token VALUES(NULL,
+                            :user_id, :token, :expiry)";
+    
+                        $this->connection->execute_query($sql, [
+                            ":user_id" => $user_id,
+                            ":token" => $token,
+                            ":expiry" => $expiration_date
+                        ]);
+    
+                        setcookie('remember_me', $token, $expiration, '/');
+                    }
                 }
             }
         }
 
-        return $login;
+        return $user_info;
     }
 
     /**
@@ -253,6 +266,25 @@ final class UserModel
     }
 
     /**
+     * Método que comprueba si una cuenta de usuario está activo o no.
+     * @param int El id del usuario que se quiere comprobar si está activo o no
+     * @return bool True si está activo, false si no es así.
+     */
+    public function isUserActive(int $user_id):bool
+    {
+        $is_active = false;
+
+        $sql = "SELECT Active FROM user WHERE Id = :user_id";
+        $this->connection->execute_select($sql, [":user_id" => $user_id]);
+
+        $active = $this->connection->rows[0]["Active"];
+
+        if($active === 1) $is_active = true;
+
+        return $is_active;
+    }
+
+    /**
      * Método que permite actualizar cualquier campo del perfil
      * del usuario (concretamente, la contraseña, el nombre completo,
      * la imagen o la ciudad)
@@ -286,6 +318,54 @@ final class UserModel
         $this->connection->execute_query($sql, $params);
 
         return $updated_fields;
+    }
+
+    /**
+     * Método que permite cambiar la contraseña del usuario.
+     * @param string El email del usuario del cuál se quiere reestablecer la contraseña.
+     * @param string La nueva contraseña que escribió el usuario en el
+     * formulario de reestablecer contraseña.
+     * @return bool True si la consulta ha tenido exito, false si no es así.
+     */
+    public function resetUserPassword(string $email, string $password):array
+    {
+        $info = [
+            "status" => false,
+            "message" => ""
+        ];
+
+        // Primero hay que comprobar si la contraseña que ya tiene puesta el usuario es igual a la que ha escrito.
+        $sql = "SELECT Password_hash FROM user WHERE Email = :email";
+        $this->connection->execute_select($sql, [
+            ":email" => $email
+        ]);
+
+        if(count($this->connection->rows) > 0)
+        {
+            $password_bd = $this->connection->rows[0]["Password_hash"];
+            $equals = password_verify($password, $password_bd);
+    
+            if($equals)
+            {
+                $info["message"] = "La contraseña que has escrito no puede ser igual a la actual";
+            }
+            else
+            {
+                $new_password = password_hash($password, PASSWORD_BCRYPT);
+    
+                $sql = "UPDATE user SET Password_hash = :password WHERE Email = :email";
+                $this->connection->execute_query($sql, [
+                    ":password" => $new_password,
+                    ":email" => $email
+                ]);
+    
+                $info["status"] = true;
+                $info["message"] = "Tu contraseña ha sido cambiada. Ya puedes iniciar sesión con tu nueva contraseña.";
+            }
+        }
+
+
+        return $info;
     }
 
     /**
