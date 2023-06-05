@@ -231,7 +231,7 @@ final class EventModel
     public function getUserPublicEvents(int $user_id):array
     {
         $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
-        e.Start_date, e.Ending_date FROM event e 
+        e.Start_date, e.Ending_date, e.Active FROM event e 
         INNER JOIN user_event ue ON e.Id = ue.Id_event
         INNER JOIN user u ON ue.Id_user = u.Id
         INNER JOIN city c ON c.Id = e.Location
@@ -251,6 +251,7 @@ final class EventModel
             $new_row["city"] = $row["City_Name"];
             $new_row["start_date"] = $row["Start_date"];
             $new_row["end_date"] = $row["Ending_date"];
+            $new_row["active"] = $row["Active"];
 
             array_push($this->data, $new_row);
         }
