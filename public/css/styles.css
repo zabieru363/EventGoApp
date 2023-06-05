@@ -110,17 +110,12 @@ html {
     z-index: 1;
 }
 
-@media (max-width: 768px) {
-    .event-results-datalist {
-        width: 100%;
-    }
-}
-  
-@media (min-width: 769px) {
-    .event-results-datalist {
-        max-height: 200px;
-        overflow-y: auto;
-    }
+.result-datalist {
+    padding: 0.5rem;
+    border: 0.5px solid grey;
+    background: white;
+    color: black;
+    cursor: pointer;
 }
 
 .category:hover {
