@@ -231,7 +231,7 @@ final class EventModel
     public function getUserPublicEvents(int $user_id):array
     {
         $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
-        e.Start_date, e.Ending_date FROM event e 
+        e.Start_date, e.Ending_date, e.Active FROM event e 
         INNER JOIN user_event ue ON e.Id = ue.Id_event
         INNER JOIN user u ON ue.Id_user = u.Id
         INNER JOIN city c ON c.Id = e.Location
@@ -251,6 +251,7 @@ final class EventModel
             $new_row["city"] = $row["City_Name"];
             $new_row["start_date"] = $row["Start_date"];
             $new_row["end_date"] = $row["Ending_date"];
+            $new_row["active"] = $row["Active"];
 
             array_push($this->data, $new_row);
         }
@@ -266,15 +267,16 @@ final class EventModel
      * @param int El id del usuario que seleccionó una opción en el evento.
      * @return bool True si la operación ha tenido exito, false si no es así.
      */
-    public function setEventParticipationRule(int $event_id, int $user_id):bool
+    public function setEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
     {
         $sql = "INSERT INTO user_event_participation VALUES(
-            :event_id, :user_id, 1
+            :event_id, :user_id, :rule_id
         )";
 
         $status = $this->connection->execute_query($sql, [
             ":user_id" => $user_id,
-            ":event_id" => $event_id
+            ":event_id" => $event_id,
+            ":rule_id" => $rule_id
         ]);
 
         return $status;
@@ -300,5 +302,21 @@ final class EventModel
         ]);
 
         return $status;
+    }
+
+    public function eventParticipationRuleExists(int $event_id, int $user_id):bool
+    {
+        $exists = false;
+
+        $sql = "SELECT Rule_id FROM user_event_participation
+        WHERE Event_id = :event_id AND User_id = :user_id";
+        $this->connection->execute_select($sql, [
+            ":event_id" => $event_id,
+            ":user_id" => $user_id 
+        ]);
+
+        if(count($this->connection->rows) > 0) $exists = true;
+
+        return $exists;
     }
 }
