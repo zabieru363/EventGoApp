@@ -22,7 +22,7 @@ const alertIfNoEvents = () => {
   eventsContainer.appendChild(alert);
 };
 
-const loadEventsByCategory = categoryEvents => {
+const loadEventsByCategoryWithRules = categoryEvents => {
   for (const e of categoryEvents) {
     const event = new Event(e.id, e.title, e.description, e.admin, e.city, e.start_date, e.end_date, e.images, e.category, e.rule);
     const eventImages = event.images;
@@ -129,7 +129,8 @@ const loadEventsByCategory = categoryEvents => {
 
             const eventId = +this.closest(".card").getAttribute("data-id");
 
-            setParticipationRule(eventId, rule, this);
+            setParticipationRule(eventId, rule, dropdown);
+            dropdown.setAttribute("rule", rule);
         });
     }
 
@@ -141,13 +142,14 @@ const loadEventsByCategory = categoryEvents => {
 
             const eventId = +this.closest(".card").getAttribute("data-id");
 
-            setParticipationRule(eventId, rule, this);
+            setParticipationRule(eventId, rule, dropdown);
+            dropdown.setAttribute("rule", rule);
         });
     }
   }
 };
 
-const loadEventsWithDropdownByCategory = categoryEvents => {
+const loadEventsCategory = categoryEvents => {
   for (const e of categoryEvents) {
     // Si esta propiedad no existe significa que no está la sesión iniciada.
     const event = new Event(e.id, e.title, e.description, e.admin, e.city, e.start_date, e.end_date, e.images, e.category);
@@ -219,7 +221,7 @@ const loadEventsWithDropdownByCategory = categoryEvents => {
 };
 
 const checkSessionStatus = categoryEvents => {
-  return typeof categoryEvents[0].rule === 'undefined';
+  return typeof categoryEvents[0].rule === "undefined";
 };
 
 const setParticipationRule = (idEvent, rule, dropdown) => {
@@ -229,7 +231,21 @@ const setParticipationRule = (idEvent, rule, dropdown) => {
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            const changeDropdownJSON = {
+              rule2 : `<button class="btn btn-success">Participaré</button>`,
+              rule3 : `<button class="btn btn-danger">No participaré</button>`,
+              rule4 : `
+                <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Pendiente de confirmar
+                </button>
+                <ul class="dropdown-menu event-confirmation-options">
+                    <li class="dropdown-item opt2">Puedo ir</li>
+                    <li class="dropdown-item opt3">No puedo ir</li>
+                </ul>`
+            }
+
+            dropdown.innerHTML = changeDropdownJSON[`rule${rule}`];
+            window.location.reload();
         })
         .catch(error => console.log("Algo salió mal " + error));
 };
@@ -250,9 +266,6 @@ const switchActiveCategory = d => {
 fetch('controllers/getAllEventsHandler.php')
   .then(res => res.json())
   .then(data => {
-    const eventsLoadedEvent = new CustomEvent('eventsLoaded', {details: data,});
-    document.dispatchEvent(eventsLoadedEvent);
-
     categories.forEach(function (category) {
       category.addEventListener('click', function () {
         let categoryEvents = getCategoryEvents(this, data);
@@ -260,14 +273,13 @@ fetch('controllers/getAllEventsHandler.php')
         switchActiveCategory(this);
 
         // Si no hay eventos en esa categoría.
-        if (!categoryEvents.length) return alertIfNoEvents();
-        // Si la categoría tiene eventos.
-        if (categoryEvents.length) eventsContainer.classList.remove('no-events');
+        if(!categoryEvents.length) return alertIfNoEvents();
+        if(categoryEvents.length) eventsContainer.classList.remove('no-events');
 
-        const sessionStatus = checkSessionStatus(categoryEvents);
+        const noSession = checkSessionStatus(categoryEvents);
 
-        if (sessionStatus) loadEventsWithDropdownByCategory(categoryEvents);
-        else loadEventsByCategory(categoryEvents);
+        if(noSession) loadEventsCategory(categoryEvents);
+        else loadEventsByCategoryWithRules(categoryEvents);
       });
     });
 
