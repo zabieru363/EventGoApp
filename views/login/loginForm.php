@@ -26,10 +26,10 @@
                                 <label class="form-check-label" for="remember-me">Recuerdame</label>
                             </div>
                             <div class="mb-3">
-                                ¿No tienes una cuenta? <a href="../register/registerForm.php">Registrate</a>
+                                ¿No tienes una cuenta? <a href=".index.php?url=register">Registrate</a>
                             </div>
                             <div class="forgot-password-container mb-3">
-                                <a href="#">¿Has olvidado tu contraseña?</a>
+                                <a href="index.php?url=forgotPassword">¿Has olvidado tu contraseña?</a>
                             </div>
                             <div class="login-error d-none"></div>
                             

@@ -81,17 +81,19 @@ final class UserController
     public function login(string $user, string $password, bool $remember_me):array
     {
         $login_status = [
-            "message" => "",
+            "message" => "Usuario o contraseña incorrectos",
+            "active" => false,
             "login" => false
         ];
 
-        if($this->model->checkUser($user, $password, $remember_me))
+        $user_info = $this->model->checkUser($user, $password, $remember_me);
+
+        if($user_info["login"])
         {
             $login_status["login"] = true;
-        }
-        else
-        {
-            $login_status["message"] = "Usuario o contraseña incorrectos";
+            $login_status["message"] = "";
+
+            if($user_info["active"]) $login_status["active"] = true;
         }
 
         return $login_status;
@@ -134,9 +136,40 @@ final class UserController
         return $this->model->getUserData($user_id);
     }
 
+    /**
+     * Método que llama al modelo para comprobar si una
+     * cuenta de uusario está activa o no.
+     * @param int El id del usuario del cuál se quiere saber
+     * si su cuenta está activa o no.
+     * @return bool True si está activo, false si no es así.
+     */
+    public function isUserActive(int $user_id):bool
+    {
+        return $this->model->isUserActive($user_id);
+    }
+
+    /**
+     * Método que manda al modelo la acción de cambiar los
+     * datos de perfil de usuario (los que haya rellenado el usuario)
+     * @param int El id del usuario del cuál se quieren cambiar los datos.
+     * @param array Un array asociativo con los valores que introdujo el
+     * usuario en el formulario de edición de perfil.
+     */
     public function updateUser(int $user_id, array $new_values):array
     {
         return $this->model->changeUserData($user_id, $new_values);
+    }
+
+    /**
+     * Método que llama al modelo para reestablecer la contraseña del
+     * usuario.
+     * @param string El email del usuario del cuál se quiere reestablecer la contraseña.
+     * @param string La nueva contraseña que introdujo el usuario en el formulario
+     * de reestablecer contraseña.
+     */
+    public function resetUserPassword(string $email, string $password):array
+    {
+        return $this->model->resetUserPassword($email, $password);
     }
 
     /**
