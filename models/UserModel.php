@@ -131,22 +131,32 @@ final class UserModel
      * @return bool Devuelve true si el usuario fue encontrado
      * false si no fue así.
      */
-    public function checkUser(string $user, string $password, bool $remember_me):bool
+    public function checkUser(string $user, string $password, bool $remember_me):array
     {
-        $login = false;
+        $user_info = [
+            "login" => false,
+            "active" => false
+        ];
 
-        $sql = "SELECT Id, Username, Password_hash FROM user 
+        $sql = "SELECT Id, Username, Password_hash, Active FROM user 
         WHERE Username = :user  OR Email = :user";
 
         $this->connection->execute_select($sql, [":user" => $user]);
 
-        foreach($this->connection->rows as $row)
+        $user_id = $this->connection->rows[0]["Id"];
+        $username = $this->connection->rows[0]["Username"];
+        $password_hash = $this->connection->rows[0]["Password_hash"];
+        $active = $this->connection->rows[0]["Active"];
+
+        if(password_verify($password, $password_hash))
         {
-            if(password_verify($password, $row["Password_hash"]))
+            $user_info["login"] = true;
+            
+            if($active === 1)
             {
-                $login = true;
-                $_SESSION["id_user"] = $row["Id"];
-                $_SESSION["username"] = $row["Username"];
+                $user_info["active"] = true;
+                $_SESSION["id_user"] = $user_id;
+                $_SESSION["username"] = $username;
 
                 $this->deleteExpiredTokens();
 
@@ -159,10 +169,10 @@ final class UserModel
                     $expiration_date = date('Y-m-d H:i:s', $expiration);
 
                     $sql = "INSERT INTO remember_token VALUES(NULL,
-                    :user_id, :token, :expiry)";
+                        :user_id, :token, :expiry)";
 
                     $this->connection->execute_query($sql, [
-                        ":user_id" => $row["Id"],
+                        ":user_id" => $user_id,
                         ":token" => $token,
                         ":expiry" => $expiration_date
                     ]);
@@ -172,7 +182,7 @@ final class UserModel
             }
         }
 
-        return $login;
+        return $user_info;
     }
 
     /**
