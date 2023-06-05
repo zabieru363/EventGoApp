@@ -73,7 +73,8 @@ form.addEventListener("submit", function(e) {
         }else{
             loginErrorDiv.classList.add("d-none");
 
-            setTimeout(() => window.location.replace("index.php"), 1500);
+            if(!data.active) setTimeout(() => window.location.replace("index.php?url=userDisabled"), 1500);
+            else setTimeout(() => window.location.replace("index.php"), 1500);
         }
     });
 });
