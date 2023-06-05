@@ -15,12 +15,31 @@
     require_once("templates/open.php");
 ?>
     <body>
-        <?php require_once("templates/header.php"); ?>
-        <?php require_once("templates/eventsZone.php"); ?>
+        <?php
+            if(isset($_SESSION["id_user"]))
+            {
+                if($_SESSION["username"] === "admin")
+                {
+                    
+                }
+                else
+                {
+                    require_once("templates/header.php");
+                    require_once("templates/eventsZone.php");
 
-        <!-- JavaScript -->
-        <script src="public/js/getEventsCategory.js" type="module"></script>
-        <script src="public/js/searchEvents.js"></script>
+                    echo '<script src="public/js/getEventsCategory.js" type="module"></script>';
+                    echo '<script src="public/js/searchEvents.js"></script>';
+                }
+            }
+            else
+            {
+                require_once("templates/header.php");
+                require_once("templates/eventsZone.php");
+
+                echo '<script src="public/js/getEventsCategory.js" type="module"></script>';
+                echo '<script src="public/js/searchEvents.js"></script>';
+            }
+        ?>
 
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("templates/cdns.php"); ?>
