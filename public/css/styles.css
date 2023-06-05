@@ -100,6 +100,24 @@ html {
     border: 1px solid rgba(0, 0, 0,.1);
 }
 
+.event-results-datalist {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    list-style: none;
+    z-index: 1;
+}
+
+.result-datalist {
+    padding: 0.5rem;
+    border: 0.5px solid grey;
+    background: white;
+    color: black;
+    cursor: pointer;
+}
+
 .category:hover {
     transition: all 0.5s;
     background: var(--secondary_color);
