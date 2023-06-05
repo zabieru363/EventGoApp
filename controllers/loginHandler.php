@@ -19,21 +19,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 
     $info = $user_controller->login($user, $password, $remember_me);
 
-    if($info["login"])
-    {
-        $login_info["login"] = true;
+    if($info["login"]) $login_info["login"] = true;
+    else $login_info["message"] = $info["message"];
 
-        if(!($info["active"]))
-        {
-            header("Location: index.php?url=userDisabled");
-            exit();
-        }
-
-        echo json_encode($login_info);
-    }
-    else
-    {
-        $login_info["message"] = $info["message"];
-        echo json_encode($login_info);
-    }
+    echo json_encode($login_info);
 }
