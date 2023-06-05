@@ -266,6 +266,25 @@ final class UserModel
     }
 
     /**
+     * Método que comprueba si una cuenta de usuario está activo o no.
+     * @param int El id del usuario que se quiere comprobar si está activo o no
+     * @return bool True si está activo, false si no es así.
+     */
+    public function isUserActive(int $user_id):bool
+    {
+        $is_active = false;
+
+        $sql = "SELECT Active FROM user WHERE Id = :user_id";
+        $this->connection->execute_select($sql, [":user_id" => $user_id]);
+
+        $active = $this->connection->rows[0]["Active"];
+
+        if($active === 1) $is_active = true;
+
+        return $is_active;
+    }
+
+    /**
      * Método que permite actualizar cualquier campo del perfil
      * del usuario (concretamente, la contraseña, el nombre completo,
      * la imagen o la ciudad)
