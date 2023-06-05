@@ -160,9 +160,9 @@ final class EventController extends BaseController
      * @param int El id de la regla que se quiere aplicar a ese evento.
      * @return bool True si la operación ha tenido exito, false si no fue así.
      */
-    public function setEventParticipationRule(int $event_id, int $user_id):bool
+    public function setEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
     {
-        return $this->model->setEventParticipationRule($event_id, $user_id);
+        return $this->model->setEventParticipationRule($event_id, $user_id, $rule_id);
     }
 
     /**
@@ -175,5 +175,10 @@ final class EventController extends BaseController
     public function updateEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
     {
         return $this->model->updateEventParticipationRule($event_id, $user_id, $rule_id);
+    }
+
+    public function eventParticipationRuleExists(int $event_id, int $user_id):bool
+    {
+        return $this->model->eventParticipationRuleExists($event_id, $user_id);
     }
 }
