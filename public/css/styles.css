@@ -135,6 +135,13 @@ html {
     opacity: 0.5;
 }
 
+/* Admin mode styles */
+.admin-option:hover {
+    transition: all 1s;
+    background: var(--secondary_color_hover);
+    border: 2px solid white;
+}
+
 /* Register form styles */
 
 .fields-container {
