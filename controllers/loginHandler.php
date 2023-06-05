@@ -22,11 +22,14 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     if($info["login"])
     {
         $login_info["login"] = true;
+
+        if(!($info["active"]))
+        {
+            header("Location: index.php?url=userDisabled");
+            exit();
+        }
+
         echo json_encode($login_info);
-    }
-    else if(!($info["active"]))
-    {
-        header("Location: index.php?url=userDisabled");
     }
     else
     {
