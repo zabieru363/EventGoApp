@@ -26,9 +26,11 @@ final class HomeController extends BaseController
             if(isset($_SESSION["id_user"]))
             {
                 $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
+                $user_active = $user_controller->isUserActive($_SESSION["id_user"]);
                 $this->render("home/home", [
                     "user_image" => $user_image,
-                    "categories" => $categories
+                    "categories" => $categories,
+                    "user_active" => $user_active
                 ]);
             }
             else
