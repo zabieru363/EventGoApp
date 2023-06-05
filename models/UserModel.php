@@ -131,9 +131,12 @@ final class UserModel
      * @return bool Devuelve true si el usuario fue encontrado
      * false si no fue así.
      */
-    public function checkUser(string $user, string $password, bool $remember_me):bool
+    public function checkUser(string $user, string $password, bool $remember_me):array
     {
-        $login = false;
+        $user_info = [
+            "login" => false,
+            "active" => false
+        ];
 
         $sql = "SELECT Id, Username, Password_hash, Active FROM user 
         WHERE Username = :user  OR Email = :user";
@@ -145,40 +148,41 @@ final class UserModel
         $password_hash = $this->connection->rows[0]["Password_hash"];
         $active = $this->connection->rows[0]["Active"];
 
-        if(password_verify($password, $password_hash) && $active == 1)
+        if(password_verify($password, $password_hash))
         {
-            $login = true;
-            $_SESSION["id_user"] = $user_id;
-            $_SESSION["username"] = $username;
-
-            $this->deleteExpiredTokens();
-
-            if($remember_me)
+            $user_info["login"] = true;
+            
+            if($active === 1)
             {
-                $token = bin2hex(random_bytes(32));
-                $seconds = 30 * 24 * 60 * 60;   // 30 dias en segundos
-                $now = time();
-                $expiration = $now + $seconds;
-                $expiration_date = date('Y-m-d H:i:s', $expiration);
+                $user_info["active"] = true;
+                $_SESSION["id_user"] = $user_id;
+                $_SESSION["username"] = $username;
 
-                $sql = "INSERT INTO remember_token VALUES(NULL,
-                    :user_id, :token, :expiry)";
+                $this->deleteExpiredTokens();
 
-                $this->connection->execute_query($sql, [
-                    ":user_id" => $user_id,
-                    ":token" => $token,
-                    ":expiry" => $expiration_date
-                ]);
+                if($remember_me)
+                {
+                    $token = bin2hex(random_bytes(32));
+                    $seconds = 30 * 24 * 60 * 60;   // 30 dias en segundos
+                    $now = time();
+                    $expiration = $now + $seconds;
+                    $expiration_date = date('Y-m-d H:i:s', $expiration);
 
-                setcookie('remember_me', $token, $expiration, '/');
+                    $sql = "INSERT INTO remember_token VALUES(NULL,
+                        :user_id, :token, :expiry)";
+
+                    $this->connection->execute_query($sql, [
+                        ":user_id" => $user_id,
+                        ":token" => $token,
+                        ":expiry" => $expiration_date
+                    ]);
+
+                    setcookie('remember_me', $token, $expiration, '/');
+                }
             }
         }
-        else
-        {
-            $login = false;
-        }
 
-        return $login;
+        return $user_info;
     }
 
     /**
