@@ -5,6 +5,7 @@ $user_controller = new UserController();
 
 $login_info = [
     "message" => "",
+    "active" => false,
     "login" => false
 ];
 
@@ -19,7 +20,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 
     $info = $user_controller->login($user, $password, $remember_me);
 
-    if($info["login"]) $login_info["login"] = true;
+    if($info["login"])
+    {
+        $login_info["login"] = true;
+        if($info["active"]) $login_info["active"] = true;
+    } 
     else $login_info["message"] = $info["message"];
 
     echo json_encode($login_info);
