@@ -21,6 +21,7 @@
                 if($_SESSION["username"] === "admin_eventgo")
                 {
                     require_once("templates/admin_header.php");
+                    require_once("templates/admin_body.php");
                 }
                 else
                 {
