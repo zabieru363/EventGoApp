@@ -81,17 +81,19 @@ final class UserController
     public function login(string $user, string $password, bool $remember_me):array
     {
         $login_status = [
-            "message" => "",
+            "message" => "Usuario o contraseña incorrectos",
+            "active" => false,
             "login" => false
         ];
 
-        if($this->model->checkUser($user, $password, $remember_me))
+        $user_info = $this->model->checkUser($user, $password, $remember_me);
+
+        if($user_info["login"])
         {
             $login_status["login"] = true;
-        }
-        else
-        {
-            $login_status["message"] = "Usuario o contraseña incorrectos";
+            $login_status["message"] = "";
+
+            if($user_info["active"]) $login_status["active"] = true;
         }
 
         return $login_status;
