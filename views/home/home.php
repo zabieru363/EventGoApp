@@ -18,9 +18,9 @@
         <?php
             if(isset($_SESSION["id_user"]))
             {
-                if($_SESSION["username"] === "admin")
+                if($_SESSION["username"] === "admin_eventgo")
                 {
-                    
+                    require_once("templates/admin_header.php");
                 }
                 else
                 {
