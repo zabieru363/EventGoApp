@@ -376,25 +376,27 @@ final class UserModel
      */
     public function getAllUsers():array
     {
-        $sql = "SELECT * FROM user";
+        $sql = "SELECT u.Id, u.Username, u.Type, u.Name, u.Email, city.Name AS City_name, u.Active, u.Register_date 
+        FROM user u JOIN city ON u.City = city.Id;";
         $this->connection->execute_select($sql, []);
+        $this->data = [];
 
         foreach($this->connection->rows as $row)
         {
-            $user = new User();
+            $new_row = [];
 
-            $user->__set("id", $row["Id"]);
-            $user->__set("username", $row["Username"]);
-            $user->__set("type", $row["Type"]);
-            $user->__set("fullname", $row["Fullname"]);
-            $user->__set("email", $row["Email"]);
-            $user->__set("country", $row["Country"]);
-            $user->__set("city", $row["City"]);
-            $user->__set("active", $row["Active"]);
-            $user->__set("register_date", $row["Register_date"]);
-            $user->__set("image", $row["Image"]);
+            $new_row["id"] = $row["Id"];
+            $new_row["username"] = $row["Username"];
+            $new_row["type"] = $row["Type"];
+            $new_row["name"] = $row["Name"];
+            $new_row["email"] = $row["Email"];
+            $new_row["country"] = $row["Country"];
+            $new_row["city"] = $row["City_name"];
+            $new_row["active"] = $row["Active"];
+            $new_row["register_date"] = $row["Register_date"];
+            $new_row["image"] = $row["Image"];
 
-            array_push($this->data, $user);
+            array_push($this->data, $new_row);
         }
 
         return $this->data;
