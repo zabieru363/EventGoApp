@@ -394,7 +394,6 @@ final class UserModel
             $new_row["city"] = $row["City_name"];
             $new_row["active"] = $row["Active"];
             $new_row["register_date"] = $row["Register_date"];
-            $new_row["image"] = $row["Image"];
 
             array_push($this->data, $new_row);
         }
