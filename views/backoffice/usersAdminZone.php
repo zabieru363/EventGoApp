@@ -28,6 +28,7 @@ require_once("templates/open.php");
                                 <?php
                                     foreach($users as $user)
                                     {
+                                        $result_active = $user["active"] ? "SI" : "NO";
                                         echo "
                                             <tr>
                                                 <td><input type='checkbox' value=" . $user["id"] . "></td>
@@ -36,7 +37,7 @@ require_once("templates/open.php");
                                                 <td>" . $user["name"] . "</td>
                                                 <td>" . $user["email"] . "</td>
                                                 <td>" . $user["city"] . "</td>
-                                                <td>" . $user["active"] . "</td>
+                                                <td>" . $result_active . "</td>
                                                 <td>" . $user["register_date"] . "</td>
                                             </tr>
                                         ";
