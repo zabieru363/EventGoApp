@@ -45,6 +45,11 @@ require_once("templates/open.php");
                                 ?>
                             </tbody>
                         </table>
+
+                        <div>
+                            <button class="btn btn-danger"><i class="fa-sharp fa-solid fa-trash"></i> Eliminar seleccionados</button>
+                            <button class="btn btn-danger"><i class="fa-sharp fa-solid fa-ban"></i> Desactivar seleccionados</button>
+                        </div>
                     </div>
                 </div>
             </div>
