@@ -24,7 +24,25 @@ require_once("templates/open.php");
                             </thead>
 
                             <!-- El id del cuerpo de la tabla. -->
-                            <tbody id="content"></tbody>
+                            <tbody id="content">
+                                <?php
+                                    foreach($users as $user)
+                                    {
+                                        echo "
+                                            <tr>
+                                                <td><input type='checkbox' value=" . $user["id"] . "></td>
+                                                <td>" . $user["username"] . "</td>
+                                                <td>" . $user["type"] . "</td>
+                                                <td>" . $user["name"] . "</td>
+                                                <td>" . $user["email"] . "</td>
+                                                <td>" . $user["city"] . "</td>
+                                                <td>" . $user["active"] . "</td>
+                                                <td>" . $user["register_date"] . "</td>
+                                            </tr>
+                                        ";
+                                    }
+                                ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>
