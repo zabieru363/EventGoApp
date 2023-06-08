@@ -103,26 +103,6 @@ final class UserModel
     }
 
     /**
-     * Método que recupera todas las provincias de
-     * España de la tabla city y las guarda en un array.
-     * @return array Un array con las provincias de España. 
-     */
-    public function getCities():array
-    {
-        $cities = [];
-
-        $sql = "SELECT * FROM city";
-        $this->connection->execute_select($sql, []);
-
-        foreach($this->connection->rows as $row)
-        {
-            array_push($cities, $row["Name"]);
-        }
-
-        return $cities;
-    }
-
-    /**
      * Método que comprueba si el usuario o email y contraseña
      * que ha introducido el usuario el formulario de inicio
      * de sesión es correcto con una consulta a la base de datos.
@@ -398,5 +378,31 @@ final class UserModel
         }
 
         return $this->data;
+    }
+
+    /**
+     * Método que elimina un usuario en especifico.
+     * @param int El id del usuario que se quiere eliminar.
+     * @return bool True si se ha eliminado, false si no es así.
+     */
+    public function deleteUser(int $user_id):bool
+    {
+        $sql = "DELETE FROM user WHERE Id = :user_id";
+        $removed = $this->connection->execute_query($sql, [":user_id" => $user_id]);
+
+        return $removed;
+    }
+
+    /**
+     * Método que desactiva un usuario en especifico.
+     * @param int El id del usuario que se quiere desactivar.
+     * @return bool True si se ha desactivado, false si no es así.
+     */
+    public function banUser(int $user_id):bool
+    {
+        $sql = "UPDATE user SET Active = 0 WHERE Id = :user_id";
+        $removed = $this->connection->execute_query($sql, [":user_id" => $user_id]);
+
+        return $removed;
     }
 }
