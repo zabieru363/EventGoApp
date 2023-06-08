@@ -5,6 +5,7 @@ const disabledUsersButton = document.getElementById("disabled-selected-users-btn
 const activeUsersButton = document.getElementById("active-selected-users-btn");
 
 const chekboxes = [...document.getElementsByClassName("user-selected")];
+const modalBody = document.getElementsByClassName("modal-body")[0];
 
 async function sendSelectedUsers(action) {
     const selectedCheckboxes = chekboxes.filter(checkbox => checkbox.checked);
@@ -24,7 +25,7 @@ async function sendSelectedUsers(action) {
                 });
         
                 if(response.ok) {
-                    const data = await response.json();
+                    await response.json();
     
                     // Actualizamos la vista
                     if(action === "delete") {
@@ -32,6 +33,10 @@ async function sendSelectedUsers(action) {
                             const userRow = document.getElementsByClassName(`user-row-${id}`)[0];
                             userRow.remove();
                         });
+
+                        modalBody.textContent = "Usuarios eliminados correctamente. Se han eliminado un total de " + selectedIds.length + " usuarios.";
+                        const modal = new bootstrap.Modal(document.getElementById("resultOperationModal"));
+                        modal.show();
                     }
     
                     if(action === "ban") {
@@ -39,6 +44,10 @@ async function sendSelectedUsers(action) {
                             const userRow = document.getElementsByClassName(`user-row-${id}`)[0];
                             userRow.children[6].textContent = "NO";
                         });
+                        
+                        modalBody.textContent = "Usuarios desactivados correctamente. Se han desactivado un total de " + selectedIds.length + " usuarios.";
+                        const modal = new bootstrap.Modal(document.getElementById("resultOperationModal"));
+                        modal.show();
                     }
 
                     if(action === "active") {
@@ -46,6 +55,10 @@ async function sendSelectedUsers(action) {
                             const userRow = document.getElementsByClassName(`user-row-${id}`)[0];
                             userRow.children[6].textContent = "SI";
                         });
+
+                        modalBody.textContent = "Usuarios activados correctamente. Se han activado un total de " + selectedIds.length + " usuarios.";
+                        const modal = new bootstrap.Modal(document.getElementById("resultOperationModal"));
+                        modal.show();
                     }
                 }
             }catch(error) {
