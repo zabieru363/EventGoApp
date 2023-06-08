@@ -432,7 +432,7 @@ final class UserModel
      */
     public function getNumberTotalUsers():int
     {
-        $sql = "SELECT COUNT(*) TOTAL_USERS FROM user";
+        $sql = "SELECT COUNT(Id) TOTAL_USERS FROM user";
         $this->connection->execute_select($sql, []);
 
         return count($this->connection->rows);
