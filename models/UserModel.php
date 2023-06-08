@@ -435,6 +435,6 @@ final class UserModel
         $sql = "SELECT COUNT(*) TOTAL_USERS FROM user";
         $this->connection->execute_select($sql, []);
 
-        return $this->connection->rows[0];
+        return count($this->connection->rows);
     }
 }
