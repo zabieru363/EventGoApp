@@ -176,9 +176,9 @@ final class UserController
      * Método que recupera todos los usuarios llamando
      * al modelo, previamente ya extraidos de la tabla user.
      */
-    public function listUsers():array
+    public function listUsers(int $start, int $rows_per_page):array
     {
-        return $this->model->getAllUsers();
+        return $this->model->getAllUsers($start, $rows_per_page);
     }
 
     /**
