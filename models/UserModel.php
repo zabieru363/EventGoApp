@@ -354,11 +354,15 @@ final class UserModel
      * @return array Un array con todos los usuarios de la
      * base de datos en formato de objeto.
      */
-    public function getAllUsers():array
+    public function getAllUsers($start, $rows_per_page):array
     {
         $sql = "SELECT u.Id, u.Username, u.Type, u.Name, u.Email, city.Name AS City_name, u.Active, u.Register_date 
-        FROM user u JOIN city ON u.City = city.Id;";
-        $this->connection->execute_select($sql, []);
+        FROM user u JOIN city ON u.City = city.Id
+        LIMIT :start, :rows_per_page";
+        $this->connection->execute_select($sql, [
+            ":start" => $start,
+            ":rows_per_page" => $rows_per_page
+        ]);
         $this->data = [];
 
         foreach($this->connection->rows as $row)
