@@ -30,7 +30,7 @@ require_once("templates/open.php");
                                     {
                                         $result_active = $user["active"] ? "SI" : "NO";
                                         echo "
-                                            <tr>
+                                            <tr class=user-row-" . $user["id"] . ">
                                                 <td><input type='checkbox' class='user-selected' value=" . $user["id"] . "></td>
                                                 <td>" . $user["username"] . "</td>
                                                 <td>" . $user["type"] . "</td>
