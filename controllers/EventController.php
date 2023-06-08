@@ -36,21 +36,41 @@ final class EventController extends BaseController
                     "categories" => $categories
                 ]);
             }
+            else
+            {
+                header("Location: index.php?url=login");
+            }
         }catch(Exception $e) {
             var_dump($e->getMessage());
         }
     }
 
-    public function list()
+    /**
+     * Método que renderiza la vista de la lista de
+     * eventos del usuario. Si el usuario no tiene la sesión
+     * iniciada, redireccionará al login.
+     */
+    public function list():void
     {
         $user_controller = new UserController();
-        $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
-        $public_user_events = $this->getUserPublicEvents($_SESSION["id_user"]);
-        
-        $this->render("my_events/myEvents", [
-            "user_image" => $user_image,
-            "public_user_events" => $public_user_events
-        ]);
+        if(isset($_SESSION["id_user"]))
+        {
+            try {
+                $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
+                $public_user_events = $this->getUserPublicEvents($_SESSION["id_user"]);
+                
+                $this->render("my_events/myEvents", [
+                    "user_image" => $user_image,
+                    "public_user_events" => $public_user_events
+                ]);
+            }catch(Exception $e) {
+                var_dump($e->getMessage());
+            }
+        }
+        else
+        {
+            header("Location: index.php?url=login");
+        }
     }
 
     /**
@@ -99,12 +119,25 @@ final class EventController extends BaseController
     }
 
     /**
+     * Método que llama al modelo para buscar eventos por
+     * titulo de evento, mirando a ver si coincide con lo
+     * que escribió el usuario.
+     * @param string Lo que escribió el usuario en el input de eventos.
+     * @return array Un array asociativo con el id y el titulo
+     * de los eventos que encontró.
+     */
+    public function searchEvent(string $search):array
+    {
+        return $this->model->searchEvent($search);
+    }
+
+    /**
      * Método que llama al modelo para recuperar los eventos de
      * una ctaegoría en especifico.
      * @param int El id del usuario para asociar las reglas a los eventos.
      * @return array Un array con todos los eventos.
      */
-    public function getAllEventsy(int $user_id):array
+    public function getAllEvents(int $user_id = null):array
     {
         return $this->model->getAllEvents($user_id);
     }
@@ -121,8 +154,8 @@ final class EventController extends BaseController
     }
 
     /**
-     * Método que llama al modelo y cambia la regla de participación o
-     * de estado de un evento.
+     * Método que llama al modelo y crea una regla de participación o
+     * de estado de un evento, para un usuario.
      * @param int El id del evento del cuál se quiere cambiar la regla.
      * @param int El id de la regla que se quiere aplicar a ese evento.
      * @return bool True si la operación ha tenido exito, false si no fue así.
@@ -130,5 +163,22 @@ final class EventController extends BaseController
     public function setEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
     {
         return $this->model->setEventParticipationRule($event_id, $user_id, $rule_id);
+    }
+
+    /**
+     * Método que llama al modelo y cambia la regla de participación o
+     * de estado de un evento.
+     * @param int El id del evento del cuál se quiere cambiar la regla.
+     * @param int El id de la regla que se quiere aplicar a ese evento.
+     * @return bool True si la operación ha tenido exito, false si no fue así.
+     */
+    public function updateEventParticipationRule(int $event_id, int $user_id, int $rule_id):bool
+    {
+        return $this->model->updateEventParticipationRule($event_id, $user_id, $rule_id);
+    }
+
+    public function eventParticipationRuleExists(int $event_id, int $user_id):bool
+    {
+        return $this->model->eventParticipationRuleExists($event_id, $user_id);
     }
 }

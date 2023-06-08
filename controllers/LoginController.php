@@ -1,4 +1,5 @@
 <?php
+require_once("UserController.php");
 
 final class LoginController extends BaseController
 {
@@ -7,10 +8,19 @@ final class LoginController extends BaseController
      */
     public function index():void
     {
-        try{
-            $this->render("login/loginForm");
-        }catch(Exception $e){
-            var_dump($e->getMessage());
+        $user_controller = new UserController();
+        
+        if(isset($_SESSION["id_user"]))
+        {
+            header("Location: index.php");
+        }
+        else
+        {
+            try{
+                $this->render("login/loginForm");
+            }catch(Exception $e){
+                var_dump($e->getMessage());
+            }
         }
     }
 }

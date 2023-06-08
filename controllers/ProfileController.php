@@ -20,11 +20,17 @@ final class ProfileController extends BaseController
             if(isset($_SESSION["id_user"]))
             {
                 $user_data = $user_controller->getUserProfileData($_SESSION["id_user"]);
+                $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
                 $cities = $city_controller->listCities();
                 $this->render("user_profile/profile", [
                     "user_data" => $user_data,
+                    "user_image" => $user_image,
                     "cities" => $cities
                 ]);
+            }
+            else
+            {
+                header("Location: index.php?url=login");
             }
         }catch(Exception $e){
             var_dump($e->getMessage());

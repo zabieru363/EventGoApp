@@ -47,6 +47,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $created = $event_id <= 0 || is_null($event_id) ? false : true; 
     $assigned = $event_controller->assignCategory($event_id, $category);
     $user_event_assoc = $event_controller->addEventToUserList($event_id, $_SESSION["id_user"]);
+    $event_controller->setEventParticipationRule($event_id, $_SESSION["id_user"], 1);
 
     $files = [];
     $image_event_assoc = false;
