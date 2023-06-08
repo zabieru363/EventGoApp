@@ -180,4 +180,24 @@ final class UserController
     {
         return $this->model->getAllUsers();
     }
+
+    /**
+     * Método que llama al modelo para eliminar un usuario.
+     * @param int El id del usuario que se quiere eliminar.
+     * @return bool True si se ha eliminado, false si no es así.
+     */
+    public function deleteUser(int $user_id):bool
+    {
+        return $this->model->deleteUser($id);
+    }
+
+    /**
+     * Método que llama al modelo para desactivar un usuario.
+     * @param int El id del usuario que se quiere desactivar.
+     * @return bool True si se ha desactivado, false si no es así.
+     */
+    public function banUser(int $user_id):bool
+    {
+        return $this->model->banUser($id);
+    }
 }
