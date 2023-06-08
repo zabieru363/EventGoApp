@@ -408,8 +408,21 @@ final class UserModel
     public function banUser(int $user_id):bool
     {
         $sql = "UPDATE user SET Active = 0 WHERE Id = :user_id";
-        $removed = $this->connection->execute_query($sql, [":user_id" => $user_id]);
+        $disabled = $this->connection->execute_query($sql, [":user_id" => $user_id]);
 
-        return $removed;
+        return $disabled;
+    }
+
+    /**
+     * Método que activa un usuario en especifico.
+     * @param int El id del usuario que se quiere activar.
+     * @return bool True si se ha activado, false si no es así.
+     */
+    public function activeUser(int $user_id):bool
+    {
+        $sql = "UPDATE user SET Active = 1 WHERE Id = :user_id";
+        $activated = $this->connection->execute_query($sql, [":user_id" => $user_id]);
+
+        return $activated;
     }
 }
