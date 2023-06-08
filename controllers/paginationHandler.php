@@ -20,4 +20,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $start = ($page - 1) * $rows_per_page;
 
     $users = $user_controller->listUsers($start, $rows_per_page);
+
+    echo json_encode([
+        "users" => $users,
+        "page" => $page,
+        "total_pages" => $total_pages
+    ]);
 }
