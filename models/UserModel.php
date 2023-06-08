@@ -425,4 +425,16 @@ final class UserModel
 
         return $activated;
     }
+
+    /**
+     * Método que devuelve el total de usuarios que hay en la tabla de usuarios
+     * @return int El total de usuarios que hay en la tabla user.
+     */
+    public function getNumberTotalUsers():int
+    {
+        $sql = "SELECT COUNT(*) TOTAL_USERS FROM user";
+        $this->connection->execute_select($sql, []);
+
+        return $this->connection->rows[0];
+    }
 }
