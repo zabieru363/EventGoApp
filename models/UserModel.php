@@ -387,6 +387,13 @@ final class UserModel
      */
     public function deleteUser(int $user_id):bool
     {
+        // Antes hay que borrar las relaciones con las tablas relacionadas a usuarios
+        $sql = "DELETE FROM user_event WHERE Id_user = :user_id";
+        $this->connection->execute_query($sql, [":user_id" => $user_id]);
+
+        $sql = "DELETE FROM user_event_participation WHERE User_id = :user_id";
+        $this->connection->execute_query($sql, [":user_id" => $user_id]);
+
         $sql = "DELETE FROM user WHERE Id = :user_id";
         $removed = $this->connection->execute_query($sql, [":user_id" => $user_id]);
 
