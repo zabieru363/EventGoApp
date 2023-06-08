@@ -1,7 +1,7 @@
 <?php
-session_start();
-$title = "Administrar usuarios";
-require_once("templates/open.php");
+    session_start();
+    $title = "Administrar usuarios";
+    require_once("templates/open.php");
 ?>
 
     <body>
@@ -28,19 +28,22 @@ require_once("templates/open.php");
                                 <?php
                                     foreach($users as $user)
                                     {
-                                        $result_active = $user["active"] ? "SI" : "NO";
-                                        echo "
-                                            <tr class=user-row-" . $user["id"] . ">
-                                                <td><input type='checkbox' class='user-selected' value=" . $user["id"] . "></td>
-                                                <td>" . $user["username"] . "</td>
-                                                <td>" . $user["type"] . "</td>
-                                                <td>" . $user["name"] . "</td>
-                                                <td>" . $user["email"] . "</td>
-                                                <td>" . $user["city"] . "</td>
-                                                <td>" . $result_active . "</td>
-                                                <td>" . $user["register_date"] . "</td>
-                                            </tr>
-                                        ";
+                                        if($user["username"] !== "admin_eventgo")
+                                        {
+                                            $result_active = $user["active"] ? "SI" : "NO";
+                                            echo "
+                                                <tr class=user-row-" . $user["id"] . ">
+                                                    <td><input type='checkbox' class='user-selected' value=" . $user["id"] . "></td>
+                                                    <td>" . $user["username"] . "</td>
+                                                    <td>" . $user["type"] . "</td>
+                                                    <td>" . $user["name"] . "</td>
+                                                    <td>" . $user["email"] . "</td>
+                                                    <td>" . $user["city"] . "</td>
+                                                    <td>" . $result_active . "</td>
+                                                    <td>" . $user["register_date"] . "</td>
+                                                </tr>
+                                            ";
+                                        }
                                     }
                                 ?>
                             </tbody>
@@ -49,7 +52,20 @@ require_once("templates/open.php");
                         <div>
                             <button class="btn btn-danger" id="delete-selected-users-btn"><i class="fa-sharp fa-solid fa-trash"></i> Eliminar seleccionados</button>
                             <button class="btn btn-danger" id="disabled-selected-users-btn"><i class="fa-sharp fa-solid fa-ban"></i> Desactivar seleccionados</button>
+                            <button class="btn btn-success" id="active-selected-users-btn"><i class="fa-sharp fa-solid fa-ban"></i> Activar seleccionados</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="resultOperationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="resultOperationModal">Proceso terminado <i class="fa-solid fa-badge-check"></i></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body"></div>
                     </div>
                 </div>
             </div>
