@@ -2,6 +2,7 @@
 
 const deleteUsersButton = document.getElementById("delete-selected-users-btn");
 const disabledUsersButton = document.getElementById("disabled-selected-users-btn");
+const activeUsersButton = document.getElementById("active-selected-users-btn");
 
 const chekboxes = [...document.getElementsByClassName("user-selected")];
 
@@ -39,6 +40,13 @@ async function sendSelectedUsers(action) {
                             userRow.children[6].textContent = "NO";
                         });
                     }
+
+                    if(action === "active") {
+                        selectedIds.forEach(function(id) {
+                            const userRow = document.getElementsByClassName(`user-row-${id}`)[0];
+                            userRow.children[6].textContent = "SI";
+                        });
+                    }
                 }
             }catch(error) {
                 console.error("Algo salió mal " + error);
@@ -55,4 +63,8 @@ deleteUsersButton.addEventListener("click", function() {
 
 disabledUsersButton.addEventListener("click", function() {
     sendSelectedUsers("ban");
+});
+
+activeUsersButton.addEventListener("click", function() {
+    sendSelectedUsers("active");
 });
