@@ -26,4 +26,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
             "message" => "Usuarios desactivados correctamente"
         ]);
     }
+
+    if($action === "active")
+    {
+        foreach($selected_ids as $id) $user_controller->activateUser($id);
+        echo json_encode([
+            "activated" => true,
+            "message" => "Usuarios activados correctamente"
+        ]);
+    }
 }

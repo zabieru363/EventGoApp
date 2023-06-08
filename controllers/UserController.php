@@ -176,9 +176,9 @@ final class UserController
      * Método que recupera todos los usuarios llamando
      * al modelo, previamente ya extraidos de la tabla user.
      */
-    public function listUsers():array
+    public function listUsers(int $start, int $rows_per_page):array
     {
-        return $this->model->getAllUsers();
+        return $this->model->getAllUsers($start, $rows_per_page);
     }
 
     /**
@@ -199,5 +199,25 @@ final class UserController
     public function banUser(int $user_id):bool
     {
         return $this->model->banUser($user_id);
+    }
+
+    /**
+     * Método que llama al modelo para activar un usuario.
+     * @param int El id del usuario que se quiere activar.
+     * @return bool True si se ha activado, false si no es así.
+     */
+    public function activateUser(int $user_id):bool
+    {
+        return $this->model->activeUser($user_id);
+    }
+
+    /**
+     * Método que llama al modelo para recuperar el número de
+     * usuarios que hay en la tabla user.
+     * @return int El número de usuarios que hay en la tabla user.
+     */
+    public function getNumberTotalUsers():int
+    {
+        return $this->model->getNumberTotalUsers();
     }
 }

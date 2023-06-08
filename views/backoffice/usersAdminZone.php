@@ -6,6 +6,7 @@
 
     <body>
         <main>
+            <?php require_once("templates/admin_header.php") ?>
             <div class="container py-4 text-center">
                 <h2>Usuarios</h2>
 
@@ -49,10 +50,16 @@
                             </tbody>
                         </table>
 
+                        <div class="user-pagination d-flex justify-content-center">
+                            <nav class="pages" aria-label="pagination">
+                                
+                            </nav>
+                        </div>
+
                         <div>
                             <button class="btn btn-danger" id="delete-selected-users-btn"><i class="fa-sharp fa-solid fa-trash"></i> Eliminar seleccionados</button>
                             <button class="btn btn-danger" id="disabled-selected-users-btn"><i class="fa-sharp fa-solid fa-ban"></i> Desactivar seleccionados</button>
-                            <button class="btn btn-success" id="active-selected-users-btn"><i class="fa-sharp fa-solid fa-ban"></i> Activar seleccionados</button>
+                            <button class="btn btn-success" id="active-selected-users-btn"><i class="fa-sharp fa-solid fa-circle-check"></i> Activar seleccionados</button>
                         </div>
                     </div>
                 </div>

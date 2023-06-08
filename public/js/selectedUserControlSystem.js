@@ -4,10 +4,12 @@ const deleteUsersButton = document.getElementById("delete-selected-users-btn");
 const disabledUsersButton = document.getElementById("disabled-selected-users-btn");
 const activeUsersButton = document.getElementById("active-selected-users-btn");
 
+let actualPage = 1;
+
 const chekboxes = [...document.getElementsByClassName("user-selected")];
 const modalBody = document.getElementsByClassName("modal-body")[0];
 
-async function sendSelectedUsers(action) {
+async function sendSelectedUsers(action, actualPage) {
     const selectedCheckboxes = chekboxes.filter(checkbox => checkbox.checked);
     if(selectedCheckboxes.length) {
         const confirmation = confirm("¿Seguro que quiere relizar esta operación?");
@@ -21,7 +23,7 @@ async function sendSelectedUsers(action) {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({users_selected: selectedIds, action: action})
+                    body: JSON.stringify({users_selected: selectedIds, action: action, page: actualPage})
                 });
         
                 if(response.ok) {
@@ -71,13 +73,13 @@ async function sendSelectedUsers(action) {
 }
 
 deleteUsersButton.addEventListener("click", function() {
-    sendSelectedUsers("delete");
+    sendSelectedUsers("delete", actualPage);
 });
 
 disabledUsersButton.addEventListener("click", function() {
-    sendSelectedUsers("ban");
+    sendSelectedUsers("ban", actualPage);
 });
 
 activeUsersButton.addEventListener("click", function() {
-    sendSelectedUsers("active");
+    sendSelectedUsers("active", actualPage);
 });
