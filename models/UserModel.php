@@ -354,11 +354,15 @@ final class UserModel
      * @return array Un array con todos los usuarios de la
      * base de datos en formato de objeto.
      */
-    public function getAllUsers():array
+    public function getAllUsers($start, $rows_per_page):array
     {
         $sql = "SELECT u.Id, u.Username, u.Type, u.Name, u.Email, city.Name AS City_name, u.Active, u.Register_date 
-        FROM user u JOIN city ON u.City = city.Id;";
-        $this->connection->execute_select($sql, []);
+        FROM user u JOIN city ON u.City = city.Id
+        LIMIT :start, :rows_per_page";
+        $this->connection->execute_select($sql, [
+            ":start" => $start,
+            ":rows_per_page" => $rows_per_page
+        ]);
         $this->data = [];
 
         foreach($this->connection->rows as $row)
@@ -408,8 +412,33 @@ final class UserModel
     public function banUser(int $user_id):bool
     {
         $sql = "UPDATE user SET Active = 0 WHERE Id = :user_id";
-        $removed = $this->connection->execute_query($sql, [":user_id" => $user_id]);
+        $disabled = $this->connection->execute_query($sql, [":user_id" => $user_id]);
 
-        return $removed;
+        return $disabled;
+    }
+
+    /**
+     * Método que activa un usuario en especifico.
+     * @param int El id del usuario que se quiere activar.
+     * @return bool True si se ha activado, false si no es así.
+     */
+    public function activeUser(int $user_id):bool
+    {
+        $sql = "UPDATE user SET Active = 1 WHERE Id = :user_id";
+        $activated = $this->connection->execute_query($sql, [":user_id" => $user_id]);
+
+        return $activated;
+    }
+
+    /**
+     * Método que devuelve el total de usuarios que hay en la tabla de usuarios
+     * @return int El total de usuarios que hay en la tabla user.
+     */
+    public function getNumberTotalUsers():int
+    {
+        $sql = "SELECT COUNT(Id) TOTAL_USERS FROM user";
+        $this->connection->execute_select($sql, []);
+
+        return count($this->connection->rows);
     }
 }
