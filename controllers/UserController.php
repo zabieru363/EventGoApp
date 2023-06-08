@@ -188,7 +188,7 @@ final class UserController
      */
     public function deleteUser(int $user_id):bool
     {
-        return $this->model->deleteUser($id);
+        return $this->model->deleteUser($user_id);
     }
 
     /**
@@ -198,6 +198,6 @@ final class UserController
      */
     public function banUser(int $user_id):bool
     {
-        return $this->model->banUser($id);
+        return $this->model->banUser($user_id);
     }
 }
