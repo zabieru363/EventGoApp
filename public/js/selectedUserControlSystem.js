@@ -21,7 +21,6 @@ async function sendSelectedUsers(action) {
     
             if(response.ok) {
                 const data = await response.json();
-
             }
         }catch(error) {
             console.error("Algo salió mal " + error);
