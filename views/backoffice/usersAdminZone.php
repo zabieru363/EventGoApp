@@ -31,7 +31,7 @@ require_once("templates/open.php");
                                         $result_active = $user["active"] ? "SI" : "NO";
                                         echo "
                                             <tr>
-                                                <td><input type='checkbox' value=" . $user["id"] . "></td>
+                                                <td><input type='checkbox' class='user-selected' value=" . $user["id"] . "></td>
                                                 <td>" . $user["username"] . "</td>
                                                 <td>" . $user["type"] . "</td>
                                                 <td>" . $user["name"] . "</td>
@@ -47,8 +47,8 @@ require_once("templates/open.php");
                         </table>
 
                         <div>
-                            <button class="btn btn-danger"><i class="fa-sharp fa-solid fa-trash"></i> Eliminar seleccionados</button>
-                            <button class="btn btn-danger"><i class="fa-sharp fa-solid fa-ban"></i> Desactivar seleccionados</button>
+                            <button class="btn btn-danger" id="delete-selected-users-btn"><i class="fa-sharp fa-solid fa-trash"></i> Eliminar seleccionados</button>
+                            <button class="btn btn-danger" id="disabled-selected-users-btn"><i class="fa-sharp fa-solid fa-ban"></i> Desactivar seleccionados</button>
                         </div>
                     </div>
                 </div>
@@ -56,6 +56,7 @@ require_once("templates/open.php");
         </main>
 
         <!-- JavaScript -->
+        <script src="public/js/selectedUserControlSystem.js"></script>
 
         <!-- Bootstrap y font-awesome --->
         <?php require_once("templates/cdns.php"); ?>
