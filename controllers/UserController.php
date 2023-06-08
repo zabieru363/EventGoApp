@@ -210,4 +210,14 @@ final class UserController
     {
         return $this->model->activeUser($user_id);
     }
+
+    /**
+     * Método que llama al modelo para recuperar el número de
+     * usuarios que hay en la tabla user.
+     * @return int El número de usuarios que hay en la tabla user.
+     */
+    public function getNumberTotalUsers():int
+    {
+        return $this->model->getNumberTotalUsers();
+    }
 }
