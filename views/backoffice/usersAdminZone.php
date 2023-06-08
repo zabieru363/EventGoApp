@@ -56,6 +56,7 @@ require_once("templates/open.php");
         </main>
 
         <!-- JavaScript -->
+        <script src="public/js/selectedUserControlSystem.js"></script>
 
         <!-- Bootstrap y font-awesome --->
         <?php require_once("templates/cdns.php"); ?>
