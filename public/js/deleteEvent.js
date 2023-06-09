@@ -3,6 +3,7 @@
 const deleteEventButtons = [...document.getElementsByClassName("delete-event-btn")];
 const confirmBtn = document.getElementsByClassName("confirm")[0];
 const cancelBtn = document.getElementsByClassName("cancel")[0];
+const closeModalSecondButton = document.getElementsByClassName("return-home-btn")[0];
 
 deleteEventButtons.forEach(function(button) {
     button.addEventListener("click", function() {
@@ -27,6 +28,8 @@ deleteEventButtons.forEach(function(button) {
                         eventContainer.remove();
                         const modal = new bootstrap.Modal(document.getElementById("eventRemovedModal"));
                         modal.show();
+
+                        closeModalSecondButton.addEventListener("click", () => modal.hide());
                     }
                 })
                 .catch(error => console.log("Algo salió mal " + error));
