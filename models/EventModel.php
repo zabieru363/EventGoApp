@@ -507,7 +507,7 @@ final class EventModel
         $sql = "DELETE FROM event_images WHERE Event_id = :event_id";
         $this->connection->execute_query($sql, [":event_id" => $event_id]);
         
-        $sql = "DELETE FROM event_participation_rules WHERE Event_id = :event_id";
+        $sql = "DELETE FROM user_event_participation WHERE Event_id = :event_id";
         $this->connection->execute_query($sql, [":event_id" => $event_id]);
         
         $sql = "DELETE FROM user_event WHERE Id_event = :event_id";
