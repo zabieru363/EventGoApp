@@ -66,7 +66,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
-                            <?php
+                                <?php
                                     foreach($user_participation_events as $participation_event)
                                     {
                                         echo "
@@ -88,7 +88,7 @@
     
                                                     <div class='event-date'>
                                                         <i class='fa-solid fa-clock'></i></i> 
-                                                        Empieza el {$participation_eventt["start_date"]} y termina el {$participation_event["end_date"]}
+                                                        Empieza el {$participation_event["start_date"]} y termina el {$participation_event["end_date"]}
                                                     </div>
                                             </div>
                                         </div>";
@@ -109,27 +109,34 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <h4>Titulo del evento</h4>
-
-                                        <div class="event-admin">
-                                            <h6>Organizado por [usuario]</h6>
-                                        </div>
-
-                                        <div cñass="event-description">
-                                            Descripción sobre el evento.
-                                        </div>
-
-                                        <div class="event-location mt-3">
-                                            <i class="fa-solid fa-location-dot"></i> Ciudad Real
-                                        </div>
-
-                                        <div class="event-date">
-                                            <i class="fa-solid fa-clock"></i></i> Empieza el x y termina el x
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+                                    foreach($pending_events as $pending_event)
+                                    {
+                                        echo "
+                                            <div class='card mb-3' data-id='{$pending_event["id"]}'>
+                                                <div class='card-body'>
+                                                     <h4>{$pending_event["title"]}</h4>
+    
+                                                    <div class='event-admin'>
+                                                        <h6>{$pending_event["admin"]}</h6>
+                                                    </div>
+    
+                                                    <div class='event-description'>
+                                                        {$pending_event["description"]}
+                                                    </div>
+    
+                                                    <div class='event-location mt-3'>
+                                                        <i class='fa-solid fa-location-dot'></i> {$pending_event["city"]}
+                                                    </div>
+    
+                                                    <div class='event-date'>
+                                                        <i class='fa-solid fa-clock'></i></i> 
+                                                        Empieza el {$pending_event["start_date"]} y termina el {$pending_event["end_date"]}
+                                                    </div>
+                                            </div>
+                                        </div>";
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -145,27 +152,34 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <h4>Titulo del evento</h4>
-
-                                        <div class="event-admin">
-                                            <h6>Organizado por [usuario]</h6>
-                                        </div>
-
-                                        <div cñass="event-description">
-                                            Descripción sobre el evento.
-                                        </div>
-
-                                        <div class="event-location mt-3">
-                                            <i class="fa-solid fa-location-dot"></i> Ciudad Real
-                                        </div>
-
-                                        <div class="event-date">
-                                            <i class="fa-solid fa-clock"></i></i> Empieza el x y termina el x
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+                                    foreach($cancelled_events as $cancelled_event)
+                                    {
+                                        echo "
+                                            <div class='card mb-3' data-id='{$cancelled_event["id"]}'>
+                                                <div class='card-body'>
+                                                     <h4>{$cancelled_event["title"]}</h4>
+    
+                                                    <div class='event-admin'>
+                                                        <h6>{$cancelled_event["admin"]}</h6>
+                                                    </div>
+    
+                                                    <div class='event-description'>
+                                                        {$cancelled_event["description"]}
+                                                    </div>
+    
+                                                    <div class='event-location mt-3'>
+                                                        <i class='fa-solid fa-location-dot'></i> {$cancelled_event["city"]}
+                                                    </div>
+    
+                                                    <div class='event-date'>
+                                                        <i class='fa-solid fa-clock'></i></i> 
+                                                        Empieza el {$cancelled_event["start_date"]} y termina el {$cancelled_event["end_date"]}
+                                                    </div>
+                                            </div>
+                                        </div>";
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
