@@ -491,4 +491,31 @@ final class EventModel
 
         return $this->connection->rows[0]["TOTAL_EVENTS"];
     }
+
+    /**
+     * Método que permite eliminar un evento de la base
+     * de datos junto con todas sus relaciones.
+     * @param int El id del evento que se quiere eliminar.
+     * @return bool True si se ha eliminado, false si no es así.
+     */
+    public function deleteEvent(int $event_id):bool
+    {
+        // Antes hay que deshacer las relaciones de los eventos con las otras tablas
+        $sql = "DELETE FROM category_event WHERE Event_id = :event_id";
+        $this->connection->execute_query($sql, [":event_id" => $event_id]);
+        
+        $sql = "DELETE FROM event_images WHERE Event_id = :event_id";
+        $this->connection->execute_query($sql, [":event_id" => $event_id]);
+        
+        $sql = "DELETE FROM event_participation_rules WHERE Event_id = :event_id";
+        $this->connection->execute_query($sql, [":event_id" => $event_id]);
+        
+        $sql = "DELETE FROM user_event WHERE Id_event = :event_id";
+        $this->connection->execute_query($sql, [":event_id" => $event_id]);
+        
+        $sql = "DELETE FROM event WHERE Id = :event_id";
+        $rmeoved = $this->connection->execute_query($sql, [":event_id" => $event_id]);
+
+        return $rmeoved;
+    }
 }
