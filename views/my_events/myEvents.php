@@ -47,6 +47,10 @@
                                                         <i class='fa-solid fa-clock'></i></i> 
                                                         Empieza el {$public_event["start_date"]} y termina el {$public_event["end_date"]}
                                                     </div>
+
+                                                    <div class='mt-3'>
+                                                        <button class='btn btn-danger' data-id={$public_event["id"]}><i class='fa-sharp fa-solid fa-trash'></i> Borrar este evento</button>
+                                                    </div>
                                             </div>
                                         </div>";
                                     }
