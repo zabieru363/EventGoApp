@@ -22,10 +22,11 @@
 
                 <div class="col-md-4">
                     <h2 class="display-6">Crear una nueva categoría</h2>
-                    <form name="create-categories-form" method="POST" action="#">
+                    <form class="needs-validation" name="create-categories-form" method="POST" action="#" novalidate>
                         <div class="mb-3">
                             <label for="category" class="form-label">Nombre de la nueva categoría</label>
                             <input type="text" class="form-control" id="category" name="category" aria-describedby="categoryHelp">
+                            <div class="invalid-feedback"></div>
                         </div>
                         
                         <button type="submit" class="btn btn-success">Crear categoría</button>
