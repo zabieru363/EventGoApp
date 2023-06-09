@@ -268,4 +268,14 @@ final class EventController extends BaseController
     {
         return $this->getNumberofTotalEvents();
     }
+
+    /**
+     * Método que llama al modelo para eliminar un evento
+     * @param int El id del evento que se quiere eliminar.
+     * @return bool True si se ha eliminado, false si no es asñi.
+     */
+    public function deleteEvent(int $event_id):bool
+    {
+        return $this->model->deleteEvent($event_id);
+    }
 }
