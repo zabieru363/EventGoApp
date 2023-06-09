@@ -197,8 +197,32 @@ final class EventController extends BaseController
      * @param int El final hasta donde se quieren obtener registros.
      * @return array Un array con los eventos obtenidos y sus datos.
      */
-    public function listEvents(int $start, int $end):array
+    public function listEvents(int $page = 1, int $perPage):array
     {
-        return $this->model->listEvents($start, $end);
+        $start = ($page - 1) * $perPage;
+        $total_rows = $this->getNumberofTotalEvents();
+        $total_pages = ceil($total_rows / $perPage);
+
+        $events = $this->model->listEvents($start, $perPage);
+
+        return [
+            "events" => $events,
+            "pagination" => [
+                "total_pages" => $total_pages,
+                "current_page" => $page,
+                "events_per_page" => $perPage,
+                "total_events" => $total_rows
+            ]
+        ];
+    }
+
+    /**
+     * Método que llama al modelo y obtiene el número total
+     * de eventos que hay en la tabla event.
+     * @return int El número total de eventos que hay en la tabla event.
+     */
+    public function getNumberofTotalEvents():int
+    {
+        return $this->getNumberofTotalEvents();
     }
 }
