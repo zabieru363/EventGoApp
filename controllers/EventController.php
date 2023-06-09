@@ -58,10 +58,12 @@ final class EventController extends BaseController
             try {
                 $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
                 $public_user_events = $this->getUserPublicEvents($_SESSION["id_user"]);
+                $user_participation_events = $this->getUserEventsParticipation($_SESSION["id_user"]);
                 
                 $this->render("my_events/myEvents", [
                     "user_image" => $user_image,
-                    "public_user_events" => $public_user_events
+                    "public_user_events" => $public_user_events,
+                    "user_participation_events" => $user_participation_events
                 ]);
             }catch(Exception $e) {
                 var_dump($e->getMessage());
@@ -151,6 +153,19 @@ final class EventController extends BaseController
     public function getUserPublicEvents(int $user_id):array
     {
         return $this->model->getUserPublicEvents($user_id);
+    }
+
+    /**
+     * Método que llama al modelo para recuperar los eventos
+     * en los que el usuario va a participar.
+     * @param int El id del usuario del cuál se quieren obtener
+     * los eventos en los cuales va a participar.
+     * @return array Los eventos en los que va a participar
+     * ese usuario.
+     */
+    public function getUserEventsParticipation(int $user_id):array
+    {
+        return $this->model->getUserEventsParticipation($user_id);
     }
 
     /**
