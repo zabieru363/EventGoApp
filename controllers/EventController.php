@@ -177,8 +177,28 @@ final class EventController extends BaseController
         return $this->model->updateEventParticipationRule($event_id, $user_id, $rule_id);
     }
 
+    /**
+     * Método que llama al modelo y comprueba que una regla de participación
+     * de un evento existe para un usuario.
+     * @param int El id del evento que se quiere comprobar.
+     * @param int El id del usuario que se quiere comprobar.
+     * @return bool True si existe, false si no es así.
+     */
     public function eventParticipationRuleExists(int $event_id, int $user_id):bool
     {
         return $this->model->eventParticipationRuleExists($event_id, $user_id);
+    }
+
+    /**
+     * Método que obtiene todos los eventos de aplicando un
+     * limitador.
+     * @param int El comienzo desde donde se quieren empezar a
+     * obtener registros.
+     * @param int El final hasta donde se quieren obtener registros.
+     * @return array Un array con los eventos obtenidos y sus datos.
+     */
+    public function listEvents(int $start, int $end):array
+    {
+        return $this->model->listEvents($start, $end);
     }
 }
