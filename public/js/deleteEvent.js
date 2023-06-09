@@ -1,5 +1,11 @@
 "use strict";
 
+const userParticipationEventsList = document.getElementsByClassName("user-participation-events")[0];
+const userPendingEventsList = document.getElementsByClassName("user-pending-events")[0];
+const userCancelledEventsList = document.getElementsByClassName("user-cancelled-events")[0];
+console.log(userParticipationEventsList);
+console.log(userPendingEventsList);
+console.log(userCancelledEventsList);
 const deleteEventButtons = [...document.getElementsByClassName("delete-event-btn")];
 const confirmBtn = document.getElementsByClassName("confirm")[0];
 const cancelBtn = document.getElementsByClassName("cancel")[0];
@@ -25,7 +31,26 @@ deleteEventButtons.forEach(function(button) {
                 .then(res => {
                     if(res.ok) {
                         // Si se ha podido eliminar el evento actualizamos la vista.
+                        const userParticipationEvents = [...userParticipationEventsList.children];
+
+                        userParticipationEvents.forEach(function(event) {
+                            if(event.getAttribute("data-id") === eventId) event.remove();
+                        });
+
+                        const userPendingEvents = [...userPendingEventsList.children];
+
+                        userPendingEvents.forEach(function(event) {
+                            if(event.getAttribute("data-id") === eventId) event.remove();
+                        });
+
+                        const userCancelledEvents = [...userCancelledEventsList.children];
+
+                        userCancelledEvents.forEach(function(event) {
+                            if(event.getAttribute("data-id") === eventId) event.remove();
+                        });
+
                         eventContainer.remove();
+
                         const modal = new bootstrap.Modal(document.getElementById("eventRemovedModal"));
                         modal.show();
 
