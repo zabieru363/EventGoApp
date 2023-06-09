@@ -11,9 +11,11 @@ deleteEventButtons.forEach(function(button) {
             method: "POST",
             body: JSON.stringify({id: eventId})
         })
-            .then(res => res.json())
-            .then(data => {
-    
+            .then(res => {
+                if(res.ok) {
+                    const modal = new bootstrap.Modal(document.getElementById("eventRemovedModal"));
+                    modal.show();
+                }
             })
             .catch(error => console.log("Algo salió mal " + error));
     });
