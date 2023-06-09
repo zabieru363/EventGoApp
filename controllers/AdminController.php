@@ -36,6 +36,7 @@ final class AdminController extends BaseController
     public function events():void
     {
         $event_controller = new EventController();
+        $user_controller = new UserController();
 
         if(isset($_SESSION["id_user"]))
         {
