@@ -364,4 +364,17 @@ final class EventModel
 
         return $this->data;
     }
+
+    /**
+     * Método que devuelve el número total de eventos
+     * que hay en la tabla event.
+     * @return int El número total de eventos que hay.
+     */
+    public function getNumberofTotalEvents():int
+    {
+        $sql = "SELECT COUNT(Id) AS TOTAL_EVENTS FROM event";
+        $this->connection->execute_select($sql, []);
+
+        return $this->connection->rows[0]["TOTAL_EVENTS"];
+    }
 }
