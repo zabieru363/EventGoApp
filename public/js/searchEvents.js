@@ -29,16 +29,14 @@ function getResults() {
           resultsDatalist.insertAdjacentHTML("beforeend", li);
         } else {
           data.forEach(function(result) {
-            li = `<li dataset-event-id="${data.id}" class="result-datalist">${result.title}</li>`;
+            li = `<li dataset-event-id="${result.id}" class="result-datalist">${result.title}</li>`;
             resultsDatalist.insertAdjacentHTML("beforeend", li);
+
+            resultsDatalist.lastElementChild.addEventListener("click", () => console.log("Evento clic activado"));
           });
+
+          resultsDatalist.classList.remove("d-none");
         }
-
-        resultsDatalist.classList.remove("d-none");
-
-        resultsDatalist.addEventListener("click", function(e) {
-            console.log(e.target);
-        });
       })
       .catch((error) => console.log("Algo salió mal " + error));
   } else {
