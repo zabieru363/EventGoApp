@@ -59,11 +59,15 @@ final class EventController extends BaseController
                 $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
                 $public_user_events = $this->getUserPublicEvents($_SESSION["id_user"]);
                 $user_participation_events = $this->getUserEventsParticipation($_SESSION["id_user"]);
+                $cancelled_events = $this->getUserCancelledEvents($_SESSION["id_user"]);
+                $pending_events = $this->getUserPendingEvents($_SESSION["id_user"]);
                 
                 $this->render("my_events/myEvents", [
                     "user_image" => $user_image,
                     "public_user_events" => $public_user_events,
-                    "user_participation_events" => $user_participation_events
+                    "user_participation_events" => $user_participation_events,
+                    "cancelled_events" => $cancelled_events,
+                    "pending_events" => $pending_events
                 ]);
             }catch(Exception $e) {
                 var_dump($e->getMessage());
@@ -166,6 +170,30 @@ final class EventController extends BaseController
     public function getUserEventsParticipation(int $user_id):array
     {
         return $this->model->getUserEventsParticipation($user_id);
+    }
+
+    /**
+     * Método llama al modelo para recuperar los eventos en los cuáles
+     * el usuario no va a participar.
+     * @param int El id del usuario para recuperar los eventos en los
+     * cuáles no va a participar.
+     * @return array Los eventos en los cuáles no participa el usuario.
+     */
+    public function getUserCancelledEvents(int $user_id):array
+    {
+        return $this->model->getUserCancelledEvents($user_id);
+    }
+
+    /**
+     * Método llama al modelo para recuperar los eventos en los cuáles
+     * el usuario no sabe si va a participar o no.
+     * @param int El id del usuario para recuperar los eventos en los
+     * cuáles no sabe si va a participar o no.
+     * @return array Los eventos en los cuáles el usuario no sabe si va a participar o no.
+     */
+    public function getUserPendingEvents(int $user_id):array
+    {
+        return $this->model->getUserPendingEvents($user_id);
     }
 
     /**
