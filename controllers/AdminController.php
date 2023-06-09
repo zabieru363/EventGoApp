@@ -1,5 +1,6 @@
 <?php
 require_once("UserController.php");
+require_once("CategoryController.php");
 require_once("EventController.php");
 
 final class AdminController extends BaseController
@@ -44,6 +45,30 @@ final class AdminController extends BaseController
                 $page = $_GET["page"] ?? 1;
                 $params = $event_controller->listEvents($page, 10);
                 $this->render("backoffice/eventsAdminZone", ["params" => $params]);
+            }catch(Exception $e) {
+                var_dump($e->getMessage());
+            }
+        }
+        else
+        {
+            header("Location: index.php");
+        }
+    }
+
+    /**
+     * Método encargado de renderizar una vista para la
+     * creación de nuevas categorias.
+     */
+    public function categories():void
+    {
+        $user_controller = new UserController();
+        $category_controller = new CategoryController();
+
+        if(isset($_SESSION["id_user"]))
+        {
+            try{
+                $categories = $category_controller->listCategories();
+                $this->render("backoffice/categoriesAdminZone", ["categories" => $categories]);
             }catch(Exception $e) {
                 var_dump($e->getMessage());
             }
