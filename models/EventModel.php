@@ -319,4 +319,49 @@ final class EventModel
 
         return $exists;
     }
+
+    /**
+     * Método que va obteniendo eventos con una consulta en base
+     * a un limitador que se le pasa cómo parametro.
+     * @param int Desde donde empieza a sacar registros.
+     * @param int Hasta donde termina de sacar registros.
+     * @return array Un array asociativo que contiene los eventos que ha
+     * devuelto la consulta con todos sus datos.
+     */
+    public function listEvents(int $start, int $end):array
+    {
+        $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
+        e.Start_date, e.Ending_date, cat.Name AS Category, e.Active FROM event e 
+        INNER JOIN event_images ei ON e.Id = ei.Event_id
+        INNER JOIN city c ON c.Id = e.Location
+        INNER JOIN category_event ce ON e.Id = ce.Event_id
+        INNER JOIN category cat ON cat.Id = ce.Category_id
+        GROUP BY e.Id
+        LIMIT :start, :end";
+
+        $this->connection->execute_select($sql, [
+            ":start" => $start,
+            ":end" => $end
+        ]);
+        $this->data = [];
+
+        foreach($this->connection->rows as $row)
+        {
+            $new_row = [];
+
+            $new_row["id"] = $row["Id"];
+            $new_row["title"] = $row["Title"];
+            $new_row["description"] = $row["Description"];
+            $new_row["admin"] = $row["Admin"];
+            $new_row["city"] = $row["City_Name"];
+            $new_row["start_date"] = $row["Start_date"];
+            $new_row["ending_date"] = $row["Ending_date"];
+            $new_row["category"] = $row["Category"];
+            $new_row["active"] = $row["Active"];
+
+            array_push($this->data, $new_row);
+        }
+
+        return $this->data;
+    }
 }
