@@ -298,6 +298,82 @@ final class EventModel
     }
 
     /**
+     * Método que obtiene los eventos en los que el usuario no va
+     * a participar.
+     * @param int El id del usuario del que se quieren obtener
+     * los eventos en los cuáles no va a participar.
+     * @return array Los eventos en los cuáles no va a participar el usuario.
+     */
+    public function getUserCancelledEvents(int $user_id):array
+    {
+        $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
+        e.Start_date, e.Ending_date, e.Active FROM event e 
+        INNER JOIN user_event_participation uep ON e.Id = uep.Event_id
+        INNER JOIN user u ON uep.User_id = u.Id
+        INNER JOIN city c ON c.Id = e.Location
+        WHERE u.Id = :user_id AND uep.Rule_id = 3";
+
+        $this->connection->execute_select($sql, [":user_id" => $user_id]);
+        $this->data = [];   // Vaciamos el contenido del array para poder insertar de nuevo.
+
+        foreach($this->connection->rows as $row)
+        {
+            $new_row = [];
+
+            $new_row["id"] = $row["Id"];
+            $new_row["title"] = $row["Title"];
+            $new_row["description"] = $row["Description"];
+            $new_row["admin"] = $row["Admin"];
+            $new_row["city"] = $row["City_Name"];
+            $new_row["start_date"] = $row["Start_date"];
+            $new_row["end_date"] = $row["Ending_date"];
+            $new_row["active"] = $row["Active"];
+
+            array_push($this->data, $new_row);
+        }
+
+        return $this->data;
+    }
+
+    /**
+     * Método que obtiene los eventos en los que el usuario tiene
+     * que confirmar si va a ir o no.
+     * @param int El id del usuario del que se quieren obtener
+     * los eventos en los cuáles no sabe si va a participar.
+     * @return array Los eventos en los cuáles el usuario no sabe si va a participar.
+     */
+    public function getUserPendingEvents(int $user_id):array
+    {
+        $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
+        e.Start_date, e.Ending_date, e.Active FROM event e 
+        INNER JOIN user_event_participation uep ON e.Id = uep.Event_id
+        INNER JOIN user u ON uep.User_id = u.Id
+        INNER JOIN city c ON c.Id = e.Location
+        WHERE u.Id = :user_id AND uep.Rule_id = 4";
+
+        $this->connection->execute_select($sql, [":user_id" => $user_id]);
+        $this->data = [];   // Vaciamos el contenido del array para poder insertar de nuevo.
+
+        foreach($this->connection->rows as $row)
+        {
+            $new_row = [];
+
+            $new_row["id"] = $row["Id"];
+            $new_row["title"] = $row["Title"];
+            $new_row["description"] = $row["Description"];
+            $new_row["admin"] = $row["Admin"];
+            $new_row["city"] = $row["City_Name"];
+            $new_row["start_date"] = $row["Start_date"];
+            $new_row["end_date"] = $row["Ending_date"];
+            $new_row["active"] = $row["Active"];
+
+            array_push($this->data, $new_row);
+        }
+
+        return $this->data;
+    }
+
+    /**
      * Método que hace una consulta a la tabla user_event para cmabiar el
      * estado de un evento.
      * @param int El id del evento del cuál se quiere cambiar la regla.
