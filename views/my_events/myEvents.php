@@ -79,7 +79,7 @@
                                 <h5 class="offcanvas-title" id="offcanvasBottomLabel">Eventos en los que participas</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
-                            <div class="offcanvas-body">
+                            <div class="offcanvas-body user-participation-events">
                                 <?php
                                     if(count($user_participation_events) > 0)
                                     {
@@ -129,7 +129,7 @@
                                 <h5 class="offcanvas-title" id="offcanvasBottomLabel">Pendientes de confirmación</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
-                            <div class="offcanvas-body">
+                            <div class="offcanvas-body user-pending-events">
                                 <?php
                                     if(count($pending_events) > 0)
                                     {
@@ -179,7 +179,7 @@
                                 <h5 class="offcanvas-title" id="offcanvasBottomLabel">Eventos cancelados</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
-                            <div class="offcanvas-body">
+                            <div class="offcanvas-body user-cancelled-events">
                                 <?php
                                     if(count($cancelled_events) > 0)
                                     {
@@ -217,6 +217,41 @@
                                 ?>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="eventRemoveConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="eventRemoveConfirmation">Confirmar acción <i class="fa-solid fa-badge-check"></i></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que quiere borrar este evento?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger confirm">Eliminar evento</button>
+                        <button type="button" class="btn btn-primary cancel">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="eventRemovedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="eventRemovedModal">Proceso terminado <i class="fa-solid fa-badge-check"></i></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        El evento ha sido borrado correctamente.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="return-home-btn submit-btn">Hecho</button>
                     </div>
                 </div>
             </div>
