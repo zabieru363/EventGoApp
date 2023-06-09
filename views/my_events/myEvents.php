@@ -222,6 +222,41 @@
             </div>
         </div>
 
+        <div class="modal fade" id="eventRemoveConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="eventRemoveConfirmation">Confirmar acción <i class="fa-solid fa-badge-check"></i></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que quiere borrar este evento?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger confirm">Eliminar evento</button>
+                        <button type="button" class="btn btn-primary cancel">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="eventRemovedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="eventRemovedModal">Proceso terminado <i class="fa-solid fa-badge-check"></i></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        El evento ha sido borrado correctamente.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="return-home-btn submit-btn">Hecho</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- JavaScript -->
         <script src="public/js/deleteEvent.js"></script>
 
