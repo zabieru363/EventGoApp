@@ -36,12 +36,14 @@ final class AdminController extends BaseController
     public function events():void
     {
         $event_controller = new EventController();
+        $user_controller = new UserController();
 
         if(isset($_SESSION["id_user"]))
         {
             try {
-                $events = $event_controller->listEvents();
-                $this->render("backoffice/eventsAdminZone", ["events" => $events]);
+                $page = $_GET["page"] ?? 1;
+                $params = $event_controller->listEvents($page, 10);
+                $this->render("backoffice/eventsAdminZone", ["params" => $params]);
             }catch(Exception $e) {
                 var_dump($e->getMessage());
             }

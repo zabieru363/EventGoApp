@@ -58,10 +58,16 @@ final class EventController extends BaseController
             try {
                 $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
                 $public_user_events = $this->getUserPublicEvents($_SESSION["id_user"]);
+                $user_participation_events = $this->getUserEventsParticipation($_SESSION["id_user"]);
+                $cancelled_events = $this->getUserCancelledEvents($_SESSION["id_user"]);
+                $pending_events = $this->getUserPendingEvents($_SESSION["id_user"]);
                 
                 $this->render("my_events/myEvents", [
                     "user_image" => $user_image,
-                    "public_user_events" => $public_user_events
+                    "public_user_events" => $public_user_events,
+                    "user_participation_events" => $user_participation_events,
+                    "cancelled_events" => $cancelled_events,
+                    "pending_events" => $pending_events
                 ]);
             }catch(Exception $e) {
                 var_dump($e->getMessage());
@@ -154,6 +160,43 @@ final class EventController extends BaseController
     }
 
     /**
+     * Método que llama al modelo para recuperar los eventos
+     * en los que el usuario va a participar.
+     * @param int El id del usuario del cuál se quieren obtener
+     * los eventos en los cuales va a participar.
+     * @return array Los eventos en los que va a participar
+     * ese usuario.
+     */
+    public function getUserEventsParticipation(int $user_id):array
+    {
+        return $this->model->getUserEventsParticipation($user_id);
+    }
+
+    /**
+     * Método llama al modelo para recuperar los eventos en los cuáles
+     * el usuario no va a participar.
+     * @param int El id del usuario para recuperar los eventos en los
+     * cuáles no va a participar.
+     * @return array Los eventos en los cuáles no participa el usuario.
+     */
+    public function getUserCancelledEvents(int $user_id):array
+    {
+        return $this->model->getUserCancelledEvents($user_id);
+    }
+
+    /**
+     * Método llama al modelo para recuperar los eventos en los cuáles
+     * el usuario no sabe si va a participar o no.
+     * @param int El id del usuario para recuperar los eventos en los
+     * cuáles no sabe si va a participar o no.
+     * @return array Los eventos en los cuáles el usuario no sabe si va a participar o no.
+     */
+    public function getUserPendingEvents(int $user_id):array
+    {
+        return $this->model->getUserPendingEvents($user_id);
+    }
+
+    /**
      * Método que llama al modelo y crea una regla de participación o
      * de estado de un evento, para un usuario.
      * @param int El id del evento del cuál se quiere cambiar la regla.
@@ -177,8 +220,52 @@ final class EventController extends BaseController
         return $this->model->updateEventParticipationRule($event_id, $user_id, $rule_id);
     }
 
+    /**
+     * Método que llama al modelo y comprueba que una regla de participación
+     * de un evento existe para un usuario.
+     * @param int El id del evento que se quiere comprobar.
+     * @param int El id del usuario que se quiere comprobar.
+     * @return bool True si existe, false si no es así.
+     */
     public function eventParticipationRuleExists(int $event_id, int $user_id):bool
     {
         return $this->model->eventParticipationRuleExists($event_id, $user_id);
+    }
+
+    /**
+     * Método que obtiene todos los eventos de aplicando un
+     * limitador.
+     * @param int El comienzo desde donde se quieren empezar a
+     * obtener registros.
+     * @param int El final hasta donde se quieren obtener registros.
+     * @return array Un array con los eventos obtenidos y sus datos.
+     */
+    public function listEvents(int $page = 1, int $perPage):array
+    {
+        $start = ($page - 1) * $perPage;
+        $total_rows = $this->getNumberofTotalEvents();
+        $total_pages = ceil($total_rows / $perPage);
+
+        $events = $this->model->listEvents($start, $perPage);
+
+        return [
+            "events" => $events,
+            "pagination" => [
+                "total_pages" => $total_pages,
+                "current_page" => $page,
+                "events_per_page" => $perPage,
+                "total_events" => $total_rows
+            ]
+        ];
+    }
+
+    /**
+     * Método que llama al modelo y obtiene el número total
+     * de eventos que hay en la tabla event.
+     * @return int El número total de eventos que hay en la tabla event.
+     */
+    public function getNumberofTotalEvents():int
+    {
+        return $this->getNumberofTotalEvents();
     }
 }
