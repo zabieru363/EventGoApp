@@ -66,27 +66,34 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <h4>Titulo del evento</h4>
-
-                                        <div class="event-admin">
-                                            <h6>Organizado por [usuario]</h6>
-                                        </div>
-
-                                        <div cñass="event-description">
-                                            Descripción sobre el evento.
-                                        </div>
-
-                                        <div class="event-location mt-3">
-                                            <i class="fa-solid fa-location-dot"></i> Ciudad Real
-                                        </div>
-
-                                        <div class="event-date">
-                                            <i class="fa-solid fa-clock"></i></i> Empieza el x y termina el x
-                                        </div>
-                                    </div>
-                                </div>
+                            <?php
+                                    foreach($user_participation_events as $participation_event)
+                                    {
+                                        echo "
+                                            <div class='card mb-3' data-id='{$participation_event["id"]}'>
+                                                <div class='card-body'>
+                                                     <h4>{$participation_event["title"]}</h4>
+    
+                                                    <div class='event-admin'>
+                                                        <h6>{$participation_event["admin"]}</h6>
+                                                    </div>
+    
+                                                    <div class='event-description'>
+                                                        {$participation_event["description"]}
+                                                    </div>
+    
+                                                    <div class='event-location mt-3'>
+                                                        <i class='fa-solid fa-location-dot'></i> {$participation_event["city"]}
+                                                    </div>
+    
+                                                    <div class='event-date'>
+                                                        <i class='fa-solid fa-clock'></i></i> 
+                                                        Empieza el {$participation_eventt["start_date"]} y termina el {$participation_event["end_date"]}
+                                                    </div>
+                                            </div>
+                                        </div>";
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
