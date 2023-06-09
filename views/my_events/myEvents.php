@@ -51,7 +51,7 @@
                                                         </div>
     
                                                         <div class='mt-3'>
-                                                            <button class='btn btn-danger' data-id={$public_event["id"]}><i class='fa-sharp fa-solid fa-trash'></i> Borrar este evento</button>
+                                                            <button class='btn btn-danger delete-event-btn' data-id={$public_event["id"]}><i class='fa-sharp fa-solid fa-trash'></i> Borrar este evento</button>
                                                         </div>
                                                 </div>
                                             </div>";
@@ -221,6 +221,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- JavaScript -->
+        <script src="public/js/deleteEvent.js"></script>
 
         <!-- Bootstrap y font-awesome -->
        <?php require_once("templates/cdns.php"); ?> 
