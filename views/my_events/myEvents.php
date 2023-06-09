@@ -222,6 +222,9 @@
             </div>
         </div>
 
+        <!-- JavaScript -->
+        <script src="public/js/deleteEvent.js"></script>
+
         <!-- Bootstrap y font-awesome -->
        <?php require_once("templates/cdns.php"); ?> 
     </body>
