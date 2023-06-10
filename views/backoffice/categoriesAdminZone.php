@@ -10,12 +10,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <h4>Haga clic en una categoría para eliminarla</h4>
-                    <?php
-                        foreach($categories as $category)
-                        {
-                            echo "<div class='category shadow mt-2 p-2' data-id='{$category->__get("id")}'>{$category->__get("name")}</div>";
-                        }
-                    ?>
+                    <div class="categories-container">
+                        <?php
+                            foreach($categories as $category)
+                            {
+                                echo "<div class='category shadow mt-2 p-2' data-id='{$category->__get("id")}'>{$category->__get("name")}</div>";
+                            }
+                        ?>
+                    </div>
                 </div>
 
                 <div class="col-md-1"></div>
@@ -31,6 +33,19 @@
                         
                         <button type="submit" class="btn btn-success">Crear categoría</button>
                     </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORIES MODAL --->
+        <div class="modal fade" id="categoryOperationResult" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="categoryOperationResult">Operación realizada <i class="fa-solid fa-badge-check"></i></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body"></div>
                 </div>
             </div>
         </div>
