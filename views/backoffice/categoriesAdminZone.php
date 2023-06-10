@@ -10,12 +10,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <h4>Haga clic en una categoría para eliminarla</h4>
-                    <?php
-                        foreach($categories as $category)
-                        {
-                            echo "<div class='category shadow mt-2 p-2' data-id='{$category->__get("id")}'>{$category->__get("name")}</div>";
-                        }
-                    ?>
+                    <div class="categories-container">
+                        <?php
+                            foreach($categories as $category)
+                            {
+                                echo "<div class='category shadow mt-2 p-2' data-id='{$category->__get("id")}'>{$category->__get("name")}</div>";
+                            }
+                        ?>
+                    </div>
                 </div>
 
                 <div class="col-md-1"></div>
