@@ -151,10 +151,11 @@ final class UserModel
                         $expiration_date = date('Y-m-d H:i:s', $expiration);
     
                         $sql = "INSERT INTO remember_token VALUES(NULL,
-                            :user_id, :token, :expiry)";
+                            :user_id, :username, :token, :expiry)";
     
                         $this->connection->execute_query($sql, [
                             ":user_id" => $user_id,
+                            ":username" => $username,
                             ":token" => $token,
                             ":expiry" => $expiration_date
                         ]);
@@ -166,6 +167,34 @@ final class UserModel
         }
 
         return $user_info;
+    }
+
+    /**
+     * Método que comprueba si existe un token de autenticación
+     * igual que el de la cookie de remember me.
+     * @param string El token que se guarda en la cookie de remember me
+     * @return array Un array asociativo que contiene el id del usuario,
+     * el nombre de usuario y si el token existe o no.
+     */
+    public function tokenExists(string $token):array
+    {
+        $result = [
+            "token_exists" => false,
+            "user_id" => 0,
+            "username" => ""
+        ];
+
+        $sql = "SELECT User_id, Username FROM remember_token WHERE Token = :token";
+        $this->connection->execute_select($sql, [":token" => $token]);
+
+        if(count($this->connection->rows) > 0)
+        {
+            $result["token_exists"] = true;
+            $result["user_id"] = $this->connection->rows[0]["User_id"];
+            $result["username"] = $this->connection->rows[0]["Username"];
+        }
+
+        return $result;
     }
 
     /**
