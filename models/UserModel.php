@@ -151,10 +151,11 @@ final class UserModel
                         $expiration_date = date('Y-m-d H:i:s', $expiration);
     
                         $sql = "INSERT INTO remember_token VALUES(NULL,
-                            :user_id, :token, :expiry)";
+                            :user_id, :username, :token, :expiry)";
     
                         $this->connection->execute_query($sql, [
                             ":user_id" => $user_id,
+                            ":username" => $username,
                             ":token" => $token,
                             ":expiry" => $expiration_date
                         ]);
