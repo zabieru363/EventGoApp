@@ -87,8 +87,7 @@ form.addEventListener("submit", async function(e) {
         });
 
         if(response.ok) {
-            const data = response.json();
-            console.log(data.id);
+            const data = await response.json();
 
             const categoryDiv = document.createElement("div");
             categoryDiv.classList.add("category", "shadow", "mt-2", "p-2");
