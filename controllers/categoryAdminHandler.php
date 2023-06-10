@@ -9,7 +9,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 
     if($data["action"] === "delete") $category_controller->deleteCategory($data["id"]);
 
-    if($data["create"])
+    if($data["action"] === "create")
     {
         $category = new Category();
 
