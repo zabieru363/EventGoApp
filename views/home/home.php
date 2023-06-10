@@ -39,6 +39,12 @@
 
                 echo '<script src="public/js/getEventsCategory.js" type="module"></script>';
                 echo '<script src="public/js/searchEvents.js"></script>';
+
+                if(!(isset($_COOKIE["cookies-accepted"])))
+                {
+                    require_once("templates/cookiesComponent.php");
+                    echo '<script src="public/js/cookiesControl.js"></script>';
+                }
             }
         ?>
 
