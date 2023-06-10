@@ -73,4 +73,21 @@ final class DAOCategories
 
         return $status;
     }
+
+    /**
+     * Método que comprueba si una categoría existe.
+     * @param string El nombre de la categoría.
+     * @return bool True si existe, false si no es así.
+     */
+    public function categoryExists(string $category_name):bool
+    {
+        $exists = false;
+
+        $sql = "SELECT COUNT(Name) AS CATEGORY_EXISTS FROM category WHERE Name = :category";
+        $this->connection->execute_select($sql, [":category" => $category_name]);
+
+        if($this->connection->rows[0]["CATEGORY_EXISTS"] == 1) $exists = true;
+
+        return $exists;
+    }
 }
