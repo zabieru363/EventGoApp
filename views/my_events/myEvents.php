@@ -156,6 +156,16 @@
                                                             <i class='fa-solid fa-clock'></i></i> 
                                                             Empieza el {$pending_event["start_date"]} y termina el {$pending_event["end_date"]}
                                                         </div>
+
+                                                        <div class='mt-3 dropdown'>
+                                                            <button class='btn btn-warning dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                                                Confirmar asistencia
+                                                            </button>
+                                                            <ul class='dropdown-menu event-confirmation-options'>
+                                                                <li class='dropdown-item opt2'>Puedo ir</li>
+                                                                <li class='dropdown-item opt3'>No puedo ir</li>
+                                                            </ul>
+                                                        </div>
                                                 </div>
                                             </div>";
                                         }
