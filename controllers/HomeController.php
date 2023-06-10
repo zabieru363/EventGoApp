@@ -22,6 +22,7 @@ final class HomeController extends BaseController
             $category_controller = new CategoryController();
             $user_controller = new UserController();
             $categories = $category_controller->listCategories();
+            $user_controller->restoreUserSession();
 
             if(isset($_SESSION["id_user"]))
             {
