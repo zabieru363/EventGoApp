@@ -13,7 +13,7 @@
             </div>
 
             <div class="p-3 shadow admin-option">
-                <a href="index.php?url=admin&action=categories" class="text-decoration-none text-black">Crear categorias</a>
+                <a href="index.php?url=admin&action=categories" class="text-decoration-none text-black">Administrar categorias</a>
             </div>
         </div>
     </div>
