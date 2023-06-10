@@ -32,7 +32,7 @@ final class DAOCategories
     public function create(Category $category):Category
     {
         $sql = "INSERT INTO category VALUES(NULL, :name)";
-        $id = $this->connection->execute_query_id($sql, [":name", $category->__get("name")]);
+        $id = $this->connection->execute_query_id($sql, [":name" => $category->__get("name")]);
 
         $category->__set("id", $id);
 
