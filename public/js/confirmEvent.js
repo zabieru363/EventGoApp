@@ -4,6 +4,8 @@ const userParticipationEventsList = document.getElementsByClassName("user-partic
 const userPendingEventsList = document.getElementsByClassName("user-pending-events")[0];
 const userCancelledEventsList = document.getElementsByClassName("user-cancelled-events")[0];
 
+const modalBody = document.getElementsByClassName("confirm-events-modal-body")[0];
+const closeConfirmModalBtn = document.getElementsByClassName("close-confirm-modal-btn")[0];
 const dropdowns = [...userPendingEventsList.getElementsByClassName("dropdown")];
 
 dropdowns.forEach(function(dropdown) {
@@ -25,15 +27,22 @@ dropdowns.forEach(function(dropdown) {
                     const dropdownForRemove = eventContainer.getElementsByClassName("dropdown")[0];
                     dropdownForRemove.remove();
                     userParticipationEventsList.appendChild(eventContainer);
+                    modalBody.textContent = "Participarás en este evento, tu confirmación ha sido realizada. Puedes verlo en tu lista de eventos en los que participas";
                 }
 
                 if(rule === 3) {
                     const dropdownForRemove = eventContainer.getElementsByClassName("dropdown")[0];
                     dropdownForRemove.remove();
                     userCancelledEventsList.appendChild(eventContainer);
+                    modalBody.textContent = "No participarás en este evento, tu confirmación ha sido realizada. Puedes verlo en tu lista de eventos cancelados";
                 }
 
                 dropdown.remove();
+
+                const modal = new bootstrap.Modal(document.getElementById("confirmEventsModal"));
+                modal.show();
+
+                closeConfirmModalBtn.addEventListener("click", () => modal.hide());
             }
 
         }catch(error) {
