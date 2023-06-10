@@ -15,6 +15,9 @@
     require_once("templates/open.php");
 ?>
     <body>
+        <!-- Bootstrap y Font Awesome -->
+        <?php require_once("templates/cdns.php"); ?>
+        
         <?php
             if(isset($_SESSION["id_user"]))
             {
@@ -47,8 +50,5 @@
                 }
             }
         ?>
-
-        <!-- Bootstrap y Font Awesome -->
-        <?php require_once("templates/cdns.php"); ?>
     </body>
 </html>
