@@ -41,4 +41,14 @@ final class CategoryController
     {
         return $this->model->delete($id);
     }
+
+    /**
+     * Métood que llama al modelo para comprobar si una categoría existe o no
+     * @param string El nombre de la categoría.
+     * @return bool True si existe, false si no es así.
+     */
+    public function categoryExists(string $category_name):bool
+    {
+        return $this->model->categoryExists($category_name);
+    }
 }
