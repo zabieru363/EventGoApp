@@ -277,7 +277,7 @@
                         <h1 class="modal-title fs-5" id="confirmEventsModal">Asistencia de evento confirmada <i class="fa-solid fa-badge-check"></i></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body close-confirm-modal-btn"></div>
+                    <div class="modal-body confirm-events-modal-body"></div>
                     <div class="modal-footer">
                         <button type="button" class="close-confirm-modal-btn submit-btn">Hecho</button>
                     </div>
