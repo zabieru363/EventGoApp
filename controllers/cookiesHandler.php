@@ -8,5 +8,5 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
     $now = time();
     $expiration = $now + $seconds;
 
-    setcookie('cookies-accepted', $token, $expiration, '/');
+    setcookie('cookies-accepted', $cookies_accepted, $expiration, '/');
 }
