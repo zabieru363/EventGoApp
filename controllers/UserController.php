@@ -100,6 +100,25 @@ final class UserController
     }
 
     /**
+     * Método que restaura la sesión del usuario si la cookie
+     * de remember me todavía no ha expirado.
+     */
+    public function restoreUserSession():void
+    {
+        if(isset($_COOKIE["remember_me"]))
+        {
+            $token = $_COOKIE["remember_me"];
+            $result = $this->model->tokenExists($token);
+
+            if($result["token_exists"])
+            {
+                $_SESSION["id_user"] = $result["user_id"];
+                $_SESSION["username"] = $result["username"];
+            }
+        }
+    }
+
+    /**
      * Método que llama al modelo para eliminar el token
      * de autenticación del usuario
      * @param int El id del usuario del cuál se quiere
