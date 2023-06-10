@@ -268,6 +268,7 @@
         </div>
 
         <!-- JavaScript -->
+        <script src="public/js/confirmEvent.js"></script>
         <script src="public/js/deleteEvent.js"></script>
 
         <!-- Bootstrap y font-awesome -->
