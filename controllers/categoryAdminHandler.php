@@ -14,8 +14,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
         $category = new Category();
 
         $category->__set("name", $data["name"]);
-        $id = $category_controller->createCategory($category);
+        $category_created = $category_controller->createCategory($category);
 
-        echo json_encode(["id" => $id, "name" => $data["name"]]);
+        echo json_encode(["id" => $category_created->__get("id"), "name" => $data["name"]]);
     }
 }
