@@ -19,7 +19,11 @@ final class AdminController extends BaseController
         {
             try {
                 $users = $user_controller->listUsers();
-                $this->render("backoffice/usersAdminZone", ["users" => $users]);
+                $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
+                $this->render("backoffice/usersAdminZone", [
+                    "users" => $users,
+                    "user_image" => $user_image
+                ]);
             }catch(Exception $e) {
                 var_dump($e->getMessage());
             }
@@ -44,7 +48,11 @@ final class AdminController extends BaseController
             try {
                 $page = $_GET["page"] ?? 1;
                 $params = $event_controller->listEvents($page, 10);
-                $this->render("backoffice/eventsAdminZone", ["params" => $params]);
+                $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
+                $this->render("backoffice/eventsAdminZone", [
+                    "user_image" => $user_image,
+                    "params" => $params
+                ]);
             }catch(Exception $e) {
                 var_dump($e->getMessage());
             }
@@ -68,7 +76,11 @@ final class AdminController extends BaseController
         {
             try{
                 $categories = $category_controller->listCategories();
-                $this->render("backoffice/categoriesAdminZone", ["categories" => $categories]);
+                $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
+                $this->render("backoffice/categoriesAdminZone", [
+                    "categories" => $categories,
+                    "user_image" => $user_image
+                ]);
             }catch(Exception $e) {
                 var_dump($e->getMessage());
             }
