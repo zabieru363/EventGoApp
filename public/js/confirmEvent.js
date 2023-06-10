@@ -15,13 +15,25 @@ dropdowns.forEach(function(dropdown) {
         if(e.target.classList.contains("opt3")) rule = 3;
 
         try {
-            const response = await fetch("setParticipationRuleEventHandler.php", {
+            const response = await fetch("controllers/setParticipationRuleEventHandler.php", {
                 method: "POST",
                 body: JSON.stringify({idEvent: eventId, rule: rule})
             });
 
             if(response.ok) {
-                
+                if(rule === 2) {
+                    const dropdownForRemove = eventContainer.getElementsByClassName("dropdown")[0];
+                    dropdownForRemove.remove();
+                    userParticipationEventsList.appendChild(eventContainer);
+                }
+
+                if(rule === 3) {
+                    const dropdownForRemove = eventContainer.getElementsByClassName("dropdown")[0];
+                    dropdownForRemove.remove();
+                    userCancelledEventsList.appendChild(eventContainer);
+                }
+
+                dropdown.remove();
             }
 
         }catch(error) {
