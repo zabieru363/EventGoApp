@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $title = "Crear una nueva categoria";
+    $title = "Administración de categorías";
     require_once("templates/open.php");
 ?>
     <body>

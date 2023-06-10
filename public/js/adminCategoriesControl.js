@@ -12,34 +12,36 @@ submitBtn.style.background = "#8dffcc";
 
 const modalBody = document.getElementsByClassName("modal-body")[0];
 
+async function deleteCategory() {
+    const confirmation = confirm("¿Está seguro de que quiere ejecutar la siguiente operación?");
+
+    if(confirmation) {
+        const categoryId = +this.getAttribute("data-id");
+
+        try{
+            const response = await fetch("controllers/categoryAdminHandler.php", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({id: categoryId, action: "delete"})
+            });
+
+            if(response.ok) {
+                this.remove();
+                modalBody.textContent = "La categoría ha sido eliminada correctamente";
+                const modal = new bootstrap.Modal(document.getElementById("categoryOperationResult"));
+                modal.show();
+            }
+        }catch(error) {
+            console.error("Algo salió mal " + error);
+        }
+    }
+}
+
 // * BORRADO
 categories.forEach(function(category) {
-    category.addEventListener("click", async function() {
-        const confirmation = confirm("¿Está seguro de que quiere ejecutar la siguiente operación?");
-
-        if(confirmation) {
-            const categoryId = this.getAttribute("data-id");
-
-            try{
-                const response = await fetch("controllers/categoryAdminHandler.php", {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({id: categoryId, action: "delete"})
-                });
-
-                if(response.ok) {
-                    this.remove();
-                    modalBody.textContent = "La categoría ha sido eliminada correctamente";
-                    const modal = new bootstrap.Modal(document.getElementById("categoryOperationResult"));
-                    modal.show();
-                }
-            }catch(error) {
-                console.error("Algo salió mal " + error);
-            }
-        }
-    });
+    category.addEventListener("click", deleteCategory);
 });
 
 // * ALTA
@@ -85,17 +87,19 @@ form.addEventListener("submit", async function(e) {
         });
 
         if(response.ok) {
-            const data = response.json();
+            const data = await response.json();
 
             const categoryDiv = document.createElement("div");
             categoryDiv.classList.add("category", "shadow", "mt-2", "p-2");
             categoryDiv.textContent = elements[0].value;
-            categoryDiv.setAttribute("data-id", data);
+            categoryDiv.setAttribute("data-id", data.id);
             categoriesContainer.appendChild(categoryDiv);
 
             modalBody.textContent = "La categoría ha sido creada correctamente";
             const modal = new bootstrap.Modal(document.getElementById("categoryOperationResult"));
             modal.show();
+
+            categoryDiv.addEventListener("click", deleteCategory);
         }
     }catch(error) {
         console.error("Algo salió mal " + error);
