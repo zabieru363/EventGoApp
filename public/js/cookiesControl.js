@@ -1,7 +1,7 @@
 "use strict";
 
 const acceptCookiesBtn = document.getElementById("accepCookiesBtn");
-const cookiesModal = new bootstrap.Modal("cookiesModal");
+const cookiesModal = new bootstrap.Modal(document.getElementById("cookiesModal"));
 cookiesModal.show();    // Mostramos el modal por defecto.
 
 acceptCookiesBtn.addEventListener("click", async function() {
