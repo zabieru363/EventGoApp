@@ -8,7 +8,7 @@
                 Utilizamos cookies propias y de terceros para mejorar nuestros servicios.
             </div>
             <div class="modal-footer">
-                <button type="button" class="submit-btn text-decoration-none">De acuerdo</button>
+                <button type="button" id="accepCookiesBtn" class="submit-btn text-decoration-none">De acuerdo</button>
             </div>
         </div>
     </div>
