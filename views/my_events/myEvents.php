@@ -232,6 +232,7 @@
             </div>
         </div>
 
+        <!-- CONFIRM EVENT REMOVE MODAL -->
         <div class="modal fade" id="eventRemoveConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -250,6 +251,7 @@
             </div>
         </div>
 
+        <!-- EVENT REMOVED MODAL -->
         <div class="modal fade" id="eventRemovedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -262,6 +264,22 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="return-home-btn submit-btn">Hecho</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONFIRM EVENTS MODAL -->
+        <div class="modal fade" id="confirmEventsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="confirmEventsModal">Asistencia de evento confirmada <i class="fa-solid fa-badge-check"></i></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="close-confirm-modal-btn submit-btn">Hecho</button>
                     </div>
                 </div>
             </div>
