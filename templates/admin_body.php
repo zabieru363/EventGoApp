@@ -9,7 +9,7 @@
             </div>
 
             <div class="p-3 shadow me-4 admin-option">
-                <a href="index.php?url=admin&action=events" class="text-decoration-none text-black">Administrar eventos</a>
+                <a href="index.php?url=admin&action=events&page=1" class="text-decoration-none text-black">Administrar eventos</a>
             </div>
 
             <div class="p-3 shadow admin-option">
