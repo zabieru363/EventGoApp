@@ -60,15 +60,14 @@
                                     <?php endif; ?>
 
                                     <?php for ($i = 1; $i <= $params["pagination"]["total_pages"]; $i++): ?>
-                                        <?php if ($i == $params["pagination"]["current_page"]): ?>
-                                            <li class="page-item active" aria-current="page">
-                                                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                            </li>
-                                        <?php else: ?>
-                                            <li class="page-item">
-                                                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                            </li>
-                                        <?php endif; ?>
+                                        <?php $activeStyle = $i == $params["pagination"]["current_page"] ? "active" : ""; ?>
+
+                                        <li class="page-item <?php echo $activeStyle?>" aria-current="page">
+                                            <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                            <a class="page-link" href="#"><?php echo $i; ?></a>
+                                        </li>
+
+                                        
                                     <?php endfor; ?>
 
                                     <?php if ($params["pagination"]["current_page"] < $params["pagination"]["total_pages"]): ?>
