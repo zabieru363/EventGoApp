@@ -45,7 +45,7 @@ final class DAOCategories
      */
     public function list():array
     {
-        $sql = "SELECT * FROM category";
+        $sql = "SELECT * FROM category ORDER BY Name ASC";
         $this->connection->execute_select($sql, []);
 
         foreach($this->connection->rows as $row)
@@ -56,6 +56,34 @@ final class DAOCategories
             $category->__set("name", $row["Name"]);
 
             array_push($this->data, $category);
+        }
+
+        return $this->data;
+    }
+
+    /**
+     * Método que recupera todas las categorías y además con el
+     * número de eventos que tienen cada una.
+     * @return array Un array asociativo con las categorias y su
+     * número de eventos.
+     */
+    public function listWithNumberOfEvents():array
+    {
+        $sql = "SELECT c.Id, c.Name, COUNT(e.Id) AS TOTAL_EVENTS
+            FROM category AS c
+            LEFT JOIN category_event AS ce ON ce.Category_id = c.Id
+            LEFT JOIN event AS e ON e.Id = ce.Event_id
+            GROUP BY c.Id ORDER BY c.Name ASC";
+
+        foreach($this->connection->rows as $row)
+        {
+            $new_row = [];
+
+            $new_row["id"] = $row["Id"];
+            $new_row["name"] = $row["Name"];
+            $new_row["total_events"] = $row["TOTAL_EVENTS"];
+
+            array_push($this->data, $new_row);
         }
 
         return $this->data;
