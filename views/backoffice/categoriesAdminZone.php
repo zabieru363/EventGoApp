@@ -16,8 +16,8 @@
                             {
                                 echo "
                                     <div class='category shadow mt-2 p-2' data-id='{$category["id"]}'>
-                                        {$category["name"]}
-                                        <p class='events'>{$category["total_events"]}</p>
+                                        <strong>{$category["name"]}</strong>
+                                        <p class='events'>Eventos: {$category["total_events"]}</p>
                                     </div>";
                             }
                         ?>
