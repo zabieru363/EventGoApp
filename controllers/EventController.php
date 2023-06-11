@@ -266,7 +266,7 @@ final class EventController extends BaseController
      */
     public function getNumberofTotalEvents():int
     {
-        return $this->getNumberofTotalEvents();
+        return $this->model->getNumberofTotalEvents();
     }
 
     /**
