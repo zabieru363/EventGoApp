@@ -7,7 +7,7 @@
         <main>
             <?php require_once("templates/admin_header.php") ?>
             <div class="container py-4 text-center">
-                <h2>Usuarios</h2>
+                <h2>Eventos</h2>
 
                 <div class="row py-4">
                     <div class="col">
@@ -64,10 +64,7 @@
 
                                         <li class="page-item <?php echo $activeStyle?>" aria-current="page">
                                             <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                            <a class="page-link" href="#"><?php echo $i; ?></a>
                                         </li>
-
-                                        
                                     <?php endfor; ?>
 
                                     <?php if ($params["pagination"]["current_page"] < $params["pagination"]["total_pages"]): ?>
