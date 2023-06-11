@@ -288,7 +288,7 @@ final class UserModel
 
         $active = $this->connection->rows[0]["Active"];
 
-        if($active === 1) $is_active = true;
+        if($active == 1) $is_active = true;
 
         return $is_active;
     }
@@ -383,15 +383,13 @@ final class UserModel
      * @return array Un array con todos los usuarios de la
      * base de datos en formato de objeto.
      */
-    public function getAllUsers($start, $rows_per_page):array
+    public function getAllUsers($start, $end):array
     {
         $sql = "SELECT u.Id, u.Username, u.Type, u.Name, u.Email, city.Name AS City_name, u.Active, u.Register_date 
         FROM user u JOIN city ON u.City = city.Id
-        LIMIT :start, :rows_per_page";
-        $this->connection->execute_select($sql, [
-            ":start" => $start,
-            ":rows_per_page" => $rows_per_page
-        ]);
+        LIMIT " . $start . "," . $end;
+
+        $this->connection->execute_select($sql, []);
         $this->data = [];
 
         foreach($this->connection->rows as $row)
@@ -465,9 +463,9 @@ final class UserModel
      */
     public function getNumberTotalUsers():int
     {
-        $sql = "SELECT COUNT(Id) TOTAL_USERS FROM user";
+        $sql = "SELECT COUNT(Id) AS TOTAL_USERS FROM user";
         $this->connection->execute_select($sql, []);
 
-        return count($this->connection->rows);
+        return $this->connection->rows[0]["TOTAL_USERS"];
     }
 }
