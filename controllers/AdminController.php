@@ -47,7 +47,7 @@ final class AdminController extends BaseController
         {
             try {
                 $page = $_GET["page"] ?? 1;
-                $params = $event_controller->listEvents($page, 10);
+                $params = $event_controller->listEvents($page, 5);
                 $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
                 $this->render("backoffice/eventsAdminZone", [
                     "user_image" => $user_image,
