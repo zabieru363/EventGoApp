@@ -16,7 +16,7 @@ async function sendSelectedEvents(action) {
             const selectedIds = selectedCheckboxes.map(checkbox => checkbox.value);
         
             try {
-                const response = await fetch("controllers/userAdminHandler.php", {
+                const response = await fetch("controllers/eventAdminHandler.php", {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'
