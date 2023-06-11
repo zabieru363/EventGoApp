@@ -451,12 +451,9 @@ final class EventModel
         INNER JOIN category_event ce ON e.Id = ce.Event_id
         INNER JOIN category cat ON cat.Id = ce.Category_id
         GROUP BY e.Id
-        LIMIT :start, :end";
+        LIMIT " . $start . "," . $end;
 
-        $this->connection->execute_select($sql, [
-            ":start" => $start,
-            ":end" => $end
-        ]);
+        $this->connection->execute_select($sql, []);
         $this->data = [];
 
         foreach($this->connection->rows as $row)
@@ -517,5 +514,31 @@ final class EventModel
         $rmeoved = $this->connection->execute_query($sql, [":event_id" => $event_id]);
 
         return $rmeoved;
+    }
+
+    /**
+     * Método que desactiva un evento en especifico.
+     * @param int El id del evento que se quiere desactivar.
+     * @return bool True si se ha desactivado, false si no es así.
+     */
+    public function banEvent(int $event_id):bool
+    {
+        $sql = "UPDATE event SET Active = 0 WHERE Id = :event_id";
+        $disabled = $this->connection->execute_query($sql, [":event_id" => $event_id]);
+
+        return $disabled;
+    }
+
+    /**
+     * Método que activa un usuario en especifico.
+     * @param int El id del usuario que se quiere activar.
+     * @return bool True si se ha activado, false si no es así.
+     */
+    public function activeEvent(int $event_id):bool
+    {
+        $sql = "UPDATE event SET Active = 1 WHERE Id = :event_id";
+        $activated = $this->connection->execute_query($sql, [":event_id" => $event_id]);
+
+        return $activated;
     }
 }
