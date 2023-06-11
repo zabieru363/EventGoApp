@@ -68,6 +68,30 @@ final class DAOCategories
      */
     public function delete(int $id):bool
     {
+        // Primero hay que borrar las relaciones con los eventos.
+        $sql = "SELECT Event_id FROM category_event WHERE Category_id = :category_id";
+        $this->connection->execute_select($sql, [":category_id" => $id]);
+
+        foreach($this->connection->rows as $row)
+        {
+            $event_id = $row["Event_id"];
+
+            $sql = "DELETE FROM user_event_participation WHERE Event_id = :event_id";
+            $this->connection->execute_query($sql, [":event_id" => $event_id]);
+
+            $sql = "DELETE FROM event_images WHERE Event_id = :event_id";
+            $this->connection->execute_query($sql, [":event_id" => $event_id]);
+
+            $sql = "DELETE FROM user_event WHERE Id_event = :event_id";
+            $this->connection->execute_query($sql, [":event_id" => $event_id]);
+
+            $sql = "DELETE FROM category_event WHERE Category_id = :category_id";
+            $this->connection->execute_query($sql, [":category_id" => $id]);
+
+            $sql = "DELETE FROM event WHERE Id = :event_id";
+            $this->connection->execute_query($sql, [":event_id" => $event_id]);
+        }
+
         $sql = "DELETE FROM category WHERE Id = :category_id";
         $status = $this->connection->execute_query($sql, [":category_id" => $id]);
 
