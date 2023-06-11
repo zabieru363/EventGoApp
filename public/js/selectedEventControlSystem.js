@@ -42,7 +42,7 @@ async function sendSelectedEvents(action) {
                     if(action === "ban") {
                         selectedIds.forEach(function(id) {
                             const userRow = document.getElementsByClassName(`event-row-${id}`)[0];
-                            userRow.children[6].textContent = "NO";
+                            userRow.children[8].textContent = "NO";
                         });
                         
                         modalBody.textContent = "Eventos desactivados correctamente. Se han desactivado un total de " + selectedIds.length + " eventos.";
@@ -52,7 +52,7 @@ async function sendSelectedEvents(action) {
 
                     if(action === "active") {
                         selectedIds.forEach(function(id) {
-                            const userRow = document.getElementsByClassName(`user-row-${id}`)[0];
+                            const userRow = document.getElementsByClassName(`event-row-${id}`)[0];
                             userRow.children[8].textContent = "SI";
                         });
 
