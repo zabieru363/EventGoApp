@@ -243,10 +243,11 @@ final class EventController extends BaseController
     public function listEvents(int $page = 1, int $perPage):array
     {
         $start = ($page - 1) * $perPage;
+        $end = $start + $perPage;
         $total_rows = $this->getNumberofTotalEvents();
         $total_pages = ceil($total_rows / $perPage);
 
-        $events = $this->model->listEvents($start, $perPage);
+        $events = $this->model->listEvents($start, $end);
 
         return [
             "events" => $events,
