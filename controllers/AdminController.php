@@ -18,10 +18,11 @@ final class AdminController extends BaseController
         if(isset($_SESSION["id_user"]))
         {
             try {
-                $users = $user_controller->listUsers();
+                $page = $_GET["page"] ?? 1;
+                $params = $user_controller->listUsers($page, 5);
                 $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
                 $this->render("backoffice/usersAdminZone", [
-                    "users" => $users,
+                    "params" => $params,
                     "user_image" => $user_image
                 ]);
             }catch(Exception $e) {
