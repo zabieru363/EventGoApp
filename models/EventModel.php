@@ -451,7 +451,7 @@ final class EventModel
         INNER JOIN category_event ce ON e.Id = ce.Event_id
         INNER JOIN category cat ON cat.Id = ce.Category_id
         GROUP BY e.Id
-        LIMIT :start, :end";
+        LIMIT " . $start . "," . $end;
 
         $this->connection->execute_select($sql, [
             ":start" => $start,
