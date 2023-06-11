@@ -7,7 +7,7 @@
         <main>
             <?php require_once("templates/admin_header.php") ?>
             <div class="container py-4 text-center">
-                <h2>Usuarios</h2>
+                <h2>Eventos</h2>
 
                 <div class="row py-4">
                     <div class="col">
@@ -53,27 +53,23 @@
                                 <ul class="pagination">
                                     <?php if ($params["pagination"]["current_page"] > 1): ?>
                                         <li class="page-item">
-                                            <a class="page-link" href="?page=<?php echo $params["pagination"]["current_page"] - 1; ?>" aria-label="Anterior">
+                                            <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $params["pagination"]["current_page"] - 1; ?>" aria-label="Anterior">
                                                 <span aria-hidden="true">&laquo;</span>
                                             </a>
                                         </li>
                                     <?php endif; ?>
 
                                     <?php for ($i = 1; $i <= $params["pagination"]["total_pages"]; $i++): ?>
-                                        <?php if ($i == $params["pagination"]["current_page"]): ?>
-                                            <li class="page-item active" aria-current="page">
-                                                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                            </li>
-                                        <?php else: ?>
-                                            <li class="page-item">
-                                                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                            </li>
-                                        <?php endif; ?>
+                                        <?php $activeStyle = $i == $params["pagination"]["current_page"] ? "active" : ""; ?>
+
+                                        <li class="page-item <?php echo $activeStyle?>" aria-current="page">
+                                            <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                        </li>
                                     <?php endfor; ?>
 
                                     <?php if ($params["pagination"]["current_page"] < $params["pagination"]["total_pages"]): ?>
                                         <li class="page-item">
-                                            <a class="page-link" href="?page=<?php echo $params["pagination"]["current_page"] + 1; ?>" aria-label="Siguiente">
+                                            <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $params["pagination"]["current_page"] + 1; ?>" aria-label="Siguiente">
                                                 <span aria-hidden="true">&raquo;</span>
                                             </a>
                                         </li>

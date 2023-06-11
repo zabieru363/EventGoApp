@@ -7,6 +7,7 @@
     <body>
         <main>
             <?php require_once("templates/admin_header.php") ?>
+
             <div class="container py-4 text-center">
                 <h2>Usuarios</h2>
 
@@ -27,7 +28,7 @@
                             <!-- El id del cuerpo de la tabla. -->
                             <tbody id="content">
                                 <?php
-                                    foreach($users as $user)
+                                    foreach($params["users"] as $user)
                                     {
                                         if($user["username"] !== "admin_eventgo")
                                         {
@@ -52,7 +53,31 @@
 
                         <div class="user-pagination d-flex justify-content-center">
                             <nav class="pages" aria-label="pagination">
-                                
+                                <ul class="pagination">
+                                    <?php if ($params["pagination"]["current_page"] > 1): ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="index.php?url=admin&action=users&page=<?php echo $params["pagination"]["current_page"] - 1; ?>" aria-label="Anterior">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+
+                                    <?php for ($i = 1; $i <= $params["pagination"]["total_pages"]; $i++): ?>
+                                        <?php $activeStyle = $i == $params["pagination"]["current_page"] ? "active" : ""; ?>
+
+                                        <li class="page-item <?php echo $activeStyle?>" aria-current="page">
+                                            <a class="page-link" href="index.php?url=admin&action=users&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                        </li>
+                                    <?php endfor; ?>
+
+                                    <?php if ($params["pagination"]["current_page"] < $params["pagination"]["total_pages"]): ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="index.php?url=admin&action=users&page=<?php echo $params["pagination"]["current_page"] + 1; ?>" aria-label="Siguiente">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                </ul>
                             </nav>
                         </div>
 
