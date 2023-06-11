@@ -71,13 +71,13 @@ async function sendSelectedEvents(action) {
 }
 
 deleteUsersButton.addEventListener("click", function() {
-    sendSelectedUsers("delete");
+    sendSelectedEvents("delete");
 });
 
 disabledUsersButton.addEventListener("click", function() {
-    sendSelectedUsers("ban");
+    sendSelectedEvents("ban");
 });
 
 activeUsersButton.addEventListener("click", function() {
-    sendSelectedUsers("active");
+    sendSelectedEvents("active");
 });
