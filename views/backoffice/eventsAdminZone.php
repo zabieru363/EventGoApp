@@ -31,8 +31,8 @@
                                     {
                                         $result_active = $event["active"] ? "SI" : "NO";
                                         echo "
-                                            <tr class=user-row-" . $event["id"] . ">
-                                                <td><input type='checkbox' class='user-selected' value=" . $event["id"] . "></td>
+                                            <tr class=event-row-" . $event["id"] . ">
+                                                <td><input type='checkbox' class='event-selected' value=" . $event["id"] . "></td>
                                                 <td>" . $event["title"] . "</td>
                                                 <td>" . $event["description"] . "</td>
                                                 <td>" . $event["admin"] . "</td>
@@ -79,9 +79,9 @@
                         </div>
 
                         <div>
-                            <button class="btn btn-danger" id="delete-selected-users-btn"><i class="fa-sharp fa-solid fa-trash"></i> Eliminar seleccionados</button>
-                            <button class="btn btn-danger" id="disabled-selected-users-btn"><i class="fa-sharp fa-solid fa-ban"></i> Desactivar seleccionados</button>
-                            <button class="btn btn-success" id="active-selected-users-btn"><i class="fa-sharp fa-solid fa-circle-check"></i> Activar seleccionados</button>
+                            <button class="btn btn-danger" id="delete-selected-events-btn"><i class="fa-sharp fa-solid fa-trash"></i> Eliminar seleccionados</button>
+                            <button class="btn btn-danger" id="disabled-selected-events-btn"><i class="fa-sharp fa-solid fa-ban"></i> Desactivar seleccionados</button>
+                            <button class="btn btn-success" id="active-selected-events-btn"><i class="fa-sharp fa-solid fa-circle-check"></i> Activar seleccionados</button>
                         </div>
                     </div>
                 </div>
@@ -101,6 +101,7 @@
         </main>
 
     <!-- JavaScript -->
+    <script src="public/js/selectedEventControlSystem.js"></script>
 
     <!-- Bootstrap y font-awesome --->
     <?php require_once("templates/cdns.php"); ?>
