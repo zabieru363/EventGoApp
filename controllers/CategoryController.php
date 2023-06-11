@@ -33,6 +33,17 @@ final class CategoryController
     }
 
     /**
+     * Método que llama al modelo para listar las categorías con el
+     * número de eventos que tiene cada una.
+     * @return array Un array asociativo con las categorías y los
+     * eventos que tiene cada categoría.
+     */
+    public function listCategoriesWithNumberOfEvents():array
+    {
+        return $this->model->listWithNumberOfEvents();
+    }
+
+    /**
      * Método que llama al modelo para borrar una categoría.
      * @param int El id de la categoría que se quiere eliminar.
      * @return bool True si se ha eliminado, false si no es así.

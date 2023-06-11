@@ -75,7 +75,7 @@ final class AdminController extends BaseController
         if(isset($_SESSION["id_user"]))
         {
             try{
-                $categories = $category_controller->listCategories();
+                $categories = $category_controller->listCategoriesWithNumberOfEvents();
                 $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
                 $this->render("backoffice/categoriesAdminZone", [
                     "categories" => $categories,
