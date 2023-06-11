@@ -53,7 +53,7 @@
                                 <ul class="pagination">
                                     <?php if ($params["pagination"]["current_page"] > 1): ?>
                                         <li class="page-item">
-                                            <a class="page-link" href="?page=<?php echo $params["pagination"]["current_page"] - 1; ?>" aria-label="Anterior">
+                                            <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $params["pagination"]["current_page"] - 1; ?>" aria-label="Anterior">
                                                 <span aria-hidden="true">&laquo;</span>
                                             </a>
                                         </li>
@@ -69,7 +69,7 @@
 
                                     <?php if ($params["pagination"]["current_page"] < $params["pagination"]["total_pages"]): ?>
                                         <li class="page-item">
-                                            <a class="page-link" href="?page=<?php echo $params["pagination"]["current_page"] + 1; ?>" aria-label="Siguiente">
+                                            <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $params["pagination"]["current_page"] + 1; ?>" aria-label="Siguiente">
                                                 <span aria-hidden="true">&raquo;</span>
                                             </a>
                                         </li>
