@@ -279,4 +279,24 @@ final class EventController extends BaseController
     {
         return $this->model->deleteEvent($event_id);
     }
+
+    /**
+     * Método que llama al modelo para desactivar un evento.
+     * @param int El id del evento que se quiere desactivar.
+     * @return bool True si se ha activado, false si no es así.
+     */
+    public function banEvent(int $event_id):bool
+    {
+        return $this->model->banEvent($event_id);
+    }
+
+    /**
+     * Métood que llama al modelo para activar un evento.
+     * @param int El id del evento que se quiere activar.
+     * @return bool True si se ha activado, false si no es así.
+     */
+    public function activeEvent(int $event_id):bool
+    {
+        return $this->model->activeEvent($event_id);
+    }
 }
