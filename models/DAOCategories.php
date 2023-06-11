@@ -74,6 +74,9 @@ final class DAOCategories
             LEFT JOIN category_event AS ce ON ce.Category_id = c.Id
             LEFT JOIN event AS e ON e.Id = ce.Event_id
             GROUP BY c.Id ORDER BY c.Name ASC";
+        
+        $this->connection->execute_select($sql, []);
+        $this->data = [];
 
         foreach($this->connection->rows as $row)
         {
