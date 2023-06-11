@@ -243,10 +243,11 @@ final class EventController extends BaseController
     public function listEvents(int $page = 1, int $perPage):array
     {
         $start = ($page - 1) * $perPage;
+        $end = $start + $perPage;
         $total_rows = $this->getNumberofTotalEvents();
         $total_pages = ceil($total_rows / $perPage);
 
-        $events = $this->model->listEvents($start, $perPage);
+        $events = $this->model->listEvents($start, $end);
 
         return [
             "events" => $events,
@@ -266,7 +267,7 @@ final class EventController extends BaseController
      */
     public function getNumberofTotalEvents():int
     {
-        return $this->getNumberofTotalEvents();
+        return $this->model->getNumberofTotalEvents();
     }
 
     /**
@@ -277,5 +278,25 @@ final class EventController extends BaseController
     public function deleteEvent(int $event_id):bool
     {
         return $this->model->deleteEvent($event_id);
+    }
+
+    /**
+     * Método que llama al modelo para desactivar un evento.
+     * @param int El id del evento que se quiere desactivar.
+     * @return bool True si se ha activado, false si no es así.
+     */
+    public function banEvent(int $event_id):bool
+    {
+        return $this->model->banEvent($event_id);
+    }
+
+    /**
+     * Métood que llama al modelo para activar un evento.
+     * @param int El id del evento que se quiere activar.
+     * @return bool True si se ha activado, false si no es así.
+     */
+    public function activeEvent(int $event_id):bool
+    {
+        return $this->model->activeEvent($event_id);
     }
 }
