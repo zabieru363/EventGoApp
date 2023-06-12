@@ -31,6 +31,7 @@
                 {
                     require_once("templates/header.php");
                     require_once("templates/eventsZone.php");
+                    require_once("templates/participation_modal.php");
 
                     echo '<script src="public/js/getEventsCategory.js" type="module"></script>';
                     echo '<script src="public/js/searchEvents.js"></script>';
