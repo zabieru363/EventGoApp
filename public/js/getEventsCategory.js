@@ -272,7 +272,7 @@ const setParticipationRule = (idEvent, rule, dropdown) => {
 
             modal.show();
 
-            const closeModalBtn = document.getElementsByClassName("close-participation-event-modal-btn")[0];
+            const closeModalBtn = document.getElementById("closeEventParticipationModalBtn");
 
             closeModalBtn.addEventListener("click", function() {
               modal.hide();
