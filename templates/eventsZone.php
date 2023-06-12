@@ -6,7 +6,7 @@
             <div class="col-md-2 categories-container">
                 <h2>Categorías</h2>
 
-                Mostrar todos <input type="checkbox" class="ms-2 form-check-input show-all">
+                <div class="category shadow mt-2 mb-2 p-2 show-all">Mostrar todos</div>
 
                 <?php
                     foreach ($categories as $category)
