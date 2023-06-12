@@ -78,6 +78,10 @@
                             </nav>
                         </div>
 
+                        <div class="no-selected-events alert alert-danger d-none">
+                            No se ha seleccionado ningún evento
+                        </div>
+
                         <div>
                             <button class="btn btn-danger" id="delete-selected-events-btn"><i class="fa-sharp fa-solid fa-trash"></i> Eliminar seleccionados</button>
                             <button class="btn btn-danger" id="disabled-selected-events-btn"><i class="fa-sharp fa-solid fa-ban"></i> Desactivar seleccionados</button>
