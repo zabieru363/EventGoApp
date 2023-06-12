@@ -8,7 +8,7 @@ const firstCategory = categories[0];
 
 const getCategoryEvents = (d, data) => {
   const categoryId = d.getAttribute('data-id');
-  return data.filter(e => +categoryId === e.category);
+  return data.filter(e => categoryId == e.category);
 };
 
 const alertIfNoEvents = () => {
@@ -30,7 +30,7 @@ const loadEventsByCategoryWithRules = categoryEvents => {
     if(event.active) {    // Solo añadirá el evento si este está activo en la base de datos.
       let dynamicHTMLDropdown = '';
 
-      switch(event.rule) {
+      switch(+event.rule) {
         case 1:
           dynamicHTMLDropdown = `
                               <div class='dropdown' rule='1'>
