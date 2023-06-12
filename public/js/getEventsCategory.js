@@ -4,13 +4,20 @@ import Event from './entities/Event.js';
 
 const categories = [...document.getElementsByClassName('category')];
 const eventsContainer = document.getElementsByClassName('events-container')[0];
-const firstCategory = categories[0];
+const firstCategory = categories[1];
 
 const modalBody = document.getElementsByClassName("modal-body-event-participation")[0];
 
 const getCategoryEvents = (d, data) => {
-  const categoryId = d.getAttribute('data-id');
-  return data.filter(e => categoryId == e.category);
+  let events = [];
+  if(d.classList.contains("show-all")) {
+    events = [...data];
+  }else{
+    const categoryId = d.getAttribute('data-id');
+    events = data.filter(e => categoryId == e.category);
+  }
+
+  return events;
 };
 
 const alertIfNoEvents = () => {
@@ -300,7 +307,7 @@ fetch('controllers/getAllEventsHandler.php')
   .then(data => {
     categories.forEach(function (category) {
       category.addEventListener('click', function () {
-        let categoryEvents = getCategoryEvents(this, data);
+        const categoryEvents = getCategoryEvents(this, data);
 
         switchActiveCategory(this);
 
