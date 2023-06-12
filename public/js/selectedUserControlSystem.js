@@ -3,6 +3,7 @@
 const deleteUsersButton = document.getElementById("delete-selected-users-btn");
 const disabledUsersButton = document.getElementById("disabled-selected-users-btn");
 const activeUsersButton = document.getElementById("active-selected-users-btn");
+const noSelectedUsersAlert = document.getElementsByClassName("no-selected-users")[0];
 
 const chekboxes = [...document.getElementsByClassName("user-selected")];
 const modalBody = document.getElementsByClassName("modal-body")[0];
@@ -10,6 +11,7 @@ const modalBody = document.getElementsByClassName("modal-body")[0];
 async function sendSelectedUsers(action) {
     const selectedCheckboxes = chekboxes.filter(checkbox => checkbox.checked);
     if(selectedCheckboxes.length) {
+        noSelectedUsersAlert.classList.add("d-none");
         const confirmation = confirm("¿Seguro que quiere relizar esta operación?");
 
         if(confirmation) {
@@ -66,7 +68,7 @@ async function sendSelectedUsers(action) {
             }
         }
     }else{
-        console.log("No ss ha seleccionado ningún usuario");
+        noSelectedUsersAlert.classList.remove("d-none");
     }
 }
 
