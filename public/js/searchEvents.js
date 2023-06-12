@@ -1,9 +1,7 @@
 "use strict";
 
 const eventInput = document.getElementsByClassName("event-input")[0];
-const resultsDatalist = document.getElementsByClassName(
-  "event-results-datalist"
-)[0];
+const resultsDatalist = document.getElementsByClassName("event-results-datalist")[0];
 
 eventInput.addEventListener("input", getResults);
 eventInput.addEventListener("blur", function () {
@@ -23,16 +21,19 @@ function getResults() {
       .then((res) => res.json())
       .then((data) => {
         resultsDatalist.innerHTML = "";
-        let li = "";
-        if (data.length < 1) {
-          li = `<li dataset-event-id="${data.id}" class="result-datalist">Sin resultados</li>`;
-          resultsDatalist.insertAdjacentHTML("beforeend", li);
+        const li = document.createElement("li");
+        if(data.length < 1) {
+          li.classList.add("result-datalist");
+          li.textContent = "Sin resultados";
+          resultsDatalist.appendChild(li);
         } else {
           data.forEach(function(result) {
-            li = `<li dataset-event-id="${result.id}" class="result-datalist">${result.title}</li>`;
-            resultsDatalist.insertAdjacentHTML("beforeend", li);
+            li.setAttribute("event-id", result.id);
+            li.classList.add("result-datalist");
+            li.textContent = result.title;
+            resultsDatalist.appendChild(li);
 
-            resultsDatalist.lastElementChild.addEventListener("click", () => console.log("Evento clic activado"));
+            li.addEventListener("click", () => console.log("Evento clic activado"));
           });
 
           resultsDatalist.classList.remove("d-none");
@@ -41,5 +42,6 @@ function getResults() {
       .catch((error) => console.log("Algo salió mal " + error));
   } else {
     resultsDatalist.innerHTML = "";
+    resultsDatalist.classList.add("d-none");
   }
 }
