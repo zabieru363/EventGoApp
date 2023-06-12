@@ -11,82 +11,86 @@
 
                 <div class="row py-4">
                     <div class="col">
-                        <table class="table table-sm table-bordered table-striped">
-                            <thead>
-                                <th>#</th>
-                                <th>Titulo</th>
-                                <th>Descripción</th>
-                                <th>Administrador</th>
-                                <th>Localidad</th>
-                                <th>Fecha inicio</th>
-                                <th>Fecha fin</th>
-                                <th>Categoria</th>
-                                <th>Activo</th>
-                            </thead>
+                        <?php if(count($params["events"]) > 0): ?>
+                            <table class="table table-sm table-bordered table-striped">
+                                <thead>
+                                    <th>#</th>
+                                    <th>Titulo</th>
+                                    <th>Descripción</th>
+                                    <th>Administrador</th>
+                                    <th>Localidad</th>
+                                    <th>Fecha inicio</th>
+                                    <th>Fecha fin</th>
+                                    <th>Categoria</th>
+                                    <th>Activo</th>
+                                </thead>
 
-                            <!-- El id del cuerpo de la tabla. -->
-                            <tbody id="content">
-                                <?php
-                                    foreach($params["events"] as $event)
-                                    {
-                                        $result_active = $event["active"] ? "SI" : "NO";
-                                        echo "
-                                            <tr class=event-row-" . $event["id"] . ">
-                                                <td><input type='checkbox' class='event-selected' value=" . $event["id"] . "></td>
-                                                <td>" . $event["title"] . "</td>
-                                                <td>" . $event["description"] . "</td>
-                                                <td>" . $event["admin"] . "</td>
-                                                <td>" . $event["city"] . "</td>
-                                                <td>" . $event["start_date"] . "</td>
-                                                <td>" . $event["ending_date"] . "</td>
-                                                <td>" . $event["category"] . "</td>
-                                                <td>" . $result_active . "</td>
-                                            </tr>
-                                        ";
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
+                                <!-- El id del cuerpo de la tabla. -->
+                                <tbody id="content">
+                                    <?php
+                                        foreach($params["events"] as $event)
+                                        {
+                                            $result_active = $event["active"] ? "SI" : "NO";
+                                            echo "
+                                                <tr class=event-row-" . $event["id"] . ">
+                                                    <td><input type='checkbox' class='event-selected' value=" . $event["id"] . "></td>
+                                                    <td>" . $event["title"] . "</td>
+                                                    <td>" . $event["description"] . "</td>
+                                                    <td>" . $event["admin"] . "</td>
+                                                    <td>" . $event["city"] . "</td>
+                                                    <td>" . $event["start_date"] . "</td>
+                                                    <td>" . $event["ending_date"] . "</td>
+                                                    <td>" . $event["category"] . "</td>
+                                                    <td>" . $result_active . "</td>
+                                                </tr>
+                                            ";
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
 
-                        <div class="user-pagination d-flex justify-content-center">
-                            <nav class="pages" aria-label="pagination">
-                                <ul class="pagination">
-                                    <?php if ($params["pagination"]["current_page"] > 1): ?>
-                                        <li class="page-item">
-                                            <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $params["pagination"]["current_page"] - 1; ?>" aria-label="Anterior">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                    <?php endif; ?>
+                            <div class="user-pagination d-flex justify-content-center">
+                                <nav class="pages" aria-label="pagination">
+                                    <ul class="pagination">
+                                        <?php if ($params["pagination"]["current_page"] > 1): ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $params["pagination"]["current_page"] - 1; ?>" aria-label="Anterior">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
 
-                                    <?php for ($i = 1; $i <= $params["pagination"]["total_pages"]; $i++): ?>
-                                        <?php $activeStyle = $i == $params["pagination"]["current_page"] ? "active" : ""; ?>
+                                        <?php for ($i = 1; $i <= $params["pagination"]["total_pages"]; $i++): ?>
+                                            <?php $activeStyle = $i == $params["pagination"]["current_page"] ? "active" : ""; ?>
 
-                                        <li class="page-item <?php echo $activeStyle?>" aria-current="page">
-                                            <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                        </li>
-                                    <?php endfor; ?>
+                                            <li class="page-item <?php echo $activeStyle?>" aria-current="page">
+                                                <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                            </li>
+                                        <?php endfor; ?>
 
-                                    <?php if ($params["pagination"]["current_page"] < $params["pagination"]["total_pages"]): ?>
-                                        <li class="page-item">
-                                            <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $params["pagination"]["current_page"] + 1; ?>" aria-label="Siguiente">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    <?php endif; ?>
-                                </ul>
-                            </nav>
-                        </div>
+                                        <?php if ($params["pagination"]["current_page"] < $params["pagination"]["total_pages"]): ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="index.php?url=admin&action=events&page=<?php echo $params["pagination"]["current_page"] + 1; ?>" aria-label="Siguiente">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
+                                    </ul>
+                                </nav>
+                            </div>
 
-                        <div class="no-selected-events alert alert-danger d-none">
-                            No se ha seleccionado ningún evento
-                        </div>
+                            <div class="no-selected-events alert alert-danger d-none">
+                                No se ha seleccionado ningún evento
+                            </div>
 
-                        <div>
-                            <button class="btn btn-danger" id="delete-selected-events-btn"><i class="fa-sharp fa-solid fa-trash"></i> Eliminar seleccionados</button>
-                            <button class="btn btn-danger" id="disabled-selected-events-btn"><i class="fa-sharp fa-solid fa-ban"></i> Desactivar seleccionados</button>
-                            <button class="btn btn-success" id="active-selected-events-btn"><i class="fa-sharp fa-solid fa-circle-check"></i> Activar seleccionados</button>
-                        </div>
+                            <div>
+                                <button class="btn btn-danger" id="delete-selected-events-btn"><i class="fa-sharp fa-solid fa-trash"></i> Eliminar seleccionados</button>
+                                <button class="btn btn-danger" id="disabled-selected-events-btn"><i class="fa-sharp fa-solid fa-ban"></i> Desactivar seleccionados</button>
+                                <button class="btn btn-success" id="active-selected-events-btn"><i class="fa-sharp fa-solid fa-circle-check"></i> Activar seleccionados</button>
+                            </div>
+                        <?php else: ?>
+                            <h4>No hay eventos</h4>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
