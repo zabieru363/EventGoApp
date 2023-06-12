@@ -1,14 +1,15 @@
 <?php
-    session_start();
-    
-    if(!$user_active)
+    if(isset($_SESSION["id_user"]))
     {
-        if(isset($_COOKIE["remember_me"])) setcookie("remember_me", "", time() - 3600);
-    
-        unset($_SESSION["id_user"]);
-        unset($_SESSION["username"]);
-    
-        session_destroy();
+        if(!$user_active)
+        {
+            if(isset($_COOKIE["remember_me"])) setcookie("remember_me", "", time() - 3600);
+        
+            unset($_SESSION["id_user"]);
+            unset($_SESSION["username"]);
+        
+            session_destroy();
+        }
     }
 
     $title = "Inicio";
