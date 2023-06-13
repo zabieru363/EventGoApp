@@ -36,6 +36,15 @@ const loadEventsByCategoryWithRules = categoryEvents => {
     const event = new Event(e.id, e.title, e.description, e.admin, e.city, e.start_date, e.end_date, e.images, e.category, e.active, e.rule);
     const eventImages = event.images;
 
+    const startDateTimeValues = event.startDate.split(" ");
+    const endDateTimeValues = event.endingDate.split(" ");
+
+    const startDate = startDateTimeValues[0];
+    const endingDate = endDateTimeValues[0];
+
+    const startTime = startDateTimeValues[1];
+    const endTime = endDateTimeValues[1];
+
     if(event.active) {    // Solo añadirá el evento si este está activo en la base de datos.
       let dynamicHTMLDropdown = '';
 
@@ -119,7 +128,7 @@ const loadEventsByCategoryWithRules = categoryEvents => {
                                   <p class="event-description">
                                       ${event.description}
                                   </p>
-                                  <p class="event-date"><i class="fa-solid fa-clock"></i> Empieza el <strong>${event.startDate}</strong>, finaliza el <strong>${event.endingDate}</strong></p>
+                                  <p class="event-date"><i class="fa-solid fa-clock"></i> Empieza el <strong>${startDate}</strong> a las ${startTime}, finaliza el <strong>${endingDate}</strong> a las ${endTime}</p>
                                   <p><strong><i class="fa-solid fa-location-dot"></i> ${event.city}</strong></p>
                               </div>
                               ${dynamicHTMLDropdown}
@@ -164,6 +173,15 @@ const loadEventsCategory = categoryEvents => {
     const event = new Event(e.id, e.title, e.description, e.admin, e.city, e.start_date, e.end_date, e.images, e.category, e.active);
     const eventImages = event.images;
 
+    const startDateTimeValues = event.startDate.split(" ");
+    const endDateTimeValues = event.endingDate.split(" ");
+
+    const startDate = startDateTimeValues[0];
+    const endingDate = endDateTimeValues[0];
+
+    const startTime = startDateTimeValues[1];
+    const endTime = endDateTimeValues[1];
+
     if(event.active) {    // Solo añadirá el evento si este está activo en la base de datos.
       let carouselHTML = '';
   
@@ -205,7 +223,7 @@ const loadEventsCategory = categoryEvents => {
                                            <p class="event-description">
                                                ${event.description}
                                            </p>
-                                           <p class="event-date"><i class="fa-solid fa-clock"></i> Empieza el <strong>${event.startDate}</strong>, finaliza el <strong>${event.endingDate}</strong></p>
+                                           <p class="event-date"><i class="fa-solid fa-clock"></i> Empieza el <strong>${startDate}</strong> a las ${startTime}, finaliza el <strong>${endingDate}</strong> a las ${endTime}</p>
                                            <p><strong><i class="fa-solid fa-location-dot"></i> ${event.city}</strong></p>
                                        </div>
                                        <div class='dropdown' rule='1'>
