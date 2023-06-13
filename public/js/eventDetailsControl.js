@@ -38,7 +38,7 @@ if(baseContainer.classList.contains("session-active")) {
             if(e.target.classList.contains("opt4")) rule = 4;
 
             try {
-                const response = await fetch("controllers/setParticipationRuleEventHandler", {
+                const response = await fetch("controllers/setParticipationRuleEventHandler.php", {
                     method: "POST",
                     body: JSON.stringify({idEvent, rule})
                 });
