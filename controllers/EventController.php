@@ -93,7 +93,7 @@ final class EventController extends BaseController
             }
             else
             {
-                $event = $this->getEventById($event_id);
+                $event = $this->getEventById($event_id, 0);
                 $this->render("home/eventDetails", ["event" => $event]);
             }
         }catch(Exception $e) {
