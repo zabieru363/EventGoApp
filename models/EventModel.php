@@ -545,7 +545,8 @@ final class EventModel
     /**
      * Método que recupera un evento por id de usuario y por
      * id de evento.
-     * @param int El id de usuario que realiza la búsqueda.
+     * @param int El id de usuario que realiza la búsqueda, si
+     * es nulo no se traerá la regla.
      * @param int El id del evento que se recuperó de la busqueda.
      * @return array Un array asociativo con los datos del evento
      * en base al id que se pasó cómo parametro.
@@ -604,7 +605,7 @@ final class EventModel
             $event["ending_date"] = $this->connection->rows[0]["Image_name"];
             $event["rule"] = $this->connection->rows[0]["Rule"];
         }
-        
+
         return $event;
     }
 }
