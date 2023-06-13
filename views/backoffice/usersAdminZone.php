@@ -1,5 +1,4 @@
 <?php
-    session_start();
     $title = "Administrar usuarios";
     require_once("templates/open.php");
 ?>
