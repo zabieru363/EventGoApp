@@ -6,7 +6,7 @@
         <?php require_once("templates/basic_header.php"); ?>
 
         <?php
-            if(isset($event["rule"]))
+            if(isset($_SESSION["id_user"]))
             {
                 $carousel_HTML = "";
 
