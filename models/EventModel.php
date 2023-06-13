@@ -575,7 +575,7 @@ final class EventModel
             $event["city"] = $this->connection->rows[0]["City_Name"];
             $event["start_date"] = $this->connection->rows[0]["Start_date"];
             $event["ending_date"] = $this->connection->rows[0]["Ending_date"];
-            $event["images"] = $this->connection->rows[0]["Image_name"];
+            $event["images"] = $this->connection->rows[0]["Image_Name"];
         }
         else
         {
@@ -602,7 +602,7 @@ final class EventModel
             $event["city"] = $this->connection->rows[0]["City_name"];
             $event["start_date"] = $this->connection->rows[0]["Start_date"];
             $event["ending_date"] = $this->connection->rows[0]["Ending_date"];
-            $event["images"] = $this->connection->rows[0]["Image_name"];
+            $event["images"] = $this->connection->rows[0]["Image_Name"];
             $event["rule"] = $this->connection->rows[0]["Rule"];
         }
 
