@@ -79,7 +79,11 @@ final class EventController extends BaseController
         }
     }
 
-    public function details()
+    /**
+     * Método que renderiza una vista con los detalles de
+     * un evento en base al id que recibe por la url.
+     */
+    public function details():void
     {
         $user_controller = new UserController();
 
@@ -88,9 +92,12 @@ final class EventController extends BaseController
 
             if(isset($_SESSION["id_user"]))
             {
+                $user_image = $user_controller->setUserImage($_SESSION["id_user"]);
                 $event = $this->getEventById($event_id, $_SESSION["id_user"]);
                 $event_images = explode("/", $event["images"]);
+                
                 $this->render("home/eventDetails", [
+                    "user_image" => $user_image,
                     "event" => $event,
                     "event_images" => $event_images
                 ]);
