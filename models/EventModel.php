@@ -551,7 +551,7 @@ final class EventModel
      * @return array Un array asociativo con los datos del evento
      * en base al id que se pasó cómo parametro.
      */
-    public function getEventById(int $user_id = null, int $event_id):array
+    public function getEventById(int $event_id, int $user_id = null):array
     {
         $event = [];
 
