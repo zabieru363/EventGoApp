@@ -551,11 +551,11 @@ final class EventModel
      * @return array Un array asociativo con los datos del evento
      * en base al id que se pasó cómo parametro.
      */
-    public function getEventById(int $event_id, int $user_id = null):array
+    public function getEventById(int $event_id, int $user_id = 0):array
     {
         $event = [];
 
-        if(is_null($user_id))
+        if($user_id == 0)
         {
             $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
                 e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
