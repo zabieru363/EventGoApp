@@ -42,7 +42,7 @@
                                 Pendiente de confirmar
                             </button>
                             <ul class='dropdown-menu event-participation-options'>
-                                <li class='dropdown-item op21'>Puedo ir</li>
+                                <li class='dropdown-item opt2'>Puedo ir</li>
                                 <li class='dropdown-item opt3'>No puedo ir</li>
                             </ul>
                         </div>",
@@ -51,7 +51,7 @@
                             Participar
                         </button>
                         <ul class='dropdown-menu event-participation-options'>
-                            <li class='dropdown-item op21'>Puedo ir</li>
+                            <li class='dropdown-item opt2'>Puedo ir</li>
                             <li class='dropdown-item opt3'>No puedo ir</li>
                             <li class='dropdown-item opt4'>Todavía no lo se</li>
                         </ul>
@@ -144,7 +144,7 @@
                                     Participar
                                 </button>
                                 <ul class='dropdown-menu event-participation-options'>
-                                    <li class='dropdown-item op21'>Puedo ir</li>
+                                    <li class='dropdown-item opt2'>Puedo ir</li>
                                     <li class='dropdown-item opt3'>No puedo ir</li>
                                     <li class='dropdown-item opt4'>Todavía no lo se</li>
                                 </ul>
