@@ -14,14 +14,34 @@
             }
             else
             {
+                $carousel_HTML = "";
+
+                for($i = 0; $i < count($event_images); $i++)
+                {
+                    if($i == 0)
+                    {
+                      $carousel_HTML .= "
+                        <div class='carousel-item active'>
+                            <img src='uploads/{$event_images[$i]}' class='d-block w-100' alt='Imagen del evento'>
+                        </div>";
+                    }
+                    else
+                    {
+                      $carousel_HTML .= "
+                        <div class='carousel-item'>
+                            <img src='uploads/{$event_images[$i]}' class='d-block w-100' alt='Imagen del evento'>
+                        </div>";
+                    }
+                }
+
                 echo "
                     <div class='container'>
                         <div class='mt-4 card mb-3' data-id={$event["id"]}>
                             <h1 class='card-header display-6 p-3 text-center'>{$event["title"]}</h1>
                             <div class='card-body'>
                                 <div id='carouselControls' class='carousel slide mb-3' data-bs-ride='carousel'>
-                                    <div class='carousel-inner'>
-                                    
+                                    <div class='carousel-inner'>" .
+                                        $carousel_HTML . "
                                     </div>
                                 <button class='carousel-control-prev' type='button' data-bs-target='#carouselControls' data-bs-slide='prev'>
                                     <span class='carousel-control-prev-icon' aria-hidden='true'></span>
