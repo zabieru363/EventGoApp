@@ -134,7 +134,7 @@ final class UserModel
             {
                 $user_info["login"] = true;
                 
-                if($active === 1)
+                if($active == 1)
                 {
                     $user_info["active"] = true;
                     $_SESSION["id_user"] = $user_id;
