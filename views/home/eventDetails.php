@@ -161,7 +161,7 @@
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="eventParticipationModal">Operación realizada</h1>
                     </div>
-                    <div class="modal-body"></div>
+                    <div class="modal-body event-participation-modal-body"></div>
                     <div class="modal-footer">
                         <button type="button" id="closeEventsParticipationModalBtn" class="submit-btn text-decoration-none">De acuerdo</button>
                     </div>
