@@ -180,7 +180,7 @@ final class EventModel
                 $new_row["images"] = $row["Image_Name"];
                 $new_row["active"] = $row["Active"];
                 $new_row["category"] = $row["Category"];
-                $new_row["rule"] = $row["Rule"];
+                $new_row["rule"] = is_null($row["Rule"]) ? 1 : $row["Rule"];
     
                 array_push($this->data, $new_row);
             }
