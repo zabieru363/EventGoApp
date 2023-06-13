@@ -155,12 +155,12 @@ final class EventModel
         {
             $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
             e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
-            Image_Name, ce.Category_id AS Category, uep.Rule_id AS Rule, e.Active FROM event e 
+            Image_Name, ce.Category_id AS Category, uep.Rule_id AS Rule, e.Active
+            FROM event e 
             INNER JOIN event_images ei ON e.Id = ei.Event_id
             INNER JOIN city c ON c.Id = e.Location
             INNER JOIN category_event ce ON e.Id = ce.Event_id
-            INNER JOIN user_event_participation uep  ON e.Id = uep.Event_id
-            WHERE uep.User_id = :user_id
+            LEFT JOIN user_event_participation uep ON e.Id = uep.Event_id AND uep.User_id = :user_id
             GROUP BY e.Id;";
     
             $this->connection->execute_select($sql, [":user_id" => $user_id]);
@@ -180,7 +180,7 @@ final class EventModel
                 $new_row["images"] = $row["Image_Name"];
                 $new_row["active"] = $row["Active"];
                 $new_row["category"] = $row["Category"];
-                $new_row["rule"] = $row["Rule"];
+                $new_row["rule"] = is_null($row["Rule"]) ? 1 : $row["Rule"];
     
                 array_push($this->data, $new_row);
             }
