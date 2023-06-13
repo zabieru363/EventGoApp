@@ -79,6 +79,22 @@ final class EventController extends BaseController
         }
     }
 
+    public function details()
+    {
+        $user_controller = new UserController();
+
+        try {
+            $event_id = $_GET["id"] ?? 0;
+
+            if($event_id != 0) {
+                $event = $this->getEventById($_SESSION["id_user"], $event_id);
+                $this->render("home/eventDetails", ["event" => $event]);
+            }
+        }catch(Exception $e) {
+            var_dump($e->getMessage());
+        }
+    }
+
     /**
      * Método que llama al modelo para mandar a crear un
      * evento, devuelve el id del evento recién insertado.
@@ -298,5 +314,18 @@ final class EventController extends BaseController
     public function activeEvent(int $event_id):bool
     {
         return $this->model->activeEvent($event_id);
+    }
+
+    /**
+     * Método que llama al modelo para recuperar un evento por
+     * id de evento y por id de usuario
+     * @param int El id de usuario que realizó la búsqueda.
+     * @param int El id del evento que se recuperó de la búsqueda.
+     * @return array Un array asociativo con los datos del evento
+     * que se recuperó en base al id.
+     */
+    public function getEventById(int $user_id, int $event_id):array
+    {
+        return $this->model->getEventById($user_id, $event_id);
     }
 }
