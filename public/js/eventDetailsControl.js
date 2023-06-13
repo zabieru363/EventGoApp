@@ -1,7 +1,7 @@
 "use strict";
 
 const modalBody = document.getElementsByClassName("event-participation-modal-body")[0];
-const closeModalBtn = document.getElementsByClassName("close-events-participation-modal-btn")[0];
+const closeModalBtn = document.getElementById("closeEventsParticipationModalBtn");
 const baseContainer = document.getElementsByClassName("container")[0];
 
 const dropdownHTML = {
