@@ -84,10 +84,16 @@ final class EventController extends BaseController
         $user_controller = new UserController();
 
         try {
-            $event_id = $_GET["id"] ?? 0;
+            $event_id = $_GET["id"];
 
-            if($event_id != 0) {
-                $event = $this->getEventById($_SESSION["id_user"], $event_id);
+            if(isset($_SESSION["id_user"]))
+            {
+                $event = $this->getEventById($event_id, $_SESSION["id_user"]);
+                $this->render("home/eventDetails", ["event" => $event]);
+            }
+            else
+            {
+                $event = $this->getEventById($event_id, 0);
                 $this->render("home/eventDetails", ["event" => $event]);
             }
         }catch(Exception $e) {
