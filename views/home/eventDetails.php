@@ -150,6 +150,9 @@
             }
         ?>
 
+        <!-- JavaScript -->
+        <script src="public/js/eventDetailsControl.js"></script>
+
         <!-- Bootstrap y Font Awesome -->
         <?php require_once("templates/cdns.php"); ?>
     </body>
