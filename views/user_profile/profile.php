@@ -1,5 +1,4 @@
 <?php
-    session_start();
     $title = "Perfil de " . $_SESSION["username"];
     require_once("templates/open.php");
 ?>
