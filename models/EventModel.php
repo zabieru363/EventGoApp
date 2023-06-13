@@ -160,7 +160,7 @@ final class EventModel
             INNER JOIN event_images ei ON e.Id = ei.Event_id
             INNER JOIN city c ON c.Id = e.Location
             INNER JOIN category_event ce ON e.Id = ce.Event_id
-            LEFT JOIN user_event_participation uep ON e.Id = uep.Event_id AND uep.User_id = 3
+            LEFT JOIN user_event_participation uep ON e.Id = uep.Event_id AND uep.User_id = :user_id
             GROUP BY e.Id;";
     
             $this->connection->execute_select($sql, [":user_id" => $user_id]);
