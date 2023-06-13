@@ -1,5 +1,4 @@
 <?php
-    session_start();
     $title = "Mis eventos";
     require_once("templates/open.php");
 ?>
