@@ -550,36 +550,61 @@ final class EventModel
      * @return array Un array asociativo con los datos del evento
      * en base al id que se pasó cómo parametro.
      */
-    public function getEventById(int $user_id, int $event_id):array
+    public function getEventById(int $user_id = null, int $event_id):array
     {
         $event = [];
 
-        $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
-            e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
-            Image_Name, uep.Rule_id AS Rule FROM event e 
-            INNER JOIN event_images ei ON e.Id = ei.Event_id
-            INNER JOIN city c ON c.Id = e.Location
-            INNER JOIN category_event ce ON e.Id = ce.Event_id
-            INNER JOIN user_event_participation uep  ON e.Id = uep.Event_id
-            WHERE uep.User_id = :user_id AND e.Id = :event_id
-            AND e.Active = 1";
+        if(is_null($user_id))
+        {
+            $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
+                e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
+                Image_Name FROM event e 
+                INNER JOIN event_images ei ON e.Id = ei.Event_id
+                INNER JOIN city c ON c.Id = e.Location
+                INNER JOIN category_event ce ON e.Id = ce.Event_id
+                WHERE e.Id = :event_id AND e.Active = 1";
+
+            $this->connection->execute_select($sql, [":event_id" => $event_id]);
+            $this->data = [];
+
+            $event["id"] = $this->connection->rows[0]["Id"];
+            $event["title"] = $this->connection->rows[0]["Title"];
+            $event["description"] = $this->connection->rows[0]["Description"];
+            $event["admin"] = $this->connection->rows[0]["Admin"];
+            $event["city"] = $this->connection->rows[0]["City_name"];
+            $event["start_date"] = $this->connection->rows[0]["Start_date"];
+            $event["ending_date"] = $this->connection->rows[0]["Ending_date"];
+            $event["ending_date"] = $this->connection->rows[0]["Image_name"];
+        }
+        else
+        {
+            $sql = "SELECT e.Id, e.Title, e.Description, e.Admin, c.Name AS City_Name,
+                e.Start_date, e.Ending_date, GROUP_CONCAT(ei.Image SEPARATOR '/') AS
+                Image_Name, uep.Rule_id AS Rule FROM event e 
+                INNER JOIN event_images ei ON e.Id = ei.Event_id
+                INNER JOIN city c ON c.Id = e.Location
+                INNER JOIN category_event ce ON e.Id = ce.Event_id
+                INNER JOIN user_event_participation uep  ON e.Id = uep.Event_id
+                WHERE uep.User_id = :user_id AND e.Id = :event_id
+                AND e.Active = 1";
+            
+            $this->connection->execute_select($sql, [
+                ":user_id" => $user_id,
+                ":event_id" => $event_id
+            ]);
+            $this->data = [];
+    
+            $event["id"] = $this->connection->rows[0]["Id"];
+            $event["title"] = $this->connection->rows[0]["Title"];
+            $event["description"] = $this->connection->rows[0]["Description"];
+            $event["admin"] = $this->connection->rows[0]["Admin"];
+            $event["city"] = $this->connection->rows[0]["City_name"];
+            $event["start_date"] = $this->connection->rows[0]["Start_date"];
+            $event["ending_date"] = $this->connection->rows[0]["Ending_date"];
+            $event["ending_date"] = $this->connection->rows[0]["Image_name"];
+            $event["rule"] = $this->connection->rows[0]["Rule"];
+        }
         
-        $this->connection->execute_select($sql, [
-            ":user_id" => $user_id,
-            ":event_id" => $event_id
-        ]);
-        $this->data = [];
-
-        $event["id"] = $this->connection->rows[0]["Id"];
-        $event["title"] = $this->connection->rows[0]["Title"];
-        $event["description"] = $this->connection->rows[0]["Description"];
-        $event["admin"] = $this->connection->rows[0]["Admin"];
-        $event["city"] = $this->connection->rows[0]["City_name"];
-        $event["start_date"] = $this->connection->rows[0]["Start_date"];
-        $event["ending_date"] = $this->connection->rows[0]["Ending_date"];
-        $event["ending_date"] = $this->connection->rows[0]["Image_name"];
-        $event["rule"] = $this->connection->rows[0]["Rule"];
-
         return $event;
     }
 }
