@@ -1,5 +1,7 @@
 "use strict";
 
+const modalBody = document.getElementsByClassName("event-participation-modal-body")[0];
+const closeModalBtn = document.getElementsByClassName("close-events-participation-modal-btn")[0];
 const baseContainer = document.getElementsByClassName("container")[0];
 
 const dropdownHTML = {
@@ -44,7 +46,23 @@ if(baseContainer.classList.contains("session-active")) {
                 if(response.ok) {
                     dropdown.innerHTML = dropdownHTML[`rule${rule}`];
 
+                    if(rule == 2) {
+                        modalBody.textContent = "Confirmación realizada. Participarás en este evento. Se ha añadido a tu lista"
+                        + " de eventos en los que vas a participar. Puedes verlo en la sección, Mis eventos" +
+                        " > eventos en los que vas a participar.";
+                    }
+
+                    if(rule == 3) {
+                        modalBody.textContent = "Confirmación realizada. No participarás en este evento. Se ha añadido a tu lista"
+                        + " de eventos cancelados. Puedes verlo en la sección, Mis eventos" +
+                        " > eventos cancelados.";
+                    }
+
                     if(rule === 4) {
+                        modalBody.textContent = "Confirmación pendiente. Se ha añadido a tu lista"
+                        + " de eventos pendientes de confirmación. Puedes verlo en la sección, Mis eventos" +
+                        " > eventos pendientes de confirmación.";
+
                         dropdown.children[1].addEventListener("click", async function(e) {
                             let confirmRule = 0;
                             if(e.target.classList.contains("opt2")) confirmRule = 2;
@@ -57,13 +75,35 @@ if(baseContainer.classList.contains("session-active")) {
                                 });
 
                                 if(response.ok) {
-                                    console.log("Evento confirmado");
+                                    dropdown.innerHTML = dropdownHTML[`rule${confirmRule}`];
+
+                                    if(confirmRule == 2) {
+                                        modalBody.textContent = "Confirmación realizada. Participarás en este evento. Se ha añadido a tu lista"
+                                        + " de eventos en los que vas a participar. Puedes verlo en la sección, Mis eventos" +
+                                        " > eventos en los que vas a participar.";
+                                    }
+                
+                                    if(confirmRule == 3) {
+                                        modalBody.textContent = "Confirmación realizada. No participarás en este evento. Se ha añadido a tu lista"
+                                        + " de eventos cancelados. Puedes verlo en la sección, Mis eventos" +
+                                        " > eventos cancelados.";
+                                    }
+
+                                    const modal = new bootstrap.Modal(document.getElementById("eventParticipationModal"));
+                                    modal.show();
+
+                                    closeModalBtn.addEventListener("click", () => modal.hide());
                                 }
                             }catch(error) {
                                 console.error("Algo salió mal " + error);
                             }
                         });
                     }
+
+                    const modal = new bootstrap.Modal(document.getElementById("eventParticipationModal"));
+                    modal.show();
+
+                    closeModalBtn.addEventListener("click", () => modal.hide());
                 }
             }catch(error) {
                 console.error("Algo salió mal " + error);
