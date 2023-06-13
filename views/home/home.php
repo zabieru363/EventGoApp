@@ -1,20 +1,24 @@
 <?php
-    session_start();
-    
-    if(!$user_active)
+    if(isset($_SESSION["id_user"]))
     {
-        if(isset($_COOKIE["remember_me"])) setcookie("remember_me", "", time() - 3600);
-    
-        unset($_SESSION["id_user"]);
-        unset($_SESSION["username"]);
-    
-        session_destroy();
+        if(!$user_active)
+        {
+            if(isset($_COOKIE["remember_me"])) setcookie("remember_me", "", time() - 3600);
+        
+            unset($_SESSION["id_user"]);
+            unset($_SESSION["username"]);
+        
+            session_destroy();
+        }
     }
 
     $title = "Inicio";
     require_once("templates/open.php");
 ?>
     <body>
+        <!-- Bootstrap y Font Awesome -->
+        <?php require_once("templates/cdns.php"); ?>
+        
         <?php
             if(isset($_SESSION["id_user"]))
             {
@@ -27,6 +31,7 @@
                 {
                     require_once("templates/header.php");
                     require_once("templates/eventsZone.php");
+                    require_once("templates/participation_modal.php");
 
                     echo '<script src="public/js/getEventsCategory.js" type="module"></script>';
                     echo '<script src="public/js/searchEvents.js"></script>';
@@ -47,8 +52,5 @@
                 }
             }
         ?>
-
-        <!-- Bootstrap y Font Awesome -->
-        <?php require_once("templates/cdns.php"); ?>
     </body>
 </html>

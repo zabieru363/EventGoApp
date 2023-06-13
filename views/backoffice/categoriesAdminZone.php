@@ -14,7 +14,11 @@
                         <?php
                             foreach($categories as $category)
                             {
-                                echo "<div class='category shadow mt-2 p-2' data-id='{$category->__get("id")}'>{$category->__get("name")}</div>";
+                                echo "
+                                    <div class='category shadow mt-2 p-2' data-id='{$category["id"]}'>
+                                        <strong>{$category["name"]}</strong>
+                                        <p class='events'>Eventos: {$category["total_events"]}</p>
+                                    </div>";
                             }
                         ?>
                     </div>

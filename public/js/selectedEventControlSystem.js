@@ -1,29 +1,29 @@
 "use strict";
 
-const deleteUsersButton = document.getElementById("delete-selected-users-btn");
-const disabledUsersButton = document.getElementById("disabled-selected-users-btn");
-const activeUsersButton = document.getElementById("active-selected-users-btn");
-const noSelectedUsersAlert = document.getElementsByClassName("no-selected-users")[0];
+const deleteUsersButton = document.getElementById("delete-selected-events-btn");
+const disabledUsersButton = document.getElementById("disabled-selected-events-btn");
+const activeUsersButton = document.getElementById("active-selected-events-btn");
+const noSelectedEventsAlert = document.getElementsByClassName("no-selected-events")[0];
 
-const chekboxes = [...document.getElementsByClassName("user-selected")];
+const chekboxes = [...document.getElementsByClassName("event-selected")];
 const modalBody = document.getElementsByClassName("modal-body")[0];
 
-async function sendSelectedUsers(action) {
+async function sendSelectedEvents(action) {
     const selectedCheckboxes = chekboxes.filter(checkbox => checkbox.checked);
     if(selectedCheckboxes.length) {
-        noSelectedUsersAlert.classList.add("d-none");
+        noSelectedEventsAlert.classList.add("d-none");
         const confirmation = confirm("¿Seguro que quiere relizar esta operación?");
 
         if(confirmation) {
             const selectedIds = selectedCheckboxes.map(checkbox => checkbox.value);
         
             try {
-                const response = await fetch("controllers/userAdminHandler.php", {
+                const response = await fetch("controllers/eventAdminHandler.php", {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({users_selected: selectedIds, action: action})
+                    body: JSON.stringify({events_selected: selectedIds, action: action})
                 });
         
                 if(response.ok) {
@@ -32,33 +32,33 @@ async function sendSelectedUsers(action) {
                     // Actualizamos la vista
                     if(action === "delete") {
                         selectedIds.forEach(function(id) {
-                            const userRow = document.getElementsByClassName(`user-row-${id}`)[0];
+                            const userRow = document.getElementsByClassName(`event-row-${id}`)[0];
                             userRow.remove();
                         });
 
-                        modalBody.textContent = "Usuarios eliminados correctamente. Se han eliminado un total de " + selectedIds.length + " usuarios.";
+                        modalBody.textContent = "Eventos eliminados correctamente. Se han eliminado un total de " + selectedIds.length + " eventos.";
                         const modal = new bootstrap.Modal(document.getElementById("resultOperationModal"));
                         modal.show();
                     }
     
                     if(action === "ban") {
                         selectedIds.forEach(function(id) {
-                            const userRow = document.getElementsByClassName(`user-row-${id}`)[0];
-                            userRow.children[6].textContent = "NO";
+                            const userRow = document.getElementsByClassName(`event-row-${id}`)[0];
+                            userRow.children[8].textContent = "NO";
                         });
                         
-                        modalBody.textContent = "Usuarios desactivados correctamente. Se han desactivado un total de " + selectedIds.length + " usuarios.";
+                        modalBody.textContent = "Eventos desactivados correctamente. Se han desactivado un total de " + selectedIds.length + " eventos.";
                         const modal = new bootstrap.Modal(document.getElementById("resultOperationModal"));
                         modal.show();
                     }
 
                     if(action === "active") {
                         selectedIds.forEach(function(id) {
-                            const userRow = document.getElementsByClassName(`user-row-${id}`)[0];
-                            userRow.children[6].textContent = "SI";
+                            const userRow = document.getElementsByClassName(`event-row-${id}`)[0];
+                            userRow.children[8].textContent = "SI";
                         });
 
-                        modalBody.textContent = "Usuarios activados correctamente. Se han activado un total de " + selectedIds.length + " usuarios.";
+                        modalBody.textContent = "Eventos activados correctamente. Se han activado un total de " + selectedIds.length + " eventos.";
                         const modal = new bootstrap.Modal(document.getElementById("resultOperationModal"));
                         modal.show();
                     }
@@ -68,18 +68,18 @@ async function sendSelectedUsers(action) {
             }
         }
     }else{
-        noSelectedUsersAlert.classList.remove("d-none");
+        noSelectedEventsAlert.classList.remove("d-none");
     }
 }
 
 deleteUsersButton.addEventListener("click", function() {
-    sendSelectedUsers("delete");
+    sendSelectedEvents("delete");
 });
 
 disabledUsersButton.addEventListener("click", function() {
-    sendSelectedUsers("ban");
+    sendSelectedEvents("ban");
 });
 
 activeUsersButton.addEventListener("click", function() {
-    sendSelectedUsers("active");
+    sendSelectedEvents("active");
 });

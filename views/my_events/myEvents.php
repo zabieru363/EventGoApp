@@ -156,6 +156,16 @@
                                                             <i class='fa-solid fa-clock'></i></i> 
                                                             Empieza el {$pending_event["start_date"]} y termina el {$pending_event["end_date"]}
                                                         </div>
+
+                                                        <div class='mt-3 dropdown' data-id={$pending_event["id"]}>
+                                                            <button class='btn btn-warning dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                                                Confirmar asistencia
+                                                            </button>
+                                                            <ul class='dropdown-menu event-confirmation-options'>
+                                                                <li class='dropdown-item opt2'>Puedo ir</li>
+                                                                <li class='dropdown-item opt3'>No puedo ir</li>
+                                                            </ul>
+                                                        </div>
                                                 </div>
                                             </div>";
                                         }
@@ -222,6 +232,7 @@
             </div>
         </div>
 
+        <!-- CONFIRM EVENT REMOVE MODAL -->
         <div class="modal fade" id="eventRemoveConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -240,6 +251,7 @@
             </div>
         </div>
 
+        <!-- EVENT REMOVED MODAL -->
         <div class="modal fade" id="eventRemovedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -257,7 +269,24 @@
             </div>
         </div>
 
+        <!-- CONFIRM EVENTS MODAL -->
+        <div class="modal fade" id="confirmEventsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="confirmEventsModal">Asistencia de evento confirmada <i class="fa-solid fa-badge-check"></i></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body confirm-events-modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="close-confirm-modal-btn submit-btn">Hecho</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- JavaScript -->
+        <script src="public/js/confirmEvent.js"></script>
         <script src="public/js/deleteEvent.js"></script>
 
         <!-- Bootstrap y font-awesome -->

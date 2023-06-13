@@ -4,11 +4,20 @@ import Event from './entities/Event.js';
 
 const categories = [...document.getElementsByClassName('category')];
 const eventsContainer = document.getElementsByClassName('events-container')[0];
-const firstCategory = categories[0];
+const firstCategory = categories[1];
+
+const modalBody = document.getElementsByClassName("modal-body-event-participation")[0];
 
 const getCategoryEvents = (d, data) => {
-  const categoryId = d.getAttribute('data-id');
-  return data.filter(e => +categoryId === e.category);
+  let events = [];
+  if(d.classList.contains("show-all")) {
+    events = [...data];
+  }else{
+    const categoryId = d.getAttribute('data-id');
+    events = data.filter(e => categoryId == e.category);
+  }
+
+  return events;
 };
 
 const alertIfNoEvents = () => {
@@ -30,7 +39,7 @@ const loadEventsByCategoryWithRules = categoryEvents => {
     if(event.active) {    // Solo añadirá el evento si este está activo en la base de datos.
       let dynamicHTMLDropdown = '';
 
-      switch(event.rule) {
+      switch(+event.rule) {
         case 1:
           dynamicHTMLDropdown = `
                               <div class='dropdown' rule='1'>
@@ -131,7 +140,6 @@ const loadEventsByCategoryWithRules = categoryEvents => {
               const eventId = +this.closest(".card").getAttribute("data-id");
 
               setParticipationRule(eventId, rule, dropdown);
-              dropdown.setAttribute("rule", rule);
           });
       }
 
@@ -144,7 +152,6 @@ const loadEventsByCategoryWithRules = categoryEvents => {
               const eventId = +this.closest(".card").getAttribute("data-id");
 
               setParticipationRule(eventId, rule, dropdown);
-              dropdown.setAttribute("rule", rule);
           });
       }
     }
@@ -249,7 +256,35 @@ const setParticipationRule = (idEvent, rule, dropdown) => {
             }
 
             dropdown.innerHTML = changeDropdownJSON[`rule${rule}`];
-            window.location.reload();
+            
+            const modal = new bootstrap.Modal(document.getElementById("eventParticipationModal"));
+
+            if(rule == 2) {
+              modalBody.textContent = "Confirmación realizada. Participarás en este evento. Se ha añadido a tu lista"
+              + " de eventos en los que vas a participar. Puedes verlo en la sección, Mis eventos" +
+              " > eventos en los que vas a participar.";
+            }
+
+            if(rule == 3) {
+              modalBody.textContent = "Confirmación realizada. No participarás en este evento. Se ha añadido a tu lista"
+              + " de eventos cancelados. Puedes verlo en la sección, Mis eventos" +
+              " > eventos cancelados.";
+            }
+
+            if(rule == 4) {
+              modalBody.textContent = "Confirmación pendiente. Se ha añadido a tu lista"
+              + " de eventos pendientes de confirmación. Puedes verlo en la sección, Mis eventos" +
+              " > eventos pendientes de confirmación.";
+            }
+
+            modal.show();
+
+            const closeModalBtn = document.getElementById("closeEventParticipationModalBtn");
+
+            closeModalBtn.addEventListener("click", function() {
+              modal.hide();
+              window.location.reload();
+            });
         })
         .catch(error => console.log("Algo salió mal " + error));
 };
@@ -272,7 +307,7 @@ fetch('controllers/getAllEventsHandler.php')
   .then(data => {
     categories.forEach(function (category) {
       category.addEventListener('click', function () {
-        let categoryEvents = getCategoryEvents(this, data);
+        const categoryEvents = getCategoryEvents(this, data);
 
         switchActiveCategory(this);
 
