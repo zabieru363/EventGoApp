@@ -30,9 +30,14 @@
 
                 $dropdown_HTML = match($event["rule"])
                 {
-                    2 => "<button class='btn btn-success'>Participaré</button>",
-                    3 => "<button class='btn btn-danger'>No participaré</button>",
-                    4 => "<div class='dropdown' rule='1'>
+                    2 => "
+                        <div class='dropdown' rule='2'>
+                            <button class='btn btn-success'>Participaré</button>
+                        </div>",
+                    3 => "<div class='dropdown' rule='3'>
+                            <button class='btn btn-danger'>No participaré</button>
+                        </div>",
+                    4 => "<div class='dropdown' rule='4'>
                             <button class='btn btn-warning dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
                                 Pendiente de confirmar
                             </button>
