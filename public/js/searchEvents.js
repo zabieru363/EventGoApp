@@ -21,22 +21,26 @@ function getResults() {
       .then((res) => res.json())
       .then((data) => {
         resultsDatalist.innerHTML = "";
-        const li = document.createElement("li");
+        resultsDatalist.classList.remove("d-none");
+
         if(data.length < 1) {
+          const li = document.createElement("li");
           li.classList.add("result-datalist");
           li.textContent = "Sin resultados";
           resultsDatalist.appendChild(li);
         } else {
           data.forEach(function(result) {
+            const li = document.createElement("li");
             li.setAttribute("event-id", result.id);
             li.classList.add("result-datalist");
             li.textContent = result.title;
             resultsDatalist.appendChild(li);
 
-            li.addEventListener("click", () => console.log("Evento clic activado"));
+            li.addEventListener("mousedown", function() {
+              const eventId = li.getAttribute("event-id");
+              window.location.href = `index.php?url=event&action=details&id=${eventId}`;
+            });
           });
-
-          resultsDatalist.classList.remove("d-none");
         }
       })
       .catch((error) => console.log("Algo salió mal " + error));
