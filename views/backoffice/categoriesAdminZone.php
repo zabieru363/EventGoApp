@@ -1,5 +1,4 @@
 <?php
-    session_start();
     $title = "Administración de categorías";
     require_once("templates/open.php");
 ?>
