@@ -572,7 +572,7 @@ final class EventModel
             $event["title"] = $this->connection->rows[0]["Title"];
             $event["description"] = $this->connection->rows[0]["Description"];
             $event["admin"] = $this->connection->rows[0]["Admin"];
-            $event["city"] = $this->connection->rows[0]["City_name"];
+            $event["city"] = $this->connection->rows[0]["City_Name"];
             $event["start_date"] = $this->connection->rows[0]["Start_date"];
             $event["ending_date"] = $this->connection->rows[0]["Ending_date"];
             $event["images"] = $this->connection->rows[0]["Image_name"];
