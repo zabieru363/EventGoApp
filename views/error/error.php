@@ -9,9 +9,6 @@
             <h1>Error 404</h1>
             <p>Página no encontrada</p>
         </div>
-        <div class="text-center">
-            <a href="index.php" class="submit-btn">Volver a inicio</a>
-        </div>
     </div>
 
         <!-- Bootstrap y FontAwesome -->
