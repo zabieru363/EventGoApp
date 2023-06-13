@@ -89,12 +89,20 @@ final class EventController extends BaseController
             if(isset($_SESSION["id_user"]))
             {
                 $event = $this->getEventById($event_id, $_SESSION["id_user"]);
-                $this->render("home/eventDetails", ["event" => $event]);
+                $event_images = explode("/", $event["images"]);
+                $this->render("home/eventDetails", [
+                    "event" => $event,
+                    "event_images" => $event_images
+                ]);
             }
             else
             {
                 $event = $this->getEventById($event_id, 0);
-                $this->render("home/eventDetails", ["event" => $event]);
+                $event_images = explode("/", $event["images"]);
+                $this->render("home/eventDetails", [
+                    "event" => $event,
+                    "event_images" => $event_images
+                ]);
             }
         }catch(Exception $e) {
             var_dump($e->getMessage());
