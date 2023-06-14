@@ -1,5 +1,4 @@
 <?php
-    session_start();
     $title = "Crear evento";
     require_once("templates/open.php");
 ?>
