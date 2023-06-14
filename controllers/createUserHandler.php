@@ -34,14 +34,14 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 
     $info = $user_controller->createUser($user);
 
+    if($file_name !== "default.png")
+    {
+        $route = realpath(dirname(__FILE__)) . "/../uploads/{$file_name}";
+        move_uploaded_file($tmp, $route);
+    }
+
     if(!($info["created"]))
     {
-        if($file_name !== "default.png")
-        {
-            $route = realpath(dirname(__FILE__)) . "/../uploads/{$file_name}";
-            move_uploaded_file($tmp, $route);
-        }
-
         if($info["username_info_message"] !== "")
         {
             $register_status["username_message"] = $info["username_info_message"];
