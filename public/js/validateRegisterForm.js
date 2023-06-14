@@ -16,11 +16,11 @@ elements[0].addEventListener("input", function () {
     this.classList.remove("is-valid");
     feedbacks[0].classList.add("d-block");
     feedbacks[0].textContent = "Este campo es obligatorio.";
-  } else if (/\d/.test(this.value)) {
+  } else if (!(/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/.test(this.value))) {
     this.classList.add("is-invalid");
     this.classList.remove("is-valid");
     feedbacks[0].classList.add("d-block");
-    feedbacks[0].textContent = "El nombre no puede contener números.";
+    feedbacks[0].textContent = "Números y caracteres especiales no permitidos.";
   } else {
     feedbacks[0].classList.remove("d-block");
     this.classList.remove("is-invalid");
@@ -154,10 +154,12 @@ elements[6].classList.add("is-valid");
 elements[6].addEventListener("change", function() {
     const file = this.files[0];
     if(!(file.type.startsWith("image/"))) {
-      this.classList.remove("is-valid");
-      this.classList.add("is-invalid");
-      feedbacks[6].classList.add("d-block");
-      feedbacks[6].textContent = "El archivo no es una imagen";
+      const errorImageModal = new bootstrap.Modal(document.getElementById("errorImageModal"));
+      errorImageModal.show();
+      this.value = "";
+
+      const closeErrorImageModalBtn = document.getElementById("closeErrorImageModalBtn");
+      closeErrorImageModalBtn.addEventListener("click", () => errorImageModal.hide());
     }else{
       const reader = new FileReader();
       reader.addEventListener('load', function() {
@@ -165,11 +167,6 @@ elements[6].addEventListener("change", function() {
         preview.style.display = 'block';
       });
       reader.readAsDataURL(file);
-
-      this.classList.add("is-valid");
-      this.classList.remove("is-invalid");
-      feedbacks[6].classList.remvoe("d-block");
-      feedbacks[6].textContent = "";
     }
 });
 
