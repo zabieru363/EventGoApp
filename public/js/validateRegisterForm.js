@@ -154,10 +154,14 @@ elements[6].classList.add("is-valid");
 elements[6].addEventListener("change", function() {
     const file = this.files[0];
     if(!(file.type.startsWith("image/"))) {
-      this.classList.remove("is-valid");
+      const errorImageModal = new bootstrap.Modal(document.getElementById("errorImageModal"));
+      errorImageModal.show();
+
       this.classList.add("is-invalid");
-      feedbacks[6].classList.add("d-block");
-      feedbacks[6].textContent = "El archivo no es una imagen";
+      this.classList.remove("is-valid");
+
+      const closeErrorImageModalBtn = document.getElementById("closeErrorImageModalBtn");
+      closeErrorImageModalBtn.addEventListener("click", () => errorImageModal.hide());
     }else{
       const reader = new FileReader();
       reader.addEventListener('load', function() {
@@ -166,10 +170,8 @@ elements[6].addEventListener("change", function() {
       });
       reader.readAsDataURL(file);
 
-      this.classList.add("is-valid");
       this.classList.remove("is-invalid");
-      feedbacks[6].classList.remvoe("d-block");
-      feedbacks[6].textContent = "";
+      this.classList.add("is-valid");
     }
 });
 
