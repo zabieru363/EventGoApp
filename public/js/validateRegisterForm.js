@@ -156,9 +156,7 @@ elements[6].addEventListener("change", function() {
     if(!(file.type.startsWith("image/"))) {
       const errorImageModal = new bootstrap.Modal(document.getElementById("errorImageModal"));
       errorImageModal.show();
-
-      this.classList.add("is-invalid");
-      this.classList.remove("is-valid");
+      this.value = "";
 
       const closeErrorImageModalBtn = document.getElementById("closeErrorImageModalBtn");
       closeErrorImageModalBtn.addEventListener("click", () => errorImageModal.hide());
@@ -169,9 +167,6 @@ elements[6].addEventListener("change", function() {
         preview.style.display = 'block';
       });
       reader.readAsDataURL(file);
-
-      this.classList.remove("is-invalid");
-      this.classList.add("is-valid");
     }
 });
 
