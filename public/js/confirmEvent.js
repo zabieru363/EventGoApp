@@ -26,15 +26,29 @@ dropdowns.forEach(function(dropdown) {
                 if(rule === 2) {
                     const dropdownForRemove = eventContainer.getElementsByClassName("dropdown")[0];
                     dropdownForRemove.remove();
-                    userParticipationEventsList.appendChild(eventContainer);
-                    modalBody.textContent = "Participarás en este evento, tu confirmación ha sido realizada. Puedes verlo en tu lista de eventos en los que participas";
+
+                    if(userParticipationEventsList.classList.contains("no-events")) {
+                        userParticipationEventsList.innerHTML = "";
+                        userParticipationEventsList.appendChild(eventContainer);
+                        modalBody.textContent = "Participarás en este evento, tu confirmación ha sido realizada. Puedes verlo en tu lista de eventos en los que participas";
+                    }else {
+                        userParticipationEventsList.appendChild(eventContainer);
+                        modalBody.textContent = "Participarás en este evento, tu confirmación ha sido realizada. Puedes verlo en tu lista de eventos en los que participas";
+                    }
                 }
 
                 if(rule === 3) {
                     const dropdownForRemove = eventContainer.getElementsByClassName("dropdown")[0];
                     dropdownForRemove.remove();
-                    userCancelledEventsList.appendChild(eventContainer);
-                    modalBody.textContent = "No participarás en este evento, tu confirmación ha sido realizada. Puedes verlo en tu lista de eventos cancelados";
+
+                    if(userCancelledEventsList.classList.contains("no-events")) {
+                        userCancelledEventsList.innerHTML = "";
+                        userCancelledEventsList.appendChild(eventContainer);
+                        modalBody.textContent = "No participarás en este evento, tu confirmación ha sido realizada. Puedes verlo en tu lista de eventos cancelados";
+                    }else{
+                        userCancelledEventsList.appendChild(eventContainer);
+                        modalBody.textContent = "No participarás en este evento, tu confirmación ha sido realizada. Puedes verlo en tu lista de eventos cancelados";
+                    }
                 }
 
                 dropdown.remove();
