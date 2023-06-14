@@ -83,7 +83,6 @@
                                         <label for="image" class="form-label"><i class="fa-solid fa-camera"></i> Imagen de perfil</label>
                                         <input type="file" class="form-control" id="image" name="image">
                                         <img id="preview" src="#" alt="Preview">
-                                        <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
                                 
@@ -91,6 +90,25 @@
                                     <button type="submit" name="register" class="submit-btn p-3">Registrarse</button>
                                 </div>
                             </form>
+
+                            <!-- ERROR IMAGE MODAL -->
+                            <div class="modal fade" id="errorImageModal" tabindex="-1" aria-labelledby="errorImageModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="errorImageModal">Registro completado <i class="fa-solid fa-badge-check"></i></h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            El archivo que ha subido no es una imagen. Por favor seleccione
+                                            un archivo con formato de imagen, por ejemplo JPG, JPEG, PNG...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="closeErrorImageModalBtn" class="return-home-btn submit-btn">Entendido</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="modal fade" id="registerCompleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
