@@ -50,7 +50,9 @@ final class Dispatcher
         }
         else
         {
-            throw new Exception("Error: El archivo no se encuentra en la ruta especificada");
+            require_once("controllers/ErrorController.php");
+            $e_controller = new ErrorController();
+            $e_controller->error();
         }
     }
 }

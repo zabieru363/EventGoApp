@@ -277,7 +277,7 @@ final class EventController extends BaseController
      * @param int El final hasta donde se quieren obtener registros.
      * @return array Un array con los eventos obtenidos y sus datos.
      */
-    public function listEvents(int $page = 1, int $perPage):array
+    public function listEvents(int $page, int $perPage):array
     {
         $start = ($page - 1) * $perPage;
         $end = $start + $perPage;
