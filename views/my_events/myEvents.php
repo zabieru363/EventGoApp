@@ -27,6 +27,9 @@
                                     {
                                         foreach($public_user_events as $public_event)
                                         {
+                                            $start_date_time = explode(" ", $public_event["start_date"]);
+                                            $end_date_time = explode(" ", $public_event["end_date"]);
+
                                             echo "
                                                 <div class='card mb-3' data-id='{$public_event["id"]}'>
                                                     <div class='card-body'>
@@ -46,7 +49,7 @@
         
                                                         <div class='event-date'>
                                                             <i class='fa-solid fa-clock'></i></i> 
-                                                            Empieza el {$public_event["start_date"]} y termina el {$public_event["end_date"]}
+                                                            Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
                                                         </div>
     
                                                         <div class='mt-3'>
@@ -84,6 +87,9 @@
                                     {
                                         foreach($user_participation_events as $participation_event)
                                         {
+                                            $start_date_time = explode(" ", $participation_event["start_date"]);
+                                            $end_date_time = explode(" ", $participation_event["end_date"]);
+
                                             echo "
                                                 <div class='card mb-3' data-id='{$participation_event["id"]}'>
                                                     <div class='card-body'>
@@ -103,7 +109,7 @@
         
                                                         <div class='event-date'>
                                                             <i class='fa-solid fa-clock'></i></i> 
-                                                            Empieza el {$participation_event["start_date"]} y termina el {$participation_event["end_date"]}
+                                                            Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
                                                         </div>
                                                 </div>
                                             </div>";
@@ -134,6 +140,9 @@
                                     {
                                         foreach($pending_events as $pending_event)
                                         {
+                                            $start_date_time = explode(" ", $pending_event["start_date"]);
+                                            $end_date_time = explode(" ", $pending_event["end_date"]);
+
                                             echo "
                                                 <div class='card mb-3' data-id='{$pending_event["id"]}'>
                                                     <div class='card-body'>
@@ -153,7 +162,7 @@
         
                                                         <div class='event-date'>
                                                             <i class='fa-solid fa-clock'></i></i> 
-                                                            Empieza el {$pending_event["start_date"]} y termina el {$pending_event["end_date"]}
+                                                            Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
                                                         </div>
 
                                                         <div class='mt-3 dropdown' data-id={$pending_event["id"]}>
@@ -194,6 +203,9 @@
                                     {
                                         foreach($cancelled_events as $cancelled_event)
                                         {
+                                            $start_date_time = explode(" ", $cancelled_event["start_date"]);
+                                            $end_date_time = explode(" ", $cancelled_event["end_date"]);
+
                                             echo "
                                                 <div class='card mb-3' data-id='{$cancelled_event["id"]}'>
                                                     <div class='card-body'>
@@ -213,7 +225,7 @@
         
                                                         <div class='event-date'>
                                                             <i class='fa-solid fa-clock'></i></i> 
-                                                            Empieza el {$cancelled_event["start_date"]} y termina el {$cancelled_event["end_date"]}
+                                                            Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
                                                         </div>
                                                 </div>
                                             </div>";
