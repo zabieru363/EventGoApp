@@ -28,25 +28,11 @@
                     }
                 }
 
-                $dropdown_HTML = match($event["rule"])
+                $dropdown_HTML = "";
+
+                if($event["rule"] == 1)
                 {
-                    2 => "
-                        <div class='dropdown' rule='2'>
-                            <button class='btn btn-success'>Participaré</button>
-                        </div>",
-                    3 => "<div class='dropdown' rule='3'>
-                            <button class='btn btn-danger'>No participaré</button>
-                        </div>",
-                    4 => "<div class='dropdown' rule='4'>
-                            <button class='btn btn-warning dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                Pendiente de confirmar
-                            </button>
-                            <ul class='dropdown-menu event-participation-options'>
-                                <li class='dropdown-item opt2'>Puedo ir</li>
-                                <li class='dropdown-item opt3'>No puedo ir</li>
-                            </ul>
-                        </div>",
-                    default => "<div class='dropdown' rule='1'>
+                    $dropdown_HTML = "<div class='dropdown' rule='1'>
                         <button class='btn btn-primary dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
                             Participar
                         </button>
@@ -55,8 +41,35 @@
                             <li class='dropdown-item opt3'>No puedo ir</li>
                             <li class='dropdown-item opt4'>Todavía no lo se</li>
                         </ul>
-                    </div>"
-                };
+                    </div>";
+                }
+
+                if($event["rule"] == 2)
+                {
+                    $dropdown_HTML = "<div class='dropdown' rule='2'>
+                        <button class='btn btn-success'>Participaré</button>
+                    </div>";
+                }
+
+                if($event["rule"] == 3)
+                {
+                    $dropdown_HTML = "<div class='dropdown' rule='3'>
+                        <button class='btn btn-danger'>No participaré</button>
+                    </div>";
+                }
+
+                if($event["rule"] == 4)
+                {
+                    $dropdown_HTML = "<div class='dropdown' rule='4'>
+                        <button class='btn btn-warning dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                            Pendiente de confirmar
+                        </button>
+                        <ul class='dropdown-menu event-participation-options'>
+                            <li class='dropdown-item opt2'>Puedo ir</li>
+                            <li class='dropdown-item opt3'>No puedo ir</li>
+                        </ul>
+                    </div>";
+                }
 
                 $start_date_time = explode(" ", $event["start_date"]);
                 $end_date_time = explode(" ", $event["ending_date"]);
