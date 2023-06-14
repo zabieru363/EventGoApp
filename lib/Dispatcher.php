@@ -40,12 +40,16 @@ final class Dispatcher
                 }
                 else
                 {
-                    throw new Exception("Error: No existe una acción para ese controlador");
+                    require_once("controllers/ErrorController.php");
+                    $e_controller = new ErrorController();
+                    $e_controller->error();
                 }
             }
             else
             {
-                throw new Exception("Error: Esta clase no se encuentra en el directorio");
+                require_once("controllers/ErrorController.php");
+                $e_controller = new ErrorController();
+                $e_controller->error();
             }
         }
         else
