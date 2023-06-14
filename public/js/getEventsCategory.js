@@ -45,7 +45,7 @@ const loadEventsByCategoryWithRules = categoryEvents => {
     const startTime = startDateTimeValues[1];
     const endTime = endDateTimeValues[1];
 
-    if(event.active) {    // Solo añadirá el evento si este está activo en la base de datos.
+    if(+event.active) {    // Solo añadirá el evento si este está activo en la base de datos.
       let dynamicHTMLDropdown = '';
 
       switch(+event.rule) {
@@ -163,9 +163,7 @@ const loadEventsByCategoryWithRules = categoryEvents => {
               setParticipationRule(eventId, rule, dropdown);
           });
       }
-    }
-    else
-    {
+    }else{
       const eventContainer = document.createElement("div");
       eventContainer.classList.add("alert", "alert-danger", "mb-3");
       eventContainer.textContent = "El administrador ha desactivado este evento.";
@@ -190,7 +188,7 @@ const loadEventsCategory = categoryEvents => {
     const startTime = startDateTimeValues[1];
     const endTime = endDateTimeValues[1];
 
-    if(event.active) {    // Solo añadirá el evento si este está activo en la base de datos.
+    if(+event.active) {    // Solo añadirá el evento si este está activo en la base de datos.
       let carouselHTML = '';
   
       for (let i = 0; i < eventImages.length; i++) {
@@ -253,6 +251,12 @@ const loadEventsCategory = categoryEvents => {
   
       // Si la sesión no está iniciada enviamos al usuario a la página de login.
       dropdown.addEventListener('click', () => (window.location.href = 'index.php?url=login'));
+    }else{
+      const eventContainer = document.createElement("div");
+      eventContainer.classList.add("alert", "alert-danger", "mb-3");
+      eventContainer.textContent = "El administrador ha desactivado este evento.";
+
+      eventsContainer.appendChild(eventContainer);
     }
   }
 };
