@@ -27,36 +27,46 @@
                                     {
                                         foreach($public_user_events as $public_event)
                                         {
-                                            $start_date_time = explode(" ", $public_event["start_date"]);
-                                            $end_date_time = explode(" ", $public_event["end_date"]);
+                                            if($public_event["active"] == 1)
+                                            {
+                                                $start_date_time = explode(" ", $public_event["start_date"]);
+                                                $end_date_time = explode(" ", $public_event["end_date"]);
 
-                                            echo "
-                                                <div class='card mb-3' data-id='{$public_event["id"]}'>
-                                                    <div class='card-body'>
-                                                         <h4>{$public_event["title"]}</h4>
+                                                echo "
+                                                    <div class='card mb-3' data-id='{$public_event["id"]}'>
+                                                        <div class='card-body'>
+                                                            <h4>{$public_event["title"]}</h4>
+            
+                                                            <div class='event-admin'>
+                                                                <h6>{$public_event["admin"]}</h6>
+                                                            </div>
+            
+                                                            <div class='event-description'>
+                                                                {$public_event["description"]}
+                                                            </div>
+            
+                                                            <div class='event-location mt-3'>
+                                                                <i class='fa-solid fa-location-dot'></i> {$public_event["city"]}
+                                                            </div>
+            
+                                                            <div class='event-date'>
+                                                                <i class='fa-solid fa-clock'></i>
+                                                                Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
+                                                            </div>
         
-                                                        <div class='event-admin'>
-                                                            <h6>{$public_event["admin"]}</h6>
-                                                        </div>
-        
-                                                        <div class='event-description'>
-                                                            {$public_event["description"]}
-                                                        </div>
-        
-                                                        <div class='event-location mt-3'>
-                                                            <i class='fa-solid fa-location-dot'></i> {$public_event["city"]}
-                                                        </div>
-        
-                                                        <div class='event-date'>
-                                                            <i class='fa-solid fa-clock'></i>
-                                                            Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
-                                                        </div>
-    
-                                                        <div class='mt-3'>
-                                                            <button class='btn btn-danger delete-event-btn' data-id={$public_event["id"]}><i class='fa-sharp fa-solid fa-trash'></i> Borrar este evento</button>
-                                                        </div>
-                                                </div>
-                                            </div>";
+                                                            <div class='mt-3'>
+                                                                <button class='btn btn-danger delete-event-btn' data-id={$public_event["id"]}><i class='fa-sharp fa-solid fa-trash'></i> Borrar este evento</button>
+                                                            </div>
+                                                    </div>
+                                                </div>";
+                                            }
+                                            else
+                                            {
+                                                echo "
+                                                    <div class='card mb-3' data-id='{$public_event["id"]}'>
+                                                        <h4 class='text text-danger'>El administrador ha desactivado este evento</h4>
+                                                    </div>";
+                                            }
                                         }
                                     }
                                     else
@@ -87,32 +97,42 @@
                                     {
                                         foreach($user_participation_events as $participation_event)
                                         {
-                                            $start_date_time = explode(" ", $participation_event["start_date"]);
-                                            $end_date_time = explode(" ", $participation_event["end_date"]);
+                                            if($participation_event["active"] == 1)
+                                            {
+                                                $start_date_time = explode(" ", $participation_event["start_date"]);
+                                                $end_date_time = explode(" ", $participation_event["end_date"]);
 
-                                            echo "
-                                                <div class='card mb-3' data-id='{$participation_event["id"]}'>
-                                                    <div class='card-body'>
-                                                         <h4>{$participation_event["title"]}</h4>
-        
-                                                        <div class='event-admin'>
-                                                            <h6>{$participation_event["admin"]}</h6>
-                                                        </div>
-        
-                                                        <div class='event-description'>
-                                                            {$participation_event["description"]}
-                                                        </div>
-        
-                                                        <div class='event-location mt-3'>
-                                                            <i class='fa-solid fa-location-dot'></i> {$participation_event["city"]}
-                                                        </div>
-        
-                                                        <div class='event-date'>
-                                                            <i class='fa-solid fa-clock'></i>
-                                                            Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
-                                                        </div>
-                                                </div>
-                                            </div>";
+                                                echo "
+                                                    <div class='card mb-3' data-id='{$participation_event["id"]}'>
+                                                        <div class='card-body'>
+                                                            <h4>{$participation_event["title"]}</h4>
+            
+                                                            <div class='event-admin'>
+                                                                <h6>{$participation_event["admin"]}</h6>
+                                                            </div>
+            
+                                                            <div class='event-description'>
+                                                                {$participation_event["description"]}
+                                                            </div>
+            
+                                                            <div class='event-location mt-3'>
+                                                                <i class='fa-solid fa-location-dot'></i> {$participation_event["city"]}
+                                                            </div>
+            
+                                                            <div class='event-date'>
+                                                                <i class='fa-solid fa-clock'></i>
+                                                                Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
+                                                            </div>
+                                                    </div>
+                                                </div>";
+                                            }
+                                            else
+                                            {
+                                                echo "
+                                                    <div class='card mb-3' data-id='{$participation_event["id"]}'>
+                                                        <h4 class='text text-danger'>El administrador ha desactivado este evento</h4>
+                                                    </div>";
+                                            }
                                         }
                                     }
                                     else
@@ -140,42 +160,52 @@
                                     {
                                         foreach($pending_events as $pending_event)
                                         {
-                                            $start_date_time = explode(" ", $pending_event["start_date"]);
-                                            $end_date_time = explode(" ", $pending_event["end_date"]);
+                                            if($pending_event["active"] == 1)
+                                            {
+                                                $start_date_time = explode(" ", $pending_event["start_date"]);
+                                                $end_date_time = explode(" ", $pending_event["end_date"]);
 
-                                            echo "
-                                                <div class='card mb-3' data-id='{$pending_event["id"]}'>
-                                                    <div class='card-body'>
-                                                         <h4>{$pending_event["title"]}</h4>
-        
-                                                        <div class='event-admin'>
-                                                            <h6>{$pending_event["admin"]}</h6>
-                                                        </div>
-        
-                                                        <div class='event-description'>
-                                                            {$pending_event["description"]}
-                                                        </div>
-        
-                                                        <div class='event-location mt-3'>
-                                                            <i class='fa-solid fa-location-dot'></i> {$pending_event["city"]}
-                                                        </div>
-        
-                                                        <div class='event-date'>
-                                                            <i class='fa-solid fa-clock'></i>
-                                                            Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
-                                                        </div>
+                                                echo "
+                                                    <div class='card mb-3' data-id='{$pending_event["id"]}'>
+                                                        <div class='card-body'>
+                                                            <h4>{$pending_event["title"]}</h4>
+            
+                                                            <div class='event-admin'>
+                                                                <h6>{$pending_event["admin"]}</h6>
+                                                            </div>
+            
+                                                            <div class='event-description'>
+                                                                {$pending_event["description"]}
+                                                            </div>
+            
+                                                            <div class='event-location mt-3'>
+                                                                <i class='fa-solid fa-location-dot'></i> {$pending_event["city"]}
+                                                            </div>
+            
+                                                            <div class='event-date'>
+                                                                <i class='fa-solid fa-clock'></i>
+                                                                Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
+                                                            </div>
 
-                                                        <div class='mt-3 dropdown' data-id={$pending_event["id"]}>
-                                                            <button class='btn btn-warning dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                                                Confirmar asistencia
-                                                            </button>
-                                                            <ul class='dropdown-menu event-confirmation-options'>
-                                                                <li class='dropdown-item opt2'>Puedo ir</li>
-                                                                <li class='dropdown-item opt3'>No puedo ir</li>
-                                                            </ul>
-                                                        </div>
-                                                </div>
-                                            </div>";
+                                                            <div class='mt-3 dropdown' data-id={$pending_event["id"]}>
+                                                                <button class='btn btn-warning dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                                                    Confirmar asistencia
+                                                                </button>
+                                                                <ul class='dropdown-menu event-confirmation-options'>
+                                                                    <li class='dropdown-item opt2'>Puedo ir</li>
+                                                                    <li class='dropdown-item opt3'>No puedo ir</li>
+                                                                </ul>
+                                                            </div>
+                                                    </div>
+                                                </div>";
+                                            }
+                                            else
+                                            {
+                                                echo "
+                                                    <div class='card mb-3' data-id='{$pending_event["id"]}'>
+                                                        <h4 class='text text-danger'>El administrador ha desactivado este evento</h4>
+                                                    </div>";
+                                            }
                                         }
                                     }
                                     else
@@ -203,32 +233,42 @@
                                     {
                                         foreach($cancelled_events as $cancelled_event)
                                         {
-                                            $start_date_time = explode(" ", $cancelled_event["start_date"]);
-                                            $end_date_time = explode(" ", $cancelled_event["end_date"]);
+                                            if($cancelled_event["active"] == 1)
+                                            {
+                                                $start_date_time = explode(" ", $cancelled_event["start_date"]);
+                                                $end_date_time = explode(" ", $cancelled_event["end_date"]);
 
-                                            echo "
-                                                <div class='card mb-3' data-id='{$cancelled_event["id"]}'>
-                                                    <div class='card-body'>
-                                                         <h4>{$cancelled_event["title"]}</h4>
-        
-                                                        <div class='event-admin'>
-                                                            <h6>{$cancelled_event["admin"]}</h6>
-                                                        </div>
-        
-                                                        <div class='event-description'>
-                                                            {$cancelled_event["description"]}
-                                                        </div>
-        
-                                                        <div class='event-location mt-3'>
-                                                            <i class='fa-solid fa-location-dot'></i> {$cancelled_event["city"]}
-                                                        </div>
-        
-                                                        <div class='event-date'>
-                                                            <i class='fa-solid fa-clock'></i>
-                                                            Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
-                                                        </div>
-                                                </div>
-                                            </div>";
+                                                echo "
+                                                    <div class='card mb-3' data-id='{$cancelled_event["id"]}'>
+                                                        <div class='card-body'>
+                                                            <h4>{$cancelled_event["title"]}</h4>
+            
+                                                            <div class='event-admin'>
+                                                                <h6>{$cancelled_event["admin"]}</h6>
+                                                            </div>
+            
+                                                            <div class='event-description'>
+                                                                {$cancelled_event["description"]}
+                                                            </div>
+            
+                                                            <div class='event-location mt-3'>
+                                                                <i class='fa-solid fa-location-dot'></i> {$cancelled_event["city"]}
+                                                            </div>
+            
+                                                            <div class='event-date'>
+                                                                <i class='fa-solid fa-clock'></i>
+                                                                Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
+                                                            </div>
+                                                    </div>
+                                                </div>";
+                                            }
+                                            else
+                                            {
+                                                echo "
+                                                    <div class='card mb-3' data-id='{$cancelled_event["id"]}'>
+                                                        <h4 class='text text-danger'>El administrador ha desactivado este evento</h4>
+                                                    </div>";
+                                            }
                                         }
                                     }
                                     else
