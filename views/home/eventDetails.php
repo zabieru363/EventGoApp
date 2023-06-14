@@ -58,6 +58,9 @@
                     </div>"
                 };
 
+                $start_date_time = explode(" ", $event["start_date"]);
+                $end_date_time = explode(" ", $event["ending_date"]);
+
                 echo "
                     <div class='container session-active'>
                         <div class='mt-4 card mb-3' data-id={$event["id"]}>
@@ -82,7 +85,7 @@
                                 <p class='event-description'>
                                     {$event["description"]}
                                 </p>
-                                <p class='event-date'><i class='fa-solid fa-clock'></i> Empieza el <strong>{$event["start_date"]}</strong>, finaliza el <strong>{$event["ending_date"]}</strong></p>
+                                Empieza el <strong>{$start_date_time[0]}</strong> a las {$start_date_time[1]} y termina el <strong>{$end_date_time[0]}</strong> a las {$end_date_time[1]}
                                 <p><strong><i class='fa-solid fa-location-dot'></i> {$event["city"]}</strong></p>
                             </div>" .
                             $dropdown_HTML .
