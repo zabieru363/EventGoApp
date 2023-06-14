@@ -164,7 +164,15 @@ const loadEventsByCategoryWithRules = categoryEvents => {
           });
       }
     }
+    else
+    {
+      const eventContainer = document.createElement("div");
+      eventContainer.classList.add("alert", "alert-danger", "mb-3");
+      eventContainer.textContent = "El administrador ha desactivado este evento.";
+
+      eventsContainer.appendChild(eventContainer);
     }
+  }
 };
 
 const loadEventsCategory = categoryEvents => {
