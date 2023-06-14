@@ -85,7 +85,7 @@
                                 <p class='event-description'>
                                     {$event["description"]}
                                 </p>
-                                Empieza el <strong>{$start_date_time[0]}</strong> a las {$start_date_time[1]} y termina el <strong>{$end_date_time[0]}</strong> a las {$end_date_time[1]}
+                                <i class='fa-solid fa-clock'></i> Empieza el <strong>{$start_date_time[0]}</strong> a las {$start_date_time[1]} y termina el <strong>{$end_date_time[0]}</strong> a las {$end_date_time[1]}
                                 <p><strong><i class='fa-solid fa-location-dot'></i> {$event["city"]}</strong></p>
                             </div>" .
                             $dropdown_HTML .
