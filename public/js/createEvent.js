@@ -47,7 +47,7 @@ eventTitleInput.addEventListener("input", function() {
         this.classList.remove("is-valid");
         feedbacks[0].classList.add("d-block");
         feedbacks[0].textContent = "Este campo es obligatorio";
-    }else if(!(/^[a-zA-Z0-9\sñÑ]+$/.test(this.value))) {
+    }else if(!(/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/.test(this.value))) {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
         feedbacks[0].classList.add("d-block");
@@ -80,7 +80,7 @@ adminNameInput.addEventListener("input", function() {
         this.classList.remove("is-valid");
         feedbacks[2].classList.add("d-block");
         feedbacks[2].textContent = "Este campo es obligatorio";
-    }else if(!(/^[a-zA-Z\sñÑ]+$/.test(this.value))) {
+    }else if(!(/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/.test(this.value))) {
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
         feedbacks[2].classList.add("d-block");

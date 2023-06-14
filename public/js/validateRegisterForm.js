@@ -16,11 +16,11 @@ elements[0].addEventListener("input", function () {
     this.classList.remove("is-valid");
     feedbacks[0].classList.add("d-block");
     feedbacks[0].textContent = "Este campo es obligatorio.";
-  } else if (/\d/.test(this.value)) {
+  } else if (!(/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/.test(this.value))) {
     this.classList.add("is-invalid");
     this.classList.remove("is-valid");
     feedbacks[0].classList.add("d-block");
-    feedbacks[0].textContent = "El nombre no puede contener números.";
+    feedbacks[0].textContent = "Números y caracteres especiales no permitidos.";
   } else {
     feedbacks[0].classList.remove("d-block");
     this.classList.remove("is-invalid");
