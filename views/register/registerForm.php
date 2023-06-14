@@ -104,7 +104,7 @@
                                             un archivo con formato de imagen, por ejemplo JPG, JPEG, PNG...
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" id="closeErrorImageModalBtn" class="return-home-btn submit-btn">Entendido</button>
+                                            <button type="button" id="closeErrorImageModalBtn" class="submit-btn text-decoration-none">Entendido</button>
                                         </div>
                                     </div>
                                 </div>
