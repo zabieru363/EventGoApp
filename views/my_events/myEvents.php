@@ -48,7 +48,7 @@
                                                         </div>
         
                                                         <div class='event-date'>
-                                                            <i class='fa-solid fa-clock'></i></i> 
+                                                            <i class='fa-solid fa-clock'></i>
                                                             Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
                                                         </div>
     
@@ -108,7 +108,7 @@
                                                         </div>
         
                                                         <div class='event-date'>
-                                                            <i class='fa-solid fa-clock'></i></i> 
+                                                            <i class='fa-solid fa-clock'></i>
                                                             Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
                                                         </div>
                                                 </div>
@@ -161,7 +161,7 @@
                                                         </div>
         
                                                         <div class='event-date'>
-                                                            <i class='fa-solid fa-clock'></i></i> 
+                                                            <i class='fa-solid fa-clock'></i>
                                                             Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
                                                         </div>
 
@@ -224,7 +224,7 @@
                                                         </div>
         
                                                         <div class='event-date'>
-                                                            <i class='fa-solid fa-clock'></i></i> 
+                                                            <i class='fa-solid fa-clock'></i>
                                                             Empieza el {$start_date_time[0]} a las {$start_date_time[1]} y termina el {$end_date_time[0]} a las {$end_date_time[1]}
                                                         </div>
                                                 </div>
