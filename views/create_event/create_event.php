@@ -106,6 +106,7 @@
 
     <!-- Bootstrap y Font Awesome -->
     <?php require_once("templates/cdns.php"); ?>
+    <?php require_once("templates/footer.php"); ?>
 </body>
 
 </html>

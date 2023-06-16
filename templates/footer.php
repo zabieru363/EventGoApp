@@ -1,5 +1,5 @@
 <!-- FOOTER -->
-<footer class="footer bg-light border text-dark">
+<footer class="footer bg-light border text-dark mt-5">
     <div class="container">
         <div class="row">
             <div class="col-md-6 p-3">
@@ -13,7 +13,7 @@
         </div>
         <hr>
         <div class="text-center">
-            <p>&copy; 2023 EventGO. Todos los derechos reservados.</p>
+            <p>&copy; <?php echo date("Y") ?> EventGO. Todos los derechos reservados.</p>
         </div>
     </div>
 </footer>

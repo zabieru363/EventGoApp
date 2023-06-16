@@ -51,6 +51,8 @@
                     echo '<script src="public/js/cookiesControl.js"></script>';
                 }
             }
+
+            require_once("templates/footer.php");
         ?>
     </body>
 </html>
